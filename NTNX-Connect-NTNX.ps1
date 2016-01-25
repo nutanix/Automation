@@ -65,7 +65,7 @@ function NTNX-Connect-NTNX {
 		if ($(Get-NutanixCluster -Servers $IP -ErrorAction SilentlyContinue).IsConnected -ne "True") {  # Not connected
 			Write-Host "Connecting to Nutanix cluster ${IP} as $($credential.UserName.Trim("\")) ..."
 			$connObj = Connect-NutanixCluster -Server $IP -UserName $($credential.UserName.Trim("\")) `
-				-Password $(([Runtime.InteropServices.Marshal]::PtrToStringAuto([Runtime.InteropServices.Marshal]::SecureStringToBSTR($credential.Password)))) -AcceptInvalidSSLCerts -F
+				-Password $credential.Password -AcceptInvalidSSLCerts -F
 		} else {  # Already connected to server
 			Write-Host "Already connected to server ${IP}, continuing..."
 		}
