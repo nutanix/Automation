@@ -12,6 +12,7 @@ Chris Rasmussen, Solutions Architect, Nutanix (Melbourne, AU)
 
 ## Changelog
 
+2018.04.05 - Moved repo to nutanix/automation/nutanix-cluster-info (JonKohler)
 2018.04.04 - Published version based on Prism Central and v3 API
 2017.09.06 - Published new version based on Python 3
 
