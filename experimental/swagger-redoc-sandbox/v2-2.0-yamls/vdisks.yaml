@@ -1,0 +1,146 @@
+swagger: '2.0'
+info:
+  version: 'v2.0'
+  title: Swagger API
+host: any_cvm_ip:9440
+basePath: /api/nutanix/v2.0
+schemes:
+- https
+consumes:
+- application/json
+produces:
+- application/json
+paths:
+  /vdisks/:
+    get:
+      description: Get a list of vdisks in the cluster.
+      summary: getVdisks
+      operationId: VdisksGet
+      produces:
+      - application/json
+      parameters:
+      - name: path
+        in: query
+        required: true
+        type: string
+        description: Path of ndfs file
+      responses:
+        200:
+          description: ''
+          schema:
+            $ref: '#/definitions/Get.base.entitycollection&lt;get.dto.ndfsfiledto&gt;'
+          examples: {}
+      x-unitTests: []
+      x-operation-settings:
+        CollectParameters: false
+        AllowDynamicQueryParameters: false
+        AllowDynamicFormParameters: false
+        IsMultiContentStreaming: false
+definitions:
+  Get.base.entitycollection&lt;get.dto.ndfsfiledto&gt;:
+    title: get.base.EntityCollection&lt;get.dto.NdfsFileDTO&gt;
+    type: object
+    properties:
+      entities:
+        description: ''
+        type: array
+        items:
+          $ref: '#/definitions/Get.dto.ndfsfiledto'
+      error_info:
+        $ref: '#/definitions/Get.base.errorinfo'
+      metadata:
+        $ref: '#/definitions/Get.base.metadata'
+  Get.base.errorinfo:
+    title: get.base.ErrorInfo
+    type: object
+    properties:
+      count:
+        description: ''
+        type: integer
+        format: int64
+      entity_list:
+        description: ''
+        type: array
+        items:
+          type: string
+      message:
+        description: ''
+        type: string
+  Get.base.metadata:
+    title: get.base.Metadata
+    type: object
+    properties:
+      count:
+        description: ''
+        type: integer
+        format: int32
+      end_index:
+        description: ''
+        type: integer
+        format: int32
+      filter_criteria:
+        description: ''
+        type: string
+      grand_total_entities:
+        description: ''
+        type: integer
+        format: int32
+      next_cursor:
+        description: ''
+        type: string
+      page:
+        description: ''
+        type: integer
+        format: int32
+      previous_cursor:
+        description: ''
+        type: string
+      search_string:
+        description: ''
+        type: string
+      sort_criteria:
+        description: ''
+        type: string
+      start_index:
+        description: ''
+        type: integer
+        format: int32
+      total_entities:
+        description: ''
+        type: integer
+        format: int32
+  FileType:
+    title: file_type
+    example: FILE
+    x-enum-elements:
+    - name: FILE
+      description: ''
+    - name: DIRECTORY
+      description: ''
+    - name: OTHER
+      description: ''
+    type: string
+    enum:
+    - FILE
+    - DIRECTORY
+    - OTHER
+  Get.dto.ndfsfiledto:
+    title: get.dto.NdfsFileDTO
+    type: object
+    properties:
+      file_path:
+        description: ''
+        type: string
+      file_type:
+        $ref: '#/definitions/FileType'
+      name:
+        description: ''
+        type: string
+      total_size:
+        description: ''
+        type: integer
+        format: int64
+      used_size:
+        description: ''
+        type: integer
+        format: int64

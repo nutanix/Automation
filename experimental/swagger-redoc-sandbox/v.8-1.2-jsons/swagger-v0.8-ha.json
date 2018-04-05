@@ -1,0 +1,177 @@
+{
+    "apiVersion": "v0.8",
+    "swaggerVersion": "1.2",
+    "basePath": "https://any_cvm_ip:9440/api/nutanix/v0.8",
+    "resourcePath": "/ha",
+    "produces": [
+        "application/json"
+    ],
+    "consumes": [
+        "application/json"
+    ],
+    "apis": [
+        {
+            "internal": false,
+            "path": "/ha/",
+            "operations": [
+                {
+                    "deprecated": "false",
+                    "internal": false,
+                    "method": "GET",
+                    "summary": "Get current HA configuration.",
+                    "notes": "",
+                    "type": "get.dto.acropolis.HaConfigDTO",
+                    "nickname": "getHaConfig",
+                    "parameters": [],
+                    "responseMessages": [
+                        {
+                            "code": 500,
+                            "message": "Any internal exception while performing this operation"
+                        }
+                    ]
+                },
+                {
+                    "deprecated": "false",
+                    "internal": false,
+                    "method": "PUT",
+                    "summary": "Enable, disable or modify HA configuration.",
+                    "notes": "",
+                    "type": "update.dto.acropolis.ReturnValueDTO$TaskIdDTO",
+                    "nickname": "updateHaConfig",
+                    "parameters": [
+                        {
+                            "description": "HA configuration",
+                            "required": true,
+                            "allowMultiple": false,
+                            "paramType": "body",
+                            "type": "update.dto.acropolis.HaUpdateDTO"
+                        }
+                    ],
+                    "responseMessages": [
+                        {
+                            "code": 500,
+                            "message": "Any internal exception while performing this operation"
+                        }
+                    ]
+                }
+            ]
+        }
+    ],
+    "models": {
+        "get.dto.acropolis.HaConfigDTO": {
+            "id": "get.dto.acropolis.HaConfigDTO",
+            "required": [],
+            "properties": {
+                "failoverEnabled": {
+                    "description": "Whether HA should be invoked upon host failure.",
+                    "type": "boolean",
+                    "typeName": "DEFAULT"
+                },
+                "failoverInProgressHostUuids": {
+                    "description": "UUIDs of hosts that are part of in-progress failover",
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": "array",
+                    "typeName": "DEFAULT"
+                },
+                "haState": {
+                    "description": "HA state of the cluster",
+                    "enum": [
+                        "HIGHLY_AVAILABLE",
+                        "HEALING",
+                        "BEST_EFFORT",
+                        "DISABLED"
+                    ],
+                    "type": "string",
+                    "typeName": "DEFAULT"
+                },
+                "logicalTimestamp": {
+                    "description": "Logical timestamp of the configuration.",
+                    "format": "int64",
+                    "type": "integer",
+                    "typeName": "DEFAULT"
+                },
+                "numHostFailuresToTolerate": {
+                    "description": "Number of host failures tolerated.",
+                    "format": "int64",
+                    "type": "integer",
+                    "typeName": "DEFAULT"
+                },
+                "reservationType": {
+                    "description": "Type of reservation (hosts or segments).",
+                    "enum": [
+                        "RESERVE_HOSTS",
+                        "RESERVE_SEGMENTS",
+                        "NO_RESERVATIONS"
+                    ],
+                    "type": "string",
+                    "typeName": "DEFAULT"
+                },
+                "reservedHostUuids": {
+                    "description": "UUIDs of hosts reserved for failover.",
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": "array",
+                    "typeName": "DEFAULT"
+                }
+            }
+        },
+        "update.dto.acropolis.HaUpdateDTO": {
+            "id": "update.dto.acropolis.HaUpdateDTO",
+            "required": [],
+            "properties": {
+                "enableFailover": {
+                    "description": "Whether HA should be invoked upon host failure.",
+                    "type": "boolean",
+                    "typeName": "DEFAULT"
+                },
+                "evacuationOption": {
+                    "description": "Indicates the action we take to evacuate VMs powered on the host.",
+                    "enum": [
+                        "POWER_OFF",
+                        "COLD_MIGRATE",
+                        "LIVE_MIGRATE"
+                    ],
+                    "type": "string",
+                    "typeName": "DEFAULT"
+                },
+                "logicalTimestamp": {
+                    "description": "Logical timestamp for HA configuration.",
+                    "format": "int64",
+                    "type": "integer",
+                    "typeName": "DEFAULT"
+                },
+                "numHostFailuresToTolerate": {
+                    "description": "Number of host failures tolerated.",
+                    "format": "int64",
+                    "type": "integer",
+                    "typeName": "DEFAULT"
+                },
+                "reservationType": {
+                    "description": "Type of HA reservation (segments or hosts).",
+                    "enum": [
+                        "RESERVE_HOSTS",
+                        "RESERVE_SEGMENTS",
+                        "NO_RESERVATIONS"
+                    ],
+                    "type": "string",
+                    "typeName": "DEFAULT"
+                }
+            }
+        },
+        "update.dto.acropolis.ReturnValueDTO$TaskIdDTO": {
+            "id": "update.dto.acropolis.ReturnValueDTO$TaskIdDTO",
+            "required": [],
+            "properties": {
+                "taskUuid": {
+                    "description": "UUID of the task.",
+                    "notes": "UUID of the task.",
+                    "type": "string",
+                    "typeName": "DEFAULT"
+                }
+            }
+        }
+    }
+}

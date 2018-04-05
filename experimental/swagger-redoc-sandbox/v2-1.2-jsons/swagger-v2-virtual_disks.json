@@ -1,0 +1,797 @@
+{
+    "apiVersion": "v2.0",
+    "swaggerVersion": "1.2",
+    "basePath": "https://any_cvm_ip:9440/PrismGateway/services/rest/v2.0",
+    "resourcePath": "/virtual_disks",
+    "produces": [
+        "application/json"
+    ],
+    "consumes": [
+        "application/json"
+    ],
+    "apis": [
+        {
+            "internal": false,
+            "path": "/virtual_disks/",
+            "operations": [
+                {
+                    "deprecated": "false",
+                    "internal": false,
+                    "method": "GET",
+                    "summary": "Get the list of VirtualDisks.",
+                    "notes": "Get the list of VirtualDisks configured in the cluster.",
+                    "type": "get.base.EntityCollection&lt;get.dto.appliance.configuration.VirtualDiskDTO&gt;",
+                    "nickname": "getVirtualDisks",
+                    "parameters": [
+                        {
+                            "name": "count",
+                            "description": "Number of VirtualDisks to retrieve",
+                            "required": false,
+                            "allowMultiple": false,
+                            "paramType": "query",
+                            "type": "integer"
+                        },
+                        {
+                            "name": "filter_criteria",
+                            "description": "Filter criteria",
+                            "required": false,
+                            "allowMultiple": false,
+                            "paramType": "query",
+                            "type": "string"
+                        },
+                        {
+                            "name": "sort_criteria",
+                            "description": "Sort criteria",
+                            "required": false,
+                            "allowMultiple": false,
+                            "paramType": "query",
+                            "type": "string"
+                        },
+                        {
+                            "name": "search_string",
+                            "description": "Search string",
+                            "required": false,
+                            "allowMultiple": false,
+                            "paramType": "query",
+                            "type": "string"
+                        },
+                        {
+                            "name": "search_attribute_list",
+                            "description": "Search attribute list",
+                            "required": false,
+                            "allowMultiple": false,
+                            "paramType": "query",
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        {
+                            "name": "page",
+                            "description": "Page number",
+                            "required": false,
+                            "allowMultiple": false,
+                            "paramType": "query",
+                            "type": "integer"
+                        },
+                        {
+                            "name": "projection",
+                            "description": "Projections on the attributes",
+                            "required": false,
+                            "allowMultiple": false,
+                            "paramType": "query",
+                            "type": "string"
+                        }
+                    ],
+                    "responseMessages": []
+                },
+                {
+                    "deprecated": "false",
+                    "internal": false,
+                    "method": "PUT",
+                    "summary": "Update virtual Disk.",
+                    "notes": "",
+                    "type": "update.dto.appliance.configuration.VirtualDiskDTO",
+                    "nickname": "updateVirtualDisk",
+                    "parameters": [
+                        {
+                            "description": "DTO specifying different parameters for VirtualDisk along with flash mode",
+                            "required": true,
+                            "allowMultiple": false,
+                            "paramType": "body",
+                            "type": "update.dto.appliance.configuration.VirtualDiskDTO"
+                        }
+                    ],
+                    "responseMessages": []
+                }
+            ]
+        },
+        {
+            "internal": false,
+            "path": "/virtual_disks/{uuid}",
+            "operations": [
+                {
+                    "deprecated": "false",
+                    "internal": false,
+                    "method": "GET",
+                    "summary": "Get VirtualDisk.",
+                    "notes": "Get VirtualDisk with the specified Uuid.",
+                    "type": "get.dto.appliance.configuration.VirtualDiskDTO",
+                    "nickname": "getVirtualDisk",
+                    "parameters": [
+                        {
+                            "name": "uuid",
+                            "description": "Uuid of the VirtualDisk",
+                            "required": true,
+                            "allowMultiple": false,
+                            "paramType": "path",
+                            "type": "string"
+                        },
+                        {
+                            "name": "projection",
+                            "description": "Projections on the attributes",
+                            "required": false,
+                            "allowMultiple": false,
+                            "paramType": "query",
+                            "type": "string"
+                        }
+                    ],
+                    "responseMessages": []
+                }
+            ]
+        },
+        {
+            "internal": false,
+            "path": "/virtual_disks/{uuid}/stats/",
+            "operations": [
+                {
+                    "deprecated": "false",
+                    "internal": false,
+                    "method": "GET",
+                    "summary": "Get the stats for a specified VirtualDisk.",
+                    "notes": "If start time and end time are included in the query string, then historical stats are retrieved. Otherwise, the latest stats are retrieved.",
+                    "type": "get.base.StatsResponse",
+                    "nickname": "getVirtualDiskStats",
+                    "parameters": [
+                        {
+                            "name": "uuid",
+                            "description": "Uuid of the VirtualDisk",
+                            "required": true,
+                            "allowMultiple": false,
+                            "paramType": "path",
+                            "type": "string"
+                        },
+                        {
+                            "name": "metrics",
+                            "description": "List of metrics",
+                            "required": true,
+                            "allowMultiple": false,
+                            "paramType": "query",
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        {
+                            "name": "start_time_in_usecs",
+                            "description": "Start time in microseconds",
+                            "required": false,
+                            "allowMultiple": false,
+                            "paramType": "query",
+                            "type": "integer"
+                        },
+                        {
+                            "name": "end_time_in_usecs",
+                            "description": "End time in microseconds",
+                            "required": false,
+                            "allowMultiple": false,
+                            "paramType": "query",
+                            "type": "integer"
+                        },
+                        {
+                            "name": "interval_in_secs",
+                            "description": "Sampling interval of stats",
+                            "required": false,
+                            "allowMultiple": false,
+                            "paramType": "query",
+                            "type": "integer"
+                        }
+                    ],
+                    "responseMessages": [
+                        {
+                            "code": 500,
+                            "message": "Any internal exception while performing this operation"
+                        }
+                    ]
+                }
+            ]
+        }
+    ],
+    "models": {
+        "get.base.EntityCollection&lt;get.dto.appliance.configuration.VirtualDiskDTO&gt;": {
+            "id": "get.base.EntityCollection&lt;get.dto.appliance.configuration.VirtualDiskDTO&gt;",
+            "required": [],
+            "properties": {
+                "entities": {
+                    "items": {
+                        "$ref": "get.dto.appliance.configuration.VirtualDiskDTO"
+                    },
+                    "type": "array"
+                },
+                "error_info": {
+                    "$ref": "get.base.ErrorInfo"
+                },
+                "metadata": {
+                    "$ref": "get.base.Metadata"
+                }
+            }
+        },
+        "get.base.ErrorInfo": {
+            "id": "get.base.ErrorInfo",
+            "required": [],
+            "properties": {
+                "count": {
+                    "format": "int64",
+                    "type": "integer"
+                },
+                "entity_list": {
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": "array"
+                },
+                "message": {
+                    "type": "string"
+                }
+            }
+        },
+        "get.base.Metadata": {
+            "id": "get.base.Metadata",
+            "required": [],
+            "properties": {
+                "count": {
+                    "format": "int32",
+                    "type": "integer"
+                },
+                "end_index": {
+                    "format": "int32",
+                    "type": "integer"
+                },
+                "filter_criteria": {
+                    "type": "string"
+                },
+                "grand_total_entities": {
+                    "format": "int32",
+                    "type": "integer"
+                },
+                "next_cursor": {
+                    "type": "string"
+                },
+                "page": {
+                    "format": "int32",
+                    "type": "integer"
+                },
+                "previous_cursor": {
+                    "type": "string"
+                },
+                "search_string": {
+                    "type": "string"
+                },
+                "sort_criteria": {
+                    "type": "string"
+                },
+                "start_index": {
+                    "format": "int32",
+                    "type": "integer"
+                },
+                "total_entities": {
+                    "format": "int32",
+                    "type": "integer"
+                }
+            }
+        },
+        "get.base.StatsResponse": {
+            "id": "get.base.StatsResponse",
+            "required": [],
+            "properties": {
+                "stats_specific_responses": {
+                    "items": {
+                        "$ref": "get.base.StatsResponse$StatsSpecificResponse"
+                    },
+                    "type": "array"
+                }
+            }
+        },
+        "get.base.StatsResponse$StatsSpecificResponse": {
+            "id": "get.base.StatsResponse$StatsSpecificResponse",
+            "required": [],
+            "properties": {
+                "interval_in_secs": {
+                    "format": "int64",
+                    "type": "integer"
+                },
+                "message": {
+                    "type": "string"
+                },
+                "metric": {
+                    "type": "string"
+                },
+                "start_time_in_usecs": {
+                    "format": "int64",
+                    "type": "integer"
+                },
+                "successful": {
+                    "type": "boolean"
+                },
+                "values": {
+                    "items": {
+                        "format": "int64",
+                        "type": "integer"
+                    },
+                    "type": "array"
+                }
+            }
+        },
+        "get.dto.alerts.AlertSummaryDTO": {
+            "id": "get.dto.alerts.AlertSummaryDTO",
+            "required": [],
+            "properties": {
+                "alert_summaries": {
+                    "$ref": "java.util.Map&lt;get.dto.alerts.AlertDTO$AlertSeverity, get.base.EntityCollection&lt;get.dto.alerts.AlertDTO&gt;&gt;"
+                },
+                "count": {
+                    "format": "int64",
+                    "type": "integer"
+                }
+            }
+        },
+        "get.dto.appliance.configuration.VirtualDiskDTO": {
+            "id": "get.dto.appliance.configuration.VirtualDiskDTO",
+            "required": [],
+            "properties": {
+                "alert_summary": {
+                    "$ref": "get.dto.alerts.AlertSummaryDTO"
+                },
+                "attached_v_m_name": {
+                    "type": "string"
+                },
+                "attached_vm_id": {
+                    "type": "string"
+                },
+                "attached_vm_uuid": {
+                    "type": "string"
+                },
+                "attached_volume_group_id": {
+                    "type": "string"
+                },
+                "cluster_uuid": {
+                    "type": "string"
+                },
+                "disk_address": {
+                    "type": "string"
+                },
+                "disk_capacity_in_bytes": {
+                    "format": "int64",
+                    "type": "integer"
+                },
+                "flash_mode_enabled": {
+                    "description": "Flash Mode Enabled .",
+                    "type": "boolean",
+                    "typeName": "DEFAULT"
+                },
+                "health_summary": {
+                    "$ref": "get.dto.health.check.HealthSummaryDTO"
+                },
+                "nutanix_n_f_s_file_path": {
+                    "type": "string"
+                },
+                "stats": {
+                    "$ref": "java.util.Map&lt;java.lang.String, java.lang.String&gt;"
+                },
+                "storage_container_id": {
+                    "description": "Virtual disk's owning container Id.",
+                    "type": "string",
+                    "typeName": "DEFAULT"
+                },
+                "storage_container_uuid": {
+                    "description": "Virtual disk's owning container UUID.",
+                    "type": "string",
+                    "typeName": "DEFAULT"
+                },
+                "usage_stats": {
+                    "$ref": "java.util.Map&lt;java.lang.String, java.lang.String&gt;"
+                },
+                "uuid": {
+                    "type": "string"
+                },
+                "virtual_disk_id": {
+                    "type": "string"
+                }
+            }
+        },
+        "get.dto.health.check.EntityTypeHealthCheckSummaryDTO": {
+            "id": "get.dto.health.check.EntityTypeHealthCheckSummaryDTO",
+            "required": [],
+            "properties": {
+                "checks_in_error": {
+                    "$ref": "java.util.Map&lt;java.lang.String, get.dto.health.check.HealthCheckErrorsDTO&gt;"
+                },
+                "detailed_check_summary": {
+                    "$ref": "java.util.Map&lt;java.lang.String, java.util.Map&lt;get.dto.health.check.HealthStatus, java.lang.Integer&gt;&gt;"
+                },
+                "entity_type": {
+                    "enum": [
+                        "CLUSTER",
+                        "HARDWARE",
+                        "STORAGE",
+                        "BACKUP",
+                        "DR",
+                        "LICENSE",
+                        "DISK",
+                        "STORAGE_TIER",
+                        "HOST",
+                        "NODE",
+                        "MANAGEMENT_SERVER",
+                        "MANAGEMENT_SERVER_INFO",
+                        "VM",
+                        "SERVICE_VM",
+                        "VDISK",
+                        "VIRTUAL_DISK",
+                        "STORAGE_POOL",
+                        "CONTAINER",
+                        "STORAGE_CONTAINER",
+                        "VZONE",
+                        "SNAPSHOT",
+                        "FAST_CLONE",
+                        "RSYSLOG_SERVER",
+                        "KEY_MANAGEMENT_SERVER",
+                        "CERTIFICATE",
+                        "HTTP_PROXY",
+                        "SNMP_TRAP",
+                        "SNMP_USER",
+                        "REMOTE_SITE",
+                        "CLOUD_CREDENTIALS",
+                        "PROTECTION_DOMAIN",
+                        "CONSISTENCY_GROUP",
+                        "REPLICATION",
+                        "REPLICATION_LINK",
+                        "SYNC_REPLICATION",
+                        "VSTORE",
+                        "NETWORK_SWITCH_INTERFACE",
+                        "NETWORK_SWITCH",
+                        "VIRTUAL_NIC",
+                        "VMKERNEL_NIC",
+                        "HOST_NIC",
+                        "NIC_TEAM",
+                        "VIRTUAL_NETWORK",
+                        "VIRTUAL_SWITCH",
+                        "HOST_GPU",
+                        "VIRTUAL_GPU",
+                        "TAG",
+                        "COMMENT",
+                        "TASK",
+                        "IMAGE",
+                        "IMAGE_INFO",
+                        "ISCSI_CLIENT",
+                        "VOLUME_GROUP",
+                        "VOLUME_DISK",
+                        "VM_DISK",
+                        "FILE_SERVER",
+                        "FS_PARTNER_SERVER",
+                        "CVM",
+                        "NVM",
+                        "FILE_SERVER_SHARE",
+                        "ALERT_CAUSE",
+                        "ALERT_CHECK_SCHEMA",
+                        "ALERT_CHECK_SCHEMA_OVERRIDE",
+                        "INTER_CLUSTER_DATA_TRANSFER_INDICATOR",
+                        "RACKABLE_UNIT",
+                        "DIRECTORY_CONFIG",
+                        "HEALTH_CHECK",
+                        "NETWORK_SNMP_PROFILE",
+                        "ALERT",
+                        "SCHEDULE",
+                        "BANDWIDTH_POLICY",
+                        "FILE_GROUP",
+                        "NETWORK_MAPPING",
+                        "PROGRESS_MONITOR",
+                        "LCM_ENTITY",
+                        "LCM_AVAILABLE_VERSION",
+                        "CAPACITY_SCENARIO",
+                        "NCC_ERROR_CODES",
+                        "RESOURCE_CONSUMPTION",
+                        "REPORT_CONFIG",
+                        "REPORT_INSTANCE",
+                        "COMMON_REPORT_CONFIG",
+                        "REMOTE_CONNECTION"
+                    ],
+                    "type": "string"
+                },
+                "filter_criteria": {
+                    "type": "string"
+                },
+                "health_summary": {
+                    "$ref": "java.util.Map&lt;get.dto.health.check.HealthStatus, java.lang.Integer&gt;"
+                }
+            }
+        },
+        "get.dto.health.check.HealthSummaryDTO": {
+            "id": "get.dto.health.check.HealthSummaryDTO",
+            "required": [],
+            "properties": {
+                "entity_type_summaries": {
+                    "items": {
+                        "$ref": "get.dto.health.check.EntityTypeHealthCheckSummaryDTO"
+                    },
+                    "type": "array"
+                },
+                "health_check_summaries": {
+                    "$ref": "java.util.Map&lt;java.lang.String, get.dto.health.check.HealthCheckSummaryDTO&gt;"
+                },
+                "health_status": {
+                    "enum": [
+                        "Critical",
+                        "Warning",
+                        "Good",
+                        "Unknown",
+                        "Error"
+                    ],
+                    "type": "string"
+                }
+            }
+        },
+        "java.util.Map&lt;get.dto.alerts.AlertDTO$AlertSeverity, get.base.EntityCollection&lt;get.dto.alerts.AlertDTO&gt;&gt;": {
+            "id": "java.util.Map&lt;get.dto.alerts.AlertDTO$AlertSeverity, get.base.EntityCollection&lt;get.dto.alerts.AlertDTO&gt;&gt;",
+            "required": [],
+            "properties": {}
+        },
+        "java.util.Map&lt;get.dto.health.check.HealthStatus, java.lang.Integer&gt;": {
+            "id": "java.util.Map&lt;get.dto.health.check.HealthStatus, java.lang.Integer&gt;",
+            "required": [],
+            "properties": {}
+        },
+        "java.util.Map&lt;java.lang.String, get.dto.health.check.HealthCheckErrorsDTO&gt;": {
+            "id": "java.util.Map&lt;java.lang.String, get.dto.health.check.HealthCheckErrorsDTO&gt;",
+            "required": [],
+            "properties": {}
+        },
+        "java.util.Map&lt;java.lang.String, get.dto.health.check.HealthCheckSummaryDTO&gt;": {
+            "id": "java.util.Map&lt;java.lang.String, get.dto.health.check.HealthCheckSummaryDTO&gt;",
+            "required": [],
+            "properties": {}
+        },
+        "java.util.Map&lt;java.lang.String, java.lang.String&gt;": {
+            "id": "java.util.Map&lt;java.lang.String, java.lang.String&gt;",
+            "required": [],
+            "properties": {}
+        },
+        "java.util.Map&lt;java.lang.String, java.util.Map&lt;get.dto.health.check.HealthStatus, java.lang.Integer&gt;&gt;": {
+            "id": "java.util.Map&lt;java.lang.String, java.util.Map&lt;get.dto.health.check.HealthStatus, java.lang.Integer&gt;&gt;",
+            "required": [],
+            "properties": {}
+        },
+        "java.util.Map&lt;java.lang.String, java.util.Map&lt;update.dto.health.check.HealthStatus, java.lang.Integer&gt;&gt;": {
+            "id": "java.util.Map&lt;java.lang.String, java.util.Map&lt;update.dto.health.check.HealthStatus, java.lang.Integer&gt;&gt;",
+            "required": [],
+            "properties": {}
+        },
+        "java.util.Map&lt;java.lang.String, update.dto.health.check.HealthCheckErrorsDTO&gt;": {
+            "id": "java.util.Map&lt;java.lang.String, update.dto.health.check.HealthCheckErrorsDTO&gt;",
+            "required": [],
+            "properties": {}
+        },
+        "java.util.Map&lt;java.lang.String, update.dto.health.check.HealthCheckSummaryDTO&gt;": {
+            "id": "java.util.Map&lt;java.lang.String, update.dto.health.check.HealthCheckSummaryDTO&gt;",
+            "required": [],
+            "properties": {}
+        },
+        "java.util.Map&lt;update.dto.alerts.AlertDTO$AlertSeverity, update.base.EntityCollection&lt;update.dto.alerts.AlertDTO&gt;&gt;": {
+            "id": "java.util.Map&lt;update.dto.alerts.AlertDTO$AlertSeverity, update.base.EntityCollection&lt;update.dto.alerts.AlertDTO&gt;&gt;",
+            "required": [],
+            "properties": {}
+        },
+        "java.util.Map&lt;update.dto.health.check.HealthStatus, java.lang.Integer&gt;": {
+            "id": "java.util.Map&lt;update.dto.health.check.HealthStatus, java.lang.Integer&gt;",
+            "required": [],
+            "properties": {}
+        },
+        "update.dto.alerts.AlertSummaryDTO": {
+            "id": "update.dto.alerts.AlertSummaryDTO",
+            "required": [],
+            "properties": {
+                "alert_summaries": {
+                    "$ref": "java.util.Map&lt;update.dto.alerts.AlertDTO$AlertSeverity, update.base.EntityCollection&lt;update.dto.alerts.AlertDTO&gt;&gt;"
+                },
+                "count": {
+                    "format": "int64",
+                    "type": "integer"
+                }
+            }
+        },
+        "update.dto.appliance.configuration.VirtualDiskDTO": {
+            "id": "update.dto.appliance.configuration.VirtualDiskDTO",
+            "required": [],
+            "properties": {
+                "alert_summary": {
+                    "$ref": "update.dto.alerts.AlertSummaryDTO"
+                },
+                "attached_v_m_name": {
+                    "type": "string"
+                },
+                "attached_vm_id": {
+                    "type": "string"
+                },
+                "attached_vm_uuid": {
+                    "type": "string"
+                },
+                "attached_volume_group_id": {
+                    "type": "string"
+                },
+                "cluster_uuid": {
+                    "type": "string"
+                },
+                "disk_address": {
+                    "type": "string"
+                },
+                "disk_capacity_in_bytes": {
+                    "format": "int64",
+                    "type": "integer"
+                },
+                "flash_mode_enabled": {
+                    "description": "Flash Mode Enabled .",
+                    "type": "boolean",
+                    "typeName": "DEFAULT"
+                },
+                "health_summary": {
+                    "$ref": "update.dto.health.check.HealthSummaryDTO"
+                },
+                "nutanix_n_f_s_file_path": {
+                    "type": "string"
+                },
+                "stats": {
+                    "$ref": "java.util.Map&lt;java.lang.String, java.lang.String&gt;"
+                },
+                "usage_stats": {
+                    "$ref": "java.util.Map&lt;java.lang.String, java.lang.String&gt;"
+                },
+                "uuid": {
+                    "type": "string"
+                },
+                "virtual_disk_id": {
+                    "type": "string"
+                }
+            }
+        },
+        "update.dto.health.check.EntityTypeHealthCheckSummaryDTO": {
+            "id": "update.dto.health.check.EntityTypeHealthCheckSummaryDTO",
+            "required": [],
+            "properties": {
+                "checks_in_error": {
+                    "$ref": "java.util.Map&lt;java.lang.String, update.dto.health.check.HealthCheckErrorsDTO&gt;"
+                },
+                "detailed_check_summary": {
+                    "$ref": "java.util.Map&lt;java.lang.String, java.util.Map&lt;update.dto.health.check.HealthStatus, java.lang.Integer&gt;&gt;"
+                },
+                "entity_type": {
+                    "enum": [
+                        "CLUSTER",
+                        "HARDWARE",
+                        "STORAGE",
+                        "BACKUP",
+                        "DR",
+                        "LICENSE",
+                        "DISK",
+                        "STORAGE_TIER",
+                        "HOST",
+                        "NODE",
+                        "MANAGEMENT_SERVER",
+                        "MANAGEMENT_SERVER_INFO",
+                        "VM",
+                        "SERVICE_VM",
+                        "VDISK",
+                        "VIRTUAL_DISK",
+                        "STORAGE_POOL",
+                        "CONTAINER",
+                        "STORAGE_CONTAINER",
+                        "VZONE",
+                        "SNAPSHOT",
+                        "FAST_CLONE",
+                        "RSYSLOG_SERVER",
+                        "KEY_MANAGEMENT_SERVER",
+                        "CERTIFICATE",
+                        "HTTP_PROXY",
+                        "SNMP_TRAP",
+                        "SNMP_USER",
+                        "REMOTE_SITE",
+                        "CLOUD_CREDENTIALS",
+                        "PROTECTION_DOMAIN",
+                        "CONSISTENCY_GROUP",
+                        "REPLICATION",
+                        "REPLICATION_LINK",
+                        "SYNC_REPLICATION",
+                        "VSTORE",
+                        "NETWORK_SWITCH_INTERFACE",
+                        "NETWORK_SWITCH",
+                        "VIRTUAL_NIC",
+                        "VMKERNEL_NIC",
+                        "HOST_NIC",
+                        "NIC_TEAM",
+                        "VIRTUAL_NETWORK",
+                        "VIRTUAL_SWITCH",
+                        "HOST_GPU",
+                        "VIRTUAL_GPU",
+                        "TAG",
+                        "COMMENT",
+                        "TASK",
+                        "IMAGE",
+                        "IMAGE_INFO",
+                        "ISCSI_CLIENT",
+                        "VOLUME_GROUP",
+                        "VOLUME_DISK",
+                        "VM_DISK",
+                        "FILE_SERVER",
+                        "FS_PARTNER_SERVER",
+                        "CVM",
+                        "NVM",
+                        "FILE_SERVER_SHARE",
+                        "ALERT_CAUSE",
+                        "ALERT_CHECK_SCHEMA",
+                        "ALERT_CHECK_SCHEMA_OVERRIDE",
+                        "INTER_CLUSTER_DATA_TRANSFER_INDICATOR",
+                        "RACKABLE_UNIT",
+                        "DIRECTORY_CONFIG",
+                        "HEALTH_CHECK",
+                        "NETWORK_SNMP_PROFILE",
+                        "ALERT",
+                        "SCHEDULE",
+                        "BANDWIDTH_POLICY",
+                        "FILE_GROUP",
+                        "NETWORK_MAPPING",
+                        "PROGRESS_MONITOR",
+                        "LCM_ENTITY",
+                        "LCM_AVAILABLE_VERSION",
+                        "CAPACITY_SCENARIO",
+                        "NCC_ERROR_CODES",
+                        "RESOURCE_CONSUMPTION",
+                        "REPORT_CONFIG",
+                        "REPORT_INSTANCE",
+                        "COMMON_REPORT_CONFIG",
+                        "REMOTE_CONNECTION"
+                    ],
+                    "type": "string"
+                },
+                "filter_criteria": {
+                    "type": "string"
+                },
+                "health_summary": {
+                    "$ref": "java.util.Map&lt;update.dto.health.check.HealthStatus, java.lang.Integer&gt;"
+                }
+            }
+        },
+        "update.dto.health.check.HealthSummaryDTO": {
+            "id": "update.dto.health.check.HealthSummaryDTO",
+            "required": [],
+            "properties": {
+                "entity_type_summaries": {
+                    "items": {
+                        "$ref": "update.dto.health.check.EntityTypeHealthCheckSummaryDTO"
+                    },
+                    "type": "array"
+                },
+                "health_check_summaries": {
+                    "$ref": "java.util.Map&lt;java.lang.String, update.dto.health.check.HealthCheckSummaryDTO&gt;"
+                },
+                "health_status": {
+                    "enum": [
+                        "Critical",
+                        "Warning",
+                        "Good",
+                        "Unknown",
+                        "Error"
+                    ],
+                    "type": "string"
+                }
+            }
+        }
+    }
+}

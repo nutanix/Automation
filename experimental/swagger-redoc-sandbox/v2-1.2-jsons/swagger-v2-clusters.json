@@ -1,0 +1,2091 @@
+{
+    "apiVersion": "v2.0",
+    "swaggerVersion": "1.2",
+    "basePath": "https://any_cvm_ip:9440/PrismGateway/services/rest/v2.0",
+    "resourcePath": "/clusters",
+    "produces": [
+        "application/json"
+    ],
+    "consumes": [
+        "application/json"
+    ],
+    "apis": [
+        {
+            "internal": false,
+            "path": "/clusters/",
+            "operations": [
+                {
+                    "deprecated": "false",
+                    "internal": false,
+                    "method": "GET",
+                    "summary": "Get the list of clusters.",
+                    "notes": "Get the list of clusters.",
+                    "type": "get.base.EntityCollection&lt;get.dto.appliance.configuration.ClusterDTO&gt;",
+                    "nickname": "getClusters",
+                    "parameters": [
+                        {
+                            "name": "count",
+                            "description": "Number of Clusters to retrieve",
+                            "required": false,
+                            "allowMultiple": false,
+                            "paramType": "query",
+                            "type": "integer"
+                        },
+                        {
+                            "name": "filter_criteria",
+                            "description": "Filter criteria",
+                            "required": false,
+                            "allowMultiple": false,
+                            "paramType": "query",
+                            "type": "string"
+                        },
+                        {
+                            "name": "sort_criteria",
+                            "description": "Sort criteria",
+                            "required": false,
+                            "allowMultiple": false,
+                            "paramType": "query",
+                            "type": "string"
+                        },
+                        {
+                            "name": "search_string",
+                            "description": "Search string",
+                            "required": false,
+                            "allowMultiple": false,
+                            "paramType": "query",
+                            "type": "string"
+                        },
+                        {
+                            "name": "search_attribute_list",
+                            "description": "Search attribute list",
+                            "required": false,
+                            "allowMultiple": false,
+                            "paramType": "query",
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        {
+                            "name": "page",
+                            "description": "Page number",
+                            "required": false,
+                            "allowMultiple": false,
+                            "paramType": "query",
+                            "type": "integer"
+                        },
+                        {
+                            "name": "projection",
+                            "description": "Projections on the attributes",
+                            "required": false,
+                            "allowMultiple": false,
+                            "paramType": "query",
+                            "type": "string"
+                        }
+                    ],
+                    "responseMessages": []
+                }
+            ]
+        },
+        {
+            "internal": false,
+            "path": "/clusters/alerts",
+            "operations": [
+                {
+                    "deprecated": "false",
+                    "internal": false,
+                    "method": "GET",
+                    "summary": "Get the list of alerts generated on any Cluster.",
+                    "notes": "",
+                    "type": "get.base.EntityCollection&lt;get.dto.alerts.AlertDTO&gt;",
+                    "nickname": "getClusterAlerts",
+                    "parameters": [
+                        {
+                            "name": "start_time_in_usecs",
+                            "description": "Start time in microseconds",
+                            "required": false,
+                            "allowMultiple": false,
+                            "paramType": "query",
+                            "type": "integer"
+                        },
+                        {
+                            "name": "end_time_in_usecs",
+                            "description": "End time in microseconds",
+                            "required": false,
+                            "allowMultiple": false,
+                            "paramType": "query",
+                            "type": "integer"
+                        },
+                        {
+                            "name": "count",
+                            "description": "Maximum number of alerts",
+                            "required": false,
+                            "allowMultiple": false,
+                            "paramType": "query",
+                            "type": "integer"
+                        },
+                        {
+                            "name": "resolved",
+                            "description": "Alerts which have been resolved",
+                            "required": false,
+                            "allowMultiple": false,
+                            "paramType": "query",
+                            "type": "boolean"
+                        },
+                        {
+                            "name": "acknowledged",
+                            "description": "Alerts which have been acknowledged",
+                            "required": false,
+                            "allowMultiple": false,
+                            "paramType": "query",
+                            "type": "boolean"
+                        },
+                        {
+                            "name": "severity",
+                            "description": "Alert severities",
+                            "required": false,
+                            "allowMultiple": false,
+                            "paramType": "query",
+                            "type": "string"
+                        },
+                        {
+                            "name": "alert_type_uuid",
+                            "description": "Alert type ids",
+                            "required": false,
+                            "allowMultiple": false,
+                            "paramType": "query",
+                            "type": "string"
+                        },
+                        {
+                            "name": "page",
+                            "description": "Page number",
+                            "required": false,
+                            "allowMultiple": false,
+                            "paramType": "query",
+                            "type": "integer"
+                        }
+                    ],
+                    "responseMessages": []
+                }
+            ]
+        },
+        {
+            "internal": false,
+            "path": "/clusters/events",
+            "operations": [
+                {
+                    "deprecated": "false",
+                    "internal": false,
+                    "method": "GET",
+                    "summary": "Get the list of events generated on any Cluster.",
+                    "notes": "",
+                    "type": "get.base.EntityCollection&lt;get.dto.alerts.AlertDTO&gt;",
+                    "nickname": "getClusterEvents",
+                    "parameters": [
+                        {
+                            "name": "start_time_in_usecs",
+                            "description": "Start time in microseconds",
+                            "required": false,
+                            "allowMultiple": false,
+                            "paramType": "query",
+                            "type": "integer"
+                        },
+                        {
+                            "name": "end_time_in_usecs",
+                            "description": "End time in microseconds",
+                            "required": false,
+                            "allowMultiple": false,
+                            "paramType": "query",
+                            "type": "integer"
+                        },
+                        {
+                            "name": "count",
+                            "description": "Maximum number of events",
+                            "required": false,
+                            "allowMultiple": false,
+                            "paramType": "query",
+                            "type": "integer"
+                        },
+                        {
+                            "name": "acknowledged",
+                            "description": "Events which have been acknowledged",
+                            "required": false,
+                            "allowMultiple": false,
+                            "paramType": "query",
+                            "type": "boolean"
+                        },
+                        {
+                            "name": "page",
+                            "description": "Page number",
+                            "required": false,
+                            "allowMultiple": false,
+                            "paramType": "query",
+                            "type": "integer"
+                        }
+                    ],
+                    "responseMessages": []
+                }
+            ]
+        },
+        {
+            "internal": false,
+            "path": "/clusters/{id}",
+            "operations": [
+                {
+                    "deprecated": "false",
+                    "internal": false,
+                    "method": "GET",
+                    "summary": "Get a Cluster.",
+                    "notes": "Get a Cluster with the specified id.",
+                    "type": "get.dto.appliance.configuration.ClusterDTO",
+                    "nickname": "getCluster",
+                    "parameters": [
+                        {
+                            "name": "id",
+                            "description": "Id of the cluster",
+                            "required": true,
+                            "allowMultiple": false,
+                            "paramType": "path",
+                            "type": "string"
+                        },
+                        {
+                            "name": "projection",
+                            "description": "Projections on the attributes",
+                            "required": false,
+                            "allowMultiple": false,
+                            "paramType": "query",
+                            "type": "string"
+                        }
+                    ],
+                    "responseMessages": []
+                }
+            ]
+        },
+        {
+            "internal": false,
+            "path": "/clusters/{id}/alerts",
+            "operations": [
+                {
+                    "deprecated": "false",
+                    "internal": false,
+                    "method": "GET",
+                    "summary": "Get the list of alerts generated on a specified Cluster.",
+                    "notes": "",
+                    "type": "get.base.EntityCollection&lt;get.dto.alerts.AlertDTO&gt;",
+                    "nickname": "getAlertsForCluster",
+                    "parameters": [
+                        {
+                            "name": "id",
+                            "description": "Id of a Cluster",
+                            "required": true,
+                            "allowMultiple": false,
+                            "paramType": "path",
+                            "type": "string"
+                        },
+                        {
+                            "name": "start_time_in_usecs",
+                            "description": "Start time in microseconds",
+                            "required": false,
+                            "allowMultiple": false,
+                            "paramType": "query",
+                            "type": "integer"
+                        },
+                        {
+                            "name": "end_time_in_usecs",
+                            "description": "End time in microseconds",
+                            "required": false,
+                            "allowMultiple": false,
+                            "paramType": "query",
+                            "type": "integer"
+                        },
+                        {
+                            "name": "count",
+                            "description": "Maximum number of alerts",
+                            "required": false,
+                            "allowMultiple": false,
+                            "paramType": "query",
+                            "type": "integer"
+                        },
+                        {
+                            "name": "resolved",
+                            "description": "Alerts which have been resolved",
+                            "required": false,
+                            "allowMultiple": false,
+                            "paramType": "query",
+                            "type": "boolean"
+                        },
+                        {
+                            "name": "acknowledged",
+                            "description": "Alerts which have been acknowledged",
+                            "required": false,
+                            "allowMultiple": false,
+                            "paramType": "query",
+                            "type": "boolean"
+                        },
+                        {
+                            "name": "severity",
+                            "description": "Alert severities",
+                            "required": false,
+                            "allowMultiple": false,
+                            "paramType": "query",
+                            "type": "string"
+                        },
+                        {
+                            "name": "alert_type_uuid",
+                            "description": "Alert type ids",
+                            "required": false,
+                            "allowMultiple": false,
+                            "paramType": "query",
+                            "type": "string"
+                        },
+                        {
+                            "name": "page",
+                            "description": "Page number",
+                            "required": false,
+                            "allowMultiple": false,
+                            "paramType": "query",
+                            "type": "integer"
+                        }
+                    ],
+                    "responseMessages": []
+                }
+            ]
+        },
+        {
+            "internal": false,
+            "path": "/clusters/{id}/events",
+            "operations": [
+                {
+                    "deprecated": "false",
+                    "internal": false,
+                    "method": "GET",
+                    "summary": "Get the list of events generated on a specified Cluster.",
+                    "notes": "",
+                    "type": "get.base.EntityCollection&lt;get.dto.alerts.AlertDTO&gt;",
+                    "nickname": "getEventsForClusters",
+                    "parameters": [
+                        {
+                            "name": "id",
+                            "description": "Id of a Cluster",
+                            "required": true,
+                            "allowMultiple": false,
+                            "paramType": "path",
+                            "type": "string"
+                        },
+                        {
+                            "name": "start_time_in_usecs",
+                            "description": "Start time in microseconds",
+                            "required": false,
+                            "allowMultiple": false,
+                            "paramType": "query",
+                            "type": "integer"
+                        },
+                        {
+                            "name": "end_time_in_usecs",
+                            "description": "End time in microseconds",
+                            "required": false,
+                            "allowMultiple": false,
+                            "paramType": "query",
+                            "type": "integer"
+                        },
+                        {
+                            "name": "count",
+                            "description": "Maximum number of events",
+                            "required": false,
+                            "allowMultiple": false,
+                            "paramType": "query",
+                            "type": "integer"
+                        },
+                        {
+                            "name": "acknowledged",
+                            "description": "Events which have been acknowledged",
+                            "required": false,
+                            "allowMultiple": false,
+                            "paramType": "query",
+                            "type": "boolean"
+                        },
+                        {
+                            "name": "page",
+                            "description": "Page number",
+                            "required": false,
+                            "allowMultiple": false,
+                            "paramType": "query",
+                            "type": "integer"
+                        }
+                    ],
+                    "responseMessages": []
+                }
+            ]
+        },
+        {
+            "internal": false,
+            "path": "/clusters/{id}/stats/",
+            "operations": [
+                {
+                    "deprecated": "false",
+                    "internal": false,
+                    "method": "GET",
+                    "summary": "Get the stats for a specified Cluster.",
+                    "notes": "If start time and end time are included in the query string, then historical stats are retrieved. Otherwise, the latest stats are retrieved.",
+                    "type": "get.base.StatsResponse",
+                    "nickname": "getStatsForCluster",
+                    "parameters": [
+                        {
+                            "name": "id",
+                            "description": "Id of a Cluster",
+                            "required": true,
+                            "allowMultiple": false,
+                            "paramType": "path",
+                            "type": "string"
+                        },
+                        {
+                            "name": "metrics",
+                            "description": "List of metrics",
+                            "required": true,
+                            "allowMultiple": false,
+                            "paramType": "query",
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        {
+                            "name": "start_time_in_usecs",
+                            "description": "Start time in microseconds",
+                            "required": false,
+                            "allowMultiple": false,
+                            "paramType": "query",
+                            "type": "integer"
+                        },
+                        {
+                            "name": "end_time_in_usecs",
+                            "description": "End time in microseconds",
+                            "required": false,
+                            "allowMultiple": false,
+                            "paramType": "query",
+                            "type": "integer"
+                        },
+                        {
+                            "name": "interval_in_secs",
+                            "description": "Sampling interval of stats",
+                            "required": false,
+                            "allowMultiple": false,
+                            "paramType": "query",
+                            "type": "integer"
+                        }
+                    ],
+                    "responseMessages": []
+                }
+            ]
+        }
+    ],
+    "models": {
+        "get.base.EntityCollection&lt;get.dto.ResultContentDescriptor&gt;": {
+            "id": "get.base.EntityCollection&lt;get.dto.ResultContentDescriptor&gt;",
+            "required": [],
+            "properties": {
+                "entities": {
+                    "items": {
+                        "$ref": "get.dto.ResultContentDescriptor"
+                    },
+                    "type": "array"
+                },
+                "error_info": {
+                    "$ref": "get.base.ErrorInfo"
+                },
+                "metadata": {
+                    "$ref": "get.base.Metadata"
+                }
+            }
+        },
+        "get.base.EntityCollection&lt;get.dto.alerts.AlertDTO&gt;": {
+            "id": "get.base.EntityCollection&lt;get.dto.alerts.AlertDTO&gt;",
+            "required": [],
+            "properties": {
+                "entities": {
+                    "items": {
+                        "$ref": "get.dto.alerts.AlertDTO"
+                    },
+                    "type": "array"
+                },
+                "error_info": {
+                    "$ref": "get.base.ErrorInfo"
+                },
+                "metadata": {
+                    "$ref": "get.base.Metadata"
+                }
+            }
+        },
+        "get.base.EntityCollection&lt;get.dto.appliance.configuration.ClusterDTO&gt;": {
+            "id": "get.base.EntityCollection&lt;get.dto.appliance.configuration.ClusterDTO&gt;",
+            "required": [],
+            "properties": {
+                "entities": {
+                    "items": {
+                        "$ref": "get.dto.appliance.configuration.ClusterDTO"
+                    },
+                    "type": "array"
+                },
+                "error_info": {
+                    "$ref": "get.base.ErrorInfo"
+                },
+                "metadata": {
+                    "$ref": "get.base.Metadata"
+                }
+            }
+        },
+        "get.base.ErrorInfo": {
+            "id": "get.base.ErrorInfo",
+            "required": [],
+            "properties": {
+                "count": {
+                    "format": "int64",
+                    "type": "integer"
+                },
+                "entity_list": {
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": "array"
+                },
+                "message": {
+                    "type": "string"
+                }
+            }
+        },
+        "get.base.Metadata": {
+            "id": "get.base.Metadata",
+            "required": [],
+            "properties": {
+                "count": {
+                    "format": "int32",
+                    "type": "integer"
+                },
+                "end_index": {
+                    "format": "int32",
+                    "type": "integer"
+                },
+                "filter_criteria": {
+                    "type": "string"
+                },
+                "grand_total_entities": {
+                    "format": "int32",
+                    "type": "integer"
+                },
+                "next_cursor": {
+                    "type": "string"
+                },
+                "page": {
+                    "format": "int32",
+                    "type": "integer"
+                },
+                "previous_cursor": {
+                    "type": "string"
+                },
+                "search_string": {
+                    "type": "string"
+                },
+                "sort_criteria": {
+                    "type": "string"
+                },
+                "start_index": {
+                    "format": "int32",
+                    "type": "integer"
+                },
+                "total_entities": {
+                    "format": "int32",
+                    "type": "integer"
+                }
+            }
+        },
+        "get.base.StatsResponse": {
+            "id": "get.base.StatsResponse",
+            "required": [],
+            "properties": {
+                "stats_specific_responses": {
+                    "items": {
+                        "$ref": "get.base.StatsResponse$StatsSpecificResponse"
+                    },
+                    "type": "array"
+                }
+            }
+        },
+        "get.base.StatsResponse$StatsSpecificResponse": {
+            "id": "get.base.StatsResponse$StatsSpecificResponse",
+            "required": [],
+            "properties": {
+                "interval_in_secs": {
+                    "format": "int64",
+                    "type": "integer"
+                },
+                "message": {
+                    "type": "string"
+                },
+                "metric": {
+                    "type": "string"
+                },
+                "start_time_in_usecs": {
+                    "format": "int64",
+                    "type": "integer"
+                },
+                "successful": {
+                    "type": "boolean"
+                },
+                "values": {
+                    "items": {
+                        "format": "int64",
+                        "type": "integer"
+                    },
+                    "type": "array"
+                }
+            }
+        },
+        "get.dto.EntityMetadata": {
+            "id": "get.dto.EntityMetadata",
+            "required": [],
+            "properties": {
+                "additional_fields": {
+                    "$ref": "java.util.Map&lt;java.lang.String, java.lang.String&gt;"
+                },
+                "cluster_uuid": {
+                    "type": "string"
+                },
+                "context_hint_field": {
+                    "type": "string"
+                },
+                "context_hint_value": {
+                    "type": "string"
+                },
+                "entity_id": {
+                    "type": "string"
+                },
+                "entity_name": {
+                    "type": "string"
+                },
+                "entity_type": {
+                    "enum": [
+                        "CLUSTER",
+                        "HARDWARE",
+                        "STORAGE",
+                        "BACKUP",
+                        "DR",
+                        "LICENSE",
+                        "DISK",
+                        "STORAGE_TIER",
+                        "HOST",
+                        "NODE",
+                        "MANAGEMENT_SERVER",
+                        "MANAGEMENT_SERVER_INFO",
+                        "VM",
+                        "SERVICE_VM",
+                        "VDISK",
+                        "VIRTUAL_DISK",
+                        "STORAGE_POOL",
+                        "CONTAINER",
+                        "STORAGE_CONTAINER",
+                        "VZONE",
+                        "SNAPSHOT",
+                        "FAST_CLONE",
+                        "RSYSLOG_SERVER",
+                        "KEY_MANAGEMENT_SERVER",
+                        "CERTIFICATE",
+                        "HTTP_PROXY",
+                        "SNMP_TRAP",
+                        "SNMP_USER",
+                        "REMOTE_SITE",
+                        "CLOUD_CREDENTIALS",
+                        "PROTECTION_DOMAIN",
+                        "CONSISTENCY_GROUP",
+                        "REPLICATION",
+                        "REPLICATION_LINK",
+                        "SYNC_REPLICATION",
+                        "VSTORE",
+                        "NETWORK_SWITCH_INTERFACE",
+                        "NETWORK_SWITCH",
+                        "VIRTUAL_NIC",
+                        "VMKERNEL_NIC",
+                        "HOST_NIC",
+                        "NIC_TEAM",
+                        "VIRTUAL_NETWORK",
+                        "VIRTUAL_SWITCH",
+                        "HOST_GPU",
+                        "VIRTUAL_GPU",
+                        "TAG",
+                        "COMMENT",
+                        "TASK",
+                        "IMAGE",
+                        "IMAGE_INFO",
+                        "ISCSI_CLIENT",
+                        "VOLUME_GROUP",
+                        "VOLUME_DISK",
+                        "VM_DISK",
+                        "FILE_SERVER",
+                        "FS_PARTNER_SERVER",
+                        "CVM",
+                        "NVM",
+                        "FILE_SERVER_SHARE",
+                        "ALERT_CAUSE",
+                        "ALERT_CHECK_SCHEMA",
+                        "ALERT_CHECK_SCHEMA_OVERRIDE",
+                        "INTER_CLUSTER_DATA_TRANSFER_INDICATOR",
+                        "RACKABLE_UNIT",
+                        "DIRECTORY_CONFIG",
+                        "HEALTH_CHECK",
+                        "NETWORK_SNMP_PROFILE",
+                        "ALERT",
+                        "SCHEDULE",
+                        "BANDWIDTH_POLICY",
+                        "FILE_GROUP",
+                        "NETWORK_MAPPING",
+                        "PROGRESS_MONITOR",
+                        "LCM_ENTITY",
+                        "LCM_AVAILABLE_VERSION",
+                        "CAPACITY_SCENARIO",
+                        "NCC_ERROR_CODES",
+                        "RESOURCE_CONSUMPTION",
+                        "REPORT_CONFIG",
+                        "REPORT_INSTANCE",
+                        "COMMON_REPORT_CONFIG",
+                        "REMOTE_CONNECTION"
+                    ],
+                    "type": "string"
+                }
+            }
+        },
+        "get.dto.ResultContentDescriptor": {
+            "id": "get.dto.ResultContentDescriptor",
+            "required": [],
+            "properties": {
+                "metadata": {
+                    "$ref": "get.dto.ResultMetadata"
+                },
+                "perspectives": {
+                    "items": {
+                        "$ref": "get.dto.ResultContentDescriptor$Perspective"
+                    },
+                    "type": "array"
+                }
+            }
+        },
+        "get.dto.ResultContentDescriptor$Perspective": {
+            "id": "get.dto.ResultContentDescriptor$Perspective",
+            "required": [],
+            "properties": {
+                "format": {
+                    "enum": [
+                        "TABLE",
+                        "BAR_CHART",
+                        "PIE_CHART",
+                        "TIME_SERIES",
+                        "KEY_VALUE",
+                        "COUNT",
+                        "HEALTH_SUMMARY",
+                        "ALERT_INFO",
+                        "CAPACITY",
+                        "OTHER"
+                    ],
+                    "type": "string"
+                },
+                "metadata": {
+                    "$ref": "get.dto.ResultMetadata"
+                },
+                "query": {},
+                "result": {},
+                "type": {
+                    "type": "string"
+                }
+            }
+        },
+        "get.dto.ResultMetadata": {
+            "id": "get.dto.ResultMetadata",
+            "required": [],
+            "properties": {
+                "entity_type": {
+                    "enum": [
+                        "CLUSTER",
+                        "HARDWARE",
+                        "STORAGE",
+                        "BACKUP",
+                        "DR",
+                        "LICENSE",
+                        "DISK",
+                        "STORAGE_TIER",
+                        "HOST",
+                        "NODE",
+                        "MANAGEMENT_SERVER",
+                        "MANAGEMENT_SERVER_INFO",
+                        "VM",
+                        "SERVICE_VM",
+                        "VDISK",
+                        "VIRTUAL_DISK",
+                        "STORAGE_POOL",
+                        "CONTAINER",
+                        "STORAGE_CONTAINER",
+                        "VZONE",
+                        "SNAPSHOT",
+                        "FAST_CLONE",
+                        "RSYSLOG_SERVER",
+                        "KEY_MANAGEMENT_SERVER",
+                        "CERTIFICATE",
+                        "HTTP_PROXY",
+                        "SNMP_TRAP",
+                        "SNMP_USER",
+                        "REMOTE_SITE",
+                        "CLOUD_CREDENTIALS",
+                        "PROTECTION_DOMAIN",
+                        "CONSISTENCY_GROUP",
+                        "REPLICATION",
+                        "REPLICATION_LINK",
+                        "SYNC_REPLICATION",
+                        "VSTORE",
+                        "NETWORK_SWITCH_INTERFACE",
+                        "NETWORK_SWITCH",
+                        "VIRTUAL_NIC",
+                        "VMKERNEL_NIC",
+                        "HOST_NIC",
+                        "NIC_TEAM",
+                        "VIRTUAL_NETWORK",
+                        "VIRTUAL_SWITCH",
+                        "HOST_GPU",
+                        "VIRTUAL_GPU",
+                        "TAG",
+                        "COMMENT",
+                        "TASK",
+                        "IMAGE",
+                        "IMAGE_INFO",
+                        "ISCSI_CLIENT",
+                        "VOLUME_GROUP",
+                        "VOLUME_DISK",
+                        "VM_DISK",
+                        "FILE_SERVER",
+                        "FS_PARTNER_SERVER",
+                        "CVM",
+                        "NVM",
+                        "FILE_SERVER_SHARE",
+                        "ALERT_CAUSE",
+                        "ALERT_CHECK_SCHEMA",
+                        "ALERT_CHECK_SCHEMA_OVERRIDE",
+                        "INTER_CLUSTER_DATA_TRANSFER_INDICATOR",
+                        "RACKABLE_UNIT",
+                        "DIRECTORY_CONFIG",
+                        "HEALTH_CHECK",
+                        "NETWORK_SNMP_PROFILE",
+                        "ALERT",
+                        "SCHEDULE",
+                        "BANDWIDTH_POLICY",
+                        "FILE_GROUP",
+                        "NETWORK_MAPPING",
+                        "PROGRESS_MONITOR",
+                        "LCM_ENTITY",
+                        "LCM_AVAILABLE_VERSION",
+                        "CAPACITY_SCENARIO",
+                        "NCC_ERROR_CODES",
+                        "RESOURCE_CONSUMPTION",
+                        "REPORT_CONFIG",
+                        "REPORT_INSTANCE",
+                        "COMMON_REPORT_CONFIG",
+                        "REMOTE_CONNECTION"
+                    ],
+                    "type": "string"
+                },
+                "filters": {
+                    "items": {
+                        "$ref": "get.dto.ResultMetadata$Filter"
+                    },
+                    "type": "array"
+                },
+                "instances": {
+                    "items": {
+                        "$ref": "get.dto.EntityMetadata"
+                    },
+                    "type": "array"
+                },
+                "title": {
+                    "type": "string"
+                }
+            }
+        },
+        "get.dto.ResultMetadata$Filter": {
+            "id": "get.dto.ResultMetadata$Filter",
+            "required": [],
+            "properties": {
+                "display_for_rhs": {
+                    "type": "string"
+                },
+                "lhs": {
+                    "type": "string"
+                },
+                "operator": {
+                    "description": "Operator for the filter.",
+                    "type": "string",
+                    "typeName": "DEFAULT"
+                },
+                "rhs": {
+                    "type": "string"
+                }
+            }
+        },
+        "get.dto.alerts.AlertCauseDTO": {
+            "id": "get.dto.alerts.AlertCauseDTO",
+            "required": [],
+            "properties": {
+                "actions": {
+                    "description": "Possible actions to resolve this alert",
+                    "type": "string",
+                    "typeName": "DEFAULT"
+                },
+                "additional_links": {
+                    "description": "Additional links",
+                    "type": "string",
+                    "typeName": "DEFAULT"
+                },
+                "alert_namespace": {
+                    "description": "Namespace this alert belongs to",
+                    "type": "string",
+                    "typeName": "DEFAULT"
+                },
+                "cause": {
+                    "description": "Detailed description",
+                    "type": "string",
+                    "typeName": "DEFAULT"
+                },
+                "chart_queries": {
+                    "$ref": "get.base.EntityCollection&lt;get.dto.ResultContentDescriptor&gt;",
+                    "description": "Charts that are relevant to this cause",
+                    "typeName": "DEFAULT"
+                },
+                "details": {
+                    "description": "Symptoms for this cause",
+                    "type": "string",
+                    "typeName": "DEFAULT"
+                },
+                "has_global_details": {
+                    "description": "Whether the alert has global details or not",
+                    "type": "boolean",
+                    "typeName": "DEFAULT"
+                },
+                "id": {
+                    "description": "Cause Id",
+                    "type": "string",
+                    "typeName": "UUID_TYPE"
+                },
+                "num_resolved_count": {
+                    "description": "Number of times this cause has resolved the alert",
+                    "format": "int64",
+                    "type": "integer",
+                    "typeName": "DEFAULT"
+                },
+                "parent_cause_id": {
+                    "description": "Id of the alert/cause this is a possible cause for",
+                    "type": "string",
+                    "typeName": "DEFAULT"
+                },
+                "title": {
+                    "description": "Short description",
+                    "type": "string",
+                    "typeName": "DEFAULT"
+                },
+                "troubleshooting_steps": {
+                    "description": "Steps to determine whether this is the cause.",
+                    "type": "string",
+                    "typeName": "DEFAULT"
+                }
+            }
+        },
+        "get.dto.alerts.AlertDTO": {
+            "id": "get.dto.alerts.AlertDTO",
+            "required": [],
+            "properties": {
+                "acknowledged": {
+                    "type": "boolean"
+                },
+                "acknowledged_by_username": {
+                    "type": "string"
+                },
+                "acknowledged_time_stamp_in_usecs": {
+                    "format": "int64",
+                    "type": "integer"
+                },
+                "affected_entities": {
+                    "items": {
+                        "$ref": "get.dto.alerts.AlertDTO$AffectedEntity"
+                    },
+                    "type": "array"
+                },
+                "alert_details": {
+                    "$ref": "get.dto.alerts.AlertDTO$AlertDetailsDTO"
+                },
+                "alert_title": {
+                    "type": "string"
+                },
+                "alert_type_uuid": {
+                    "type": "string"
+                },
+                "auto_resolved": {
+                    "type": "boolean"
+                },
+                "check_id": {
+                    "type": "string"
+                },
+                "classifications": {
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": "array"
+                },
+                "cluster_uuid": {
+                    "type": "string"
+                },
+                "context_types": {
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": "array"
+                },
+                "context_values": {
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": "array"
+                },
+                "created_time_stamp_in_usecs": {
+                    "format": "int64",
+                    "type": "integer"
+                },
+                "detailed_message": {
+                    "type": "string"
+                },
+                "id": {
+                    "type": "string"
+                },
+                "impact_types": {
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": "array"
+                },
+                "last_occurrence_time_stamp_in_usecs": {
+                    "format": "int64",
+                    "type": "integer"
+                },
+                "message": {
+                    "type": "string"
+                },
+                "node_uuid": {
+                    "type": "string"
+                },
+                "originating_cluster_uuid": {
+                    "type": "string"
+                },
+                "possible_causes": {
+                    "items": {
+                        "$ref": "get.dto.alerts.AlertCauseDTO"
+                    },
+                    "type": "array"
+                },
+                "resolved": {
+                    "type": "boolean"
+                },
+                "resolved_by_username": {
+                    "type": "string"
+                },
+                "resolved_time_stamp_in_usecs": {
+                    "format": "int64",
+                    "type": "integer"
+                },
+                "service_v_m_id": {
+                    "type": "string"
+                },
+                "severity": {
+                    "description": "This field describes the severity of the alert.",
+                    "type": "string",
+                    "typeName": "DEFAULT"
+                },
+                "user_defined": {
+                    "type": "boolean"
+                }
+            }
+        },
+        "get.dto.alerts.AlertDTO$AffectedEntity": {
+            "id": "get.dto.alerts.AlertDTO$AffectedEntity",
+            "required": [],
+            "properties": {
+                "entity_name": {
+                    "type": "string"
+                },
+                "entity_type": {
+                    "type": "string"
+                },
+                "entity_type_display_name": {
+                    "type": "string"
+                },
+                "id": {
+                    "type": "string"
+                },
+                "uuid": {
+                    "type": "string"
+                }
+            }
+        },
+        "get.dto.alerts.AlertDTO$AlertDetailsDTO": {
+            "id": "get.dto.alerts.AlertDTO$AlertDetailsDTO",
+            "required": [],
+            "properties": {
+                "metric_details": {
+                    "description": "List of metric details associated with the alert",
+                    "items": {
+                        "$ref": "get.dto.alerts.AlertDTO$MetricDetails"
+                    },
+                    "notes": "List of metric details associated with the alert",
+                    "type": "array",
+                    "typeName": "DEFAULT"
+                },
+                "severity_trails": {
+                    "description": "List that contains severity level change details",
+                    "items": {
+                        "$ref": "get.dto.alerts.AlertDTO$SeverityTrail"
+                    },
+                    "notes": "List that contains severity level change details",
+                    "type": "array",
+                    "typeName": "DEFAULT"
+                }
+            }
+        },
+        "get.dto.alerts.AlertDTO$MetricDetails": {
+            "id": "get.dto.alerts.AlertDTO$MetricDetails",
+            "required": [],
+            "properties": {
+                "comparison_operator": {
+                    "description": "Comparison Operator to be applied for teh values.",
+                    "notes": "Comparison Operator",
+                    "type": "string",
+                    "typeName": "DEFAULT"
+                },
+                "condition_type": {
+                    "description": "Condition Type that the current metric is associated with.",
+                    "enum": [
+                        "STATIC_THRESHOLD",
+                        "ANOMALY",
+                        "SAFETY_ZONE"
+                    ],
+                    "notes": "Condition Type that the current metric is associated with.",
+                    "type": "string",
+                    "typeName": "DEFAULT"
+                },
+                "data_type": {
+                    "description": "Data Type of the value.",
+                    "enum": [
+                        "LONG",
+                        "DOUBLE",
+                        "BOOLEAN",
+                        "STRING"
+                    ],
+                    "notes": "Data Type of the value.",
+                    "type": "string",
+                    "typeName": "DEFAULT"
+                },
+                "entity_id": {
+                    "description": "UUID of the entity",
+                    "notes": "UUID of the entity",
+                    "type": "string",
+                    "typeName": "DEFAULT"
+                },
+                "entity_type": {
+                    "description": "Entity Type",
+                    "notes": "Entity Type",
+                    "type": "string",
+                    "typeName": "DEFAULT"
+                },
+                "metric_display_name": {
+                    "description": "Display name of the metric",
+                    "notes": "Display name of the metric",
+                    "type": "string",
+                    "typeName": "DEFAULT"
+                },
+                "metric_name": {
+                    "description": "Name of the metric",
+                    "notes": "Name of the metric",
+                    "type": "string",
+                    "typeName": "DEFAULT"
+                },
+                "metric_value_details": {
+                    "description": "List of metric values at different instances of time in the alert lifecycle",
+                    "items": {
+                        "$ref": "get.dto.alerts.AlertDTO$MetricValueDetails"
+                    },
+                    "notes": "List of metric values at different instances of time in the alert lifecycle",
+                    "type": "array",
+                    "typeName": "DEFAULT"
+                },
+                "unit": {
+                    "description": "Unit of the metric value.",
+                    "notes": "Unit of the metric value.",
+                    "type": "string",
+                    "typeName": "DEFAULT"
+                }
+            }
+        },
+        "get.dto.alerts.AlertDTO$MetricValueDetails": {
+            "id": "get.dto.alerts.AlertDTO$MetricValueDetails",
+            "required": [],
+            "properties": {
+                "metric_threshold_value": {
+                    "description": "Threshold value of the metric that was specified in the policy at that given time.",
+                    "notes": "Threshold value of the metric that was specified in the policy at that given time.",
+                    "type": "string",
+                    "typeName": "DEFAULT"
+                },
+                "metric_value": {
+                    "description": "Actual value of the metric at that given time.",
+                    "notes": "Actual value of the metric at that given time.",
+                    "type": "string",
+                    "typeName": "DEFAULT"
+                },
+                "state_change_time_stamp_in_usecs": {
+                    "description": "Time at which the alert's state change occurred.",
+                    "format": "int64",
+                    "notes": "Time at which the alert's state change occurred.",
+                    "type": "integer",
+                    "typeName": "DEFAULT"
+                }
+            }
+        },
+        "get.dto.alerts.AlertDTO$SeverityTrail": {
+            "id": "get.dto.alerts.AlertDTO$SeverityTrail",
+            "required": [],
+            "properties": {
+                "severity": {
+                    "description": "Severity level of the alert. Can be INFO, WARNING or CRITICAL",
+                    "notes": "Severity level of the alert. Can be INFO, WARNING or CRITICAL",
+                    "type": "string",
+                    "typeName": "DEFAULT"
+                },
+                "severity_change_timestamp_in_usecs": {
+                    "description": "Time at which the severity level change occurred",
+                    "format": "int64",
+                    "notes": "Time at which the severity level change occurred",
+                    "type": "integer",
+                    "typeName": "DEFAULT"
+                }
+            }
+        },
+        "get.dto.alerts.AlertSummaryDTO": {
+            "id": "get.dto.alerts.AlertSummaryDTO",
+            "required": [],
+            "properties": {
+                "alert_summaries": {
+                    "$ref": "java.util.Map&lt;get.dto.alerts.AlertDTO$AlertSeverity, get.base.EntityCollection&lt;get.dto.alerts.AlertDTO&gt;&gt;"
+                },
+                "count": {
+                    "format": "int64",
+                    "type": "integer"
+                }
+            }
+        },
+        "get.dto.appliance.configuration.ClusterDTO": {
+            "id": "get.dto.appliance.configuration.ClusterDTO",
+            "required": [],
+            "properties": {
+                "alert_summary": {
+                    "$ref": "get.dto.alerts.AlertSummaryDTO"
+                },
+                "all_hyperv_nodes_in_failover_cluster": {
+                    "description": "If the cluster includes Hyper-V nodes, then this property indicates whether all the Hyper-V nodes in the NOS cluster (that are not marked for removal)are a part of a Hyper-V failover cluster",
+                    "type": "boolean",
+                    "typeName": "DEFAULT"
+                },
+                "block_serials": {
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": "array"
+                },
+                "cloudcluster": {
+                    "type": "boolean"
+                },
+                "cluster_arch": {
+                    "type": "string"
+                },
+                "cluster_data_state": {
+                    "$ref": "get.dto.multicluster.ClusterDataStateDTO"
+                },
+                "cluster_external_data_services_i_p_address": {
+                    "type": "string"
+                },
+                "cluster_external_i_p_address": {
+                    "type": "string"
+                },
+                "cluster_functions": {
+                    "description": "This field describes the type of cluster",
+                    "items": {
+                        "enum": [
+                            "NDFS",
+                            "MULTICLUSTER",
+                            "CLOUDDATAGATEWAY",
+                            "MINERVA",
+                            "SINGLE_NODE",
+                            "TWO_NODE"
+                        ],
+                        "type": "string"
+                    },
+                    "type": "array",
+                    "typeName": "DEFAULT",
+                    "uniqueItems": "true"
+                },
+                "cluster_gpus": {
+                    "description": "Gpus present on the cluster",
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": "array",
+                    "typeName": "DEFAULT"
+                },
+                "cluster_incarnation_id": {
+                    "format": "int64",
+                    "type": "integer"
+                },
+                "cluster_redundancy_state": {
+                    "$ref": "get.dto.appliance.configuration.ClusterRedundancyStateDTO"
+                },
+                "cluster_uuid": {
+                    "description": " Uuid of the cluster this entity belongs to",
+                    "type": "string",
+                    "typeName": "DEFAULT"
+                },
+                "common_criteria_mode": {
+                    "type": "boolean"
+                },
+                "credential": {
+                    "$ref": "get.dto.hyperv.CredentialDTO",
+                    "description": "If the cluster includes Hyper-V nodes, then this propertyindicates the credential for the account that has permissions to modify the domain account representing the NOS cluster",
+                    "typeName": "DEFAULT"
+                },
+                "disable_degraded_node_monitoring": {
+                    "type": "boolean"
+                },
+                "domain": {
+                    "description": "If the cluster includes Hyper-V nodes, then this property indicates the AD domain name that this cluster is a part of",
+                    "type": "string",
+                    "typeName": "DEFAULT"
+                },
+                "enable_lock_down": {
+                    "type": "boolean"
+                },
+                "enable_on_disk_dedup": {
+                    "type": "boolean"
+                },
+                "enable_password_remote_login_to_cluster": {
+                    "type": "boolean"
+                },
+                "enable_shadow_clones": {
+                    "type": "boolean"
+                },
+                "enforce_rackable_unit_aware_placement": {
+                    "description": "Indicates whether RackableUnit (RU) aware placement has been enforced.",
+                    "type": "boolean",
+                    "typeName": "DEFAULT"
+                },
+                "external_subnet": {
+                    "type": "string"
+                },
+                "fingerprint_content_cache_percentage": {
+                    "format": "int32",
+                    "type": "integer"
+                },
+                "full_version": {
+                    "type": "string"
+                },
+                "global_nfs_white_list": {
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": "array"
+                },
+                "gpu_driver_version": {
+                    "description": "Host driver version of the GPU",
+                    "type": "string",
+                    "typeName": "DEFAULT"
+                },
+                "has_self_encrypting_drive": {
+                    "type": "boolean"
+                },
+                "health_summary": {
+                    "$ref": "get.dto.health.check.HealthSummaryDTO"
+                },
+                "http_proxies": {
+                    "items": {
+                        "$ref": "get.dto.appliance.configuration.HttpProxyDTO"
+                    },
+                    "type": "array"
+                },
+                "hypervisor_security_compliance_config": {
+                    "$ref": "get.dto.appliance.configuration.ClusterDTO$HypervisorSecurityComplianceConfigDTO"
+                },
+                "hypervisor_types": {
+                    "items": {
+                        "enum": [
+                            "kVMware",
+                            "kXen",
+                            "kHyperv",
+                            "kKvm",
+                            "kAmazonWebServices",
+                            "kVCenter",
+                            "kAcropolis",
+                            "kSCVMM",
+                            "kNull"
+                        ],
+                        "type": "string"
+                    },
+                    "type": "array",
+                    "uniqueItems": "true"
+                },
+                "id": {
+                    "type": "string"
+                },
+                "internal_subnet": {
+                    "type": "string"
+                },
+                "is_upgrade_in_progress": {
+                    "type": "boolean"
+                },
+                "iscsi_config": {
+                    "$ref": "get.dto.appliance.configuration.ClusterDTO$IscsiConfig",
+                    "description": "Cluster wide iscsi configuration",
+                    "typeName": "DEFAULT"
+                },
+                "management_servers": {
+                    "items": {
+                        "$ref": "get.dto.uhura.ManagementServerInfoDTO"
+                    },
+                    "type": "array"
+                },
+                "multicluster": {
+                    "type": "boolean"
+                },
+                "name": {
+                    "type": "string"
+                },
+                "name_servers": {
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": "array"
+                },
+                "ncc_version": {
+                    "type": "string"
+                },
+                "nos_cluster_and_hosts_domain_joined": {
+                    "description": "If the cluster includes Hyper-V nodes, then this property indicates whether the NOS cluster and the constituent hosts are all joined to the same domain",
+                    "type": "boolean",
+                    "typeName": "DEFAULT"
+                },
+                "ntp_servers": {
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": "array"
+                },
+                "num_nodes": {
+                    "format": "int64",
+                    "type": "integer"
+                },
+                "operation_mode": {
+                    "enum": [
+                        "NORMAL",
+                        "OVERRIDE",
+                        "READONLY",
+                        "STANDALONE",
+                        "SWITCH_TO_TWO_NODE"
+                    ],
+                    "type": "string"
+                },
+                "public_keys": {
+                    "items": {
+                        "$ref": "get.dto.appliance.configuration.ClusterDTO$PublicKeyDTO"
+                    },
+                    "type": "array"
+                },
+                "rackable_units": {
+                    "items": {
+                        "$ref": "get.dto.appliance.configuration.RackableUnitDTO"
+                    },
+                    "type": "array"
+                },
+                "security_compliance_config": {
+                    "$ref": "get.dto.appliance.configuration.ClusterDTO$SecurityComplianceConfigDTO"
+                },
+                "service_centers": {
+                    "items": {
+                        "$ref": "get.dto.appliance.configuration.ServiceCenterDTO"
+                    },
+                    "type": "array"
+                },
+                "smtp_server": {
+                    "$ref": "get.dto.appliance.configuration.SmtpServerDTO"
+                },
+                "ssd_pinning_percentage_limit": {
+                    "description": "This field describes the allowable percentage pinning on the ssd",
+                    "format": "int32",
+                    "type": "integer",
+                    "typeName": "DEFAULT"
+                },
+                "stats": {
+                    "$ref": "java.util.Map&lt;java.lang.String, java.lang.String&gt;"
+                },
+                "storage_type": {
+                    "description": "This field describes the storage type of cluster",
+                    "enum": [
+                        "ALL_FLASH",
+                        "MIXED",
+                        "ALL_HDD"
+                    ],
+                    "type": "string",
+                    "typeName": "DEFAULT"
+                },
+                "support_verbosity_type": {
+                    "enum": [
+                        "NOTHING",
+                        "BASIC",
+                        "BASIC_COREDUMP"
+                    ],
+                    "type": "string"
+                },
+                "target_version": {
+                    "type": "string"
+                },
+                "timezone": {
+                    "type": "string"
+                },
+                "usage_stats": {
+                    "$ref": "java.util.Map&lt;java.lang.String, java.lang.String&gt;"
+                },
+                "uuid": {
+                    "type": "string"
+                },
+                "version": {
+                    "type": "string"
+                }
+            }
+        },
+        "get.dto.appliance.configuration.ClusterDTO$HypervisorSecurityComplianceConfigDTO": {
+            "id": "get.dto.appliance.configuration.ClusterDTO$HypervisorSecurityComplianceConfigDTO",
+            "required": [],
+            "properties": {}
+        },
+        "get.dto.appliance.configuration.ClusterDTO$IscsiConfig": {
+            "id": "get.dto.appliance.configuration.ClusterDTO$IscsiConfig",
+            "required": [],
+            "properties": {
+                "external_client_enabled": {
+                    "description": "Indicates whether external iscsi initiators are enabled or not",
+                    "type": "boolean",
+                    "typeName": "DEFAULT"
+                }
+            }
+        },
+        "get.dto.appliance.configuration.ClusterDTO$PublicKeyDTO": {
+            "id": "get.dto.appliance.configuration.ClusterDTO$PublicKeyDTO",
+            "required": [],
+            "properties": {
+                "key": {
+                    "type": "string"
+                },
+                "name": {
+                    "type": "string"
+                }
+            }
+        },
+        "get.dto.appliance.configuration.ClusterDTO$SecurityComplianceConfigDTO": {
+            "id": "get.dto.appliance.configuration.ClusterDTO$SecurityComplianceConfigDTO",
+            "required": [],
+            "properties": {
+                "enable_s_n_m_pv3_only": {
+                    "type": "boolean"
+                }
+            }
+        },
+        "get.dto.appliance.configuration.ClusterRedundancyStateDTO": {
+            "id": "get.dto.appliance.configuration.ClusterRedundancyStateDTO",
+            "required": [],
+            "properties": {
+                "current_redundancy_factor": {
+                    "format": "int32",
+                    "type": "integer"
+                },
+                "desired_redundancy_factor": {
+                    "format": "int32",
+                    "type": "integer"
+                },
+                "redundancy_status": {
+                    "$ref": "java.util.Map&lt;java.lang.String, java.lang.Boolean&gt;"
+                }
+            }
+        },
+        "get.dto.appliance.configuration.HttpProxyDTO": {
+            "id": "get.dto.appliance.configuration.HttpProxyDTO",
+            "description": "http-proxy",
+            "required": [],
+            "properties": {
+                "address": {
+                    "description": "Address of the proxy",
+                    "type": "string",
+                    "typeName": "DEFAULT"
+                },
+                "name": {
+                    "description": "Proxy name.",
+                    "type": "string",
+                    "typeName": "DEFAULT"
+                },
+                "password": {
+                    "description": "Password for proxy authentication",
+                    "type": "string",
+                    "typeName": "DEFAULT"
+                },
+                "port": {
+                    "description": "Port on which proxy is binding",
+                    "format": "int32",
+                    "maximum": "65536",
+                    "minimum": "0",
+                    "notes": "Any port number which is in the range 0 - 65536",
+                    "type": "integer",
+                    "typeName": "DEFAULT"
+                },
+                "proxy_types": {
+                    "description": "Proxy types to send applicable traffic",
+                    "items": {
+                        "enum": [
+                            "HTTP",
+                            "HTTPS",
+                            "SOCKS"
+                        ],
+                        "type": "string"
+                    },
+                    "notes": "Proxy types to send applicable traffic. Supports 'http' 'https', and 'socks' proxy configuration.",
+                    "type": "array",
+                    "typeName": "DEFAULT"
+                },
+                "username": {
+                    "description": "Username for proxy authentication",
+                    "type": "string",
+                    "typeName": "DEFAULT"
+                }
+            }
+        },
+        "get.dto.appliance.configuration.RackableUnitDTO": {
+            "id": "get.dto.appliance.configuration.RackableUnitDTO",
+            "required": [],
+            "properties": {
+                "id": {
+                    "format": "int64",
+                    "type": "integer"
+                },
+                "location": {
+                    "type": "string"
+                },
+                "model": {
+                    "type": "string"
+                },
+                "model_name": {
+                    "type": "string"
+                },
+                "node_uuids": {
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": "array"
+                },
+                "nodes": {
+                    "items": {
+                        "format": "int64",
+                        "type": "integer"
+                    },
+                    "type": "array"
+                },
+                "positions": {
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": "array"
+                },
+                "rackable_unit_uuid": {
+                    "type": "string"
+                },
+                "serial": {
+                    "type": "string"
+                }
+            }
+        },
+        "get.dto.appliance.configuration.ServiceCenterDTO": {
+            "id": "get.dto.appliance.configuration.ServiceCenterDTO",
+            "required": [],
+            "properties": {
+                "ip_address": {
+                    "description": "Ip Address.",
+                    "type": "string",
+                    "typeName": "DEFAULT"
+                },
+                "name": {
+                    "description": "Name.",
+                    "type": "string",
+                    "typeName": "DEFAULT"
+                },
+                "port": {
+                    "description": "Port number.",
+                    "format": "int32",
+                    "maximum": "65536",
+                    "minimum": "0",
+                    "notes": "Any port number which is in the range 0 - 65536",
+                    "type": "integer",
+                    "typeName": "DEFAULT"
+                },
+                "username": {
+                    "description": "username.",
+                    "type": "string",
+                    "typeName": "DEFAULT"
+                }
+            }
+        },
+        "get.dto.appliance.configuration.SmtpServerDTO": {
+            "id": "get.dto.appliance.configuration.SmtpServerDTO",
+            "required": [],
+            "properties": {
+                "address": {
+                    "type": "string"
+                },
+                "email_status": {
+                    "$ref": "get.dto.base.CommunicationStatusDTO"
+                },
+                "from_email_address": {
+                    "type": "string"
+                },
+                "password": {
+                    "type": "string"
+                },
+                "port": {
+                    "format": "int32",
+                    "type": "integer"
+                },
+                "secure_mode": {
+                    "enum": [
+                        "STARTTLS",
+                        "SSL",
+                        "NONE"
+                    ],
+                    "type": "string"
+                },
+                "username": {
+                    "type": "string"
+                }
+            }
+        },
+        "get.dto.base.CommunicationStatusDTO": {
+            "id": "get.dto.base.CommunicationStatusDTO",
+            "required": [],
+            "properties": {
+                "last_changed_time_stamp_usecs": {
+                    "format": "int64",
+                    "type": "integer"
+                },
+                "last_checked_time_stamp_usecs": {
+                    "format": "int64",
+                    "type": "integer"
+                },
+                "last_successful_transmission_time_stamp_usecs": {
+                    "format": "int64",
+                    "type": "integer"
+                },
+                "message": {
+                    "$ref": "get.dto.base.ParameterizedMessageDTO"
+                },
+                "status": {
+                    "enum": [
+                        "SUCCESS",
+                        "FAILED",
+                        "RETRYING",
+                        "UNKNOWN"
+                    ],
+                    "type": "string"
+                }
+            }
+        },
+        "get.dto.base.ParameterizedMessageDTO": {
+            "id": "get.dto.base.ParameterizedMessageDTO",
+            "required": [],
+            "properties": {
+                "attributes": {
+                    "$ref": "java.util.Map&lt;java.lang.String, java.lang.String&gt;"
+                },
+                "message": {
+                    "type": "string"
+                }
+            }
+        },
+        "get.dto.health.check.EntityTypeHealthCheckSummaryDTO": {
+            "id": "get.dto.health.check.EntityTypeHealthCheckSummaryDTO",
+            "required": [],
+            "properties": {
+                "checks_in_error": {
+                    "$ref": "java.util.Map&lt;java.lang.String, get.dto.health.check.HealthCheckErrorsDTO&gt;"
+                },
+                "detailed_check_summary": {
+                    "$ref": "java.util.Map&lt;java.lang.String, java.util.Map&lt;get.dto.health.check.HealthStatus, java.lang.Integer&gt;&gt;"
+                },
+                "entity_type": {
+                    "enum": [
+                        "CLUSTER",
+                        "HARDWARE",
+                        "STORAGE",
+                        "BACKUP",
+                        "DR",
+                        "LICENSE",
+                        "DISK",
+                        "STORAGE_TIER",
+                        "HOST",
+                        "NODE",
+                        "MANAGEMENT_SERVER",
+                        "MANAGEMENT_SERVER_INFO",
+                        "VM",
+                        "SERVICE_VM",
+                        "VDISK",
+                        "VIRTUAL_DISK",
+                        "STORAGE_POOL",
+                        "CONTAINER",
+                        "STORAGE_CONTAINER",
+                        "VZONE",
+                        "SNAPSHOT",
+                        "FAST_CLONE",
+                        "RSYSLOG_SERVER",
+                        "KEY_MANAGEMENT_SERVER",
+                        "CERTIFICATE",
+                        "HTTP_PROXY",
+                        "SNMP_TRAP",
+                        "SNMP_USER",
+                        "REMOTE_SITE",
+                        "CLOUD_CREDENTIALS",
+                        "PROTECTION_DOMAIN",
+                        "CONSISTENCY_GROUP",
+                        "REPLICATION",
+                        "REPLICATION_LINK",
+                        "SYNC_REPLICATION",
+                        "VSTORE",
+                        "NETWORK_SWITCH_INTERFACE",
+                        "NETWORK_SWITCH",
+                        "VIRTUAL_NIC",
+                        "VMKERNEL_NIC",
+                        "HOST_NIC",
+                        "NIC_TEAM",
+                        "VIRTUAL_NETWORK",
+                        "VIRTUAL_SWITCH",
+                        "HOST_GPU",
+                        "VIRTUAL_GPU",
+                        "TAG",
+                        "COMMENT",
+                        "TASK",
+                        "IMAGE",
+                        "IMAGE_INFO",
+                        "ISCSI_CLIENT",
+                        "VOLUME_GROUP",
+                        "VOLUME_DISK",
+                        "VM_DISK",
+                        "FILE_SERVER",
+                        "FS_PARTNER_SERVER",
+                        "CVM",
+                        "NVM",
+                        "FILE_SERVER_SHARE",
+                        "ALERT_CAUSE",
+                        "ALERT_CHECK_SCHEMA",
+                        "ALERT_CHECK_SCHEMA_OVERRIDE",
+                        "INTER_CLUSTER_DATA_TRANSFER_INDICATOR",
+                        "RACKABLE_UNIT",
+                        "DIRECTORY_CONFIG",
+                        "HEALTH_CHECK",
+                        "NETWORK_SNMP_PROFILE",
+                        "ALERT",
+                        "SCHEDULE",
+                        "BANDWIDTH_POLICY",
+                        "FILE_GROUP",
+                        "NETWORK_MAPPING",
+                        "PROGRESS_MONITOR",
+                        "LCM_ENTITY",
+                        "LCM_AVAILABLE_VERSION",
+                        "CAPACITY_SCENARIO",
+                        "NCC_ERROR_CODES",
+                        "RESOURCE_CONSUMPTION",
+                        "REPORT_CONFIG",
+                        "REPORT_INSTANCE",
+                        "COMMON_REPORT_CONFIG",
+                        "REMOTE_CONNECTION"
+                    ],
+                    "type": "string"
+                },
+                "filter_criteria": {
+                    "type": "string"
+                },
+                "health_summary": {
+                    "$ref": "java.util.Map&lt;get.dto.health.check.HealthStatus, java.lang.Integer&gt;"
+                }
+            }
+        },
+        "get.dto.health.check.HealthSummaryDTO": {
+            "id": "get.dto.health.check.HealthSummaryDTO",
+            "required": [],
+            "properties": {
+                "entity_type_summaries": {
+                    "items": {
+                        "$ref": "get.dto.health.check.EntityTypeHealthCheckSummaryDTO"
+                    },
+                    "type": "array"
+                },
+                "health_check_summaries": {
+                    "$ref": "java.util.Map&lt;java.lang.String, get.dto.health.check.HealthCheckSummaryDTO&gt;"
+                },
+                "health_status": {
+                    "enum": [
+                        "Critical",
+                        "Warning",
+                        "Good",
+                        "Unknown",
+                        "Error"
+                    ],
+                    "type": "string"
+                }
+            }
+        },
+        "get.dto.hyperv.CredentialDTO": {
+            "id": "get.dto.hyperv.CredentialDTO",
+            "required": [],
+            "properties": {
+                "logon_name": {
+                    "description": "Logon name of the account",
+                    "type": "string",
+                    "typeName": "DEFAULT"
+                },
+                "password": {
+                    "description": "Password of the account",
+                    "type": "string",
+                    "typeName": "DEFAULT"
+                }
+            }
+        },
+        "get.dto.multicluster.ClusterDataStateDTO": {
+            "id": "get.dto.multicluster.ClusterDataStateDTO",
+            "required": [],
+            "properties": {
+                "cluster_available": {
+                    "type": "boolean"
+                },
+                "cluster_data_available": {
+                    "type": "boolean"
+                },
+                "cluster_register_time_usecs": {
+                    "format": "int64",
+                    "type": "integer"
+                },
+                "cluster_uuid": {
+                    "type": "string"
+                },
+                "first_unavailable_time_usecs": {
+                    "format": "int64",
+                    "type": "integer"
+                },
+                "last_alerts_data_transferred_usecs": {
+                    "format": "int64",
+                    "type": "integer"
+                },
+                "last_arithmos_data_transferred_usecs": {
+                    "format": "int64",
+                    "type": "integer"
+                }
+            }
+        },
+        "get.dto.uhura.ManagementServerInfoDTO": {
+            "id": "get.dto.uhura.ManagementServerInfoDTO",
+            "required": [],
+            "properties": {
+                "drs_enabled": {
+                    "description": "Denotes if DRS is enabled or not. Applicable only for vCenter.",
+                    "notes": "Denotes if DRS is enabled or not.",
+                    "type": "boolean",
+                    "typeName": "DEFAULT"
+                },
+                "drs_vm_behaviour": {
+                    "description": "Denotes if DRS is enabled or not. Applicable only for vCenter.",
+                    "enum": [
+                        "UNKNOWN",
+                        "FULL_ENABLED",
+                        "ONLY_PLACEMENT_ENABLED",
+                        "MANUAL"
+                    ],
+                    "notes": "Denotes if DRS is enabled or not.",
+                    "type": "string",
+                    "typeName": "DEFAULT"
+                },
+                "ha_enabled": {
+                    "description": "Denotes if HA is enabled or not.",
+                    "notes": "Denotes if HA is enabled or not.",
+                    "type": "boolean",
+                    "typeName": "DEFAULT"
+                },
+                "in_use": {
+                    "description": "Indicates whether any host is managed by this server or not.",
+                    "notes": "Indicates whether any host is managed by this server or not.",
+                    "type": "boolean",
+                    "typeName": "DEFAULT"
+                },
+                "ip_address": {
+                    "description": "Address of the management server.",
+                    "notes": "Address of the management server.",
+                    "type": "string",
+                    "typeName": "IP4_ADDRESS"
+                },
+                "management_server_type": {
+                    "enum": [
+                        "VCENTER"
+                    ],
+                    "type": "string"
+                },
+                "registered": {
+                    "description": "Denotes whether the server is registered with Nutanix or not",
+                    "notes": "Denotes whether the server is registered with Nutanix or not",
+                    "type": "boolean",
+                    "typeName": "DEFAULT"
+                }
+            }
+        },
+        "java.util.Map&lt;get.dto.alerts.AlertDTO$AlertSeverity, get.base.EntityCollection&lt;get.dto.alerts.AlertDTO&gt;&gt;": {
+            "id": "java.util.Map&lt;get.dto.alerts.AlertDTO$AlertSeverity, get.base.EntityCollection&lt;get.dto.alerts.AlertDTO&gt;&gt;",
+            "required": [],
+            "properties": {}
+        },
+        "java.util.Map&lt;get.dto.health.check.HealthStatus, java.lang.Integer&gt;": {
+            "id": "java.util.Map&lt;get.dto.health.check.HealthStatus, java.lang.Integer&gt;",
+            "required": [],
+            "properties": {}
+        },
+        "java.util.Map&lt;java.lang.String, get.dto.health.check.HealthCheckErrorsDTO&gt;": {
+            "id": "java.util.Map&lt;java.lang.String, get.dto.health.check.HealthCheckErrorsDTO&gt;",
+            "required": [],
+            "properties": {}
+        },
+        "java.util.Map&lt;java.lang.String, get.dto.health.check.HealthCheckSummaryDTO&gt;": {
+            "id": "java.util.Map&lt;java.lang.String, get.dto.health.check.HealthCheckSummaryDTO&gt;",
+            "required": [],
+            "properties": {}
+        },
+        "java.util.Map&lt;java.lang.String, java.lang.Boolean&gt;": {
+            "id": "java.util.Map&lt;java.lang.String, java.lang.Boolean&gt;",
+            "required": [],
+            "properties": {}
+        },
+        "java.util.Map&lt;java.lang.String, java.lang.String&gt;": {
+            "id": "java.util.Map&lt;java.lang.String, java.lang.String&gt;",
+            "required": [],
+            "properties": {}
+        },
+        "java.util.Map&lt;java.lang.String, java.util.Map&lt;get.dto.health.check.HealthStatus, java.lang.Integer&gt;&gt;": {
+            "id": "java.util.Map&lt;java.lang.String, java.util.Map&lt;get.dto.health.check.HealthStatus, java.lang.Integer&gt;&gt;",
+            "required": [],
+            "properties": {}
+        }
+    }
+}

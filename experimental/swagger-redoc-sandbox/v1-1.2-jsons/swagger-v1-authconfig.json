@@ -1,0 +1,1309 @@
+{
+    "apiVersion": "v1",
+    "swaggerVersion": "1.2",
+    "basePath": "https://any_cvm_ip:9440/PrismGateway/services/rest/v1",
+    "resourcePath": "/authconfig",
+    "produces": [
+        "application/json"
+    ],
+    "consumes": [
+        "application/json"
+    ],
+    "apis": [
+        {
+            "internal": false,
+            "path": "/authconfig/",
+            "operations": [
+                {
+                    "deprecated": "false",
+                    "internal": false,
+                    "method": "DELETE",
+                    "summary": "Delete Auth config.",
+                    "notes": "Delete Auth configuration from the cluster. This will also delete all the directories configured in the cluster.",
+                    "type": "delete.dto.PrimitiveDTO&lt;java.lang.Boolean&gt;",
+                    "nickname": "deleteAuthConfig",
+                    "parameters": [],
+                    "responseMessages": [
+                        {
+                            "code": 500,
+                            "message": "Any internal exception while performing this operation"
+                        }
+                    ]
+                },
+                {
+                    "deprecated": "false",
+                    "internal": false,
+                    "method": "GET",
+                    "summary": "Get Auth configuration.",
+                    "notes": "Get the complete Auth configuration including directories configured in the cluster.",
+                    "type": "get.dto.authconfig.AuthConfigDTO",
+                    "nickname": "getAuthConfig",
+                    "parameters": [],
+                    "responseMessages": [
+                        {
+                            "code": 500,
+                            "message": "Any internal exception while performing this operation"
+                        }
+                    ]
+                },
+                {
+                    "deprecated": "false",
+                    "internal": false,
+                    "method": "PATCH",
+                    "summary": "Modify Auth configuration.",
+                    "notes": "Modify the Auth configuration excluding directories configured in the cluster.",
+                    "type": "patch.dto.authconfig.AuthConfigDTO",
+                    "nickname": "patchAuthConfig",
+                    "parameters": [
+                        {
+                            "description": "an AuthConfigDTO instance",
+                            "required": true,
+                            "allowMultiple": false,
+                            "paramType": "body",
+                            "type": "patch.dto.RequestDTO&lt;patch.dto.authconfig.AuthConfigDTO&gt;"
+                        }
+                    ],
+                    "responseMessages": [
+                        {
+                            "code": 500,
+                            "message": "Any internal exception while performing this operation"
+                        }
+                    ]
+                },
+                {
+                    "deprecated": "false",
+                    "internal": false,
+                    "method": "PUT",
+                    "summary": "Update Auth configuration.",
+                    "notes": "Update the Auth configuration excluding directories configured in the cluster.",
+                    "type": "update.dto.authconfig.AuthConfigDTO",
+                    "nickname": "updateAuthConfig",
+                    "parameters": [
+                        {
+                            "description": "an AuthConfigDTO instance",
+                            "required": true,
+                            "allowMultiple": false,
+                            "paramType": "body",
+                            "type": "update.dto.authconfig.AuthConfigDTO"
+                        }
+                    ],
+                    "responseMessages": [
+                        {
+                            "code": 500,
+                            "message": "Any internal exception while performing this operation"
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "internal": false,
+            "path": "/authconfig/add_auth_types",
+            "operations": [
+                {
+                    "deprecated": "false",
+                    "internal": false,
+                    "method": "POST",
+                    "summary": "Add Auth types.",
+                    "notes": "Add Auth types to the existing Auth types.",
+                    "type": "array",
+                    "items": {
+                        "enum": [
+                            "LOCAL",
+                            "DIRECTORY_SERVICE"
+                        ],
+                        "type": "string"
+                    },
+                    "nickname": "addAuthTypes",
+                    "parameters": [
+                        {
+                            "description": "List of Auth types",
+                            "required": true,
+                            "allowMultiple": false,
+                            "paramType": "body",
+                            "type": "array",
+                            "items": {
+                                "enum": [
+                                    "LOCAL",
+                                    "DIRECTORY_SERVICE"
+                                ],
+                                "type": "string"
+                            }
+                        }
+                    ],
+                    "responseMessages": [
+                        {
+                            "code": 500,
+                            "message": "Any internal exception while performing this operation"
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "internal": false,
+            "path": "/authconfig/auth_types",
+            "operations": [
+                {
+                    "deprecated": "false",
+                    "internal": false,
+                    "method": "GET",
+                    "summary": "Get Auth types.",
+                    "notes": "Get Auth types configured in Auth configuration.",
+                    "type": "array",
+                    "items": {
+                        "enum": [
+                            "LOCAL",
+                            "DIRECTORY_SERVICE"
+                        ],
+                        "type": "string"
+                    },
+                    "nickname": "getAuthTypes",
+                    "parameters": [],
+                    "responseMessages": [
+                        {
+                            "code": 500,
+                            "message": "Any internal exception while performing this operation"
+                        }
+                    ]
+                },
+                {
+                    "deprecated": "false",
+                    "internal": false,
+                    "method": "PUT",
+                    "summary": "Update Auth types.",
+                    "notes": "Update Auth types configured in the Auth configuration.",
+                    "type": "update.dto.authconfig.AuthConfigDTO",
+                    "nickname": "setAuthTypes",
+                    "parameters": [
+                        {
+                            "description": "List of Auth types",
+                            "required": true,
+                            "allowMultiple": false,
+                            "paramType": "body",
+                            "type": "array",
+                            "items": {
+                                "enum": [
+                                    "LOCAL",
+                                    "DIRECTORY_SERVICE"
+                                ],
+                                "type": "string"
+                            }
+                        }
+                    ],
+                    "responseMessages": [
+                        {
+                            "code": 500,
+                            "message": "Any internal exception while performing this operation"
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "internal": false,
+            "path": "/authconfig/client_auth/",
+            "operations": [
+                {
+                    "deprecated": "false",
+                    "internal": false,
+                    "method": "GET",
+                    "summary": "Get client authentication status.",
+                    "notes": "Get the client authentication status configured on the cluster.",
+                    "type": "get.dto.authconfig.ClientAuthDTO",
+                    "nickname": "getClientAuth",
+                    "parameters": [],
+                    "responseMessages": [
+                        {
+                            "code": 500,
+                            "message": "Any internal exception while performing this operation"
+                        }
+                    ]
+                },
+                {
+                    "deprecated": "false",
+                    "internal": false,
+                    "method": "POST",
+                    "summary": "Enable/disable client authentication.",
+                    "notes": "Enable/disable client authentication on the cluster.",
+                    "type": "create.dto.authconfig.CaChainDTO",
+                    "nickname": "setClientAuthState",
+                    "parameters": [
+                        {
+                            "description": "Enable client auth",
+                            "required": true,
+                            "allowMultiple": false,
+                            "paramType": "body",
+                            "type": "create.dto.PrimitiveDTO&lt;java.lang.Boolean&gt;"
+                        }
+                    ],
+                    "responseMessages": [
+                        {
+                            "code": 500,
+                            "message": "Any internal exception while performing this operation"
+                        }
+                    ]
+                },
+                {
+                    "deprecated": "false",
+                    "internal": false,
+                    "method": "PUT",
+                    "summary": "Update client authentication.",
+                    "notes": "Update client authentication on the cluster.",
+                    "type": "update.dto.authconfig.ClientAuthDTO",
+                    "nickname": "updateClientAuth",
+                    "parameters": [
+                        {
+                            "description": "Client auth updates",
+                            "required": true,
+                            "allowMultiple": false,
+                            "paramType": "body",
+                            "type": "update.dto.authconfig.ClientAuthDTO"
+                        }
+                    ],
+                    "responseMessages": [
+                        {
+                            "code": 500,
+                            "message": "Any internal exception while performing this operation"
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "internal": false,
+            "path": "/authconfig/client_auth/{name}",
+            "operations": [
+                {
+                    "deprecated": "false",
+                    "internal": false,
+                    "method": "DELETE",
+                    "summary": "Delete client chain certificate for authentication.",
+                    "notes": "Delete client chain certificate on the cluster.",
+                    "type": "delete.dto.PrimitiveDTO&lt;java.lang.Boolean&gt;",
+                    "nickname": "deleteClientAuthChain",
+                    "parameters": [
+                        {
+                            "name": "name",
+                            "description": "Name of the Certificate",
+                            "required": true,
+                            "allowMultiple": false,
+                            "paramType": "path",
+                            "type": "string"
+                        }
+                    ],
+                    "responseMessages": []
+                }
+            ]
+        },
+        {
+            "internal": false,
+            "path": "/authconfig/directories/",
+            "operations": [
+                {
+                    "deprecated": "false",
+                    "internal": false,
+                    "method": "GET",
+                    "summary": "Get the list of Directories.",
+                    "notes": "Get the list of Directories configured in the cluster.",
+                    "type": "array",
+                    "items": {
+                        "$ref": "get.dto.authconfig.DirectoryConfigDTO"
+                    },
+                    "nickname": "getAllDirectoryConfigs",
+                    "parameters": [],
+                    "responseMessages": [
+                        {
+                            "code": 500,
+                            "message": "Any internal exception while performing this operation"
+                        }
+                    ]
+                },
+                {
+                    "deprecated": "false",
+                    "internal": false,
+                    "method": "PATCH",
+                    "summary": "Modify Directory.",
+                    "notes": "Modify the specified Directory config.",
+                    "type": "patch.dto.authconfig.DirectoryConfigDTO",
+                    "nickname": "patchDirectoryConfig",
+                    "parameters": [
+                        {
+                            "description": "A Directory instance",
+                            "required": true,
+                            "allowMultiple": false,
+                            "paramType": "body",
+                            "type": "patch.dto.RequestDTO&lt;patch.dto.authconfig.DirectoryConfigDTO&gt;"
+                        }
+                    ],
+                    "responseMessages": [
+                        {
+                            "code": 500,
+                            "message": "Any internal exception while performing this operation"
+                        }
+                    ]
+                },
+                {
+                    "deprecated": "false",
+                    "internal": false,
+                    "method": "POST",
+                    "summary": "Add Directory.",
+                    "notes": "Add Directory config to the cluster.",
+                    "type": "create.dto.authconfig.DirectoryConfigDTO",
+                    "nickname": "addDirectoryConfig",
+                    "parameters": [
+                        {
+                            "description": "A Directory instance",
+                            "required": true,
+                            "allowMultiple": false,
+                            "paramType": "body",
+                            "type": "create.dto.authconfig.DirectoryConfigDTO"
+                        }
+                    ],
+                    "responseMessages": [
+                        {
+                            "code": 500,
+                            "message": "Any internal exception while performing this operation"
+                        }
+                    ]
+                },
+                {
+                    "deprecated": "false",
+                    "internal": false,
+                    "method": "PUT",
+                    "summary": "Edit Directory.",
+                    "notes": "Edit the specified Directory config.",
+                    "type": "update.dto.authconfig.DirectoryConfigDTO",
+                    "nickname": "updateDirectoryConfig",
+                    "parameters": [
+                        {
+                            "description": "A Directory instance",
+                            "required": true,
+                            "allowMultiple": false,
+                            "paramType": "body",
+                            "type": "update.dto.authconfig.DirectoryConfigDTO"
+                        }
+                    ],
+                    "responseMessages": [
+                        {
+                            "code": 500,
+                            "message": "Any internal exception while performing this operation"
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "internal": false,
+            "path": "/authconfig/directories/connection_status",
+            "operations": [
+                {
+                    "deprecated": "false",
+                    "internal": false,
+                    "method": "POST",
+                    "summary": "Test LDAP directory connection status",
+                    "notes": "",
+                    "type": "create.dto.PrimitiveDTO&lt;java.lang.Boolean&gt;",
+                    "nickname": "testConnection",
+                    "parameters": [
+                        {
+                            "description": "Username, active directory name and password to authenticate",
+                            "required": true,
+                            "allowMultiple": false,
+                            "paramType": "body",
+                            "type": "create.dto.authconfig.TestDirectoryConfigDTO"
+                        }
+                    ],
+                    "responseMessages": [
+                        {
+                            "code": 500,
+                            "message": "Any internal exception while performing this operation"
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "internal": false,
+            "path": "/authconfig/directories/{name}",
+            "operations": [
+                {
+                    "deprecated": "false",
+                    "internal": false,
+                    "method": "DELETE",
+                    "summary": "Delete Directory.",
+                    "notes": "Delete Directory config with the specified name.",
+                    "type": "delete.dto.PrimitiveDTO&lt;java.lang.Boolean&gt;",
+                    "nickname": "deleteDirectoryConfig",
+                    "parameters": [
+                        {
+                            "name": "name",
+                            "description": "Name of the Directory",
+                            "required": true,
+                            "allowMultiple": false,
+                            "paramType": "path",
+                            "type": "string"
+                        }
+                    ],
+                    "responseMessages": [
+                        {
+                            "code": 500,
+                            "message": "Any internal exception while performing this operation"
+                        }
+                    ]
+                },
+                {
+                    "deprecated": "false",
+                    "internal": false,
+                    "method": "GET",
+                    "summary": "Get Directory.",
+                    "notes": "Get Directory with the specified name.",
+                    "type": "get.dto.authconfig.DirectoryConfigDTO",
+                    "nickname": "getDirectoryConfig",
+                    "parameters": [
+                        {
+                            "name": "name",
+                            "description": "Name of the Directory",
+                            "required": true,
+                            "allowMultiple": false,
+                            "paramType": "path",
+                            "type": "string"
+                        }
+                    ],
+                    "responseMessages": [
+                        {
+                            "code": 500,
+                            "message": "Any internal exception while performing this operation"
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "internal": false,
+            "path": "/authconfig/remove_auth_types",
+            "operations": [
+                {
+                    "deprecated": "false",
+                    "internal": false,
+                    "method": "POST",
+                    "summary": "Remove Auth types.",
+                    "notes": "Remove Auth types from the existing Auth types.",
+                    "type": "array",
+                    "items": {
+                        "enum": [
+                            "LOCAL",
+                            "DIRECTORY_SERVICE"
+                        ],
+                        "type": "string"
+                    },
+                    "nickname": "deleteAuthTypes",
+                    "parameters": [
+                        {
+                            "description": "List of Auth types",
+                            "required": true,
+                            "allowMultiple": false,
+                            "paramType": "body",
+                            "type": "array",
+                            "items": {
+                                "enum": [
+                                    "LOCAL",
+                                    "DIRECTORY_SERVICE"
+                                ],
+                                "type": "string"
+                            }
+                        }
+                    ],
+                    "responseMessages": [
+                        {
+                            "code": 500,
+                            "message": "Any internal exception while performing this operation"
+                        }
+                    ]
+                }
+            ]
+        }
+    ],
+    "models": {
+        "create.dto.PrimitiveDTO&lt;java.lang.Boolean&gt;": {
+            "id": "create.dto.PrimitiveDTO&lt;java.lang.Boolean&gt;",
+            "required": [],
+            "properties": {
+                "value": {
+                    "type": "boolean"
+                }
+            }
+        },
+        "create.dto.authconfig.CaChainDTO": {
+            "id": "create.dto.authconfig.CaChainDTO",
+            "required": [],
+            "properties": {
+                "caChain": {
+                    "description": "The content of the CA Chain certificate.",
+                    "items": {
+                        "format": "byte",
+                        "type": "string"
+                    },
+                    "type": "array",
+                    "typeName": "DEFAULT"
+                },
+                "enableClientAuth": {
+                    "description": "The status of the client authentication.",
+                    "type": "boolean",
+                    "typeName": "DEFAULT"
+                },
+                "name": {
+                    "description": "The name of the CA Chain certificate.",
+                    "type": "string",
+                    "typeName": "DEFAULT"
+                }
+            }
+        },
+        "create.dto.authconfig.DirectoryConfigDTO": {
+            "id": "create.dto.authconfig.DirectoryConfigDTO",
+            "description": "directory-config",
+            "required": [
+                "directoryType",
+                "connectionType",
+                "directoryUrl",
+                "domain",
+                "name"
+            ],
+            "properties": {
+                "connectionType": {
+                    "description": "Connection type.",
+                    "enum": [
+                        "LDAP"
+                    ],
+                    "type": "string",
+                    "typeName": "DEFAULT"
+                },
+                "directoryType": {
+                    "description": "Directory type.",
+                    "enum": [
+                        "ACTIVE_DIRECTORY",
+                        "OPEN_LDAP"
+                    ],
+                    "type": "string",
+                    "typeName": "DEFAULT"
+                },
+                "directoryUrl": {
+                    "description": "Directory's ldap url.",
+                    "notes": "Needs to be a proper ldap url",
+                    "type": "string",
+                    "typeName": "DEFAULT"
+                },
+                "domain": {
+                    "description": "Domain name.",
+                    "type": "string",
+                    "typeName": "DEFAULT"
+                },
+                "groupSearchType": {
+                    "description": "Group search type.",
+                    "enum": [
+                        "RECURSIVE",
+                        "NON_RECURSIVE"
+                    ],
+                    "type": "string",
+                    "typeName": "DEFAULT"
+                },
+                "name": {
+                    "description": "Name of directory.",
+                    "type": "string",
+                    "typeName": "DEFAULT"
+                },
+                "openLdapConfig": {
+                    "$ref": "create.dto.authconfig.OpenLdapConfigDTO",
+                    "description": "Open ldap config.",
+                    "typeName": "DEFAULT"
+                },
+                "serviceAccountPassword": {
+                    "description": "The password to use for the service account.",
+                    "type": "string",
+                    "typeName": "DEFAULT"
+                },
+                "serviceAccountUsername": {
+                    "description": "The username to use with the service account.",
+                    "type": "string",
+                    "typeName": "DEFAULT"
+                }
+            }
+        },
+        "create.dto.authconfig.OpenLdapConfigDTO": {
+            "id": "create.dto.authconfig.OpenLdapConfigDTO",
+            "description": "Open LDAP configuration",
+            "required": [],
+            "properties": {
+                "groupMemberAttribute": {
+                    "description": "Unique identifier in group that associates users to the group.",
+                    "type": "string",
+                    "typeName": "DEFAULT"
+                },
+                "groupMemberAttributeValue": {
+                    "description": "User attribute that will be used to group entity to associate user to the group.",
+                    "type": "string",
+                    "typeName": "DEFAULT"
+                },
+                "groupObjectClass": {
+                    "description": "Group Object class, identifier for object type group.",
+                    "type": "string",
+                    "typeName": "DEFAULT"
+                },
+                "groupSearchBase": {
+                    "description": "Base DN for group search.",
+                    "type": "string",
+                    "typeName": "DEFAULT"
+                },
+                "userObjectClass": {
+                    "description": "User object class, unique identifier for object user type",
+                    "type": "string",
+                    "typeName": "DEFAULT"
+                },
+                "userSearchBase": {
+                    "description": "Base DN for user search.",
+                    "type": "string",
+                    "typeName": "DEFAULT"
+                },
+                "usernameAttribute": {
+                    "description": "Unique identifier for each user which can be used forauthentication.",
+                    "type": "string",
+                    "typeName": "DEFAULT"
+                }
+            }
+        },
+        "create.dto.authconfig.TestDirectoryConfigDTO": {
+            "id": "create.dto.authconfig.TestDirectoryConfigDTO",
+            "required": [
+                "directoryName",
+                "password",
+                "username"
+            ],
+            "properties": {
+                "directoryName": {
+                    "description": "Directory name to test LDAP configuration.",
+                    "type": "string",
+                    "typeName": "DEFAULT"
+                },
+                "password": {
+                    "description": "Password to test LDAP configuration.",
+                    "type": "string",
+                    "typeName": "DEFAULT"
+                },
+                "username": {
+                    "description": "Username to test LDAP configuration.",
+                    "type": "string",
+                    "typeName": "DEFAULT"
+                }
+            }
+        },
+        "delete.dto.PrimitiveDTO&lt;java.lang.Boolean&gt;": {
+            "id": "delete.dto.PrimitiveDTO&lt;java.lang.Boolean&gt;",
+            "required": [],
+            "properties": {
+                "value": {
+                    "type": "boolean"
+                }
+            }
+        },
+        "get.dto.authconfig.AuthConfigDTO": {
+            "id": "get.dto.authconfig.AuthConfigDTO",
+            "description": "auth-config",
+            "required": [],
+            "properties": {
+                "authTypeList": {
+                    "description": "Authentication Types",
+                    "items": {
+                        "enum": [
+                            "LOCAL",
+                            "DIRECTORY_SERVICE"
+                        ],
+                        "type": "string"
+                    },
+                    "type": "array",
+                    "typeName": "DEFAULT"
+                },
+                "directoryList": {
+                    "description": "Id of an alert type.",
+                    "items": {
+                        "$ref": "get.dto.authconfig.DirectoryConfigDTO"
+                    },
+                    "type": "array",
+                    "typeName": "DEFAULT"
+                }
+            }
+        },
+        "get.dto.authconfig.AutoLoginInfoDTO": {
+            "id": "get.dto.authconfig.AutoLoginInfoDTO",
+            "required": [],
+            "properties": {
+                "enabled": {
+                    "description": "Whether auto login is enabled or not.",
+                    "type": "boolean",
+                    "typeName": "DEFAULT"
+                },
+                "serviceAccountDTO": {
+                    "$ref": "get.dto.authconfig.ServiceAccountDTO",
+                    "description": "The service account info to be used for auto login.",
+                    "typeName": "DEFAULT"
+                }
+            }
+        },
+        "get.dto.authconfig.CaChainDTO": {
+            "id": "get.dto.authconfig.CaChainDTO",
+            "required": [],
+            "properties": {
+                "caChain": {
+                    "description": "The content of the CA Chain certificate.",
+                    "items": {
+                        "format": "byte",
+                        "type": "string"
+                    },
+                    "type": "array",
+                    "typeName": "DEFAULT"
+                },
+                "enableClientAuth": {
+                    "description": "The status of the client authentication.",
+                    "type": "boolean",
+                    "typeName": "DEFAULT"
+                },
+                "name": {
+                    "description": "The name of the CA Chain certificate.",
+                    "type": "string",
+                    "typeName": "DEFAULT"
+                }
+            }
+        },
+        "get.dto.authconfig.ClientAuthDTO": {
+            "id": "get.dto.authconfig.ClientAuthDTO",
+            "required": [],
+            "properties": {
+                "autoLoginInfo": {
+                    "$ref": "get.dto.authconfig.AutoLoginInfoDTO",
+                    "description": "Auto Login Information.",
+                    "typeName": "DEFAULT"
+                },
+                "caChainInfo": {
+                    "$ref": "get.dto.authconfig.CaChainDTO",
+                    "description": "The CA chain information.",
+                    "typeName": "DEFAULT"
+                }
+            }
+        },
+        "get.dto.authconfig.DirectoryConfigDTO": {
+            "id": "get.dto.authconfig.DirectoryConfigDTO",
+            "description": "directory-config",
+            "required": [],
+            "properties": {
+                "connectionType": {
+                    "description": "Connection type.",
+                    "enum": [
+                        "LDAP"
+                    ],
+                    "type": "string",
+                    "typeName": "DEFAULT"
+                },
+                "directoryType": {
+                    "description": "Directory type.",
+                    "enum": [
+                        "ACTIVE_DIRECTORY",
+                        "OPEN_LDAP"
+                    ],
+                    "type": "string",
+                    "typeName": "DEFAULT"
+                },
+                "directoryUrl": {
+                    "description": "Directory's ldap url.",
+                    "notes": "Needs to be a proper ldap url",
+                    "type": "string",
+                    "typeName": "DEFAULT"
+                },
+                "domain": {
+                    "description": "Domain name.",
+                    "type": "string",
+                    "typeName": "DEFAULT"
+                },
+                "groupSearchType": {
+                    "description": "Group search type.",
+                    "enum": [
+                        "RECURSIVE",
+                        "NON_RECURSIVE"
+                    ],
+                    "type": "string",
+                    "typeName": "DEFAULT"
+                },
+                "name": {
+                    "description": "Name of directory.",
+                    "type": "string",
+                    "typeName": "DEFAULT"
+                },
+                "openLdapConfig": {
+                    "$ref": "get.dto.authconfig.OpenLdapConfigDTO",
+                    "description": "Open ldap config.",
+                    "typeName": "DEFAULT"
+                },
+                "serviceAccountPassword": {
+                    "description": "The password to use for the service account.",
+                    "type": "string",
+                    "typeName": "DEFAULT"
+                },
+                "serviceAccountUsername": {
+                    "description": "The username to use with the service account.",
+                    "type": "string",
+                    "typeName": "DEFAULT"
+                }
+            }
+        },
+        "get.dto.authconfig.OpenLdapConfigDTO": {
+            "id": "get.dto.authconfig.OpenLdapConfigDTO",
+            "description": "Open LDAP configuration",
+            "required": [],
+            "properties": {
+                "groupMemberAttribute": {
+                    "description": "Unique identifier in group that associates users to the group.",
+                    "type": "string",
+                    "typeName": "DEFAULT"
+                },
+                "groupMemberAttributeValue": {
+                    "description": "User attribute that will be used to group entity to associate user to the group.",
+                    "type": "string",
+                    "typeName": "DEFAULT"
+                },
+                "groupObjectClass": {
+                    "description": "Group Object class, identifier for object type group.",
+                    "type": "string",
+                    "typeName": "DEFAULT"
+                },
+                "groupSearchBase": {
+                    "description": "Base DN for group search.",
+                    "type": "string",
+                    "typeName": "DEFAULT"
+                },
+                "userObjectClass": {
+                    "description": "User object class, unique identifier for object user type",
+                    "type": "string",
+                    "typeName": "DEFAULT"
+                },
+                "userSearchBase": {
+                    "description": "Base DN for user search.",
+                    "type": "string",
+                    "typeName": "DEFAULT"
+                },
+                "usernameAttribute": {
+                    "description": "Unique identifier for each user which can be used forauthentication.",
+                    "type": "string",
+                    "typeName": "DEFAULT"
+                }
+            }
+        },
+        "get.dto.authconfig.ServiceAccountDTO": {
+            "id": "get.dto.authconfig.ServiceAccountDTO",
+            "required": [],
+            "properties": {
+                "directoryConfigName": {
+                    "description": "The name of the Active Directory Config name to use for this service account.",
+                    "type": "string",
+                    "typeName": "DEFAULT"
+                },
+                "password": {
+                    "description": "The password to use for the service account.",
+                    "type": "string",
+                    "typeName": "DEFAULT"
+                },
+                "username": {
+                    "description": "The username to use with the service account.",
+                    "type": "string",
+                    "typeName": "DEFAULT"
+                }
+            }
+        },
+        "patch.dto.RequestDTO&lt;patch.dto.authconfig.AuthConfigDTO&gt;": {
+            "id": "patch.dto.RequestDTO&lt;patch.dto.authconfig.AuthConfigDTO&gt;",
+            "required": [],
+            "properties": {
+                "clusterUuid": {
+                    "type": "string"
+                },
+                "genericDTO": {
+                    "$ref": "patch.dto.authconfig.AuthConfigDTO"
+                },
+                "operation": {
+                    "type": "string"
+                }
+            }
+        },
+        "patch.dto.RequestDTO&lt;patch.dto.authconfig.DirectoryConfigDTO&gt;": {
+            "id": "patch.dto.RequestDTO&lt;patch.dto.authconfig.DirectoryConfigDTO&gt;",
+            "required": [],
+            "properties": {
+                "clusterUuid": {
+                    "type": "string"
+                },
+                "genericDTO": {
+                    "$ref": "patch.dto.authconfig.DirectoryConfigDTO"
+                },
+                "operation": {
+                    "type": "string"
+                }
+            }
+        },
+        "patch.dto.authconfig.AuthConfigDTO": {
+            "id": "patch.dto.authconfig.AuthConfigDTO",
+            "description": "auth-config",
+            "required": [
+                "authTypeList"
+            ],
+            "properties": {
+                "authTypeList": {
+                    "description": "Authentication Types",
+                    "items": {
+                        "enum": [
+                            "LOCAL",
+                            "DIRECTORY_SERVICE"
+                        ],
+                        "type": "string"
+                    },
+                    "type": "array",
+                    "typeName": "DEFAULT"
+                },
+                "directoryList": {
+                    "description": "Id of an alert type.",
+                    "items": {
+                        "$ref": "patch.dto.authconfig.DirectoryConfigDTO"
+                    },
+                    "type": "array",
+                    "typeName": "DEFAULT"
+                }
+            }
+        },
+        "patch.dto.authconfig.DirectoryConfigDTO": {
+            "id": "patch.dto.authconfig.DirectoryConfigDTO",
+            "description": "directory-config",
+            "required": [
+                "name"
+            ],
+            "properties": {
+                "connectionType": {
+                    "description": "Connection type.",
+                    "enum": [
+                        "LDAP"
+                    ],
+                    "type": "string",
+                    "typeName": "DEFAULT"
+                },
+                "directoryType": {
+                    "description": "Directory type.",
+                    "enum": [
+                        "ACTIVE_DIRECTORY",
+                        "OPEN_LDAP"
+                    ],
+                    "type": "string",
+                    "typeName": "DEFAULT"
+                },
+                "directoryUrl": {
+                    "description": "Directory's ldap url.",
+                    "notes": "Needs to be a proper ldap url",
+                    "type": "string",
+                    "typeName": "DEFAULT"
+                },
+                "domain": {
+                    "description": "Domain name.",
+                    "type": "string",
+                    "typeName": "DEFAULT"
+                },
+                "groupSearchType": {
+                    "description": "Group search type.",
+                    "enum": [
+                        "RECURSIVE",
+                        "NON_RECURSIVE"
+                    ],
+                    "type": "string",
+                    "typeName": "DEFAULT"
+                },
+                "name": {
+                    "description": "Name of directory.",
+                    "type": "string",
+                    "typeName": "DEFAULT"
+                },
+                "openLdapConfig": {
+                    "$ref": "patch.dto.authconfig.OpenLdapConfigDTO",
+                    "description": "Open ldap config.",
+                    "typeName": "DEFAULT"
+                },
+                "serviceAccountPassword": {
+                    "description": "The password to use for the service account.",
+                    "type": "string",
+                    "typeName": "DEFAULT"
+                },
+                "serviceAccountUsername": {
+                    "description": "The username to use with the service account.",
+                    "type": "string",
+                    "typeName": "DEFAULT"
+                }
+            }
+        },
+        "patch.dto.authconfig.OpenLdapConfigDTO": {
+            "id": "patch.dto.authconfig.OpenLdapConfigDTO",
+            "description": "Open LDAP configuration",
+            "required": [],
+            "properties": {
+                "groupMemberAttribute": {
+                    "description": "Unique identifier in group that associates users to the group.",
+                    "type": "string",
+                    "typeName": "DEFAULT"
+                },
+                "groupMemberAttributeValue": {
+                    "description": "User attribute that will be used to group entity to associate user to the group.",
+                    "type": "string",
+                    "typeName": "DEFAULT"
+                },
+                "groupObjectClass": {
+                    "description": "Group Object class, identifier for object type group.",
+                    "type": "string",
+                    "typeName": "DEFAULT"
+                },
+                "groupSearchBase": {
+                    "description": "Base DN for group search.",
+                    "type": "string",
+                    "typeName": "DEFAULT"
+                },
+                "userObjectClass": {
+                    "description": "User object class, unique identifier for object user type",
+                    "type": "string",
+                    "typeName": "DEFAULT"
+                },
+                "userSearchBase": {
+                    "description": "Base DN for user search.",
+                    "type": "string",
+                    "typeName": "DEFAULT"
+                },
+                "usernameAttribute": {
+                    "description": "Unique identifier for each user which can be used forauthentication.",
+                    "type": "string",
+                    "typeName": "DEFAULT"
+                }
+            }
+        },
+        "update.dto.authconfig.AuthConfigDTO": {
+            "id": "update.dto.authconfig.AuthConfigDTO",
+            "description": "auth-config",
+            "required": [
+                "authTypeList"
+            ],
+            "properties": {
+                "authTypeList": {
+                    "description": "Authentication Types",
+                    "items": {
+                        "enum": [
+                            "LOCAL",
+                            "DIRECTORY_SERVICE"
+                        ],
+                        "type": "string"
+                    },
+                    "type": "array",
+                    "typeName": "DEFAULT"
+                },
+                "directoryList": {
+                    "description": "Id of an alert type.",
+                    "items": {
+                        "$ref": "update.dto.authconfig.DirectoryConfigDTO"
+                    },
+                    "type": "array",
+                    "typeName": "DEFAULT"
+                }
+            }
+        },
+        "update.dto.authconfig.AutoLoginInfoDTO": {
+            "id": "update.dto.authconfig.AutoLoginInfoDTO",
+            "required": [],
+            "properties": {
+                "enabled": {
+                    "description": "Whether auto login is enabled or not.",
+                    "type": "boolean",
+                    "typeName": "DEFAULT"
+                },
+                "serviceAccountDTO": {
+                    "$ref": "update.dto.authconfig.ServiceAccountDTO",
+                    "description": "The service account info to be used for auto login.",
+                    "typeName": "DEFAULT"
+                }
+            }
+        },
+        "update.dto.authconfig.CaChainDTO": {
+            "id": "update.dto.authconfig.CaChainDTO",
+            "required": [
+                "caChain",
+                "name"
+            ],
+            "properties": {
+                "caChain": {
+                    "description": "The content of the CA Chain certificate.",
+                    "items": {
+                        "format": "byte",
+                        "type": "string"
+                    },
+                    "type": "array",
+                    "typeName": "DEFAULT"
+                },
+                "enableClientAuth": {
+                    "description": "The status of the client authentication.",
+                    "type": "boolean",
+                    "typeName": "DEFAULT"
+                },
+                "name": {
+                    "description": "The name of the CA Chain certificate.",
+                    "type": "string",
+                    "typeName": "DEFAULT"
+                }
+            }
+        },
+        "update.dto.authconfig.ClientAuthDTO": {
+            "id": "update.dto.authconfig.ClientAuthDTO",
+            "required": [],
+            "properties": {
+                "autoLoginInfo": {
+                    "$ref": "update.dto.authconfig.AutoLoginInfoDTO",
+                    "description": "Auto Login Information.",
+                    "typeName": "DEFAULT"
+                },
+                "caChainInfo": {
+                    "$ref": "update.dto.authconfig.CaChainDTO",
+                    "description": "The CA chain information.",
+                    "typeName": "DEFAULT"
+                }
+            }
+        },
+        "update.dto.authconfig.DirectoryConfigDTO": {
+            "id": "update.dto.authconfig.DirectoryConfigDTO",
+            "description": "directory-config",
+            "required": [
+                "directoryType",
+                "connectionType",
+                "directoryUrl",
+                "domain",
+                "name"
+            ],
+            "properties": {
+                "connectionType": {
+                    "description": "Connection type.",
+                    "enum": [
+                        "LDAP"
+                    ],
+                    "type": "string",
+                    "typeName": "DEFAULT"
+                },
+                "directoryType": {
+                    "description": "Directory type.",
+                    "enum": [
+                        "ACTIVE_DIRECTORY",
+                        "OPEN_LDAP"
+                    ],
+                    "type": "string",
+                    "typeName": "DEFAULT"
+                },
+                "directoryUrl": {
+                    "description": "Directory's ldap url.",
+                    "notes": "Needs to be a proper ldap url",
+                    "type": "string",
+                    "typeName": "DEFAULT"
+                },
+                "domain": {
+                    "description": "Domain name.",
+                    "type": "string",
+                    "typeName": "DEFAULT"
+                },
+                "groupSearchType": {
+                    "description": "Group search type.",
+                    "enum": [
+                        "RECURSIVE",
+                        "NON_RECURSIVE"
+                    ],
+                    "type": "string",
+                    "typeName": "DEFAULT"
+                },
+                "name": {
+                    "description": "Name of directory.",
+                    "type": "string",
+                    "typeName": "DEFAULT"
+                },
+                "openLdapConfig": {
+                    "$ref": "update.dto.authconfig.OpenLdapConfigDTO",
+                    "description": "Open ldap config.",
+                    "typeName": "DEFAULT"
+                },
+                "serviceAccountPassword": {
+                    "description": "The password to use for the service account.",
+                    "type": "string",
+                    "typeName": "DEFAULT"
+                },
+                "serviceAccountUsername": {
+                    "description": "The username to use with the service account.",
+                    "type": "string",
+                    "typeName": "DEFAULT"
+                }
+            }
+        },
+        "update.dto.authconfig.OpenLdapConfigDTO": {
+            "id": "update.dto.authconfig.OpenLdapConfigDTO",
+            "description": "Open LDAP configuration",
+            "required": [],
+            "properties": {
+                "groupMemberAttribute": {
+                    "description": "Unique identifier in group that associates users to the group.",
+                    "type": "string",
+                    "typeName": "DEFAULT"
+                },
+                "groupMemberAttributeValue": {
+                    "description": "User attribute that will be used to group entity to associate user to the group.",
+                    "type": "string",
+                    "typeName": "DEFAULT"
+                },
+                "groupObjectClass": {
+                    "description": "Group Object class, identifier for object type group.",
+                    "type": "string",
+                    "typeName": "DEFAULT"
+                },
+                "groupSearchBase": {
+                    "description": "Base DN for group search.",
+                    "type": "string",
+                    "typeName": "DEFAULT"
+                },
+                "userObjectClass": {
+                    "description": "User object class, unique identifier for object user type",
+                    "type": "string",
+                    "typeName": "DEFAULT"
+                },
+                "userSearchBase": {
+                    "description": "Base DN for user search.",
+                    "type": "string",
+                    "typeName": "DEFAULT"
+                },
+                "usernameAttribute": {
+                    "description": "Unique identifier for each user which can be used forauthentication.",
+                    "type": "string",
+                    "typeName": "DEFAULT"
+                }
+            }
+        },
+        "update.dto.authconfig.ServiceAccountDTO": {
+            "id": "update.dto.authconfig.ServiceAccountDTO",
+            "required": [],
+            "properties": {
+                "directoryConfigName": {
+                    "description": "The name of the Active Directory Config name to use for this service account.",
+                    "type": "string",
+                    "typeName": "DEFAULT"
+                },
+                "password": {
+                    "description": "The password to use for the service account.",
+                    "type": "string",
+                    "typeName": "DEFAULT"
+                },
+                "username": {
+                    "description": "The username to use with the service account.",
+                    "type": "string",
+                    "typeName": "DEFAULT"
+                }
+            }
+        }
+    }
+}

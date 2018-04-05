@@ -1,0 +1,1073 @@
+{
+    "apiVersion": "v1",
+    "swaggerVersion": "1.2",
+    "basePath": "https://any_cvm_ip:9440/PrismGateway/services/rest/v1",
+    "resourcePath": "/snmp",
+    "produces": [
+        "application/json"
+    ],
+    "consumes": [
+        "application/json"
+    ],
+    "apis": [
+        {
+            "internal": false,
+            "path": "/snmp/",
+            "operations": [
+                {
+                    "deprecated": "false",
+                    "internal": false,
+                    "method": "GET",
+                    "summary": "Get SNMP configuration.",
+                    "notes": "Get the complete SNMP configuration including Users, Transports and Traps configured in the cluster.",
+                    "type": "get.dto.appliance.configuration.SnmpInfoDTO",
+                    "nickname": "getSnmpInfo",
+                    "parameters": [],
+                    "responseMessages": [
+                        {
+                            "code": 500,
+                            "message": "Any internal exception while performing this operation"
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "internal": false,
+            "path": "/snmp/add_transports",
+            "operations": [
+                {
+                    "deprecated": "false",
+                    "internal": false,
+                    "method": "POST",
+                    "summary": "Add SNMP Transports.",
+                    "notes": "Add SNMP Transports to the existing SNMP Transports.",
+                    "type": "array",
+                    "items": {
+                        "$ref": "create.dto.appliance.configuration.SnmpTransportDTO"
+                    },
+                    "nickname": "addSnmpTransports",
+                    "parameters": [
+                        {
+                            "description": "List of SNMP Transports",
+                            "required": true,
+                            "allowMultiple": false,
+                            "paramType": "body",
+                            "type": "array",
+                            "items": {
+                                "$ref": "create.dto.appliance.configuration.SnmpTransportDTO"
+                            }
+                        }
+                    ],
+                    "responseMessages": [
+                        {
+                            "code": 500,
+                            "message": "Any internal exception while performing this operation"
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "internal": false,
+            "path": "/snmp/remove_transports",
+            "operations": [
+                {
+                    "deprecated": "false",
+                    "internal": false,
+                    "method": "POST",
+                    "summary": "Remove SNMP Transports.",
+                    "notes": "Remove SNMP Transports from the existing SNMP Transports.",
+                    "type": "array",
+                    "items": {
+                        "$ref": "create.dto.appliance.configuration.SnmpTransportDTO"
+                    },
+                    "nickname": "deleteSnmpTransports",
+                    "parameters": [
+                        {
+                            "description": "List of SNMP Transports",
+                            "required": true,
+                            "allowMultiple": false,
+                            "paramType": "body",
+                            "type": "array",
+                            "items": {
+                                "$ref": "create.dto.appliance.configuration.SnmpTransportDTO"
+                            }
+                        }
+                    ],
+                    "responseMessages": [
+                        {
+                            "code": 500,
+                            "message": "Any internal exception while performing this operation"
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "internal": false,
+            "path": "/snmp/status",
+            "operations": [
+                {
+                    "deprecated": "false",
+                    "internal": false,
+                    "method": "GET",
+                    "summary": "Get the SNMP status.",
+                    "notes": "Get the SNMP status.",
+                    "type": "get.dto.PrimitiveDTO&lt;java.lang.Boolean&gt;",
+                    "nickname": "getSnmpStatus",
+                    "parameters": [],
+                    "responseMessages": [
+                        {
+                            "code": 500,
+                            "message": "Any internal exception while performing this operation"
+                        }
+                    ]
+                },
+                {
+                    "deprecated": "false",
+                    "internal": false,
+                    "method": "PUT",
+                    "summary": "Enable/Disable SNMP configuration.",
+                    "notes": "Enable/Disable SNMP configuration in the cluster.",
+                    "type": "update.dto.appliance.configuration.SnmpInfoDTO",
+                    "nickname": "setSnmpStatus",
+                    "parameters": [
+                        {
+                            "description": "Enable SNMP Status",
+                            "required": true,
+                            "allowMultiple": false,
+                            "paramType": "body",
+                            "type": "update.dto.PrimitiveDTO&lt;java.lang.Boolean&gt;"
+                        }
+                    ],
+                    "responseMessages": [
+                        {
+                            "code": 500,
+                            "message": "Any internal exception while performing this operation"
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "internal": false,
+            "path": "/snmp/transports",
+            "operations": [
+                {
+                    "deprecated": "false",
+                    "internal": false,
+                    "method": "GET",
+                    "summary": "Get the list of SNMP Transports.",
+                    "notes": "Get the list of SNMP Transports configured in the cluster.",
+                    "type": "array",
+                    "items": {
+                        "$ref": "get.dto.appliance.configuration.SnmpTransportDTO"
+                    },
+                    "nickname": "getSnmpTransports",
+                    "parameters": [],
+                    "responseMessages": [
+                        {
+                            "code": 500,
+                            "message": "Any internal exception while performing this operation"
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "internal": false,
+            "path": "/snmp/traps",
+            "operations": [
+                {
+                    "deprecated": "false",
+                    "internal": false,
+                    "method": "GET",
+                    "summary": "Get the list of SNMP Traps.",
+                    "notes": "Get the list of SNMP Traps configured in the cluster.",
+                    "type": "array",
+                    "items": {
+                        "$ref": "get.dto.appliance.configuration.SnmpTrapDTO"
+                    },
+                    "nickname": "getSnmpTraps",
+                    "parameters": [],
+                    "responseMessages": [
+                        {
+                            "code": 500,
+                            "message": "Any internal exception while performing this operation"
+                        }
+                    ]
+                },
+                {
+                    "deprecated": "false",
+                    "internal": false,
+                    "method": "PATCH",
+                    "summary": "Modify SNMP Trap.",
+                    "notes": "Modify the specified SNMP Trap.",
+                    "type": "patch.dto.appliance.configuration.SnmpTrapDTO",
+                    "nickname": "patchSnmpTrap",
+                    "parameters": [
+                        {
+                            "description": "An SNMP Trap instance",
+                            "required": true,
+                            "allowMultiple": false,
+                            "paramType": "body",
+                            "type": "patch.dto.RequestDTO&lt;patch.dto.appliance.configuration.SnmpTrapDTO&gt;"
+                        }
+                    ],
+                    "responseMessages": [
+                        {
+                            "code": 500,
+                            "message": "Any internal exception while performing this operation"
+                        }
+                    ]
+                },
+                {
+                    "deprecated": "false",
+                    "internal": false,
+                    "method": "POST",
+                    "summary": "Add SNMP Trap.",
+                    "notes": "Add SNMP Trap to the cluster.",
+                    "type": "create.dto.appliance.configuration.SnmpTrapDTO",
+                    "nickname": "addSnmpTrap",
+                    "parameters": [
+                        {
+                            "description": "An SNMP Trap instance",
+                            "required": true,
+                            "allowMultiple": false,
+                            "paramType": "body",
+                            "type": "create.dto.appliance.configuration.SnmpTrapDTO"
+                        }
+                    ],
+                    "responseMessages": [
+                        {
+                            "code": 500,
+                            "message": "Any internal exception while performing this operation"
+                        }
+                    ]
+                },
+                {
+                    "deprecated": "false",
+                    "internal": false,
+                    "method": "PUT",
+                    "summary": "Edit SNMP Trap.",
+                    "notes": "Edit the specified SNMP Trap.",
+                    "type": "update.dto.appliance.configuration.SnmpTrapDTO",
+                    "nickname": "editSnmpTrap",
+                    "parameters": [
+                        {
+                            "description": "An SNMP Trap instance",
+                            "required": true,
+                            "allowMultiple": false,
+                            "paramType": "body",
+                            "type": "update.dto.appliance.configuration.SnmpTrapDTO"
+                        }
+                    ],
+                    "responseMessages": [
+                        {
+                            "code": 500,
+                            "message": "Any internal exception while performing this operation"
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "internal": false,
+            "path": "/snmp/traps/{trapAddress}",
+            "operations": [
+                {
+                    "deprecated": "false",
+                    "internal": false,
+                    "method": "DELETE",
+                    "summary": "Delete SNMP Trap.",
+                    "notes": "Delete SNMP Trap with the specified address",
+                    "type": "delete.dto.PrimitiveDTO&lt;java.lang.Boolean&gt;",
+                    "nickname": "deleteSnmpTrap",
+                    "parameters": [
+                        {
+                            "name": "trapAddress",
+                            "description": "Address of the SNMP Trap",
+                            "required": true,
+                            "allowMultiple": false,
+                            "paramType": "path",
+                            "type": "string"
+                        }
+                    ],
+                    "responseMessages": [
+                        {
+                            "code": 500,
+                            "message": "Any internal exception while performing this operation"
+                        }
+                    ]
+                },
+                {
+                    "deprecated": "false",
+                    "internal": false,
+                    "method": "GET",
+                    "summary": "Get SNMP Trap.",
+                    "notes": "Get SNMP Trap with the specified address.",
+                    "type": "get.dto.appliance.configuration.SnmpTrapDTO",
+                    "nickname": "getSnmpTrap",
+                    "parameters": [
+                        {
+                            "name": "trapAddress",
+                            "description": "Address of the SNMP Trap",
+                            "required": true,
+                            "allowMultiple": false,
+                            "paramType": "path",
+                            "type": "string"
+                        }
+                    ],
+                    "responseMessages": [
+                        {
+                            "code": 500,
+                            "message": "Any internal exception while performing this operation"
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "internal": false,
+            "path": "/snmp/users",
+            "operations": [
+                {
+                    "deprecated": "false",
+                    "internal": false,
+                    "method": "GET",
+                    "summary": "Get the list of SNMP Users.",
+                    "notes": "Get the list of SNMP Users configured in the cluster.",
+                    "type": "array",
+                    "items": {
+                        "$ref": "get.dto.appliance.configuration.SnmpUserDTO"
+                    },
+                    "nickname": "getSnmpUsers",
+                    "parameters": [],
+                    "responseMessages": [
+                        {
+                            "code": 500,
+                            "message": "Any internal exception while performing this operation"
+                        }
+                    ]
+                },
+                {
+                    "deprecated": "false",
+                    "internal": false,
+                    "method": "PATCH",
+                    "summary": "Modify SNMP User.",
+                    "notes": "Modify the specified SNMP User.",
+                    "type": "patch.dto.appliance.configuration.SnmpUserDTO",
+                    "nickname": "patchSnmpUser",
+                    "parameters": [
+                        {
+                            "description": "An SNMP User instance",
+                            "required": true,
+                            "allowMultiple": false,
+                            "paramType": "body",
+                            "type": "patch.dto.RequestDTO&lt;patch.dto.appliance.configuration.SnmpUserDTO&gt;"
+                        }
+                    ],
+                    "responseMessages": [
+                        {
+                            "code": 500,
+                            "message": "Any internal exception while performing this operation"
+                        }
+                    ]
+                },
+                {
+                    "deprecated": "false",
+                    "internal": false,
+                    "method": "POST",
+                    "summary": "Add SNMP User.",
+                    "notes": "Add SNMP User to the cluster.",
+                    "type": "create.dto.appliance.configuration.SnmpUserDTO",
+                    "nickname": "addSnmpUser",
+                    "parameters": [
+                        {
+                            "description": "An SNMP User instance",
+                            "required": true,
+                            "allowMultiple": false,
+                            "paramType": "body",
+                            "type": "create.dto.appliance.configuration.SnmpUserDTO"
+                        }
+                    ],
+                    "responseMessages": [
+                        {
+                            "code": 500,
+                            "message": "Any internal exception while performing this operation"
+                        }
+                    ]
+                },
+                {
+                    "deprecated": "false",
+                    "internal": false,
+                    "method": "PUT",
+                    "summary": "Edit SNMP User.",
+                    "notes": "Edit the specified SNMP User.",
+                    "type": "update.dto.appliance.configuration.SnmpUserDTO",
+                    "nickname": "editSnmpUser",
+                    "parameters": [
+                        {
+                            "description": "An SNMP User instance",
+                            "required": true,
+                            "allowMultiple": false,
+                            "paramType": "body",
+                            "type": "update.dto.appliance.configuration.SnmpUserDTO"
+                        }
+                    ],
+                    "responseMessages": [
+                        {
+                            "code": 500,
+                            "message": "Any internal exception while performing this operation"
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "internal": false,
+            "path": "/snmp/users/{username}",
+            "operations": [
+                {
+                    "deprecated": "false",
+                    "internal": false,
+                    "method": "DELETE",
+                    "summary": "Delete SNMP User.",
+                    "notes": "Delete SNMP User with the specified name.",
+                    "type": "delete.dto.PrimitiveDTO&lt;java.lang.Boolean&gt;",
+                    "nickname": "deleteSnmpUser",
+                    "parameters": [
+                        {
+                            "name": "username",
+                            "description": "Name of the SNMP User",
+                            "required": true,
+                            "allowMultiple": false,
+                            "paramType": "path",
+                            "type": "string"
+                        }
+                    ],
+                    "responseMessages": [
+                        {
+                            "code": 500,
+                            "message": "Any internal exception while performing this operation"
+                        }
+                    ]
+                },
+                {
+                    "deprecated": "false",
+                    "internal": false,
+                    "method": "GET",
+                    "summary": "Get SNMP User.",
+                    "notes": "Get SNMP User with the specified name.",
+                    "type": "get.dto.appliance.configuration.SnmpUserDTO",
+                    "nickname": "getSnmpUser",
+                    "parameters": [
+                        {
+                            "name": "username",
+                            "description": "Name of the SNMP User",
+                            "required": true,
+                            "allowMultiple": false,
+                            "paramType": "path",
+                            "type": "string"
+                        }
+                    ],
+                    "responseMessages": [
+                        {
+                            "code": 500,
+                            "message": "Any internal exception while performing this operation"
+                        }
+                    ]
+                }
+            ]
+        }
+    ],
+    "models": {
+        "create.dto.appliance.configuration.SnmpTransportDTO": {
+            "id": "create.dto.appliance.configuration.SnmpTransportDTO",
+            "required": [
+                "transportProtocol",
+                "port"
+            ],
+            "properties": {
+                "port": {
+                    "description": "Port number.",
+                    "format": "int32",
+                    "maximum": "65536",
+                    "minimum": "0",
+                    "notes": "Any port number which is in the range 0 - 65536",
+                    "type": "integer",
+                    "typeName": "DEFAULT"
+                },
+                "transportProtocol": {
+                    "description": "Transport protocol dto.",
+                    "enum": [
+                        "TCP",
+                        "TCP_6",
+                        "UDP",
+                        "UDP_6"
+                    ],
+                    "type": "string",
+                    "typeName": "DEFAULT"
+                }
+            }
+        },
+        "create.dto.appliance.configuration.SnmpTrapDTO": {
+            "id": "create.dto.appliance.configuration.SnmpTrapDTO",
+            "required": [
+                "trapAddress"
+            ],
+            "properties": {
+                "communityString": {
+                    "type": "string"
+                },
+                "engineId": {
+                    "type": "string"
+                },
+                "inform": {
+                    "type": "boolean"
+                },
+                "log": {
+                    "$ref": "org.slf4j.Logger"
+                },
+                "port": {
+                    "description": "Port number.",
+                    "format": "int32",
+                    "maximum": "65536",
+                    "minimum": "0",
+                    "notes": "Any port number which is in the range 0 - 65536",
+                    "type": "integer",
+                    "typeName": "DEFAULT"
+                },
+                "receiverName": {
+                    "type": "string"
+                },
+                "transportProtocol": {
+                    "enum": [
+                        "TCP",
+                        "TCP_6",
+                        "UDP",
+                        "UDP_6"
+                    ],
+                    "type": "string"
+                },
+                "trapAddress": {
+                    "description": "Trap address.",
+                    "type": "string",
+                    "typeName": "DEFAULT"
+                },
+                "trapUsername": {
+                    "description": "Trap Username.",
+                    "type": "string",
+                    "typeName": "DEFAULT"
+                },
+                "version": {
+                    "description": "SNMP version.",
+                    "enum": [
+                        "SNMPv2C",
+                        "SNMPv3"
+                    ],
+                    "type": "string",
+                    "typeName": "DEFAULT"
+                }
+            }
+        },
+        "create.dto.appliance.configuration.SnmpUserDTO": {
+            "id": "create.dto.appliance.configuration.SnmpUserDTO",
+            "required": [
+                "username",
+                "authType",
+                "authKey"
+            ],
+            "properties": {
+                "authKey": {
+                    "description": "Authentication key.",
+                    "type": "string",
+                    "typeName": "DEFAULT"
+                },
+                "authType": {
+                    "description": "Authorization type dto.",
+                    "enum": [
+                        "SHA"
+                    ],
+                    "type": "string",
+                    "typeName": "DEFAULT"
+                },
+                "privKey": {
+                    "type": "string"
+                },
+                "privType": {
+                    "enum": [
+                        "AES"
+                    ],
+                    "type": "string"
+                },
+                "username": {
+                    "description": "User name.",
+                    "type": "string",
+                    "typeName": "DEFAULT"
+                }
+            }
+        },
+        "delete.dto.PrimitiveDTO&lt;java.lang.Boolean&gt;": {
+            "id": "delete.dto.PrimitiveDTO&lt;java.lang.Boolean&gt;",
+            "required": [],
+            "properties": {
+                "value": {
+                    "type": "boolean"
+                }
+            }
+        },
+        "get.dto.PrimitiveDTO&lt;java.lang.Boolean&gt;": {
+            "id": "get.dto.PrimitiveDTO&lt;java.lang.Boolean&gt;",
+            "required": [],
+            "properties": {
+                "value": {
+                    "type": "boolean"
+                }
+            }
+        },
+        "get.dto.appliance.configuration.SnmpInfoDTO": {
+            "id": "get.dto.appliance.configuration.SnmpInfoDTO",
+            "required": [],
+            "properties": {
+                "enabled": {
+                    "type": "boolean"
+                },
+                "snmpTransports": {
+                    "items": {
+                        "$ref": "get.dto.appliance.configuration.SnmpTransportDTO"
+                    },
+                    "type": "array"
+                },
+                "snmpTraps": {
+                    "items": {
+                        "$ref": "get.dto.appliance.configuration.SnmpTrapDTO"
+                    },
+                    "type": "array"
+                },
+                "snmpUsers": {
+                    "items": {
+                        "$ref": "get.dto.appliance.configuration.SnmpUserDTO"
+                    },
+                    "type": "array"
+                }
+            }
+        },
+        "get.dto.appliance.configuration.SnmpTransportDTO": {
+            "id": "get.dto.appliance.configuration.SnmpTransportDTO",
+            "required": [],
+            "properties": {
+                "port": {
+                    "description": "Port number.",
+                    "format": "int32",
+                    "maximum": "65536",
+                    "minimum": "0",
+                    "notes": "Any port number which is in the range 0 - 65536",
+                    "type": "integer",
+                    "typeName": "DEFAULT"
+                },
+                "transportProtocol": {
+                    "description": "Transport protocol dto.",
+                    "enum": [
+                        "TCP",
+                        "TCP_6",
+                        "UDP",
+                        "UDP_6"
+                    ],
+                    "type": "string",
+                    "typeName": "DEFAULT"
+                }
+            }
+        },
+        "get.dto.appliance.configuration.SnmpTrapDTO": {
+            "id": "get.dto.appliance.configuration.SnmpTrapDTO",
+            "required": [],
+            "properties": {
+                "communityString": {
+                    "type": "string"
+                },
+                "engineId": {
+                    "type": "string"
+                },
+                "inform": {
+                    "type": "boolean"
+                },
+                "log": {
+                    "$ref": "org.slf4j.Logger"
+                },
+                "port": {
+                    "description": "Port number.",
+                    "format": "int32",
+                    "maximum": "65536",
+                    "minimum": "0",
+                    "notes": "Any port number which is in the range 0 - 65536",
+                    "type": "integer",
+                    "typeName": "DEFAULT"
+                },
+                "receiverName": {
+                    "type": "string"
+                },
+                "transportProtocol": {
+                    "enum": [
+                        "TCP",
+                        "TCP_6",
+                        "UDP",
+                        "UDP_6"
+                    ],
+                    "type": "string"
+                },
+                "trapAddress": {
+                    "description": "Trap address.",
+                    "type": "string",
+                    "typeName": "DEFAULT"
+                },
+                "trapUsername": {
+                    "description": "Trap Username.",
+                    "type": "string",
+                    "typeName": "DEFAULT"
+                },
+                "version": {
+                    "description": "SNMP version.",
+                    "enum": [
+                        "SNMPv2C",
+                        "SNMPv3"
+                    ],
+                    "type": "string",
+                    "typeName": "DEFAULT"
+                }
+            }
+        },
+        "get.dto.appliance.configuration.SnmpUserDTO": {
+            "id": "get.dto.appliance.configuration.SnmpUserDTO",
+            "required": [],
+            "properties": {
+                "authKey": {
+                    "description": "Authentication key.",
+                    "type": "string",
+                    "typeName": "DEFAULT"
+                },
+                "authType": {
+                    "description": "Authorization type dto.",
+                    "enum": [
+                        "SHA"
+                    ],
+                    "type": "string",
+                    "typeName": "DEFAULT"
+                },
+                "privKey": {
+                    "type": "string"
+                },
+                "privType": {
+                    "enum": [
+                        "AES"
+                    ],
+                    "type": "string"
+                },
+                "username": {
+                    "description": "User name.",
+                    "type": "string",
+                    "typeName": "DEFAULT"
+                }
+            }
+        },
+        "org.slf4j.Logger": {
+            "id": "org.slf4j.Logger",
+            "required": [],
+            "properties": {
+                "ROOT_LOGGER_NAME": {
+                    "type": "string"
+                }
+            }
+        },
+        "patch.dto.RequestDTO&lt;patch.dto.appliance.configuration.SnmpTrapDTO&gt;": {
+            "id": "patch.dto.RequestDTO&lt;patch.dto.appliance.configuration.SnmpTrapDTO&gt;",
+            "required": [],
+            "properties": {
+                "clusterUuid": {
+                    "type": "string"
+                },
+                "genericDTO": {
+                    "$ref": "patch.dto.appliance.configuration.SnmpTrapDTO"
+                },
+                "operation": {
+                    "type": "string"
+                }
+            }
+        },
+        "patch.dto.RequestDTO&lt;patch.dto.appliance.configuration.SnmpUserDTO&gt;": {
+            "id": "patch.dto.RequestDTO&lt;patch.dto.appliance.configuration.SnmpUserDTO&gt;",
+            "required": [],
+            "properties": {
+                "clusterUuid": {
+                    "type": "string"
+                },
+                "genericDTO": {
+                    "$ref": "patch.dto.appliance.configuration.SnmpUserDTO"
+                },
+                "operation": {
+                    "type": "string"
+                }
+            }
+        },
+        "patch.dto.appliance.configuration.SnmpTrapDTO": {
+            "id": "patch.dto.appliance.configuration.SnmpTrapDTO",
+            "required": [
+                "trapAddress"
+            ],
+            "properties": {
+                "communityString": {
+                    "type": "string"
+                },
+                "engineId": {
+                    "type": "string"
+                },
+                "inform": {
+                    "type": "boolean"
+                },
+                "log": {
+                    "$ref": "org.slf4j.Logger"
+                },
+                "port": {
+                    "description": "Port number.",
+                    "format": "int32",
+                    "maximum": "65536",
+                    "minimum": "0",
+                    "notes": "Any port number which is in the range 0 - 65536",
+                    "type": "integer",
+                    "typeName": "DEFAULT"
+                },
+                "receiverName": {
+                    "type": "string"
+                },
+                "transportProtocol": {
+                    "enum": [
+                        "TCP",
+                        "TCP_6",
+                        "UDP",
+                        "UDP_6"
+                    ],
+                    "type": "string"
+                },
+                "trapAddress": {
+                    "description": "Trap address.",
+                    "type": "string",
+                    "typeName": "DEFAULT"
+                },
+                "trapUsername": {
+                    "description": "Trap Username.",
+                    "type": "string",
+                    "typeName": "DEFAULT"
+                },
+                "version": {
+                    "description": "SNMP version.",
+                    "enum": [
+                        "SNMPv2C",
+                        "SNMPv3"
+                    ],
+                    "type": "string",
+                    "typeName": "DEFAULT"
+                }
+            }
+        },
+        "patch.dto.appliance.configuration.SnmpUserDTO": {
+            "id": "patch.dto.appliance.configuration.SnmpUserDTO",
+            "required": [
+                "username",
+                "authType",
+                "authKey"
+            ],
+            "properties": {
+                "authKey": {
+                    "description": "Authentication key.",
+                    "type": "string",
+                    "typeName": "DEFAULT"
+                },
+                "authType": {
+                    "description": "Authorization type dto.",
+                    "enum": [
+                        "SHA"
+                    ],
+                    "type": "string",
+                    "typeName": "DEFAULT"
+                },
+                "privKey": {
+                    "type": "string"
+                },
+                "privType": {
+                    "enum": [
+                        "AES"
+                    ],
+                    "type": "string"
+                },
+                "username": {
+                    "description": "User name.",
+                    "type": "string",
+                    "typeName": "DEFAULT"
+                }
+            }
+        },
+        "update.dto.PrimitiveDTO&lt;java.lang.Boolean&gt;": {
+            "id": "update.dto.PrimitiveDTO&lt;java.lang.Boolean&gt;",
+            "required": [],
+            "properties": {
+                "value": {
+                    "type": "boolean"
+                }
+            }
+        },
+        "update.dto.appliance.configuration.SnmpInfoDTO": {
+            "id": "update.dto.appliance.configuration.SnmpInfoDTO",
+            "required": [],
+            "properties": {
+                "enabled": {
+                    "type": "boolean"
+                },
+                "snmpTransports": {
+                    "items": {
+                        "$ref": "update.dto.appliance.configuration.SnmpTransportDTO"
+                    },
+                    "type": "array"
+                },
+                "snmpTraps": {
+                    "items": {
+                        "$ref": "update.dto.appliance.configuration.SnmpTrapDTO"
+                    },
+                    "type": "array"
+                },
+                "snmpUsers": {
+                    "items": {
+                        "$ref": "update.dto.appliance.configuration.SnmpUserDTO"
+                    },
+                    "type": "array"
+                }
+            }
+        },
+        "update.dto.appliance.configuration.SnmpTransportDTO": {
+            "id": "update.dto.appliance.configuration.SnmpTransportDTO",
+            "required": [
+                "transportProtocol",
+                "port"
+            ],
+            "properties": {
+                "port": {
+                    "description": "Port number.",
+                    "format": "int32",
+                    "maximum": "65536",
+                    "minimum": "0",
+                    "notes": "Any port number which is in the range 0 - 65536",
+                    "type": "integer",
+                    "typeName": "DEFAULT"
+                },
+                "transportProtocol": {
+                    "description": "Transport protocol dto.",
+                    "enum": [
+                        "TCP",
+                        "TCP_6",
+                        "UDP",
+                        "UDP_6"
+                    ],
+                    "type": "string",
+                    "typeName": "DEFAULT"
+                }
+            }
+        },
+        "update.dto.appliance.configuration.SnmpTrapDTO": {
+            "id": "update.dto.appliance.configuration.SnmpTrapDTO",
+            "required": [
+                "trapAddress"
+            ],
+            "properties": {
+                "communityString": {
+                    "type": "string"
+                },
+                "engineId": {
+                    "type": "string"
+                },
+                "inform": {
+                    "type": "boolean"
+                },
+                "log": {
+                    "$ref": "org.slf4j.Logger"
+                },
+                "port": {
+                    "description": "Port number.",
+                    "format": "int32",
+                    "maximum": "65536",
+                    "minimum": "0",
+                    "notes": "Any port number which is in the range 0 - 65536",
+                    "type": "integer",
+                    "typeName": "DEFAULT"
+                },
+                "receiverName": {
+                    "type": "string"
+                },
+                "transportProtocol": {
+                    "enum": [
+                        "TCP",
+                        "TCP_6",
+                        "UDP",
+                        "UDP_6"
+                    ],
+                    "type": "string"
+                },
+                "trapAddress": {
+                    "description": "Trap address.",
+                    "type": "string",
+                    "typeName": "DEFAULT"
+                },
+                "trapUsername": {
+                    "description": "Trap Username.",
+                    "type": "string",
+                    "typeName": "DEFAULT"
+                },
+                "version": {
+                    "description": "SNMP version.",
+                    "enum": [
+                        "SNMPv2C",
+                        "SNMPv3"
+                    ],
+                    "type": "string",
+                    "typeName": "DEFAULT"
+                }
+            }
+        },
+        "update.dto.appliance.configuration.SnmpUserDTO": {
+            "id": "update.dto.appliance.configuration.SnmpUserDTO",
+            "required": [
+                "username",
+                "authType",
+                "authKey"
+            ],
+            "properties": {
+                "authKey": {
+                    "description": "Authentication key.",
+                    "type": "string",
+                    "typeName": "DEFAULT"
+                },
+                "authType": {
+                    "description": "Authorization type dto.",
+                    "enum": [
+                        "SHA"
+                    ],
+                    "type": "string",
+                    "typeName": "DEFAULT"
+                },
+                "privKey": {
+                    "type": "string"
+                },
+                "privType": {
+                    "enum": [
+                        "AES"
+                    ],
+                    "type": "string"
+                },
+                "username": {
+                    "description": "User name.",
+                    "type": "string",
+                    "typeName": "DEFAULT"
+                }
+            }
+        }
+    }
+}

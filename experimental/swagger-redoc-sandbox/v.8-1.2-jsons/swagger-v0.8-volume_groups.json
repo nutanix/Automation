@@ -1,0 +1,1246 @@
+{
+    "apiVersion": "v0.8",
+    "swaggerVersion": "1.2",
+    "basePath": "https://any_cvm_ip:9440/api/nutanix/v0.8",
+    "resourcePath": "/volume_groups",
+    "produces": [
+        "application/json"
+    ],
+    "consumes": [
+        "application/json"
+    ],
+    "apis": [
+        {
+            "internal": false,
+            "path": "/volume_groups/",
+            "operations": [
+                {
+                    "deprecated": "false",
+                    "internal": false,
+                    "method": "GET",
+                    "summary": "Retrieve Volume Group configuration",
+                    "notes": "",
+                    "type": "array",
+                    "items": {
+                        "$ref": "get.dto.acropolis.volumegroups.VolumeGroupConfigDTO"
+                    },
+                    "nickname": "getVolumeGroups",
+                    "parameters": [
+                        {
+                            "name": "includeDiskSize",
+                            "description": "Whether to include disk sizes, true by default",
+                            "required": false,
+                            "allowMultiple": false,
+                            "paramType": "query",
+                            "type": "boolean"
+                        }
+                    ],
+                    "responseMessages": [
+                        {
+                            "code": 500,
+                            "message": "Any internal exception while performing this operation"
+                        }
+                    ]
+                },
+                {
+                    "deprecated": "false",
+                    "internal": false,
+                    "method": "POST",
+                    "summary": "Create a new Volume Group configuration",
+                    "notes": "",
+                    "type": "create.dto.acropolis.ReturnValueDTO$TaskIdDTO",
+                    "nickname": "createVolumeGroup",
+                    "parameters": [
+                        {
+                            "description": "Create a Volume Group",
+                            "required": true,
+                            "allowMultiple": false,
+                            "paramType": "body",
+                            "type": "create.dto.acropolis.volumegroups.VolumeGroupCreateDTO"
+                        }
+                    ],
+                    "responseMessages": []
+                }
+            ]
+        },
+        {
+            "internal": false,
+            "path": "/volume_groups/{sourceVolumeGroupUuid}/clone",
+            "operations": [
+                {
+                    "deprecated": "false",
+                    "internal": false,
+                    "method": "POST",
+                    "summary": "Clone a new Volume Group",
+                    "notes": "",
+                    "type": "create.dto.acropolis.ReturnValueDTO$TaskIdDTO",
+                    "nickname": "cloneVolumeGroup",
+                    "parameters": [
+                        {
+                            "name": "sourceVolumeGroupUuid",
+                            "description": "UUID of the source Volume Group",
+                            "required": true,
+                            "allowMultiple": false,
+                            "paramType": "path",
+                            "type": "string"
+                        },
+                        {
+                            "description": "Clone a Volume Group",
+                            "required": true,
+                            "allowMultiple": false,
+                            "paramType": "body",
+                            "type": "create.dto.acropolis.volumegroups.VolumeGroupCloneDTO"
+                        }
+                    ],
+                    "responseMessages": [
+                        {
+                            "code": 500,
+                            "message": "Any internal exception while performing this operation"
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "internal": false,
+            "path": "/volume_groups/{uuid}",
+            "operations": [
+                {
+                    "deprecated": "false",
+                    "internal": false,
+                    "method": "DELETE",
+                    "summary": "Remove an existing Volume Group configuration",
+                    "notes": "",
+                    "type": "delete.dto.acropolis.ReturnValueDTO$TaskIdDTO",
+                    "nickname": "removeVolumeGroup",
+                    "parameters": [
+                        {
+                            "name": "uuid",
+                            "description": "UUID of the Volume Group",
+                            "required": true,
+                            "allowMultiple": false,
+                            "paramType": "path",
+                            "type": "string"
+                        },
+                        {
+                            "name": "logicalTimestamp",
+                            "description": "The logical timestamp",
+                            "required": false,
+                            "allowMultiple": false,
+                            "paramType": "query",
+                            "type": "integer"
+                        }
+                    ],
+                    "responseMessages": [
+                        {
+                            "code": 500,
+                            "message": "Any internal exception while performing this operation"
+                        }
+                    ]
+                },
+                {
+                    "deprecated": "false",
+                    "internal": false,
+                    "method": "GET",
+                    "summary": "Retrieve Volume Group configuration",
+                    "notes": "",
+                    "type": "get.dto.acropolis.volumegroups.VolumeGroupConfigDTO",
+                    "nickname": "getVolumeGroup",
+                    "parameters": [
+                        {
+                            "name": "uuid",
+                            "description": "UUID of the Volume Group",
+                            "required": true,
+                            "allowMultiple": false,
+                            "paramType": "path",
+                            "type": "string"
+                        },
+                        {
+                            "name": "includeDiskSize",
+                            "description": "Whether to include disk sizes",
+                            "required": false,
+                            "allowMultiple": false,
+                            "paramType": "query",
+                            "type": "boolean"
+                        }
+                    ],
+                    "responseMessages": [
+                        {
+                            "code": 500,
+                            "message": "Any internal exception while performing this operation"
+                        }
+                    ]
+                },
+                {
+                    "deprecated": "false",
+                    "internal": false,
+                    "method": "PUT",
+                    "summary": "Modify an existing Volume Group configuration",
+                    "notes": "",
+                    "type": "update.dto.acropolis.volumegroups.VolumeGroupConfigDTO",
+                    "nickname": "updateVolumeGroup",
+                    "parameters": [
+                        {
+                            "name": "uuid",
+                            "description": "UUID of the Volume Group",
+                            "required": true,
+                            "allowMultiple": false,
+                            "paramType": "path",
+                            "type": "string"
+                        },
+                        {
+                            "description": "Update Volume Group",
+                            "required": true,
+                            "allowMultiple": false,
+                            "paramType": "body",
+                            "type": "update.dto.acropolis.volumegroups.VolumeGroupUpdateDTO"
+                        }
+                    ],
+                    "responseMessages": []
+                }
+            ]
+        },
+        {
+            "internal": false,
+            "path": "/volume_groups/{uuid}/attach",
+            "operations": [
+                {
+                    "deprecated": "false",
+                    "internal": false,
+                    "method": "POST",
+                    "summary": "Attach Volume Group to Virtual Machine.",
+                    "notes": "",
+                    "type": "create.dto.acropolis.ReturnValueDTO$TaskIdDTO",
+                    "nickname": "attachVirtualMachine",
+                    "parameters": [
+                        {
+                            "name": "uuid",
+                            "description": "UUID of the Volume Group",
+                            "required": true,
+                            "allowMultiple": false,
+                            "paramType": "path",
+                            "type": "string"
+                        },
+                        {
+                            "description": "Virtual Machine attach configuration",
+                            "required": true,
+                            "allowMultiple": false,
+                            "paramType": "body",
+                            "type": "create.dto.acropolis.volumegroups.VolumeGroupAttachVmDTO"
+                        }
+                    ],
+                    "responseMessages": [
+                        {
+                            "code": 500,
+                            "message": "Any internal exception while performing this operation"
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "internal": false,
+            "path": "/volume_groups/{uuid}/close",
+            "operations": [
+                {
+                    "deprecated": "false",
+                    "internal": false,
+                    "method": "POST",
+                    "summary": "Close Volume Group for iSCSI initiators",
+                    "notes": "",
+                    "type": "create.dto.PrimitiveDTO&lt;java.lang.Boolean&gt;",
+                    "nickname": "closeVolumeGroup",
+                    "parameters": [
+                        {
+                            "name": "uuid",
+                            "description": "UUID of the Volume Group",
+                            "required": true,
+                            "allowMultiple": false,
+                            "paramType": "path",
+                            "type": "string"
+                        },
+                        {
+                            "description": "Volume Group detach configuration",
+                            "required": true,
+                            "allowMultiple": false,
+                            "paramType": "body",
+                            "type": "create.dto.acropolis.volumegroups.VolumeGroupAttachExternalDTO"
+                        }
+                    ],
+                    "responseMessages": []
+                }
+            ]
+        },
+        {
+            "internal": false,
+            "path": "/volume_groups/{uuid}/detach",
+            "operations": [
+                {
+                    "deprecated": "false",
+                    "internal": false,
+                    "method": "POST",
+                    "summary": "Detach Volume Group to Virtual Machine.",
+                    "notes": "",
+                    "type": "create.dto.acropolis.ReturnValueDTO$TaskIdDTO",
+                    "nickname": "detachVirtualMachine",
+                    "parameters": [
+                        {
+                            "name": "uuid",
+                            "description": "UUID of the Volume Group",
+                            "required": true,
+                            "allowMultiple": false,
+                            "paramType": "path",
+                            "type": "string"
+                        },
+                        {
+                            "description": "Virtual Machine detach configuration",
+                            "required": true,
+                            "allowMultiple": false,
+                            "paramType": "body",
+                            "type": "create.dto.acropolis.volumegroups.VolumeGroupAttachVmDTO"
+                        }
+                    ],
+                    "responseMessages": [
+                        {
+                            "code": 500,
+                            "message": "Any internal exception while performing this operation"
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "internal": false,
+            "path": "/volume_groups/{uuid}/disks",
+            "operations": [
+                {
+                    "deprecated": "false",
+                    "internal": false,
+                    "method": "POST",
+                    "summary": "Create a Volume Disk",
+                    "notes": "Creates a Volume Disk with specified configuration.",
+                    "type": "create.dto.acropolis.ReturnValueDTO$TaskIdDTO",
+                    "nickname": "createVolumeDisk",
+                    "parameters": [
+                        {
+                            "name": "uuid",
+                            "description": "UUID of the Volume Group",
+                            "required": true,
+                            "allowMultiple": false,
+                            "paramType": "path",
+                            "type": "string"
+                        },
+                        {
+                            "description": "Create a Volume Disk",
+                            "required": true,
+                            "allowMultiple": false,
+                            "paramType": "body",
+                            "type": "create.dto.acropolis.volumegroups.VolumeDiskCreateSpecDTO"
+                        }
+                    ],
+                    "responseMessages": []
+                },
+                {
+                    "deprecated": "false",
+                    "internal": false,
+                    "method": "PUT",
+                    "summary": "Updates a Volume Disk",
+                    "notes": "Updates a Volume Disk with specified configuration.",
+                    "type": "update.dto.acropolis.volumegroups.VolumeDiskConfigDTO",
+                    "nickname": "updateVolumeDisk",
+                    "parameters": [
+                        {
+                            "name": "uuid",
+                            "description": "UUID of the Volume Group",
+                            "required": true,
+                            "allowMultiple": false,
+                            "paramType": "path",
+                            "type": "string"
+                        },
+                        {
+                            "description": "Update a Volume Disk",
+                            "required": true,
+                            "allowMultiple": false,
+                            "paramType": "body",
+                            "type": "update.dto.acropolis.volumegroups.VolumeDiskUpdateDTO"
+                        }
+                    ],
+                    "responseMessages": []
+                }
+            ]
+        },
+        {
+            "internal": false,
+            "path": "/volume_groups/{uuid}/disks/{index}",
+            "operations": [
+                {
+                    "deprecated": "false",
+                    "internal": false,
+                    "method": "DELETE",
+                    "summary": "Delete a Volume Disk",
+                    "notes": "Delete a Volume Disk with specified configuration.",
+                    "type": "delete.dto.acropolis.ReturnValueDTO$TaskIdDTO",
+                    "nickname": "deleteVolumeDisk",
+                    "parameters": [
+                        {
+                            "name": "uuid",
+                            "description": "UUID of the Volume Group",
+                            "required": true,
+                            "allowMultiple": false,
+                            "paramType": "path",
+                            "type": "string"
+                        },
+                        {
+                            "name": "index",
+                            "description": "Volume Group index of the disk",
+                            "required": true,
+                            "allowMultiple": false,
+                            "paramType": "path",
+                            "type": "integer"
+                        },
+                        {
+                            "name": "logicalTimestamp",
+                            "description": "The logical timestamp",
+                            "required": false,
+                            "allowMultiple": false,
+                            "paramType": "query",
+                            "type": "integer"
+                        }
+                    ],
+                    "responseMessages": [
+                        {
+                            "code": 500,
+                            "message": "Any internal exception while performing this operation"
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "internal": false,
+            "path": "/volume_groups/{uuid}/open",
+            "operations": [
+                {
+                    "deprecated": "false",
+                    "internal": false,
+                    "method": "POST",
+                    "summary": "Open Volume Group for iSCSI initiators",
+                    "notes": "",
+                    "type": "create.dto.PrimitiveDTO&lt;java.lang.Boolean&gt;",
+                    "nickname": "openVolumeGroup",
+                    "parameters": [
+                        {
+                            "name": "uuid",
+                            "description": "UUID of the Volume Group",
+                            "required": true,
+                            "allowMultiple": false,
+                            "paramType": "path",
+                            "type": "string"
+                        },
+                        {
+                            "description": "Volume Group attach configuration",
+                            "required": true,
+                            "allowMultiple": false,
+                            "paramType": "body",
+                            "type": "create.dto.acropolis.volumegroups.VolumeGroupAttachExternalDTO"
+                        }
+                    ],
+                    "responseMessages": []
+                }
+            ]
+        }
+    ],
+    "models": {
+        "create.dto.PrimitiveDTO&lt;java.lang.Boolean&gt;": {
+            "id": "create.dto.PrimitiveDTO&lt;java.lang.Boolean&gt;",
+            "required": [],
+            "properties": {
+                "value": {
+                    "type": "boolean"
+                }
+            }
+        },
+        "create.dto.acropolis.ReturnValueDTO$TaskIdDTO": {
+            "id": "create.dto.acropolis.ReturnValueDTO$TaskIdDTO",
+            "required": [],
+            "properties": {
+                "taskUuid": {
+                    "description": "UUID of the task.",
+                    "notes": "UUID of the task.",
+                    "type": "string",
+                    "typeName": "DEFAULT"
+                }
+            }
+        },
+        "create.dto.acropolis.VMDiskSpecCloneDTO": {
+            "id": "create.dto.acropolis.VMDiskSpecCloneDTO",
+            "required": [],
+            "properties": {
+                "containerUuid": {
+                    "description": "The Uuid of the container in which the specified image or vmdisk is stored. If the source is a vmdisk, this field is recommended, but optional. If the source is a snapshot vmdisk, this field is required. If the source is an absolute image path, this field is prohibited. If the source is a relative image path, this field is required.",
+                    "notes": "The Uuid of the container in which the specified image or vmdisk is stored.",
+                    "type": "string",
+                    "typeName": "UUID_TYPE"
+                },
+                "imagePath": {
+                    "description": "Path of the image to clone from. If this is specified, then 'vmDiskUUID' should not be specified.",
+                    "notes": "Path of the image to clone from.",
+                    "type": "string",
+                    "typeName": "DEFAULT"
+                },
+                "minimumSize": {
+                    "description": "The minimum size of the resulting clone in bytes. This should only be specified if 'vmDiskUUID' is specified.",
+                    "format": "int64",
+                    "notes": "The minimum size of the resulting clone in bytes.",
+                    "type": "integer",
+                    "typeName": "DEFAULT"
+                },
+                "minimumSizeMb": {
+                    "description": "The minimum size of the resulting clone in MiB. This should only be specified if 'vmdiskUuid' is specified.",
+                    "format": "int64",
+                    "notes": "The minimum size of the resulting clone in MiB.",
+                    "type": "integer",
+                    "typeName": "DEFAULT"
+                },
+                "ndfs_filepath": {
+                    "description": "Path of the image to clone from. If this is specified, then 'vmDiskUUID' should not be specified.",
+                    "notes": "Path of the image to clone from.",
+                    "type": "string",
+                    "typeName": "DEFAULT"
+                },
+                "snapshotGroupId": {
+                    "description": "UUID of the snapshot consistency group from which to clone a snapshot vmdisk.",
+                    "notes": "UUID of the snapshot consistency group from which to clone a snapshot vmdisk.",
+                    "type": "string",
+                    "typeName": "UUID_TYPE"
+                },
+                "vmDiskUuid": {
+                    "description": "UUID of the Virtual Machine disk to clone from. If this is specified, then 'imagePath' should not be specified.",
+                    "notes": "UUID of the Virtual Machine disk to clone from.",
+                    "type": "string",
+                    "typeName": "UUID_TYPE"
+                },
+                "vmdisk_uuid": {
+                    "description": "UUID of the Virtual Machine disk to clone from. If this is specified, then 'imagePath' should not be specified.",
+                    "notes": "UUID of the Virtual Machine disk to clone from.",
+                    "type": "string",
+                    "typeName": "UUID_TYPE"
+                }
+            }
+        },
+        "create.dto.acropolis.VmDiskSpecCreateDTO": {
+            "id": "create.dto.acropolis.VmDiskSpecCreateDTO",
+            "required": [],
+            "properties": {
+                "containerId": {
+                    "description": "Id of container to create disk in. If this is specified, then Container Name and UUID should not be specified.",
+                    "format": "int64",
+                    "notes": "Id of container to create disk in.",
+                    "type": "integer",
+                    "typeName": "DEFAULT"
+                },
+                "containerName": {
+                    "description": "Name of container to create disk in. If this is specified, then Container ID and UUID should not be specified.",
+                    "notes": "Name of container to create disk in.",
+                    "type": "string",
+                    "typeName": "DEFAULT"
+                },
+                "containerUuid": {
+                    "description": "UUID of container to create disk in. If this is specified, then Container Name and ID should not be specified.",
+                    "notes": "UUID of container to create disk in.",
+                    "type": "string",
+                    "typeName": "DEFAULT"
+                },
+                "size": {
+                    "description": "Size of the Virtual Machine disk to be created in bytes.",
+                    "format": "int64",
+                    "notes": "Size of the Virtual Machine disk to be created in bytes.",
+                    "type": "integer",
+                    "typeName": "DEFAULT"
+                },
+                "sizeMb": {
+                    "description": "Size of the Virtual Machine disk to be created in MiB.",
+                    "format": "int64",
+                    "notes": "Size of the Virtual Machine disk to be created in MiB.",
+                    "type": "integer",
+                    "typeName": "DEFAULT"
+                }
+            }
+        },
+        "create.dto.acropolis.volumegroups.ClientAuthenticationDTO": {
+            "id": "create.dto.acropolis.volumegroups.ClientAuthenticationDTO",
+            "required": [],
+            "properties": {
+                "authType": {
+                    "description": "Type of the authentication",
+                    "enum": [
+                        "CHAP",
+                        "NONE"
+                    ],
+                    "type": "string",
+                    "typeName": "DEFAULT"
+                },
+                "password": {
+                    "description": "Password of the supported authentication type",
+                    "type": "string",
+                    "typeName": "DEFAULT"
+                }
+            }
+        },
+        "create.dto.acropolis.volumegroups.IscsiClientDTO": {
+            "id": "create.dto.acropolis.volumegroups.IscsiClientDTO",
+            "required": [
+                "clientAddress"
+            ],
+            "properties": {
+                "clientAddress": {
+                    "description": "Unique identifier for the client, it can be either iqn or ip address",
+                    "type": "string",
+                    "typeName": "DEFAULT"
+                },
+                "enabledAuthentications": {
+                    "description": "List of supported authentication types",
+                    "items": {
+                        "$ref": "create.dto.acropolis.volumegroups.ClientAuthenticationDTO"
+                    },
+                    "type": "array",
+                    "typeName": "DEFAULT"
+                },
+                "uuid": {
+                    "description": "Uuid of the iscsi client",
+                    "type": "string",
+                    "typeName": "UUID_TYPE"
+                }
+            }
+        },
+        "create.dto.acropolis.volumegroups.VolumeDiskCreateSpecDTO": {
+            "id": "create.dto.acropolis.volumegroups.VolumeDiskCreateSpecDTO",
+            "required": [],
+            "properties": {
+                "cloneSpec": {
+                    "$ref": "create.dto.acropolis.VMDiskSpecCloneDTO",
+                    "description": "VM disk clone configuration",
+                    "notes": "Either create or clone, not both.",
+                    "typeName": "DEFAULT"
+                },
+                "createSpec": {
+                    "$ref": "create.dto.acropolis.VmDiskSpecCreateDTO",
+                    "description": "VM disk create configuration",
+                    "notes": "Either create or clone, not both.",
+                    "typeName": "DEFAULT"
+                },
+                "index": {
+                    "description": "Volume Group index of the disk",
+                    "format": "int32",
+                    "type": "integer",
+                    "typeName": "DEFAULT"
+                },
+                "volumeGroupUuid": {
+                    "type": "string"
+                }
+            }
+        },
+        "create.dto.acropolis.volumegroups.VolumeGroupAttachExternalDTO": {
+            "id": "create.dto.acropolis.volumegroups.VolumeGroupAttachExternalDTO",
+            "required": [],
+            "properties": {
+                "iscsiClientIp": {
+                    "description": "iSCSI client ip address",
+                    "type": "string",
+                    "typeName": "DEFAULT"
+                },
+                "iscsiInitiator": {
+                    "description": "iSCSI qualified name",
+                    "type": "string",
+                    "typeName": "DEFAULT"
+                },
+                "logicalTimestamp": {
+                    "description": "The logical timestamp",
+                    "format": "int64",
+                    "type": "integer",
+                    "typeName": "DEFAULT"
+                },
+                "operation": {
+                    "enum": [
+                        "ATTACH",
+                        "DETACH"
+                    ],
+                    "type": "string"
+                },
+                "uuid": {
+                    "type": "string"
+                }
+            }
+        },
+        "create.dto.acropolis.volumegroups.VolumeGroupAttachVmDTO": {
+            "id": "create.dto.acropolis.volumegroups.VolumeGroupAttachVmDTO",
+            "required": [
+                "vmUuid"
+            ],
+            "properties": {
+                "index": {
+                    "description": "Volume Group index of the disk",
+                    "format": "int32",
+                    "type": "integer",
+                    "typeName": "DEFAULT"
+                },
+                "logicalTimestamp": {
+                    "description": "The volume group logical timestamp",
+                    "format": "int64",
+                    "type": "integer",
+                    "typeName": "DEFAULT"
+                },
+                "operation": {
+                    "enum": [
+                        "ATTACH",
+                        "DETACH"
+                    ],
+                    "type": "string"
+                },
+                "uuid": {
+                    "type": "string"
+                },
+                "vmLogicalTimestamp": {
+                    "description": "The virtual machine logical timestamp",
+                    "format": "int64",
+                    "type": "integer",
+                    "typeName": "DEFAULT"
+                },
+                "vmUuid": {
+                    "description": "Virtual machine UUID",
+                    "type": "string",
+                    "typeName": "UUID_TYPE"
+                }
+            }
+        },
+        "create.dto.acropolis.volumegroups.VolumeGroupCloneDTO": {
+            "id": "create.dto.acropolis.volumegroups.VolumeGroupCloneDTO",
+            "required": [],
+            "properties": {
+                "enabledAuthentications": {
+                    "description": "List of supported authentication types",
+                    "items": {
+                        "$ref": "create.dto.acropolis.volumegroups.ClientAuthenticationDTO"
+                    },
+                    "type": "array",
+                    "typeName": "DEFAULT"
+                },
+                "iscsiTarget": {
+                    "description": "iSCSI target name for the clone (optional)",
+                    "type": "string",
+                    "typeName": "ISCSI_TARGET"
+                },
+                "iscsiTargetPrefix": {
+                    "description": "iSCSI target prefix for the clone (optional)",
+                    "type": "string",
+                    "typeName": "ACRO_NAME"
+                },
+                "logicalTimestamp": {
+                    "description": "The logical timestamp",
+                    "format": "int64",
+                    "type": "integer",
+                    "typeName": "DEFAULT"
+                },
+                "name": {
+                    "description": "Name of the clone (optional)",
+                    "type": "string",
+                    "typeName": "ACRO_NAME"
+                },
+                "uuid": {
+                    "description": "UUID of the cloned Volume Group (optional)",
+                    "type": "string",
+                    "typeName": "UUID_TYPE"
+                }
+            }
+        },
+        "create.dto.acropolis.volumegroups.VolumeGroupCreateDTO": {
+            "id": "create.dto.acropolis.volumegroups.VolumeGroupCreateDTO",
+            "required": [
+                "name"
+            ],
+            "properties": {
+                "attachedClients": {
+                    "description": "List of the attached clients",
+                    "items": {
+                        "$ref": "create.dto.acropolis.volumegroups.IscsiClientDTO"
+                    },
+                    "type": "array",
+                    "typeName": "DEFAULT"
+                },
+                "description": {
+                    "description": "Volume Group description",
+                    "type": "string",
+                    "typeName": "DEFAULT"
+                },
+                "diskList": {
+                    "description": "Volume Group disk specification",
+                    "items": {
+                        "$ref": "create.dto.acropolis.volumegroups.VolumeDiskCreateSpecDTO"
+                    },
+                    "type": "array",
+                    "typeName": "DEFAULT"
+                },
+                "enabledAuthentications": {
+                    "description": "List of supported authentication types",
+                    "items": {
+                        "$ref": "create.dto.acropolis.volumegroups.ClientAuthenticationDTO"
+                    },
+                    "type": "array",
+                    "typeName": "DEFAULT"
+                },
+                "flashModeEnabled": {
+                    "description": "Flash mode enabled or not for the volume group",
+                    "type": "boolean",
+                    "typeName": "DEFAULT"
+                },
+                "isShared": {
+                    "description": "True or false indicating whether volume is shared across multiple iSCSI initiators",
+                    "type": "boolean",
+                    "typeName": "DEFAULT"
+                },
+                "iscsiInitiatorNameList": {
+                    "description": "iSCSI qualified name list",
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": "array",
+                    "typeName": "DEFAULT"
+                },
+                "iscsiTarget": {
+                    "description": "iSCSI target name",
+                    "type": "string",
+                    "typeName": "ISCSI_TARGET"
+                },
+                "iscsiTargetPrefix": {
+                    "description": "iSCSI target prefix name",
+                    "type": "string",
+                    "typeName": "ACRO_NAME"
+                },
+                "name": {
+                    "description": "Volume Group name",
+                    "type": "string",
+                    "typeName": "ACRO_NAME"
+                },
+                "uuid": {
+                    "description": "Volume Group UUID (optional)",
+                    "type": "string",
+                    "typeName": "UUID_TYPE"
+                }
+            }
+        },
+        "delete.dto.acropolis.ReturnValueDTO$TaskIdDTO": {
+            "id": "delete.dto.acropolis.ReturnValueDTO$TaskIdDTO",
+            "required": [],
+            "properties": {
+                "taskUuid": {
+                    "description": "UUID of the task.",
+                    "notes": "UUID of the task.",
+                    "type": "string",
+                    "typeName": "DEFAULT"
+                }
+            }
+        },
+        "get.dto.acropolis.volumegroups.ClientAuthenticationDTO": {
+            "id": "get.dto.acropolis.volumegroups.ClientAuthenticationDTO",
+            "required": [],
+            "properties": {
+                "authType": {
+                    "description": "Type of the authentication",
+                    "enum": [
+                        "CHAP",
+                        "NONE"
+                    ],
+                    "type": "string",
+                    "typeName": "DEFAULT"
+                },
+                "password": {
+                    "description": "Password of the supported authentication type",
+                    "type": "string",
+                    "typeName": "DEFAULT"
+                }
+            }
+        },
+        "get.dto.acropolis.volumegroups.VolumeAttachmentDTO": {
+            "id": "get.dto.acropolis.volumegroups.VolumeAttachmentDTO",
+            "required": [],
+            "properties": {
+                "clientUuid": {
+                    "description": "UUID of the iscsi client",
+                    "type": "string",
+                    "typeName": "UUID_TYPE"
+                },
+                "initiatorIpAddress": {
+                    "description": "Ip of the iscsi initiator",
+                    "type": "string",
+                    "typeName": "DEFAULT"
+                },
+                "iscsiInitiatorName": {
+                    "description": "Name of the iSCSI initiator",
+                    "type": "string",
+                    "typeName": "DEFAULT"
+                },
+                "vmUuid": {
+                    "description": "UUID of VM to which this volume is attached",
+                    "type": "string",
+                    "typeName": "UUID_TYPE"
+                }
+            }
+        },
+        "get.dto.acropolis.volumegroups.VolumeDiskConfigDTO": {
+            "id": "get.dto.acropolis.volumegroups.VolumeDiskConfigDTO",
+            "required": [],
+            "properties": {
+                "flashModeEnabled": {
+                    "description": "Flash mode enabled or not for the disk",
+                    "type": "boolean",
+                    "typeName": "DEFAULT"
+                },
+                "index": {
+                    "description": "Volume Group index of the disk",
+                    "format": "int32",
+                    "type": "integer",
+                    "typeName": "DEFAULT"
+                },
+                "vmdiskSizeMb": {
+                    "description": "Disk size in MiB",
+                    "format": "int64",
+                    "type": "integer",
+                    "typeName": "DEFAULT"
+                },
+                "vmdiskUuid": {
+                    "description": "UUID of the volume disk",
+                    "type": "string",
+                    "typeName": "UUID_TYPE"
+                }
+            }
+        },
+        "get.dto.acropolis.volumegroups.VolumeGroupConfigDTO": {
+            "id": "get.dto.acropolis.volumegroups.VolumeGroupConfigDTO",
+            "required": [],
+            "properties": {
+                "attachmentList": {
+                    "description": "Currently attached iSCSI initiators",
+                    "items": {
+                        "$ref": "get.dto.acropolis.volumegroups.VolumeAttachmentDTO"
+                    },
+                    "type": "array",
+                    "typeName": "DEFAULT"
+                },
+                "description": {
+                    "description": "Volume group description",
+                    "type": "string",
+                    "typeName": "DEFAULT"
+                },
+                "diskList": {
+                    "description": "Ordered list of volume diskSpec",
+                    "items": {
+                        "$ref": "get.dto.acropolis.volumegroups.VolumeDiskConfigDTO"
+                    },
+                    "type": "array",
+                    "typeName": "DEFAULT"
+                },
+                "enabledAuthentications": {
+                    "description": "List of supported authentication types",
+                    "items": {
+                        "$ref": "get.dto.acropolis.volumegroups.ClientAuthenticationDTO"
+                    },
+                    "type": "array",
+                    "typeName": "DEFAULT"
+                },
+                "flashModeEnabled": {
+                    "description": "Flash mode enabled or not for the volume group",
+                    "type": "boolean",
+                    "typeName": "DEFAULT"
+                },
+                "isDeleted": {
+                    "description": "Whether the volume has been deleted",
+                    "type": "boolean",
+                    "typeName": "DEFAULT"
+                },
+                "isShared": {
+                    "description": "Whether or not this volume can be shared",
+                    "type": "boolean",
+                    "typeName": "DEFAULT"
+                },
+                "iscsiTarget": {
+                    "description": "iSCSI target name for attachment",
+                    "type": "string",
+                    "typeName": "DEFAULT"
+                },
+                "lastModifiedTimestampUsecs": {
+                    "description": "Volume group last modified timestamp",
+                    "format": "int64",
+                    "type": "integer",
+                    "typeName": "DEFAULT"
+                },
+                "logicalTimestamp": {
+                    "description": "Volume group logical timestamp",
+                    "format": "int64",
+                    "type": "integer",
+                    "typeName": "DEFAULT"
+                },
+                "name": {
+                    "description": "Volume group name",
+                    "type": "string",
+                    "typeName": "DEFAULT"
+                },
+                "uuid": {
+                    "description": "Volume group UUID",
+                    "type": "string",
+                    "typeName": "UUID_TYPE"
+                }
+            }
+        },
+        "update.dto.acropolis.VMDiskSpecCloneDTO": {
+            "id": "update.dto.acropolis.VMDiskSpecCloneDTO",
+            "required": [],
+            "properties": {
+                "containerUuid": {
+                    "description": "The Uuid of the container in which the specified image or vmdisk is stored. If the source is a vmdisk, this field is recommended, but optional. If the source is a snapshot vmdisk, this field is required. If the source is an absolute image path, this field is prohibited. If the source is a relative image path, this field is required.",
+                    "notes": "The Uuid of the container in which the specified image or vmdisk is stored.",
+                    "type": "string",
+                    "typeName": "UUID_TYPE"
+                },
+                "imagePath": {
+                    "description": "Path of the image to clone from. If this is specified, then 'vmDiskUUID' should not be specified.",
+                    "notes": "Path of the image to clone from.",
+                    "type": "string",
+                    "typeName": "DEFAULT"
+                },
+                "minimumSize": {
+                    "description": "The minimum size of the resulting clone in bytes. This should only be specified if 'vmDiskUUID' is specified.",
+                    "format": "int64",
+                    "notes": "The minimum size of the resulting clone in bytes.",
+                    "type": "integer",
+                    "typeName": "DEFAULT"
+                },
+                "minimumSizeMb": {
+                    "description": "The minimum size of the resulting clone in MiB. This should only be specified if 'vmdiskUuid' is specified.",
+                    "format": "int64",
+                    "notes": "The minimum size of the resulting clone in MiB.",
+                    "type": "integer",
+                    "typeName": "DEFAULT"
+                },
+                "ndfs_filepath": {
+                    "description": "Path of the image to clone from. If this is specified, then 'vmDiskUUID' should not be specified.",
+                    "notes": "Path of the image to clone from.",
+                    "type": "string",
+                    "typeName": "DEFAULT"
+                },
+                "snapshotGroupId": {
+                    "description": "UUID of the snapshot consistency group from which to clone a snapshot vmdisk.",
+                    "notes": "UUID of the snapshot consistency group from which to clone a snapshot vmdisk.",
+                    "type": "string",
+                    "typeName": "UUID_TYPE"
+                },
+                "vmDiskUuid": {
+                    "description": "UUID of the Virtual Machine disk to clone from. If this is specified, then 'imagePath' should not be specified.",
+                    "notes": "UUID of the Virtual Machine disk to clone from.",
+                    "type": "string",
+                    "typeName": "UUID_TYPE"
+                },
+                "vmdisk_uuid": {
+                    "description": "UUID of the Virtual Machine disk to clone from. If this is specified, then 'imagePath' should not be specified.",
+                    "notes": "UUID of the Virtual Machine disk to clone from.",
+                    "type": "string",
+                    "typeName": "UUID_TYPE"
+                }
+            }
+        },
+        "update.dto.acropolis.volumegroups.ClientAuthenticationDTO": {
+            "id": "update.dto.acropolis.volumegroups.ClientAuthenticationDTO",
+            "required": [],
+            "properties": {
+                "authType": {
+                    "description": "Type of the authentication",
+                    "enum": [
+                        "CHAP",
+                        "NONE"
+                    ],
+                    "type": "string",
+                    "typeName": "DEFAULT"
+                },
+                "password": {
+                    "description": "Password of the supported authentication type",
+                    "type": "string",
+                    "typeName": "DEFAULT"
+                }
+            }
+        },
+        "update.dto.acropolis.volumegroups.IscsiClientDTO": {
+            "id": "update.dto.acropolis.volumegroups.IscsiClientDTO",
+            "required": [
+                "clientAddress"
+            ],
+            "properties": {
+                "clientAddress": {
+                    "description": "Unique identifier for the client, it can be either iqn or ip address",
+                    "type": "string",
+                    "typeName": "DEFAULT"
+                },
+                "enabledAuthentications": {
+                    "description": "List of supported authentication types",
+                    "items": {
+                        "$ref": "update.dto.acropolis.volumegroups.ClientAuthenticationDTO"
+                    },
+                    "type": "array",
+                    "typeName": "DEFAULT"
+                },
+                "uuid": {
+                    "description": "Uuid of the iscsi client",
+                    "type": "string",
+                    "typeName": "UUID_TYPE"
+                }
+            }
+        },
+        "update.dto.acropolis.volumegroups.VolumeDiskConfigDTO": {
+            "id": "update.dto.acropolis.volumegroups.VolumeDiskConfigDTO",
+            "required": [],
+            "properties": {
+                "flashModeEnabled": {
+                    "description": "Flash mode enabled or not for the disk",
+                    "type": "boolean",
+                    "typeName": "DEFAULT"
+                }
+            }
+        },
+        "update.dto.acropolis.volumegroups.VolumeDiskUpdateDTO": {
+            "id": "update.dto.acropolis.volumegroups.VolumeDiskUpdateDTO",
+            "required": [
+                "index"
+            ],
+            "properties": {
+                "cloneSpec": {
+                    "$ref": "update.dto.acropolis.VMDiskSpecCloneDTO"
+                },
+                "flashModeEnabled": {
+                    "description": "Flash mode enabled or not for the volume",
+                    "type": "boolean",
+                    "typeName": "DEFAULT"
+                },
+                "index": {
+                    "description": "Volume Group index of the disk",
+                    "format": "int32",
+                    "type": "integer",
+                    "typeName": "DEFAULT"
+                },
+                "upgradeSpec": {
+                    "$ref": "update.dto.acropolis.volumegroups.VolumeDiskUpdateDTO$UpgradeSpec"
+                },
+                "volumeGroupUuid": {
+                    "type": "string"
+                }
+            }
+        },
+        "update.dto.acropolis.volumegroups.VolumeDiskUpdateDTO$UpgradeSpec": {
+            "id": "update.dto.acropolis.volumegroups.VolumeDiskUpdateDTO$UpgradeSpec",
+            "required": [],
+            "properties": {
+                "containerUuid": {
+                    "description": "Re-creates the empty disk on specified container. Is mutually exclusive with the preserveData flag.",
+                    "type": "string",
+                    "typeName": "UUID_TYPE"
+                },
+                "preserveData": {
+                    "description": "When set to true, re-size disk in place. Else, create a new disk by cloning from other disks or providing creation spec. True by default.",
+                    "type": "boolean",
+                    "typeName": "DEFAULT"
+                },
+                "sizeMb": {
+                    "description": "Disk size in MiB",
+                    "format": "int64",
+                    "type": "integer",
+                    "typeName": "DEFAULT"
+                }
+            }
+        },
+        "update.dto.acropolis.volumegroups.VolumeGroupConfigDTO": {
+            "id": "update.dto.acropolis.volumegroups.VolumeGroupConfigDTO",
+            "required": [],
+            "properties": {
+                "enabledAuthentications": {
+                    "description": "List of supported authentication types",
+                    "items": {
+                        "$ref": "update.dto.acropolis.volumegroups.ClientAuthenticationDTO"
+                    },
+                    "type": "array",
+                    "typeName": "DEFAULT"
+                },
+                "flashModeEnabled": {
+                    "description": "Flash mode enabled or not for the volume group",
+                    "type": "boolean",
+                    "typeName": "DEFAULT"
+                }
+            }
+        },
+        "update.dto.acropolis.volumegroups.VolumeGroupUpdateDTO": {
+            "id": "update.dto.acropolis.volumegroups.VolumeGroupUpdateDTO",
+            "required": [],
+            "properties": {
+                "attachedClients": {
+                    "description": "List of the attached clients",
+                    "items": {
+                        "$ref": "update.dto.acropolis.volumegroups.IscsiClientDTO"
+                    },
+                    "type": "array",
+                    "typeName": "DEFAULT"
+                },
+                "description": {
+                    "description": "Volume Group description",
+                    "type": "string",
+                    "typeName": "DEFAULT"
+                },
+                "enabledAuthentications": {
+                    "description": "List of supported authentication types",
+                    "items": {
+                        "$ref": "update.dto.acropolis.volumegroups.ClientAuthenticationDTO"
+                    },
+                    "type": "array",
+                    "typeName": "DEFAULT"
+                },
+                "flashModeEnabled": {
+                    "description": "Flash mode enabled or not for the volume group",
+                    "type": "boolean",
+                    "typeName": "DEFAULT"
+                },
+                "isShared": {
+                    "description": "True or false indicating whether volume is shared across multiple iSCSI initiators",
+                    "type": "boolean",
+                    "typeName": "DEFAULT"
+                },
+                "iscsiInitiatorNameList": {
+                    "description": "iSCSI qualified name list",
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": "array",
+                    "typeName": "DEFAULT"
+                },
+                "iscsiTarget": {
+                    "description": "iSCSI target name",
+                    "type": "string",
+                    "typeName": "ISCSI_TARGET"
+                },
+                "iscsiTargetPrefix": {
+                    "description": "iSCSI target prefix",
+                    "type": "string",
+                    "typeName": "ACRO_NAME"
+                },
+                "logicalTimestamp": {
+                    "description": "The logical timestamp",
+                    "format": "int64",
+                    "type": "integer",
+                    "typeName": "DEFAULT"
+                },
+                "name": {
+                    "description": "Volume Group name",
+                    "type": "string",
+                    "typeName": "ACRO_NAME"
+                },
+                "uuid": {
+                    "type": "string"
+                }
+            }
+        }
+    }
+}

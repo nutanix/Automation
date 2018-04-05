@@ -1,0 +1,536 @@
+{
+    "apiVersion": "v0.8",
+    "swaggerVersion": "1.2",
+    "basePath": "https://any_cvm_ip:9440/api/nutanix/v0.8",
+    "resourcePath": "/tasks",
+    "produces": [
+        "application/json"
+    ],
+    "consumes": [
+        "application/json"
+    ],
+    "apis": [
+        {
+            "internal": false,
+            "path": "/tasks/",
+            "operations": [
+                {
+                    "deprecated": "false",
+                    "internal": false,
+                    "method": "GET",
+                    "summary": "Get a list of tasks.",
+                    "notes": "Get a list of tasks generated in the cluster. <br/><br/>By default, completed tasks are excluded. Set the includeCompeted flag to true to include completed tasks. <br/><br/>Tasks can also be filtered based on the entites, entity types and operation type.",
+                    "type": "get.base.EntityCollection&lt;get.dto.acropolis.tasks.TaskDTO&gt;",
+                    "nickname": "getTasks",
+                    "parameters": [
+                        {
+                            "name": "entityTypes",
+                            "description": "Comma separated Entity types",
+                            "required": false,
+                            "allowMultiple": false,
+                            "paramType": "query",
+                            "type": "string"
+                        },
+                        {
+                            "name": "entityUuids",
+                            "description": "Comma separated Entity types",
+                            "required": false,
+                            "allowMultiple": false,
+                            "paramType": "query",
+                            "type": "string"
+                        },
+                        {
+                            "name": "operationTypeList",
+                            "description": "Comma separated Operation types",
+                            "required": false,
+                            "allowMultiple": false,
+                            "paramType": "query",
+                            "type": "string"
+                        },
+                        {
+                            "name": "includeCompleted",
+                            "description": "Include Completed Tasks",
+                            "required": false,
+                            "allowMultiple": false,
+                            "paramType": "query",
+                            "type": "boolean"
+                        },
+                        {
+                            "name": "epochCutOffTime",
+                            "description": "Tasks greater than cut off epoch time in microseconds will be returned. This is applicable only when include completed is set to True.",
+                            "required": false,
+                            "allowMultiple": false,
+                            "paramType": "query",
+                            "type": "integer"
+                        },
+                        {
+                            "name": "count",
+                            "description": "Maximum number of tasks",
+                            "required": false,
+                            "allowMultiple": false,
+                            "paramType": "query",
+                            "type": "integer"
+                        },
+                        {
+                            "name": "includeEntityNames",
+                            "description": "Include entity names",
+                            "required": false,
+                            "allowMultiple": false,
+                            "paramType": "query",
+                            "type": "boolean"
+                        }
+                    ],
+                    "responseMessages": [
+                        {
+                            "code": 500,
+                            "message": "Any internal exception while performing this operation"
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "internal": false,
+            "path": "/tasks/{taskid}",
+            "operations": [
+                {
+                    "deprecated": "false",
+                    "internal": false,
+                    "method": "GET",
+                    "summary": "Get details of the specified task.",
+                    "notes": "Get details of the specified task.",
+                    "type": "get.dto.acropolis.tasks.TaskDTO",
+                    "nickname": "getTask",
+                    "parameters": [
+                        {
+                            "name": "taskid",
+                            "description": "Id of the task",
+                            "required": true,
+                            "allowMultiple": false,
+                            "paramType": "path",
+                            "type": "string"
+                        },
+                        {
+                            "name": "includeEntityNames",
+                            "description": "Include entity names",
+                            "required": false,
+                            "allowMultiple": false,
+                            "paramType": "query",
+                            "type": "boolean"
+                        }
+                    ],
+                    "responseMessages": [
+                        {
+                            "code": 500,
+                            "message": "Any internal exception while performing this operation"
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "internal": false,
+            "path": "/tasks/{taskid}/poll",
+            "operations": [
+                {
+                    "deprecated": "false",
+                    "internal": false,
+                    "method": "GET",
+                    "summary": "Poll a task.",
+                    "notes": "Poll a task to check if its ready. The maximum timeout that can be specified is 30 minutes, i.e. 1800 seconds.",
+                    "type": "get.dto.acropolis.tasks.TaskPollResultDTO",
+                    "nickname": "pollTask",
+                    "parameters": [
+                        {
+                            "name": "taskid",
+                            "description": "Id of the task",
+                            "required": true,
+                            "allowMultiple": false,
+                            "paramType": "path",
+                            "type": "string"
+                        },
+                        {
+                            "name": "timeoutseconds",
+                            "description": "Timeout seconds",
+                            "required": false,
+                            "allowMultiple": false,
+                            "paramType": "query",
+                            "type": "integer"
+                        },
+                        {
+                            "name": "includeEntityNames",
+                            "description": "Include entity names",
+                            "required": false,
+                            "allowMultiple": false,
+                            "paramType": "query",
+                            "type": "boolean"
+                        }
+                    ],
+                    "responseMessages": [
+                        {
+                            "code": 500,
+                            "message": "Any internal exception while performing this operation"
+                        }
+                    ]
+                }
+            ]
+        }
+    ],
+    "models": {
+        "get.base.EntityCollection&lt;get.dto.acropolis.tasks.TaskDTO&gt;": {
+            "id": "get.base.EntityCollection&lt;get.dto.acropolis.tasks.TaskDTO&gt;",
+            "required": [],
+            "properties": {
+                "entities": {
+                    "items": {
+                        "$ref": "get.dto.acropolis.tasks.TaskDTO"
+                    },
+                    "type": "array"
+                },
+                "errorInfo": {
+                    "$ref": "get.base.ErrorInfo"
+                },
+                "metadata": {
+                    "$ref": "get.base.Metadata"
+                }
+            }
+        },
+        "get.base.ErrorInfo": {
+            "id": "get.base.ErrorInfo",
+            "required": [],
+            "properties": {
+                "count": {
+                    "format": "int64",
+                    "type": "integer"
+                },
+                "entityList": {
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": "array"
+                },
+                "message": {
+                    "type": "string"
+                }
+            }
+        },
+        "get.base.Metadata": {
+            "id": "get.base.Metadata",
+            "required": [],
+            "properties": {
+                "count": {
+                    "format": "int32",
+                    "type": "integer"
+                },
+                "endIndex": {
+                    "format": "int32",
+                    "type": "integer"
+                },
+                "filterCriteria": {
+                    "type": "string"
+                },
+                "grandTotalEntities": {
+                    "format": "int32",
+                    "type": "integer"
+                },
+                "nextCursor": {
+                    "type": "string"
+                },
+                "page": {
+                    "format": "int32",
+                    "type": "integer"
+                },
+                "previousCursor": {
+                    "type": "string"
+                },
+                "searchString": {
+                    "type": "string"
+                },
+                "sortCriteria": {
+                    "type": "string"
+                },
+                "startIndex": {
+                    "format": "int32",
+                    "type": "integer"
+                },
+                "totalEntities": {
+                    "format": "int32",
+                    "type": "integer"
+                }
+            }
+        },
+        "get.dto.acropolis.tasks.EntityIdDTO": {
+            "id": "get.dto.acropolis.tasks.EntityIdDTO",
+            "required": [],
+            "properties": {
+                "entityName": {
+                    "description": "Entity name.",
+                    "notes": "Entity name.",
+                    "type": "string",
+                    "typeName": "DEFAULT"
+                },
+                "entityType": {
+                    "description": "Entity type.",
+                    "enum": [
+                        "NODE",
+                        "VM",
+                        "SNAPSHOT",
+                        "IMAGE",
+                        "VOLUME_GROUP",
+                        "VIRTUAL_NETWORK",
+                        "CLUSTER",
+                        "MICROSEG_RULE",
+                        "VM_GROUP"
+                    ],
+                    "notes": "Entity type.",
+                    "type": "string",
+                    "typeName": "DEFAULT"
+                },
+                "uuid": {
+                    "description": "The version 4 UUID of the entity",
+                    "notes": "The version 4 UUID of the entity",
+                    "type": "string",
+                    "typeName": "UUID_TYPE"
+                }
+            }
+        },
+        "get.dto.acropolis.tasks.MetaRequestDTO": {
+            "id": "get.dto.acropolis.tasks.MetaRequestDTO",
+            "required": [],
+            "properties": {
+                "methodName": {
+                    "description": "The method name for which the task was created",
+                    "notes": "The method name for which the task was created",
+                    "type": "string",
+                    "typeName": "DEFAULT"
+                }
+            }
+        },
+        "get.dto.acropolis.tasks.MetaResponseDTO": {
+            "id": "get.dto.acropolis.tasks.MetaResponseDTO",
+            "required": [],
+            "properties": {
+                "error": {
+                    "description": "An error code indicating whether the RPC was successful.",
+                    "notes": "An error code indicating whether the RPC was successful.",
+                    "type": "string",
+                    "typeName": "DEFAULT"
+                },
+                "errorDetail": {
+                    "description": "An optional additional string describing the error, if the RPC was not successful.",
+                    "notes": "An optional additional string describing the error, if the RPC was not successful.",
+                    "type": "string",
+                    "typeName": "DEFAULT"
+                }
+            }
+        },
+        "get.dto.acropolis.tasks.TaskDTO": {
+            "id": "get.dto.acropolis.tasks.TaskDTO",
+            "required": [],
+            "properties": {
+                "completeTime": {
+                    "description": "Complete time in microseconds from epoch.",
+                    "format": "int64",
+                    "notes": "Complete time in microseconds from epoch.",
+                    "type": "integer",
+                    "typeName": "DEFAULT"
+                },
+                "createTime": {
+                    "description": "The request object associated with the task.",
+                    "format": "int64",
+                    "notes": "The request object associated with the task.",
+                    "type": "integer",
+                    "typeName": "DEFAULT"
+                },
+                "entityIds": {
+                    "description": "The list of affected entity ids",
+                    "items": {
+                        "type": "string"
+                    },
+                    "notes": "The list of affected entity ids",
+                    "type": "array",
+                    "typeName": "DEFAULT"
+                },
+                "entityList": {
+                    "description": "List of entities that the task impacts.",
+                    "items": {
+                        "$ref": "get.dto.acropolis.tasks.EntityIdDTO"
+                    },
+                    "notes": "List of entities that the task impacts.",
+                    "type": "array",
+                    "typeName": "DEFAULT"
+                },
+                "lastUpdatedTime": {
+                    "description": "Last time the task was updated in microseconds from epoch.",
+                    "format": "int64",
+                    "notes": "Last time the task was updated in microseconds from epoch.",
+                    "type": "integer",
+                    "typeName": "DEFAULT"
+                },
+                "message": {
+                    "type": "string"
+                },
+                "metaRequest": {
+                    "$ref": "get.dto.acropolis.tasks.MetaRequestDTO",
+                    "description": "The request object associated with the task.",
+                    "notes": "The request object associated with the task.",
+                    "typeName": "DEFAULT"
+                },
+                "metaResponse": {
+                    "$ref": "get.dto.acropolis.tasks.MetaResponseDTO",
+                    "description": "The response object associated with the task.",
+                    "notes": "The response object associated with the task.",
+                    "typeName": "DEFAULT"
+                },
+                "operationType": {
+                    "description": "The operation for which the task was created",
+                    "enum": [
+                        "SNAPSHOT_CREATE",
+                        "SNAPSHOT_DELETE",
+                        "VM_CREATE",
+                        "VM_CLONE",
+                        "VM_MIGRATE",
+                        "VM_RESTORE",
+                        "VM_UPDATE",
+                        "VM_DELETE",
+                        "VM_REGISTER",
+                        "VM_SET_POWER_STATE",
+                        "VM_FORCE_COMPLETE_MIGRATION",
+                        "VM_FORCE_POWEROFF",
+                        "VM_ATTACH_VG",
+                        "VM_AFFINITY_UPDATE",
+                        "DISK_CREATE",
+                        "DISK_UPDATE",
+                        "DISK_DELETE",
+                        "NIC_CREATE",
+                        "NIC_UPDATE",
+                        "NIC_DELETE",
+                        "ENTER_MAINTENANCE_MODE",
+                        "EXIT_MAINTENANCE_MODE",
+                        "IMAGE_CREATE",
+                        "IMAGE_DELETE",
+                        "IMAGE_UPDATE",
+                        "MICROSEG_UPDATE",
+                        "MICROSEG_DELETE",
+                        "VOLUME_GROUP_CREATE",
+                        "VOLUME_GROUP_CLONE",
+                        "VOLUME_GROUP_DELETE",
+                        "VOLUME_GROUP_UPDATE",
+                        "VOLUME_GROUP_ATTACH_VM",
+                        "VOLUME_DISK_CREATE",
+                        "VOLUME_DISK_DELETE",
+                        "VOLUME_DISK_UPDATE",
+                        "VOLUME_GROUP_REGISTER",
+                        "STRETCH_CONFIGURE",
+                        "STRETCH_RECOVER",
+                        "HOST_RESTART_ALL_VMS",
+                        "HA_UPDATE",
+                        "HA_FAILOVER",
+                        "START_HA_FAILOVER",
+                        "RESTART_VM_GROUP",
+                        "HOST_RESTORE_VM_LOCALITY",
+                        "VM_GROUP_CREATE",
+                        "VM_GROUP_DELETE",
+                        "VM_GROUP_UPDATE",
+                        "NETWORK_CREATE",
+                        "NETWORK_DELETE",
+                        "NETWORK_UPDATE",
+                        "PARCELS_CREATE",
+                        "PARCELS_DELETE",
+                        "AFFINITY_RULE_UPDATE",
+                        "PARCELS_UPDATE",
+                        "GET_VMS_ON_HOST",
+                        "NOTIFY_POWER_TRANSITION",
+                        "COMPLETE_MIGRATE_VM",
+                        "SET_HOST_FAILURES",
+                        "NOTIFY_FAILOVER_COMPLETE",
+                        "IS_TASK_PENDING",
+                        "ASSIGN_SEGMENTS",
+                        "GET_ENTITY_PARCELS",
+                        "AFFINITY_HA_COMPLIANCE_CHECK",
+                        "RECALCULATE_RESERVATIONS",
+                        "CHECK_CURRENT_NODE_FAILURES",
+                        "IS_FAILOVER_IN_PROGRESS",
+                        "SCHEDULE_VM",
+                        "MAYBE_UPDATE_AFFINITY",
+                        "GET_SEGMENT_ASSIGNMENT",
+                        "GET_HIGH_PRIORITY_HOSTS",
+                        "RESERVE_PER_HOST_MEMORY"
+                    ],
+                    "notes": "The operation for which the task was created",
+                    "type": "string",
+                    "typeName": "DEFAULT"
+                },
+                "parentTaskUuid": {
+                    "description": "The UUID of the parent task",
+                    "notes": "The UUID of the parent task",
+                    "type": "string",
+                    "typeName": "DEFAULT"
+                },
+                "percentageComplete": {
+                    "format": "int64",
+                    "type": "integer"
+                },
+                "progressStatus": {
+                    "description": "The status of the task",
+                    "enum": [
+                        "QUEUED",
+                        "RUNNING",
+                        "SUCCEEDED",
+                        "ABORTED",
+                        "FAILED"
+                    ],
+                    "notes": "The status of the task",
+                    "type": "string",
+                    "typeName": "DEFAULT"
+                },
+                "startTime": {
+                    "description": "Start time in microseconds from epoch.",
+                    "format": "int64",
+                    "notes": "Start time in microseconds from epoch.",
+                    "type": "integer",
+                    "typeName": "DEFAULT"
+                },
+                "subtaskUuidList": {
+                    "description": "The list of UUIDs of the sub-tasks",
+                    "items": {
+                        "type": "string"
+                    },
+                    "notes": "The list of UUIDs of the sub-tasks",
+                    "type": "array",
+                    "typeName": "DEFAULT"
+                },
+                "uuid": {
+                    "description": "The version 4 UUID of the task.",
+                    "notes": "The version 4 UUID of the task,",
+                    "type": "string",
+                    "typeName": "UUID_TYPE"
+                }
+            }
+        },
+        "get.dto.acropolis.tasks.TaskPollResultDTO": {
+            "id": "get.dto.acropolis.tasks.TaskPollResultDTO",
+            "required": [],
+            "properties": {
+                "isUnrecognized": {
+                    "description": "Whether the task UUID specified was not recognized.",
+                    "notes": "Whether the task UUID specified was not recognized.",
+                    "type": "boolean",
+                    "typeName": "DEFAULT"
+                },
+                "taskInfo": {
+                    "$ref": "get.dto.acropolis.tasks.TaskDTO",
+                    "description": "The task object if the task is ready.",
+                    "notes": "The task object if the task is ready.",
+                    "typeName": "DEFAULT"
+                },
+                "timedOut": {
+                    "description": "Whether the poll request timed out.",
+                    "notes": "Whether the poll request timed out.",
+                    "type": "boolean",
+                    "typeName": "DEFAULT"
+                }
+            }
+        }
+    }
+}

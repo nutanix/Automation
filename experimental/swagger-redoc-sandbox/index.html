@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Jon Test Doc Portal</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style>
+      body {
+        margin: 0;
+        padding-top: 40px;
+      }
+
+      nav {
+        position: fixed;
+        top: 0;
+        width: 100%;
+        z-index: 100;
+      }
+      #links_container {
+          margin: 0;
+          padding: 0;
+          background-color: #0033a0;
+      }
+
+      #links_container li {
+          display: inline-block;
+          padding: 10px;
+          color: white;
+          cursor: pointer;
+      }
+    </style>
+  </head>
+  <body>
+
+    <!-- Top navigation placeholder -->
+    <nav>
+      <ul id="links_container">
+      </ul>
+    </nav>
+
+    <redoc scroll-y-offset="body > nav"></redoc>
+
+    <script src="redoc.standalone.js"> </script>
+    <script>
+      // list of APIS
+      var apis = [
+        {
+          name: 'Intentionally ugly hack top bar (proper selector/design needed) ... PE v3.1.0: 5.6rc4',
+          url: 'swagger-pe56rc4-3.1.0.yaml'
+        },
+        {
+          name: 'PC v3.1.0: 5.6rc5 (TODO FIX)',
+          url: 'swagger-pc56rc5-3.1.0.yaml'
+        },
+        {
+          name: 'PE v2.0: jons creation (TODO)',
+          url: 'swagger-pe56rc5-2.0.yaml'
+        }
+      ];
+
+      // initially render first API
+      Redoc.init(apis[0].url);
+
+      function onClick() {
+        var url = this.getAttribute('data-link');
+        Redoc.init(url);
+      }
+
+      // dynamically building navigation items
+      var $list = document.getElementById('links_container');
+      apis.forEach(function(api) {
+        var $listitem = document.createElement('li');
+        $listitem.setAttribute('data-link', api.url);
+        $listitem.innerText = api.name;
+        $listitem.addEventListener('click', onClick);
+        $list.appendChild($listitem);
+      });
+    </script>
+  </body>
+</html>

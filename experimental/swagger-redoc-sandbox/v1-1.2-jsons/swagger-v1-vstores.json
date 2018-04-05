@@ -1,0 +1,326 @@
+{
+    "apiVersion": "v1",
+    "swaggerVersion": "1.2",
+    "basePath": "https://any_cvm_ip:9440/PrismGateway/services/rest/v1",
+    "resourcePath": "/vstores",
+    "produces": [
+        "application/json"
+    ],
+    "consumes": [
+        "application/json"
+    ],
+    "apis": [
+        {
+            "internal": false,
+            "path": "/vstores/",
+            "operations": [
+                {
+                    "deprecated": "false",
+                    "internal": false,
+                    "method": "GET",
+                    "summary": "Get the list of VStores.",
+                    "notes": "Get the list of VStores configured in the cluster.",
+                    "type": "array",
+                    "items": {
+                        "$ref": "get.dto.vstore.VStoreDTO"
+                    },
+                    "nickname": "getVStores",
+                    "parameters": [
+                        {
+                            "name": "ids",
+                            "description": "VStore uuids",
+                            "required": false,
+                            "allowMultiple": false,
+                            "paramType": "query",
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        {
+                            "name": "names",
+                            "description": "VStore names",
+                            "required": false,
+                            "allowMultiple": false,
+                            "paramType": "query",
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        {
+                            "name": "includeDeleted",
+                            "description": "Include deleted",
+                            "required": false,
+                            "allowMultiple": false,
+                            "paramType": "query",
+                            "type": "boolean"
+                        }
+                    ],
+                    "responseMessages": []
+                }
+            ]
+        },
+        {
+            "internal": false,
+            "path": "/vstores/{id}",
+            "operations": [
+                {
+                    "deprecated": "false",
+                    "internal": false,
+                    "method": "GET",
+                    "summary": "Get a VStore.",
+                    "notes": "Get a VStore with the specified uuid.",
+                    "type": "get.dto.vstore.VStoreDTO",
+                    "nickname": "getVStoreByUuid",
+                    "parameters": [
+                        {
+                            "name": "id",
+                            "description": "Uuid of the VStore",
+                            "required": true,
+                            "allowMultiple": false,
+                            "paramType": "path",
+                            "type": "string"
+                        }
+                    ],
+                    "responseMessages": []
+                }
+            ]
+        },
+        {
+            "internal": false,
+            "path": "/vstores/{id}/protect",
+            "operations": [
+                {
+                    "deprecated": "false",
+                    "internal": false,
+                    "method": "POST",
+                    "summary": "Protect a VStore.",
+                    "notes": "Protect a VStore with the specified id.",
+                    "type": "create.dto.vstore.VStoreDTO",
+                    "nickname": "protectVStore",
+                    "parameters": [
+                        {
+                            "name": "id",
+                            "description": "Uuid of the VStore",
+                            "required": true,
+                            "allowMultiple": false,
+                            "paramType": "path",
+                            "type": "string"
+                        },
+                        {
+                            "name": "vmLevelConsistency",
+                            "description": "Create vm level consistent snapshots for the vStore",
+                            "required": false,
+                            "allowMultiple": false,
+                            "paramType": "query",
+                            "type": "boolean"
+                        }
+                    ],
+                    "responseMessages": []
+                }
+            ]
+        },
+        {
+            "internal": false,
+            "path": "/vstores/{id}/unprotect",
+            "operations": [
+                {
+                    "deprecated": "false",
+                    "internal": false,
+                    "method": "POST",
+                    "summary": "Unprotect a VStore.",
+                    "notes": "Unprotect a VStore with the specified id.",
+                    "type": "create.dto.vstore.VStoreDTO",
+                    "nickname": "unProtectVStore",
+                    "parameters": [
+                        {
+                            "name": "id",
+                            "description": "Uuid of the VStore",
+                            "required": true,
+                            "allowMultiple": false,
+                            "paramType": "path",
+                            "type": "string"
+                        }
+                    ],
+                    "responseMessages": []
+                }
+            ]
+        },
+        {
+            "internal": false,
+            "path": "/vstores/{id}/update_protection_mode",
+            "operations": [
+                {
+                    "deprecated": "false",
+                    "internal": false,
+                    "method": "PUT",
+                    "summary": "Protect a VStore.",
+                    "notes": "Protect a VStore with the specified uuid.",
+                    "type": "update.dto.vstore.VStoreDTO",
+                    "nickname": "updateProtection",
+                    "parameters": [
+                        {
+                            "name": "id",
+                            "description": "Uuid of the VStore",
+                            "required": true,
+                            "allowMultiple": false,
+                            "paramType": "path",
+                            "type": "string"
+                        },
+                        {
+                            "name": "vmLevelConsistency",
+                            "description": "Create vm level consistent snapshots for the vStore",
+                            "required": true,
+                            "allowMultiple": false,
+                            "paramType": "query",
+                            "type": "boolean"
+                        }
+                    ],
+                    "responseMessages": []
+                }
+            ]
+        }
+    ],
+    "models": {
+        "create.dto.vstore.VStoreDTO": {
+            "id": "create.dto.vstore.VStoreDTO",
+            "description": "vStore",
+            "required": [
+                "id",
+                "name",
+                "containerId"
+            ],
+            "properties": {
+                "Uuid": {
+                    "type": "string"
+                },
+                "backedup": {
+                    "type": "boolean"
+                },
+                "containerId": {
+                    "description": "Container with which vstore is associated with.",
+                    "format": "int64",
+                    "type": "integer",
+                    "typeName": "DEFAULT"
+                },
+                "containerUuid": {
+                    "type": "string"
+                },
+                "id": {
+                    "description": "Vstore id.",
+                    "format": "int64",
+                    "type": "integer",
+                    "typeName": "DEFAULT"
+                },
+                "isBackup": {
+                    "type": "boolean"
+                },
+                "markedForRemoval": {
+                    "type": "boolean"
+                },
+                "name": {
+                    "description": "Vstore name",
+                    "type": "string",
+                    "typeName": "DEFAULT"
+                },
+                "protectionDomain": {
+                    "type": "string"
+                }
+            }
+        },
+        "get.dto.vstore.VStoreDTO": {
+            "id": "get.dto.vstore.VStoreDTO",
+            "description": "vStore",
+            "required": [],
+            "properties": {
+                "Uuid": {
+                    "type": "string"
+                },
+                "backedup": {
+                    "type": "boolean"
+                },
+                "containerId": {
+                    "description": "Container with which vstore is associated with.",
+                    "format": "int64",
+                    "type": "integer",
+                    "typeName": "DEFAULT"
+                },
+                "containerUuid": {
+                    "type": "string"
+                },
+                "id": {
+                    "description": "Vstore id.",
+                    "format": "int64",
+                    "type": "integer",
+                    "typeName": "DEFAULT"
+                },
+                "isBackup": {
+                    "type": "boolean"
+                },
+                "markedForRemoval": {
+                    "type": "boolean"
+                },
+                "name": {
+                    "description": "Vstore name",
+                    "type": "string",
+                    "typeName": "DEFAULT"
+                },
+                "protectionDomain": {
+                    "type": "string"
+                },
+                "vmLevelConsistent": {
+                    "description": "Vm level consistent snapshots for the vStore",
+                    "type": "boolean",
+                    "typeName": "DEFAULT"
+                }
+            }
+        },
+        "update.dto.vstore.VStoreDTO": {
+            "id": "update.dto.vstore.VStoreDTO",
+            "description": "vStore",
+            "required": [
+                "id",
+                "name",
+                "containerId"
+            ],
+            "properties": {
+                "Uuid": {
+                    "type": "string"
+                },
+                "backedup": {
+                    "type": "boolean"
+                },
+                "containerId": {
+                    "description": "Container with which vstore is associated with.",
+                    "format": "int64",
+                    "type": "integer",
+                    "typeName": "DEFAULT"
+                },
+                "containerUuid": {
+                    "type": "string"
+                },
+                "id": {
+                    "description": "Vstore id.",
+                    "format": "int64",
+                    "type": "integer",
+                    "typeName": "DEFAULT"
+                },
+                "isBackup": {
+                    "type": "boolean"
+                },
+                "markedForRemoval": {
+                    "type": "boolean"
+                },
+                "name": {
+                    "description": "Vstore name",
+                    "type": "string",
+                    "typeName": "DEFAULT"
+                },
+                "protectionDomain": {
+                    "type": "string"
+                }
+            }
+        }
+    }
+}

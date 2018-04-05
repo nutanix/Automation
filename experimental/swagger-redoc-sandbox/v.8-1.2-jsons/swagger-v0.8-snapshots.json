@@ -1,0 +1,1212 @@
+{
+    "apiVersion": "v0.8",
+    "swaggerVersion": "1.2",
+    "basePath": "https://any_cvm_ip:9440/api/nutanix/v0.8",
+    "resourcePath": "/snapshots",
+    "produces": [
+        "application/json"
+    ],
+    "consumes": [
+        "application/json"
+    ],
+    "apis": [
+        {
+            "internal": false,
+            "path": "/snapshots/",
+            "operations": [
+                {
+                    "deprecated": "false",
+                    "internal": false,
+                    "method": "GET",
+                    "summary": "Get a list of snapshots in a cluster.",
+                    "notes": "Get a list of snapshots in a cluster.",
+                    "type": "get.base.EntityCollection&lt;get.dto.acropolis.SnapshotInfoDTO&gt;",
+                    "nickname": "getSnapshots",
+                    "parameters": [],
+                    "responseMessages": []
+                },
+                {
+                    "deprecated": "false",
+                    "internal": false,
+                    "method": "POST",
+                    "summary": "Create Virtual Machine snapshots.",
+                    "notes": "Create Virtual Machine snapshots. <br/><br/>If a UUID is specified for the snapshot, this operation will be idempotent. <br/><br/>If multiple VMs are specified, all of their configurations and disks will fall into the same consistency group. Since this operation requires the coordination of multiple resources, it should not be abused by specifying more than several VMs at a time. <br/><br/>Snapshots are crash-consistent. They do not include the VM's current memory image, only the VM configuration and its disk contents. The snapshot is taken atomically across all of a VM's configuration and disks to ensure consistency. <br/><br/>This is also an asynchronous operation that results in the creation of a task object. The UUID of this task object is returned as the response of this operation. This task can be monitored by using the /tasks/poll API.",
+                    "type": "create.dto.acropolis.ReturnValueDTO$TaskIdDTO",
+                    "nickname": "createSnapshot",
+                    "parameters": [
+                        {
+                            "description": "Create a snapshot",
+                            "required": true,
+                            "allowMultiple": false,
+                            "paramType": "body",
+                            "type": "create.dto.acropolis.SnapshotCreateDTO"
+                        }
+                    ],
+                    "responseMessages": [
+                        {
+                            "code": 500,
+                            "message": "Any internal exception while performing this operation"
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "internal": false,
+            "path": "/snapshots/{uuid}",
+            "operations": [
+                {
+                    "deprecated": "false",
+                    "internal": false,
+                    "method": "DELETE",
+                    "summary": "Delete a snapshot.",
+                    "notes": "Delete a snapshot. <br/><br/>This operation is idempotent. The logical timestamp can optionally be provided for consistency. If a logical timestamp is specified, then this operation will be rejected if the logical timestamp specified is not the value of the snapshot logical timestamp. <br/><br/>This is also an asynchronous operation that results in the creation of a task object. The UUID of this task object is returned as the response of this operation. This task can be monitored by using the /tasks/poll API.",
+                    "type": "delete.dto.acropolis.ReturnValueDTO$TaskIdDTO",
+                    "nickname": "deleteSnapshot",
+                    "parameters": [
+                        {
+                            "name": "uuid",
+                            "description": "Id of the Snapshot",
+                            "required": true,
+                            "allowMultiple": false,
+                            "paramType": "path",
+                            "type": "string"
+                        },
+                        {
+                            "name": "logicalTimestamp",
+                            "description": "Logical timestamp",
+                            "required": false,
+                            "allowMultiple": false,
+                            "paramType": "query",
+                            "type": "integer"
+                        }
+                    ],
+                    "responseMessages": [
+                        {
+                            "code": 500,
+                            "message": "Any internal exception while performing this operation"
+                        }
+                    ]
+                },
+                {
+                    "deprecated": "false",
+                    "internal": false,
+                    "method": "GET",
+                    "summary": "Get details of a specified snapshot.",
+                    "notes": "Get details of a specified snapshot.",
+                    "type": "get.dto.acropolis.SnapshotInfoDTO",
+                    "nickname": "getSnapshot",
+                    "parameters": [
+                        {
+                            "name": "uuid",
+                            "description": "Id of the Snapshot",
+                            "required": true,
+                            "allowMultiple": false,
+                            "paramType": "path",
+                            "type": "string"
+                        }
+                    ],
+                    "responseMessages": []
+                }
+            ]
+        },
+        {
+            "internal": false,
+            "path": "/snapshots/{uuid}/clone",
+            "operations": [
+                {
+                    "deprecated": "false",
+                    "internal": false,
+                    "method": "POST",
+                    "summary": "Clone a Snapshot.",
+                    "notes": "Clone a Snapshot. <br/><br/>If a UUID is specified for the cloned snapshot, then the operation will be idempotent. <br/><br/>If overrideNetworkConfig is set to true in the clone spec, then the source snapshot's network configuration is overridden by one specified in the nic list. If false, the clone will inherit its basic network configuration from the source, minus MAC and IP address. <br/><br/>This is also an asynchronous operation that results in the creation of a task object.This is also an asynchronous operation that results in the creation of a task object. The UUID of this task object is returned as the response of this operation. This task can be monitored by using the /tasks/poll API.",
+                    "type": "create.dto.acropolis.ReturnValueDTO$TaskIdDTO",
+                    "nickname": "cloneSnapshot",
+                    "parameters": [
+                        {
+                            "name": "uuid",
+                            "description": "Id of the Snapshot",
+                            "required": true,
+                            "allowMultiple": false,
+                            "paramType": "path",
+                            "type": "string"
+                        },
+                        {
+                            "description": "Clone a Snapshot",
+                            "required": false,
+                            "allowMultiple": false,
+                            "paramType": "body",
+                            "type": "create.dto.acropolis.SnapshotCloneDTO"
+                        }
+                    ],
+                    "responseMessages": [
+                        {
+                            "code": 500,
+                            "message": "Any internal exception while performing this operation"
+                        }
+                    ]
+                }
+            ]
+        }
+    ],
+    "models": {
+        "create.dto.acropolis.BootConfigDTO": {
+            "id": "create.dto.acropolis.BootConfigDTO",
+            "required": [],
+            "properties": {
+                "bootDeviceOrder": {
+                    "description": "The boot device order. In case boot device is not specified or the specified boot device fails, VM will attempt to boot from connected devices in this device type order.",
+                    "items": {
+                        "enum": [
+                            "CDROM",
+                            "DISK",
+                            "NIC"
+                        ],
+                        "type": "string"
+                    },
+                    "notes": "Boot device order",
+                    "type": "array",
+                    "typeName": "DEFAULT"
+                },
+                "bootDeviceType": {
+                    "description": "The device from which to boot. This must refer to a valid device configured on the VM. When a boot device is removed from the VM, this field is cleared as a side effect. If no boot device is configured, the VM will have the following boot preference: hard disk, CD-ROM, NIC.",
+                    "enum": [
+                        "CDROM",
+                        "DISK",
+                        "NIC"
+                    ],
+                    "notes": "Device from which to boot",
+                    "type": "string",
+                    "typeName": "DEFAULT"
+                },
+                "diskAddress": {
+                    "$ref": "create.dto.acropolis.VMDiskAddressDTO",
+                    "description": "Disk address selected as boot device. At most one of this or macAddr field should be set.",
+                    "notes": "Disk address selected as boot device",
+                    "typeName": "DEFAULT"
+                },
+                "macAddr": {
+                    "description": "Mac address of the NIC selected as boot device. At most one of this or diskAddress field should be set.",
+                    "notes": "Mac address of the NIC selected as boot device",
+                    "type": "string",
+                    "typeName": "MAC_ADDRESS"
+                }
+            }
+        },
+        "create.dto.acropolis.ReturnValueDTO$TaskIdDTO": {
+            "id": "create.dto.acropolis.ReturnValueDTO$TaskIdDTO",
+            "required": [],
+            "properties": {
+                "taskUuid": {
+                    "description": "UUID of the task.",
+                    "notes": "UUID of the task.",
+                    "type": "string",
+                    "typeName": "DEFAULT"
+                }
+            }
+        },
+        "create.dto.acropolis.SnapshotCloneDTO": {
+            "id": "create.dto.acropolis.SnapshotCloneDTO",
+            "required": [],
+            "properties": {
+                "specList": {
+                    "description": "List of clone specifications.",
+                    "items": {
+                        "$ref": "create.dto.acropolis.VMCloneSpecDTO"
+                    },
+                    "notes": "List of clone specifications.",
+                    "type": "array",
+                    "typeName": "DEFAULT"
+                },
+                "uuid": {
+                    "description": "UUID of the Snapshot.",
+                    "notes": "UUID of the Snapshot.",
+                    "type": "string",
+                    "typeName": "UUID_TYPE"
+                }
+            }
+        },
+        "create.dto.acropolis.SnapshotCreateDTO": {
+            "id": "create.dto.acropolis.SnapshotCreateDTO",
+            "required": [],
+            "properties": {
+                "snapshotSpecs": {
+                    "description": "List of snapshot specifications. All disks for all Virtual Machines are treated as a single consistency group for the vdisk snapshot",
+                    "items": {
+                        "$ref": "create.dto.acropolis.SnapshotSpecDTO"
+                    },
+                    "notes": "List of snapshot specifications.",
+                    "type": "array",
+                    "typeName": "DEFAULT"
+                }
+            }
+        },
+        "create.dto.acropolis.SnapshotSpecDTO": {
+            "id": "create.dto.acropolis.SnapshotSpecDTO",
+            "required": [
+                "vmUuid"
+            ],
+            "properties": {
+                "snapshotName": {
+                    "description": "Name for the snapshot.",
+                    "notes": "Name for the snapshot.",
+                    "type": "string",
+                    "typeName": "DEFAULT"
+                },
+                "uuid": {
+                    "description": "A version 4 UUID that the client may specify for idempotence.",
+                    "notes": "A version 4 UUID that the client may specify for idempotence.",
+                    "type": "string",
+                    "typeName": "UUID_TYPE"
+                },
+                "vmUuid": {
+                    "description": "The Virtual Machine identifier.",
+                    "notes": "The Virtual Machine identifier.",
+                    "type": "string",
+                    "typeName": "UUID_TYPE"
+                }
+            }
+        },
+        "create.dto.acropolis.VMCloneSpecDTO": {
+            "id": "create.dto.acropolis.VMCloneSpecDTO",
+            "required": [
+                "name"
+            ],
+            "properties": {
+                "bootConfig": {
+                    "$ref": "create.dto.acropolis.BootConfigDTO",
+                    "description": "Override the existing boot configuration for the Virtual Machine. Any updates to the boot configuration will be applied during the next Virtual Machine power cycle but not reset.",
+                    "notes": "Override the existing boot configuration for the Virtual Machine.",
+                    "typeName": "DEFAULT"
+                },
+                "memoryMb": {
+                    "description": "Override the amount of RAM assigned to the clone.",
+                    "format": "int64",
+                    "notes": "Override the amount of RAM assigned to the clone.",
+                    "type": "integer",
+                    "typeName": "DEFAULT"
+                },
+                "name": {
+                    "description": "Named for the cloned Virtual Machine.",
+                    "notes": "Name for the cloned Virtual Machine.",
+                    "type": "string",
+                    "typeName": "DEFAULT"
+                },
+                "numCoresPerVcpu": {
+                    "description": "Override the number of cores assigned to each VCPUs.",
+                    "format": "int64",
+                    "notes": "Override the number of cores assigned to each VCPUs.",
+                    "type": "integer",
+                    "typeName": "DEFAULT"
+                },
+                "numVcpus": {
+                    "description": "Override the number of vCPUs assigned to the clone.",
+                    "format": "int64",
+                    "notes": "Override the number of vCPUs assigned to the clone.",
+                    "type": "integer",
+                    "typeName": "DEFAULT"
+                },
+                "overrideNetworkConfig": {
+                    "description": "Indicate whether the source Virtual Machine's/snapshot's network configuration with the one specified in the vmNics field. If false, the clone will inherit its basic network configuration from the source, minus MAC and IP address assignments.",
+                    "notes": "Whether to override the source Virtual Machine's/snapshot's network configuration.",
+                    "type": "boolean",
+                    "typeName": "DEFAULT"
+                },
+                "uuid": {
+                    "description": "A version 4 UUID that the client may specify for idempotence. This UUID will be used as the vm ID of the target vm.",
+                    "notes": "A version 4 UUID that the client may specify for idempotence",
+                    "type": "string",
+                    "typeName": "UUID_TYPE"
+                },
+                "vmNics": {
+                    "description": "Network configuration. Required when overrideNetworkConfig set to true.",
+                    "items": {
+                        "$ref": "create.dto.acropolis.VMNicSpecDTO"
+                    },
+                    "notes": "Network configuration. Required when overrideNetworkConfig set to true.",
+                    "type": "array",
+                    "typeName": "DEFAULT"
+                }
+            }
+        },
+        "create.dto.acropolis.VMDiskAddressDTO": {
+            "id": "create.dto.acropolis.VMDiskAddressDTO",
+            "required": [],
+            "properties": {
+                "deviceBus": {
+                    "description": "The device bus for the virtual disk device.Possible values are SCSI, IDE and PCI. Along with this the deviceIndex is used to specify a vdisk address. When specifying a vmdisk address, then only one of the following combinations of fields must be set - (device_bus, device_index) or vmdisk_uuid or ndfs_filepath.",
+                    "enum": [
+                        "SCSI",
+                        "IDE",
+                        "PCI",
+                        "SATA",
+                        "SPAPR"
+                    ],
+                    "notes": "The device bus for the virtual disk device.",
+                    "type": "string",
+                    "typeName": "DEFAULT"
+                },
+                "deviceIndex": {
+                    "description": "Index of the device on the adapter type. If left unspecified, the system will allocate the next available slot on the default bus.",
+                    "format": "int32",
+                    "notes": "Index of the device on the adapter type.",
+                    "type": "integer",
+                    "typeName": "DEFAULT"
+                },
+                "ndfsFilepath": {
+                    "description": "NDFS path to existing virtual disk. This field will not be set when this message is used in a create mode.When specifying a vmdisk address, then only one of the following combinations of fields must be set - (device_bus, device_index) or vmdisk_uuid or ndfs_filepath.",
+                    "notes": "NDFS path to existing virtual disk.",
+                    "type": "string",
+                    "typeName": "DEFAULT"
+                },
+                "vmdiskUuid": {
+                    "description": "Virtual disk identifier. This field will not be set when this message is used in a create mode. When specifying a vmdisk address, then only one of the following combinations of fields must be set - (device_bus, device_index) or vmdisk_uuid or ndfs_filepath.",
+                    "notes": "Virtual disk identifier.",
+                    "type": "string",
+                    "typeName": "DEFAULT"
+                },
+                "volumeGroupUuid": {
+                    "type": "string"
+                }
+            }
+        },
+        "create.dto.acropolis.VMNicSpecDTO": {
+            "id": "create.dto.acropolis.VMNicSpecDTO",
+            "required": [
+                "networkUuid"
+            ],
+            "properties": {
+                "adapterType": {
+                    "description": "Type of the network adapter for ESX networks.",
+                    "enum": [
+                        "E1000",
+                        "E1000e",
+                        "PCNet32",
+                        "Vmxnet",
+                        "Vmxnet2",
+                        "Vmxnet3",
+                        "Unsupported"
+                    ],
+                    "notes": "Type of the network adapter.",
+                    "type": "string",
+                    "typeName": "DEFAULT"
+                },
+                "macAddress": {
+                    "description": "The MAC address of the NIC",
+                    "notes": "The MAC address of the NIC",
+                    "type": "string",
+                    "typeName": "MAC_ADDRESS"
+                },
+                "model": {
+                    "description": "Virtual hardware model.",
+                    "notes": "Virtual hardware model.",
+                    "type": "string",
+                    "typeName": "DEFAULT"
+                },
+                "networkUuid": {
+                    "description": "The network to which the NIC is attached",
+                    "notes": "The network to which the NIC is attached",
+                    "type": "string",
+                    "typeName": "UUID_TYPE"
+                },
+                "requestIp": {
+                    "description": "If request_ip is true\nIf 'requestedIpAddress' is set then request that IP from the network. If it's a managed network then request a dynamic IP from the network. Otherwise don't request an IP. If requestIp is false, then don't request an IP at all, regardless of whether or not the 'requestedIpAddress' is set and whether or the network is managed or not.",
+                    "notes": "Request IP address.",
+                    "type": "boolean",
+                    "typeName": "DEFAULT"
+                },
+                "requestedIpAddress": {
+                    "description": "Requested IP address.",
+                    "notes": "Requested IP address.",
+                    "type": "string",
+                    "typeName": "DEFAULT"
+                }
+            }
+        },
+        "delete.dto.acropolis.ReturnValueDTO$TaskIdDTO": {
+            "id": "delete.dto.acropolis.ReturnValueDTO$TaskIdDTO",
+            "required": [],
+            "properties": {
+                "taskUuid": {
+                    "description": "UUID of the task.",
+                    "notes": "UUID of the task.",
+                    "type": "string",
+                    "typeName": "DEFAULT"
+                }
+            }
+        },
+        "get.base.EntityCollection&lt;get.dto.acropolis.SnapshotInfoDTO&gt;": {
+            "id": "get.base.EntityCollection&lt;get.dto.acropolis.SnapshotInfoDTO&gt;",
+            "required": [],
+            "properties": {
+                "entities": {
+                    "items": {
+                        "$ref": "get.dto.acropolis.SnapshotInfoDTO"
+                    },
+                    "type": "array"
+                },
+                "errorInfo": {
+                    "$ref": "get.base.ErrorInfo"
+                },
+                "metadata": {
+                    "$ref": "get.base.Metadata"
+                }
+            }
+        },
+        "get.base.ErrorInfo": {
+            "id": "get.base.ErrorInfo",
+            "required": [],
+            "properties": {
+                "count": {
+                    "format": "int64",
+                    "type": "integer"
+                },
+                "entityList": {
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": "array"
+                },
+                "message": {
+                    "type": "string"
+                }
+            }
+        },
+        "get.base.Metadata": {
+            "id": "get.base.Metadata",
+            "required": [],
+            "properties": {
+                "count": {
+                    "format": "int32",
+                    "type": "integer"
+                },
+                "endIndex": {
+                    "format": "int32",
+                    "type": "integer"
+                },
+                "filterCriteria": {
+                    "type": "string"
+                },
+                "grandTotalEntities": {
+                    "format": "int32",
+                    "type": "integer"
+                },
+                "nextCursor": {
+                    "type": "string"
+                },
+                "page": {
+                    "format": "int32",
+                    "type": "integer"
+                },
+                "previousCursor": {
+                    "type": "string"
+                },
+                "searchString": {
+                    "type": "string"
+                },
+                "sortCriteria": {
+                    "type": "string"
+                },
+                "startIndex": {
+                    "format": "int32",
+                    "type": "integer"
+                },
+                "totalEntities": {
+                    "format": "int32",
+                    "type": "integer"
+                }
+            }
+        },
+        "get.dto.acropolis.BootConfigDTO": {
+            "id": "get.dto.acropolis.BootConfigDTO",
+            "required": [],
+            "properties": {
+                "bootDeviceOrder": {
+                    "description": "The boot device order. In case boot device is not specified or the specified boot device fails, VM will attempt to boot from connected devices in this device type order.",
+                    "items": {
+                        "enum": [
+                            "CDROM",
+                            "DISK",
+                            "NIC"
+                        ],
+                        "type": "string"
+                    },
+                    "notes": "Boot device order",
+                    "type": "array",
+                    "typeName": "DEFAULT"
+                },
+                "bootDeviceType": {
+                    "description": "The device from which to boot. This must refer to a valid device configured on the VM. When a boot device is removed from the VM, this field is cleared as a side effect. If no boot device is configured, the VM will have the following boot preference: hard disk, CD-ROM, NIC.",
+                    "enum": [
+                        "CDROM",
+                        "DISK",
+                        "NIC"
+                    ],
+                    "notes": "Device from which to boot",
+                    "type": "string",
+                    "typeName": "DEFAULT"
+                },
+                "diskAddress": {
+                    "$ref": "get.dto.acropolis.VMDiskAddressDTO",
+                    "description": "Disk address selected as boot device. At most one of this or macAddr field should be set.",
+                    "notes": "Disk address selected as boot device",
+                    "typeName": "DEFAULT"
+                },
+                "macAddr": {
+                    "description": "Mac address of the NIC selected as boot device. At most one of this or diskAddress field should be set.",
+                    "notes": "Mac address of the NIC selected as boot device",
+                    "type": "string",
+                    "typeName": "MAC_ADDRESS"
+                }
+            }
+        },
+        "get.dto.acropolis.FileToInjectDTO": {
+            "id": "get.dto.acropolis.FileToInjectDTO",
+            "required": [],
+            "properties": {
+                "destinationPath": {
+                    "description": "Destination path in the VM at which the file specified by source_path should be copied to.",
+                    "notes": "Destination path in the VM at which the file specified by sourcePath should be copied to.",
+                    "type": "string",
+                    "typeName": "DEFAULT"
+                },
+                "sourcePath": {
+                    "description": "ADSF path of the source file to inject in the VM. Must be of form: adsf:///<ctr>/...",
+                    "notes": "ADSF path of the source file to inject in the VM.",
+                    "type": "string",
+                    "typeName": "DEFAULT"
+                }
+            }
+        },
+        "get.dto.acropolis.SnapshotInfoDTO": {
+            "id": "get.dto.acropolis.SnapshotInfoDTO",
+            "required": [],
+            "properties": {
+                "createdTime": {
+                    "description": "The epoch time in microseconds when this snapshot was created.",
+                    "format": "int64",
+                    "notes": "The epoch time in microseconds when this snapshot was created.",
+                    "type": "integer",
+                    "typeName": "DEFAULT"
+                },
+                "deleted": {
+                    "description": "Indicates whether the snapshot has been deleted and waiting to be garbage collected. If this is marked as true, no operations can be performed on this snapshot.",
+                    "notes": "Indicates if the snapshot has been deleted.",
+                    "type": "boolean",
+                    "typeName": "UUID_TYPE"
+                },
+                "groupUuid": {
+                    "description": "UUID of the consistency group for this snapshot",
+                    "notes": "UUID of the consistency group for this snapshot",
+                    "type": "string",
+                    "typeName": "DEFAULT"
+                },
+                "logicalTimestamp": {
+                    "description": "Logical timestamp specified for consistency. This can be obtained from the snapshot object",
+                    "format": "int64",
+                    "notes": "Logical timestamp specified for consistency.",
+                    "type": "integer",
+                    "typeName": "DEFAULT"
+                },
+                "snapshotName": {
+                    "description": "The snapshot name.",
+                    "notes": "The snapshot name.",
+                    "type": "string",
+                    "typeName": "DEFAULT"
+                },
+                "uuid": {
+                    "description": "A version 4 UUID that the client may specify for idempotence.",
+                    "notes": "A version 4 UUID that the client may specify for idempotence.",
+                    "type": "string",
+                    "typeName": "UUID_TYPE"
+                },
+                "vmCreateSpecification": {
+                    "$ref": "get.dto.acropolis.VMCreateDTO",
+                    "description": "A specification for creating VMs from this snapshot.",
+                    "notes": "A specification for creating VMs from this snapshot.",
+                    "typeName": "DEFAULT"
+                },
+                "vmUuid": {
+                    "description": "UUID of the VM",
+                    "notes": "UUID of the VM",
+                    "type": "string",
+                    "typeName": "UUID_TYPE"
+                }
+            }
+        },
+        "get.dto.acropolis.VMCreateDTO": {
+            "id": "get.dto.acropolis.VMCreateDTO",
+            "required": [],
+            "properties": {
+                "bootConfig": {
+                    "$ref": "get.dto.acropolis.BootConfigDTO",
+                    "description": "Boot configuration for the Virtual Machine. Any updates to the boot configuration will be applied during the next Virtual Machine power cycle but not reset.",
+                    "notes": "Boot configuration for the Virtual Machine.",
+                    "typeName": "DEFAULT"
+                },
+                "containerUuid": {
+                    "description": "UUID of the container on which the customization config iso files should be created. Must be provided when cluster has more than one container.",
+                    "notes": "UUID of the container on which the customization config iso files should be created",
+                    "type": "string",
+                    "typeName": "UUID_TYPE"
+                },
+                "description": {
+                    "description": "Description for the Virtual Machine.",
+                    "notes": "Description for the Virtual Machine.",
+                    "type": "string",
+                    "typeName": "DEFAULT"
+                },
+                "haPriority": {
+                    "description": "Priority for restarting in case of HA event.",
+                    "format": "int64",
+                    "notes": "Priority for restarting in case of HA event. Negative value indicates do not restart.",
+                    "type": "integer",
+                    "typeName": "DEFAULT"
+                },
+                "hostId": {
+                    "description": "UUID of the host where the Virtual Machine needs to be placed. Either this or hypervisorType needs to be specified.",
+                    "notes": "UUID of the host where the Virtual Machine needs to be placed.",
+                    "type": "string",
+                    "typeName": "UUID_TYPE"
+                },
+                "hypervisorType": {
+                    "description": "The hypervisor type for the Virtual Machine placement.Possible values are VMware, Hyperv and Acropolis. Either this or hostId needs to be specified.",
+                    "enum": [
+                        "ACROPOLIS",
+                        "NULL",
+                        "AHV",
+                        "HYPERV",
+                        "VMWARE",
+                        "XEN",
+                        "ESX",
+                        "KVM"
+                    ],
+                    "notes": "The hypervisor type for the Virtual Machine placement.",
+                    "type": "string",
+                    "typeName": "DEFAULT"
+                },
+                "memoryMb": {
+                    "description": "RAM, in megabytes assigned to the Virtual Machine.",
+                    "format": "int64",
+                    "notes": "RAM, in megabytes assigned to the Virtual Machine.",
+                    "type": "integer",
+                    "typeName": "DEFAULT"
+                },
+                "memoryReservationMb": {
+                    "description": "RAM, in megabytes reserved for the Virtual Machine.",
+                    "format": "int64",
+                    "notes": "RAM, in megabytes reserved for the Virtual Machine.",
+                    "type": "integer",
+                    "typeName": "DEFAULT"
+                },
+                "name": {
+                    "description": "The Virtual Machine human readable name.",
+                    "notes": "The Virtual Machine human readable name.",
+                    "type": "string",
+                    "typeName": "DEFAULT"
+                },
+                "numCoresPerVcpu": {
+                    "description": "Number of cores assigned to each VCPUs.",
+                    "format": "int64",
+                    "notes": "Number of cores assigned to each VCPUs.",
+                    "type": "integer",
+                    "typeName": "DEFAULT"
+                },
+                "numVcpus": {
+                    "description": "Number of VCPUs assigned to the Virtual Machine.",
+                    "format": "int64",
+                    "notes": "Number of VCPUs assigned to the Virtual Machine.",
+                    "type": "integer",
+                    "typeName": "DEFAULT"
+                },
+                "timezone": {
+                    "description": "The timezone for the VM's hardware clock. Default is UTC.",
+                    "notes": "The timezone for the VM's hardware clock.",
+                    "type": "string",
+                    "typeName": "DEFAULT"
+                },
+                "uuid": {
+                    "description": "A version 4 UUID that the client may specify for idempotence",
+                    "notes": "A version 4 UUID that the client may specify for idempotence",
+                    "type": "string",
+                    "typeName": "UUID_TYPE"
+                },
+                "vcpuReservationHz": {
+                    "description": "CPU, in Hertz reserved for the Virtual Machine.",
+                    "format": "int64",
+                    "notes": "CPU, in Hertz reserved for the Virtual Machine.",
+                    "type": "integer",
+                    "typeName": "DEFAULT"
+                },
+                "vmCustomizationConfig": {
+                    "$ref": "get.dto.acropolis.VMCustomizationConfigDTO",
+                    "description": "Vm customization configuration. At boot time, this config will be replayed by VM customization tool(cloudinit/sysprep) installed in the VM to bring VM to the state defined by this config.",
+                    "notes": "Vm customization configuration.",
+                    "typeName": "DEFAULT"
+                },
+                "vmDisks": {
+                    "description": "List of disk specification to add to the Virtual Machine.",
+                    "items": {
+                        "$ref": "get.dto.acropolis.VMDiskDTO"
+                    },
+                    "notes": "List of disk specification to add to the Virtual Machine.",
+                    "type": "array",
+                    "typeName": "DEFAULT"
+                },
+                "vmGpus": {
+                    "description": "List of GPUs requested for the Virtual Machine.",
+                    "items": {
+                        "$ref": "get.dto.uhura.GPUConfigDTO"
+                    },
+                    "notes": "List of GPUs requested for the Virtual Machine.",
+                    "type": "array",
+                    "typeName": "DEFAULT"
+                },
+                "vmNics": {
+                    "description": "List of NIC specification to add to the Virtual Machine.",
+                    "items": {
+                        "$ref": "get.dto.acropolis.VMNicSpecDTO"
+                    },
+                    "notes": "List of NIC specification to add to the Virtual Machine.",
+                    "type": "array",
+                    "typeName": "DEFAULT"
+                }
+            }
+        },
+        "get.dto.acropolis.VMCustomizationConfigDTO": {
+            "id": "get.dto.acropolis.VMCustomizationConfigDTO",
+            "required": [],
+            "properties": {
+                "datasourceType": {
+                    "description": "The type of datasource for configuring the Linux Virtual Machine in case cloudinit config is provided. ISO based datasource supported by Uhura is ConfigDriveV2.",
+                    "enum": [
+                        "CONFIG_DRIVE_V2"
+                    ],
+                    "notes": "The type of datasource for configuring the Linux Virtual Machine in case cloudinit config is provided.",
+                    "type": "string",
+                    "typeName": "DEFAULT"
+                },
+                "filesToInjectList": {
+                    "description": "List of details about files to inject in the VM.",
+                    "items": {
+                        "$ref": "get.dto.acropolis.FileToInjectDTO"
+                    },
+                    "notes": "List of details about files to inject in the VM.",
+                    "type": "array",
+                    "typeName": "DEFAULT"
+                },
+                "freshInstall": {
+                    "description": "Indicates whether the VM to be customized is meant to be freshly installed via Windows Setup from a Windows OS DVD or whether the VM will be configured from a 'Sysprepped' image in which case the setup was already complete.",
+                    "notes": "Indicates whether the VM to be customized is meant to be freshly installed or not.",
+                    "type": "boolean",
+                    "typeName": "DEFAULT"
+                },
+                "userdata": {
+                    "description": "Userdata in string format. Either Cloudinit format for customizing Linux VM or Sysprep format for customizing Windows VM. For cloudinit the userdata is usually a yaml file or shell script. For sysprep the userdata is usually a Xml representation of an unattend file in string format.Either this or userdataPath must be provided",
+                    "notes": "Userdata in string format.",
+                    "type": "string",
+                    "typeName": "TEXT"
+                },
+                "userdataPath": {
+                    "description": "Userdata source path. Must begin with adsf:///<ctr>.For cloudinit usually a yaml file or shell script is provided. For sysprep usually an unattend file or answer file is provided. Either this or userdata must be provided",
+                    "notes": "Userdata source path.",
+                    "type": "string",
+                    "typeName": "DEFAULT"
+                }
+            }
+        },
+        "get.dto.acropolis.VMDiskAddressDTO": {
+            "id": "get.dto.acropolis.VMDiskAddressDTO",
+            "required": [],
+            "properties": {
+                "deviceBus": {
+                    "description": "The device bus for the virtual disk device.Possible values are SCSI, IDE and PCI. Along with this the deviceIndex is used to specify a vdisk address. When specifying a vmdisk address, then only one of the following combinations of fields must be set - (device_bus, device_index) or vmdisk_uuid or ndfs_filepath.",
+                    "enum": [
+                        "SCSI",
+                        "IDE",
+                        "PCI",
+                        "SATA",
+                        "SPAPR"
+                    ],
+                    "notes": "The device bus for the virtual disk device.",
+                    "type": "string",
+                    "typeName": "DEFAULT"
+                },
+                "deviceIndex": {
+                    "description": "Index of the device on the adapter type. If left unspecified, the system will allocate the next available slot on the default bus.",
+                    "format": "int32",
+                    "notes": "Index of the device on the adapter type.",
+                    "type": "integer",
+                    "typeName": "DEFAULT"
+                },
+                "diskLabel": {
+                    "description": "Information about attached disk. Disk label (for example, scsi0:0) where the virtual disk was attached. This indicates the location of the virtual disk within the VM.",
+                    "notes": "Information about attached disk.",
+                    "type": "string",
+                    "typeName": "DEFAULT"
+                },
+                "isCdrom": {
+                    "description": "Whether this is a CD-ROM drive.",
+                    "notes": "Whether this is a CD-ROM drive.",
+                    "type": "boolean",
+                    "typeName": "DEFAULT"
+                },
+                "ndfsFilepath": {
+                    "description": "NDFS path to existing virtual disk. This field will not be set when this message is used in a create mode.When specifying a vmdisk address, then only one of the following combinations of fields must be set - (device_bus, device_index) or vmdisk_uuid or ndfs_filepath.",
+                    "notes": "NDFS path to existing virtual disk.",
+                    "type": "string",
+                    "typeName": "DEFAULT"
+                },
+                "vmdiskUuid": {
+                    "description": "Virtual disk identifier. This field will not be set when this message is used in a create mode. When specifying a vmdisk address, then only one of the following combinations of fields must be set - (device_bus, device_index) or vmdisk_uuid or ndfs_filepath.",
+                    "notes": "Virtual disk identifier.",
+                    "type": "string",
+                    "typeName": "DEFAULT"
+                },
+                "volumeGroupUuid": {
+                    "type": "string"
+                }
+            }
+        },
+        "get.dto.acropolis.VMDiskDTO": {
+            "id": "get.dto.acropolis.VMDiskDTO",
+            "required": [],
+            "properties": {
+                "diskAddress": {
+                    "$ref": "get.dto.acropolis.VMDiskAddressDTO",
+                    "description": "Disk address represented by device bus type and device index.",
+                    "notes": "Disk address represented by device bus type and device index.",
+                    "typeName": "DEFAULT"
+                },
+                "isCdrom": {
+                    "description": "Whether this is a CD-ROM drive. The default value is 'false'",
+                    "notes": "Whether this is a CD-ROM drive.",
+                    "type": "boolean",
+                    "typeName": "DEFAULT"
+                },
+                "isEmpty": {
+                    "description": "Whether the drive should be empty. This field only applies to CD-ROM drives, otherwise it is ignored. If this field is set to true and the drive is a CD-ROM, then the disk creation field 'vmDiskCreate' should be ignored. The default value is 'false'",
+                    "notes": "Whether the CD-ROM drive should be empty.",
+                    "type": "boolean",
+                    "typeName": "DEFAULT"
+                },
+                "isScsiPassThrough": {
+                    "description": "Whether the SCSI disk should be attached in passthrough mode to pass all SCSI commands directly to Stargate via iSCSI. The default value is true.",
+                    "notes": "Whether the SCSI disk should be attached in passthrough mode to pass all SCSI commands directly to Stargate via iSCSI.",
+                    "type": "boolean",
+                    "typeName": "DEFAULT"
+                },
+                "isThinProvisioned": {
+                    "description": "Whether the disk is thin provisioned. This field applies to only ESX managed VMs.",
+                    "notes": "Whether the disk is thin provisioned.",
+                    "type": "boolean",
+                    "typeName": "DEFAULT"
+                },
+                "vmDiskClone": {
+                    "$ref": "get.dto.acropolis.VMDiskSpecCloneDTO",
+                    "description": "Specification for cloning a new disk or snapshot. Only one of 'vmCloneSpec' and 'vmCreateSpec' is required per create/update request.",
+                    "notes": "Specification for cloning a new disk or snapshot.",
+                    "typeName": "DEFAULT"
+                },
+                "vmDiskCreate": {
+                    "$ref": "get.dto.acropolis.VmDiskSpecCreateDTO",
+                    "description": "Specification for creating a new disk. Only one of 'vmCreateSpec' and 'vmCloneSpec' is required per create/update request.",
+                    "notes": "Specification for creating a new disk.",
+                    "typeName": "DEFAULT"
+                }
+            }
+        },
+        "get.dto.acropolis.VMDiskSpecCloneDTO": {
+            "id": "get.dto.acropolis.VMDiskSpecCloneDTO",
+            "required": [],
+            "properties": {
+                "containerUuid": {
+                    "description": "The Uuid of the container in which the specified image or vmdisk is stored. If the source is a vmdisk, this field is recommended, but optional. If the source is a snapshot vmdisk, this field is required. If the source is an absolute image path, this field is prohibited. If the source is a relative image path, this field is required.",
+                    "notes": "The Uuid of the container in which the specified image or vmdisk is stored.",
+                    "type": "string",
+                    "typeName": "UUID_TYPE"
+                },
+                "imagePath": {
+                    "description": "Path of the image to clone from. If this is specified, then 'vmDiskUUID' should not be specified.",
+                    "notes": "Path of the image to clone from.",
+                    "type": "string",
+                    "typeName": "DEFAULT"
+                },
+                "minimumSize": {
+                    "description": "The minimum size of the resulting clone in bytes. This should only be specified if 'vmDiskUUID' is specified.",
+                    "format": "int64",
+                    "notes": "The minimum size of the resulting clone in bytes.",
+                    "type": "integer",
+                    "typeName": "DEFAULT"
+                },
+                "minimumSizeMb": {
+                    "description": "The minimum size of the resulting clone in MiB. This should only be specified if 'vmdiskUuid' is specified.",
+                    "format": "int64",
+                    "notes": "The minimum size of the resulting clone in MiB.",
+                    "type": "integer",
+                    "typeName": "DEFAULT"
+                },
+                "ndfs_filepath": {
+                    "description": "Path of the image to clone from. If this is specified, then 'vmDiskUUID' should not be specified.",
+                    "notes": "Path of the image to clone from.",
+                    "type": "string",
+                    "typeName": "DEFAULT"
+                },
+                "snapshotGroupId": {
+                    "description": "UUID of the snapshot consistency group from which to clone a snapshot vmdisk.",
+                    "notes": "UUID of the snapshot consistency group from which to clone a snapshot vmdisk.",
+                    "type": "string",
+                    "typeName": "UUID_TYPE"
+                },
+                "vmDiskUuid": {
+                    "description": "UUID of the Virtual Machine disk to clone from. If this is specified, then 'imagePath' should not be specified.",
+                    "notes": "UUID of the Virtual Machine disk to clone from.",
+                    "type": "string",
+                    "typeName": "UUID_TYPE"
+                },
+                "vmdisk_uuid": {
+                    "description": "UUID of the Virtual Machine disk to clone from. If this is specified, then 'imagePath' should not be specified.",
+                    "notes": "UUID of the Virtual Machine disk to clone from.",
+                    "type": "string",
+                    "typeName": "UUID_TYPE"
+                }
+            }
+        },
+        "get.dto.acropolis.VMNicSpecDTO": {
+            "id": "get.dto.acropolis.VMNicSpecDTO",
+            "required": [],
+            "properties": {
+                "adapterType": {
+                    "description": "Type of the network adapter for ESX networks.",
+                    "enum": [
+                        "E1000",
+                        "E1000e",
+                        "PCNet32",
+                        "Vmxnet",
+                        "Vmxnet2",
+                        "Vmxnet3",
+                        "Unsupported"
+                    ],
+                    "notes": "Type of the network adapter.",
+                    "type": "string",
+                    "typeName": "DEFAULT"
+                },
+                "ipAddress": {
+                    "description": "IP address for the NIC. Includes both Acropolis assigned IP address as well as learned IP address from thirdparty networks.",
+                    "notes": "IP address for the NIC.",
+                    "type": "string",
+                    "typeName": "DEFAULT"
+                },
+                "macAddress": {
+                    "description": "The MAC address of the NIC",
+                    "notes": "The MAC address of the NIC",
+                    "type": "string",
+                    "typeName": "MAC_ADDRESS"
+                },
+                "model": {
+                    "description": "Virtual hardware model.",
+                    "notes": "Virtual hardware model.",
+                    "type": "string",
+                    "typeName": "DEFAULT"
+                },
+                "networkUuid": {
+                    "description": "The network to which the NIC is attached",
+                    "notes": "The network to which the NIC is attached",
+                    "type": "string",
+                    "typeName": "UUID_TYPE"
+                },
+                "portId": {
+                    "description": "The port id for ESX networks.",
+                    "notes": "Port Id.",
+                    "type": "string",
+                    "typeName": "DEFAULT"
+                },
+                "requestIp": {
+                    "description": "If request_ip is true\nIf 'requestedIpAddress' is set then request that IP from the network. If it's a managed network then request a dynamic IP from the network. Otherwise don't request an IP. If requestIp is false, then don't request an IP at all, regardless of whether or not the 'requestedIpAddress' is set and whether or the network is managed or not.",
+                    "notes": "Request IP address.",
+                    "type": "boolean",
+                    "typeName": "DEFAULT"
+                },
+                "requestedIpAddress": {
+                    "description": "Requested IP address.",
+                    "notes": "Requested IP address.",
+                    "type": "string",
+                    "typeName": "DEFAULT"
+                }
+            }
+        },
+        "get.dto.acropolis.VmDiskSpecCreateDTO": {
+            "id": "get.dto.acropolis.VmDiskSpecCreateDTO",
+            "required": [],
+            "properties": {
+                "containerId": {
+                    "description": "Id of container to create disk in. If this is specified, then Container Name and UUID should not be specified.",
+                    "format": "int64",
+                    "notes": "Id of container to create disk in.",
+                    "type": "integer",
+                    "typeName": "DEFAULT"
+                },
+                "containerName": {
+                    "description": "Name of container to create disk in. If this is specified, then Container ID and UUID should not be specified.",
+                    "notes": "Name of container to create disk in.",
+                    "type": "string",
+                    "typeName": "DEFAULT"
+                },
+                "containerUuid": {
+                    "description": "UUID of container to create disk in. If this is specified, then Container Name and ID should not be specified.",
+                    "notes": "UUID of container to create disk in.",
+                    "type": "string",
+                    "typeName": "DEFAULT"
+                },
+                "size": {
+                    "description": "Size of the Virtual Machine disk to be created in bytes.",
+                    "format": "int64",
+                    "notes": "Size of the Virtual Machine disk to be created in bytes.",
+                    "type": "integer",
+                    "typeName": "DEFAULT"
+                },
+                "sizeMb": {
+                    "description": "Size of the Virtual Machine disk to be created in MiB.",
+                    "format": "int64",
+                    "notes": "Size of the Virtual Machine disk to be created in MiB.",
+                    "type": "integer",
+                    "typeName": "DEFAULT"
+                }
+            }
+        },
+        "get.dto.uhura.GPUConfigDTO": {
+            "id": "get.dto.uhura.GPUConfigDTO",
+            "required": [],
+            "properties": {
+                "assignable": {
+                    "description": "Whether the GPU can be assigned to a Virtual Machine.",
+                    "notes": "Whether the GPU can be assigned to a Virtual Machine.",
+                    "type": "boolean",
+                    "typeName": "DEFAULT"
+                },
+                "deviceId": {
+                    "description": "Device ID of the GPU resource.",
+                    "format": "int32",
+                    "notes": "Device ID of the GPU resource.",
+                    "type": "integer",
+                    "typeName": "DEFAULT"
+                },
+                "deviceName": {
+                    "description": "Vendor device name of the GPU resource.",
+                    "notes": "Vendor device name of the GPU resource.",
+                    "type": "string",
+                    "typeName": "DEFAULT"
+                },
+                "fraction": {
+                    "description": "Fraction of the physical GPU. Only applicable for a vGPU instance.",
+                    "format": "int32",
+                    "notes": "Fraction of the physical GPU. Only applicable for a vGPU instance.",
+                    "type": "integer",
+                    "typeName": "DEFAULT"
+                },
+                "frameBufferSizeBytes": {
+                    "description": "GPU framebuffer size in bytes.",
+                    "format": "int64",
+                    "notes": "GPU framebuffer size.",
+                    "type": "integer",
+                    "typeName": "DEFAULT"
+                },
+                "gpuMode": {
+                    "description": "Current mode of the physical GPU. Not valid on vGPU resources.",
+                    "enum": [
+                        "UNUSED",
+                        "USED_FOR_PASSTHROUGH",
+                        "USED_FOR_VIRTUAL"
+                    ],
+                    "notes": "Current mode of the physical GPU.",
+                    "type": "string",
+                    "typeName": "DEFAULT"
+                },
+                "gpuProfile": {
+                    "description": "Profile of the GPU.",
+                    "notes": "Profile of the GPU.",
+                    "type": "string",
+                    "typeName": "DEFAULT"
+                },
+                "gpuType": {
+                    "description": "Type of the GPU resource.",
+                    "enum": [
+                        "PASS_THROUGH_GRAPHICS",
+                        "PASS_THROUGH_COMPUTE",
+                        "VIRTUAL"
+                    ],
+                    "notes": "Type of the GPU resource.",
+                    "type": "string",
+                    "typeName": "DEFAULT"
+                },
+                "gpuVendor": {
+                    "description": "Vendor of the GPU resource.",
+                    "enum": [
+                        "NVIDIA",
+                        "INTEL",
+                        "AMD"
+                    ],
+                    "notes": "Vendor of the GPU resource.",
+                    "type": "string",
+                    "typeName": "DEFAULT"
+                },
+                "guestDriverVersion": {
+                    "description": "Last determined guest driver version.",
+                    "notes": "Last determined guest driver version.",
+                    "type": "string",
+                    "typeName": "DEFAULT"
+                },
+                "inUse": {
+                    "description": "Whether the GPU resource is in use or not.",
+                    "notes": "Whether the GPU resource is in use or not.",
+                    "type": "boolean",
+                    "typeName": "DEFAULT"
+                },
+                "licenses": {
+                    "description": "List of license types associated with this GPU.",
+                    "items": {
+                        "type": "string"
+                    },
+                    "notes": "List of license types.",
+                    "type": "array",
+                    "typeName": "DEFAULT"
+                },
+                "maxResolution": {
+                    "description": "Maximum resolution per display heads.",
+                    "notes": "Maximum resolution per display heads.",
+                    "type": "string",
+                    "typeName": "DEFAULT"
+                },
+                "numVirtualDisplayHeads": {
+                    "description": "Number of supported virtual display heads.",
+                    "format": "int32",
+                    "notes": "Number of supported virtual display heads.",
+                    "type": "integer",
+                    "typeName": "DEFAULT"
+                },
+                "numaNode": {
+                    "description": "The NUMA node where the GPU belongs to.",
+                    "format": "int32",
+                    "notes": "The NUMA node where the GPU belongs to.",
+                    "type": "integer",
+                    "typeName": "DEFAULT"
+                },
+                "sbdf": {
+                    "description": "Unique device information for the GPU resource.",
+                    "notes": "Unique device information for the GPU resource.",
+                    "type": "string",
+                    "typeName": "DEFAULT"
+                },
+                "vmUuids": {
+                    "description": "List of UUIDs of the Virtual Machines where the GPU resource is assigned.",
+                    "items": {
+                        "type": "string"
+                    },
+                    "notes": "List of UUIDs of the Virtual Machines where the GPU resource is assigned.",
+                    "type": "array",
+                    "typeName": "DEFAULT"
+                }
+            }
+        }
+    }
+}

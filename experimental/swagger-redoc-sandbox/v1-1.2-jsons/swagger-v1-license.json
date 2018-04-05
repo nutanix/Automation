@@ -1,0 +1,1580 @@
+{
+    "apiVersion": "v1",
+    "swaggerVersion": "1.2",
+    "basePath": "https://any_cvm_ip:9440/PrismGateway/services/rest/v1",
+    "resourcePath": "/license",
+    "produces": [
+        "application/json"
+    ],
+    "consumes": [
+        "application/json"
+    ],
+    "apis": [
+        {
+            "internal": false,
+            "path": "/license/",
+            "operations": [
+                {
+                    "deprecated": "false",
+                    "internal": false,
+                    "method": "GET",
+                    "summary": "Show current license file",
+                    "notes": "Show current license file from the cluster.",
+                    "type": "get.dto.license.LicenseDTO",
+                    "nickname": "getCurrentLicense",
+                    "parameters": [],
+                    "responseMessages": [
+                        {
+                            "code": 500,
+                            "message": "Any internal exception while performing this operation"
+                        }
+                    ]
+                },
+                {
+                    "deprecated": "false",
+                    "internal": false,
+                    "method": "POST",
+                    "summary": "Apply license file",
+                    "notes": "Apply license file to the cluster.",
+                    "type": "create.dto.license.LicenseDTO",
+                    "nickname": "applyLicense",
+                    "parameters": [
+                        {
+                            "description": "License file",
+                            "required": true,
+                            "allowMultiple": false,
+                            "paramType": "body",
+                            "type": "org.apache.cxf.jaxrs.ext.multipart.Attachment"
+                        }
+                    ],
+                    "responseMessages": [
+                        {
+                            "code": 500,
+                            "message": "Any internal exception while performing this operation"
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "internal": false,
+            "path": "/license/alerts",
+            "operations": [
+                {
+                    "deprecated": "false",
+                    "internal": false,
+                    "method": "GET",
+                    "summary": "Get the list of alerts generated for any License.",
+                    "notes": "",
+                    "type": "get.base.EntityCollection&lt;get.dto.alerts.AlertDTO&gt;",
+                    "nickname": "getLicenseAlerts",
+                    "parameters": [
+                        {
+                            "name": "startTimeInUsecs",
+                            "description": "Start time in microseconds",
+                            "required": false,
+                            "allowMultiple": false,
+                            "paramType": "query",
+                            "type": "integer"
+                        },
+                        {
+                            "name": "endTimeInUsecs",
+                            "description": "End time in microseconds",
+                            "required": false,
+                            "allowMultiple": false,
+                            "paramType": "query",
+                            "type": "integer"
+                        },
+                        {
+                            "name": "count",
+                            "description": "Maximum number of alerts",
+                            "required": false,
+                            "allowMultiple": false,
+                            "paramType": "query",
+                            "type": "integer"
+                        },
+                        {
+                            "name": "resolved",
+                            "description": "Alerts which have been resolved",
+                            "required": false,
+                            "allowMultiple": false,
+                            "paramType": "query",
+                            "type": "boolean"
+                        },
+                        {
+                            "name": "acknowledged",
+                            "description": "Alerts which have been acknowledged",
+                            "required": false,
+                            "allowMultiple": false,
+                            "paramType": "query",
+                            "type": "boolean"
+                        },
+                        {
+                            "name": "severity",
+                            "description": "Alert severities",
+                            "required": false,
+                            "allowMultiple": false,
+                            "paramType": "query",
+                            "type": "string"
+                        },
+                        {
+                            "name": "alertTypeUuid",
+                            "description": "Alert type ids",
+                            "required": false,
+                            "allowMultiple": false,
+                            "paramType": "query",
+                            "type": "string"
+                        },
+                        {
+                            "name": "page",
+                            "description": "Page number",
+                            "required": false,
+                            "allowMultiple": false,
+                            "paramType": "query",
+                            "type": "integer"
+                        }
+                    ],
+                    "responseMessages": []
+                }
+            ]
+        },
+        {
+            "internal": false,
+            "path": "/license/allowances",
+            "operations": [
+                {
+                    "deprecated": "false",
+                    "internal": false,
+                    "method": "GET",
+                    "summary": "Show allowances for all features",
+                    "notes": "Show allowances for all features",
+                    "type": "java.util.Map&lt;get.services.license.LicenseFeature, get.dto.license.AllowancesDTO&gt;",
+                    "nickname": "getAllowances",
+                    "parameters": [],
+                    "responseMessages": [
+                        {
+                            "code": 500,
+                            "message": "Any internal exception while performing this operation"
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "internal": false,
+            "path": "/license/allowances/{featureName}",
+            "operations": [
+                {
+                    "deprecated": "false",
+                    "internal": false,
+                    "method": "GET",
+                    "summary": "Show allowances for a particular feature",
+                    "notes": "Show allowances for a particular feature",
+                    "type": "get.dto.license.AllowancesDTO",
+                    "nickname": "getAllowanceForFeature",
+                    "parameters": [
+                        {
+                            "name": "featureName",
+                            "description": "Feature name",
+                            "required": true,
+                            "allowMultiple": false,
+                            "paramType": "path",
+                            "type": "string"
+                        }
+                    ],
+                    "responseMessages": [
+                        {
+                            "code": 500,
+                            "message": "Any internal exception while performing this operation"
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "internal": false,
+            "path": "/license/cluster_info",
+            "operations": [
+                {
+                    "deprecated": "false",
+                    "internal": false,
+                    "method": "GET",
+                    "summary": "Get Cluster Info",
+                    "notes": "Get Cluster Info",
+                    "type": "get.dto.license.LicenseClusterInfoDTO",
+                    "nickname": "getClusterLicenseInfo",
+                    "parameters": [],
+                    "responseMessages": [
+                        {
+                            "code": 500,
+                            "message": "Any internal exception while performing this operation"
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "internal": false,
+            "path": "/license/cluster_summary_file",
+            "operations": [
+                {
+                    "deprecated": "false",
+                    "internal": false,
+                    "method": "GET",
+                    "summary": "Get Cluster Info as a file",
+                    "notes": "Get Cluster Info as a file",
+                    "type": "javax.ws.rs.core.Response",
+                    "nickname": "getClusterInfoFile",
+                    "parameters": [],
+                    "responseMessages": [
+                        {
+                            "code": 500,
+                            "message": "Any internal exception while performing this operation"
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "internal": false,
+            "path": "/license/events",
+            "operations": [
+                {
+                    "deprecated": "false",
+                    "internal": false,
+                    "method": "GET",
+                    "summary": "Get the list of events generated for any License.",
+                    "notes": "",
+                    "type": "get.base.EntityCollection&lt;get.dto.alerts.AlertDTO&gt;",
+                    "nickname": "getLicenseEvents",
+                    "parameters": [
+                        {
+                            "name": "startTimeInUsecs",
+                            "description": "Start time in microseconds",
+                            "required": false,
+                            "allowMultiple": false,
+                            "paramType": "query",
+                            "type": "integer"
+                        },
+                        {
+                            "name": "endTimeInUsecs",
+                            "description": "End time in microseconds",
+                            "required": false,
+                            "allowMultiple": false,
+                            "paramType": "query",
+                            "type": "integer"
+                        },
+                        {
+                            "name": "count",
+                            "description": "Maximum number of events",
+                            "required": false,
+                            "allowMultiple": false,
+                            "paramType": "query",
+                            "type": "integer"
+                        },
+                        {
+                            "name": "acknowledged",
+                            "description": "Events which have been acknowledged",
+                            "required": false,
+                            "allowMultiple": false,
+                            "paramType": "query",
+                            "type": "boolean"
+                        },
+                        {
+                            "name": "page",
+                            "description": "Page number",
+                            "required": false,
+                            "allowMultiple": false,
+                            "paramType": "query",
+                            "type": "integer"
+                        }
+                    ],
+                    "responseMessages": []
+                }
+            ]
+        }
+    ],
+    "models": {
+        "create.dto.license.FeatureViolationDTO": {
+            "id": "create.dto.license.FeatureViolationDTO",
+            "required": [],
+            "properties": {
+                "affected": {
+                    "type": "string"
+                },
+                "featureName": {
+                    "type": "string"
+                },
+                "violationDescription": {
+                    "type": "string"
+                }
+            }
+        },
+        "create.dto.license.LicenseClusterInfoDTO$LicenseCapacityDTO": {
+            "id": "create.dto.license.LicenseClusterInfoDTO$LicenseCapacityDTO",
+            "required": [],
+            "properties": {
+                "flow_num_protected_nodes": {
+                    "format": "int64",
+                    "type": "integer"
+                },
+                "hdd_size_tebibytes": {
+                    "format": "int64",
+                    "type": "integer"
+                },
+                "num_cores": {
+                    "format": "int64",
+                    "type": "integer"
+                },
+                "num_nodes": {
+                    "format": "int64",
+                    "type": "integer"
+                },
+                "ssd_size_tebibytes": {
+                    "format": "int64",
+                    "type": "integer"
+                }
+            }
+        },
+        "create.dto.license.LicenseDTO": {
+            "id": "create.dto.license.LicenseDTO",
+            "required": [],
+            "properties": {
+                "addonAllowanceMap": {
+                    "$ref": "java.util.Map&lt;create.services.license.LicenseFeature, create.dto.license.AllowancesDTO&gt;"
+                },
+                "addonLicenseList": {
+                    "items": {
+                        "$ref": "create.dto.license.NodeLicenseDTO"
+                    },
+                    "type": "array"
+                },
+                "allowanceMap": {
+                    "$ref": "java.util.Map&lt;create.services.license.LicenseFeature, create.dto.license.AllowancesDTO&gt;"
+                },
+                "availableAddonList": {
+                    "items": {
+                        "$ref": "create.dto.license.LicenseTypeDto"
+                    },
+                    "type": "array"
+                },
+                "capacity": {
+                    "$ref": "create.dto.license.LicenseClusterInfoDTO$LicenseCapacityDTO"
+                },
+                "capacityLicensed": {
+                    "$ref": "create.dto.license.LicenseClusterInfoDTO$LicenseCapacityDTO"
+                },
+                "category": {
+                    "type": "string"
+                },
+                "clusterExpiryUsecs": {
+                    "format": "int64",
+                    "type": "integer"
+                },
+                "clusterLicenseList": {
+                    "items": {
+                        "$ref": "create.dto.license.NodeLicenseDTO"
+                    },
+                    "type": "array"
+                },
+                "featureViolations": {
+                    "items": {
+                        "$ref": "create.dto.license.FeatureViolationDTO"
+                    },
+                    "type": "array"
+                },
+                "licenseClass": {
+                    "type": "string"
+                },
+                "licenseExpiryMessage": {
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": "array"
+                },
+                "licenseList": {
+                    "items": {
+                        "$ref": "create.dto.license.NodeLicenseDTO"
+                    },
+                    "type": "array"
+                },
+                "licenseStandbyMessage": {
+                    "type": "string"
+                },
+                "nodeExpiryMessage": {
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": "array"
+                },
+                "nodeLicenseList": {
+                    "items": {
+                        "$ref": "create.dto.license.NodeLicenseDTO"
+                    },
+                    "type": "array"
+                },
+                "standbyMode": {
+                    "type": "boolean"
+                },
+                "subCategory": {
+                    "type": "string"
+                },
+                "totalCoinsLicensed": {
+                    "format": "int64",
+                    "type": "integer"
+                },
+                "useNonCompliantFeatures": {
+                    "type": "boolean"
+                }
+            }
+        },
+        "create.dto.license.LicenseTypeDto": {
+            "id": "create.dto.license.LicenseTypeDto",
+            "required": [],
+            "properties": {
+                "category": {
+                    "type": "string"
+                },
+                "subCategory": {
+                    "type": "string"
+                }
+            }
+        },
+        "create.dto.license.NodeLicenseDTO": {
+            "id": "create.dto.license.NodeLicenseDTO",
+            "required": [],
+            "properties": {
+                "category": {
+                    "type": "string"
+                },
+                "coinsLicensed": {
+                    "format": "int64",
+                    "type": "integer"
+                },
+                "displayName": {
+                    "type": "string"
+                },
+                "expiryUsecs": {
+                    "format": "int64",
+                    "type": "integer"
+                },
+                "licenseClass": {
+                    "type": "string"
+                },
+                "licenseId": {
+                    "type": "string"
+                },
+                "licenseType": {
+                    "type": "string"
+                },
+                "model": {
+                    "type": "string"
+                },
+                "nodeExpiryUsecs": {
+                    "format": "int64",
+                    "type": "integer"
+                },
+                "nodeId": {
+                    "type": "string"
+                },
+                "numDaysRemaining": {
+                    "format": "int32",
+                    "type": "integer"
+                },
+                "subCategory": {
+                    "type": "string"
+                },
+                "used": {
+                    "type": "boolean"
+                }
+            }
+        },
+        "get.base.EntityCollection&lt;get.dto.ResultContentDescriptor&gt;": {
+            "id": "get.base.EntityCollection&lt;get.dto.ResultContentDescriptor&gt;",
+            "required": [],
+            "properties": {
+                "entities": {
+                    "items": {
+                        "$ref": "get.dto.ResultContentDescriptor"
+                    },
+                    "type": "array"
+                },
+                "errorInfo": {
+                    "$ref": "get.base.ErrorInfo"
+                },
+                "metadata": {
+                    "$ref": "get.base.Metadata"
+                }
+            }
+        },
+        "get.base.EntityCollection&lt;get.dto.alerts.AlertDTO&gt;": {
+            "id": "get.base.EntityCollection&lt;get.dto.alerts.AlertDTO&gt;",
+            "required": [],
+            "properties": {
+                "entities": {
+                    "items": {
+                        "$ref": "get.dto.alerts.AlertDTO"
+                    },
+                    "type": "array"
+                },
+                "errorInfo": {
+                    "$ref": "get.base.ErrorInfo"
+                },
+                "metadata": {
+                    "$ref": "get.base.Metadata"
+                }
+            }
+        },
+        "get.base.ErrorInfo": {
+            "id": "get.base.ErrorInfo",
+            "required": [],
+            "properties": {
+                "count": {
+                    "format": "int64",
+                    "type": "integer"
+                },
+                "entityList": {
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": "array"
+                },
+                "message": {
+                    "type": "string"
+                }
+            }
+        },
+        "get.base.Metadata": {
+            "id": "get.base.Metadata",
+            "required": [],
+            "properties": {
+                "count": {
+                    "format": "int32",
+                    "type": "integer"
+                },
+                "endIndex": {
+                    "format": "int32",
+                    "type": "integer"
+                },
+                "filterCriteria": {
+                    "type": "string"
+                },
+                "grandTotalEntities": {
+                    "format": "int32",
+                    "type": "integer"
+                },
+                "nextCursor": {
+                    "type": "string"
+                },
+                "page": {
+                    "format": "int32",
+                    "type": "integer"
+                },
+                "previousCursor": {
+                    "type": "string"
+                },
+                "searchString": {
+                    "type": "string"
+                },
+                "sortCriteria": {
+                    "type": "string"
+                },
+                "startIndex": {
+                    "format": "int32",
+                    "type": "integer"
+                },
+                "totalEntities": {
+                    "format": "int32",
+                    "type": "integer"
+                }
+            }
+        },
+        "get.dto.EntityMetadata": {
+            "id": "get.dto.EntityMetadata",
+            "required": [],
+            "properties": {
+                "additionalFields": {
+                    "$ref": "java.util.Map&lt;java.lang.String, java.lang.String&gt;"
+                },
+                "clusterUuid": {
+                    "type": "string"
+                },
+                "contextHintField": {
+                    "type": "string"
+                },
+                "contextHintValue": {
+                    "type": "string"
+                },
+                "entityId": {
+                    "type": "string"
+                },
+                "entityName": {
+                    "type": "string"
+                },
+                "entityType": {
+                    "enum": [
+                        "CLUSTER",
+                        "HARDWARE",
+                        "STORAGE",
+                        "BACKUP",
+                        "DR",
+                        "LICENSE",
+                        "DISK",
+                        "STORAGE_TIER",
+                        "HOST",
+                        "NODE",
+                        "MANAGEMENT_SERVER",
+                        "MANAGEMENT_SERVER_INFO",
+                        "VM",
+                        "SERVICE_VM",
+                        "VDISK",
+                        "VIRTUAL_DISK",
+                        "STORAGE_POOL",
+                        "CONTAINER",
+                        "STORAGE_CONTAINER",
+                        "VZONE",
+                        "SNAPSHOT",
+                        "FAST_CLONE",
+                        "RSYSLOG_SERVER",
+                        "KEY_MANAGEMENT_SERVER",
+                        "CERTIFICATE",
+                        "HTTP_PROXY",
+                        "SNMP_TRAP",
+                        "SNMP_USER",
+                        "REMOTE_SITE",
+                        "CLOUD_CREDENTIALS",
+                        "PROTECTION_DOMAIN",
+                        "CONSISTENCY_GROUP",
+                        "REPLICATION",
+                        "REPLICATION_LINK",
+                        "SYNC_REPLICATION",
+                        "VSTORE",
+                        "NETWORK_SWITCH_INTERFACE",
+                        "NETWORK_SWITCH",
+                        "VIRTUAL_NIC",
+                        "VMKERNEL_NIC",
+                        "HOST_NIC",
+                        "NIC_TEAM",
+                        "VIRTUAL_NETWORK",
+                        "VIRTUAL_SWITCH",
+                        "HOST_GPU",
+                        "VIRTUAL_GPU",
+                        "TAG",
+                        "COMMENT",
+                        "TASK",
+                        "IMAGE",
+                        "IMAGE_INFO",
+                        "ISCSI_CLIENT",
+                        "VOLUME_GROUP",
+                        "VOLUME_DISK",
+                        "VM_DISK",
+                        "FILE_SERVER",
+                        "FS_PARTNER_SERVER",
+                        "CVM",
+                        "NVM",
+                        "FILE_SERVER_SHARE",
+                        "ALERT_CAUSE",
+                        "ALERT_CHECK_SCHEMA",
+                        "ALERT_CHECK_SCHEMA_OVERRIDE",
+                        "INTER_CLUSTER_DATA_TRANSFER_INDICATOR",
+                        "RACKABLE_UNIT",
+                        "DIRECTORY_CONFIG",
+                        "HEALTH_CHECK",
+                        "NETWORK_SNMP_PROFILE",
+                        "ALERT",
+                        "SCHEDULE",
+                        "BANDWIDTH_POLICY",
+                        "FILE_GROUP",
+                        "NETWORK_MAPPING",
+                        "PROGRESS_MONITOR",
+                        "LCM_ENTITY",
+                        "LCM_AVAILABLE_VERSION",
+                        "CAPACITY_SCENARIO",
+                        "NCC_ERROR_CODES",
+                        "RESOURCE_CONSUMPTION",
+                        "REPORT_CONFIG",
+                        "REPORT_INSTANCE",
+                        "COMMON_REPORT_CONFIG",
+                        "REMOTE_CONNECTION"
+                    ],
+                    "type": "string"
+                }
+            }
+        },
+        "get.dto.ResultContentDescriptor": {
+            "id": "get.dto.ResultContentDescriptor",
+            "required": [],
+            "properties": {
+                "metadata": {
+                    "$ref": "get.dto.ResultMetadata"
+                },
+                "perspectives": {
+                    "items": {
+                        "$ref": "get.dto.ResultContentDescriptor$Perspective"
+                    },
+                    "type": "array"
+                }
+            }
+        },
+        "get.dto.ResultContentDescriptor$Perspective": {
+            "id": "get.dto.ResultContentDescriptor$Perspective",
+            "required": [],
+            "properties": {
+                "format": {
+                    "enum": [
+                        "TABLE",
+                        "BAR_CHART",
+                        "PIE_CHART",
+                        "TIME_SERIES",
+                        "KEY_VALUE",
+                        "COUNT",
+                        "HEALTH_SUMMARY",
+                        "ALERT_INFO",
+                        "CAPACITY",
+                        "OTHER"
+                    ],
+                    "type": "string"
+                },
+                "metadata": {
+                    "$ref": "get.dto.ResultMetadata"
+                },
+                "query": {},
+                "result": {},
+                "type": {
+                    "type": "string"
+                }
+            }
+        },
+        "get.dto.ResultMetadata": {
+            "id": "get.dto.ResultMetadata",
+            "required": [],
+            "properties": {
+                "entityType": {
+                    "enum": [
+                        "CLUSTER",
+                        "HARDWARE",
+                        "STORAGE",
+                        "BACKUP",
+                        "DR",
+                        "LICENSE",
+                        "DISK",
+                        "STORAGE_TIER",
+                        "HOST",
+                        "NODE",
+                        "MANAGEMENT_SERVER",
+                        "MANAGEMENT_SERVER_INFO",
+                        "VM",
+                        "SERVICE_VM",
+                        "VDISK",
+                        "VIRTUAL_DISK",
+                        "STORAGE_POOL",
+                        "CONTAINER",
+                        "STORAGE_CONTAINER",
+                        "VZONE",
+                        "SNAPSHOT",
+                        "FAST_CLONE",
+                        "RSYSLOG_SERVER",
+                        "KEY_MANAGEMENT_SERVER",
+                        "CERTIFICATE",
+                        "HTTP_PROXY",
+                        "SNMP_TRAP",
+                        "SNMP_USER",
+                        "REMOTE_SITE",
+                        "CLOUD_CREDENTIALS",
+                        "PROTECTION_DOMAIN",
+                        "CONSISTENCY_GROUP",
+                        "REPLICATION",
+                        "REPLICATION_LINK",
+                        "SYNC_REPLICATION",
+                        "VSTORE",
+                        "NETWORK_SWITCH_INTERFACE",
+                        "NETWORK_SWITCH",
+                        "VIRTUAL_NIC",
+                        "VMKERNEL_NIC",
+                        "HOST_NIC",
+                        "NIC_TEAM",
+                        "VIRTUAL_NETWORK",
+                        "VIRTUAL_SWITCH",
+                        "HOST_GPU",
+                        "VIRTUAL_GPU",
+                        "TAG",
+                        "COMMENT",
+                        "TASK",
+                        "IMAGE",
+                        "IMAGE_INFO",
+                        "ISCSI_CLIENT",
+                        "VOLUME_GROUP",
+                        "VOLUME_DISK",
+                        "VM_DISK",
+                        "FILE_SERVER",
+                        "FS_PARTNER_SERVER",
+                        "CVM",
+                        "NVM",
+                        "FILE_SERVER_SHARE",
+                        "ALERT_CAUSE",
+                        "ALERT_CHECK_SCHEMA",
+                        "ALERT_CHECK_SCHEMA_OVERRIDE",
+                        "INTER_CLUSTER_DATA_TRANSFER_INDICATOR",
+                        "RACKABLE_UNIT",
+                        "DIRECTORY_CONFIG",
+                        "HEALTH_CHECK",
+                        "NETWORK_SNMP_PROFILE",
+                        "ALERT",
+                        "SCHEDULE",
+                        "BANDWIDTH_POLICY",
+                        "FILE_GROUP",
+                        "NETWORK_MAPPING",
+                        "PROGRESS_MONITOR",
+                        "LCM_ENTITY",
+                        "LCM_AVAILABLE_VERSION",
+                        "CAPACITY_SCENARIO",
+                        "NCC_ERROR_CODES",
+                        "RESOURCE_CONSUMPTION",
+                        "REPORT_CONFIG",
+                        "REPORT_INSTANCE",
+                        "COMMON_REPORT_CONFIG",
+                        "REMOTE_CONNECTION"
+                    ],
+                    "type": "string"
+                },
+                "filters": {
+                    "items": {
+                        "$ref": "get.dto.ResultMetadata$Filter"
+                    },
+                    "type": "array"
+                },
+                "instances": {
+                    "items": {
+                        "$ref": "get.dto.EntityMetadata"
+                    },
+                    "type": "array"
+                },
+                "title": {
+                    "type": "string"
+                }
+            }
+        },
+        "get.dto.ResultMetadata$Filter": {
+            "id": "get.dto.ResultMetadata$Filter",
+            "required": [],
+            "properties": {
+                "displayForRhs": {
+                    "type": "string"
+                },
+                "lhs": {
+                    "type": "string"
+                },
+                "operator": {
+                    "description": "Operator for the filter.",
+                    "type": "string",
+                    "typeName": "DEFAULT"
+                },
+                "rhs": {
+                    "type": "string"
+                }
+            }
+        },
+        "get.dto.alerts.AlertCauseDTO": {
+            "id": "get.dto.alerts.AlertCauseDTO",
+            "required": [],
+            "properties": {
+                "actions": {
+                    "description": "Possible actions to resolve this alert",
+                    "type": "string",
+                    "typeName": "DEFAULT"
+                },
+                "additionalLinks": {
+                    "description": "Additional links",
+                    "type": "string",
+                    "typeName": "DEFAULT"
+                },
+                "alertNamespace": {
+                    "description": "Namespace this alert belongs to",
+                    "type": "string",
+                    "typeName": "DEFAULT"
+                },
+                "cause": {
+                    "description": "Detailed description",
+                    "type": "string",
+                    "typeName": "DEFAULT"
+                },
+                "chartQueries": {
+                    "$ref": "get.base.EntityCollection&lt;get.dto.ResultContentDescriptor&gt;",
+                    "description": "Charts that are relevant to this cause",
+                    "typeName": "DEFAULT"
+                },
+                "details": {
+                    "description": "Symptoms for this cause",
+                    "type": "string",
+                    "typeName": "DEFAULT"
+                },
+                "hasGlobalDetails": {
+                    "description": "Whether the alert has global details or not",
+                    "type": "boolean",
+                    "typeName": "DEFAULT"
+                },
+                "id": {
+                    "description": "Cause Id",
+                    "type": "string",
+                    "typeName": "UUID_TYPE"
+                },
+                "numResolvedCount": {
+                    "description": "Number of times this cause has resolved the alert",
+                    "format": "int64",
+                    "type": "integer",
+                    "typeName": "DEFAULT"
+                },
+                "parentCauseId": {
+                    "description": "Id of the alert/cause this is a possible cause for",
+                    "type": "string",
+                    "typeName": "DEFAULT"
+                },
+                "title": {
+                    "description": "Short description",
+                    "type": "string",
+                    "typeName": "DEFAULT"
+                },
+                "troubleshootingSteps": {
+                    "description": "Steps to determine whether this is the cause.",
+                    "type": "string",
+                    "typeName": "DEFAULT"
+                }
+            }
+        },
+        "get.dto.alerts.AlertDTO": {
+            "id": "get.dto.alerts.AlertDTO",
+            "required": [],
+            "properties": {
+                "acknowledged": {
+                    "type": "boolean"
+                },
+                "acknowledgedByUsername": {
+                    "type": "string"
+                },
+                "acknowledgedTimeStampInUsecs": {
+                    "format": "int64",
+                    "type": "integer"
+                },
+                "alertDetails": {
+                    "$ref": "get.dto.alerts.AlertDTO$AlertDetailsDTO"
+                },
+                "alertTitle": {
+                    "type": "string"
+                },
+                "alertTypeUuid": {
+                    "type": "string"
+                },
+                "autoResolved": {
+                    "type": "boolean"
+                },
+                "categories": {
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": "array"
+                },
+                "checkId": {
+                    "type": "string"
+                },
+                "clusterUuid": {
+                    "type": "string"
+                },
+                "contextTypes": {
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": "array"
+                },
+                "contextValues": {
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": "array"
+                },
+                "createdTimeStampInUsecs": {
+                    "format": "int64",
+                    "type": "integer"
+                },
+                "detailedMessage": {
+                    "type": "string"
+                },
+                "entityIds": {
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": "array"
+                },
+                "entityTypes": {
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": "array"
+                },
+                "entityUuids": {
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": "array"
+                },
+                "id": {
+                    "type": "string"
+                },
+                "impact": {
+                    "type": "string"
+                },
+                "lastOccurrenceTimeStampInUsecs": {
+                    "format": "int64",
+                    "type": "integer"
+                },
+                "message": {
+                    "type": "string"
+                },
+                "nodeUuid": {
+                    "type": "string"
+                },
+                "originatingClusterUuid": {
+                    "type": "string"
+                },
+                "possibleCauses": {
+                    "items": {
+                        "$ref": "get.dto.alerts.AlertCauseDTO"
+                    },
+                    "type": "array"
+                },
+                "resolved": {
+                    "type": "boolean"
+                },
+                "resolvedByUsername": {
+                    "type": "string"
+                },
+                "resolvedTimeStampInUsecs": {
+                    "format": "int64",
+                    "type": "integer"
+                },
+                "serviceVMId": {
+                    "type": "string"
+                },
+                "severity": {
+                    "description": "This field describes the severity of the alert.",
+                    "type": "string",
+                    "typeName": "DEFAULT"
+                }
+            }
+        },
+        "get.dto.alerts.AlertDTO$AlertDetailsDTO": {
+            "id": "get.dto.alerts.AlertDTO$AlertDetailsDTO",
+            "required": [],
+            "properties": {
+                "metricDetails": {
+                    "description": "List of metric details associated with the alert",
+                    "items": {
+                        "$ref": "get.dto.alerts.AlertDTO$MetricDetails"
+                    },
+                    "notes": "List of metric details associated with the alert",
+                    "type": "array",
+                    "typeName": "DEFAULT"
+                },
+                "severityTrails": {
+                    "description": "List that contains severity level change details",
+                    "items": {
+                        "$ref": "get.dto.alerts.AlertDTO$SeverityTrail"
+                    },
+                    "notes": "List that contains severity level change details",
+                    "type": "array",
+                    "typeName": "DEFAULT"
+                }
+            }
+        },
+        "get.dto.alerts.AlertDTO$MetricDetails": {
+            "id": "get.dto.alerts.AlertDTO$MetricDetails",
+            "required": [],
+            "properties": {
+                "comparisonOperator": {
+                    "description": "Comparison Operator to be applied for teh values.",
+                    "notes": "Comparison Operator",
+                    "type": "string",
+                    "typeName": "DEFAULT"
+                },
+                "conditionType": {
+                    "description": "Condition Type that the current metric is associated with.",
+                    "enum": [
+                        "STATIC_THRESHOLD",
+                        "ANOMALY",
+                        "SAFETY_ZONE"
+                    ],
+                    "notes": "Condition Type that the current metric is associated with.",
+                    "type": "string",
+                    "typeName": "DEFAULT"
+                },
+                "dataType": {
+                    "description": "Data Type of the value.",
+                    "enum": [
+                        "LONG",
+                        "DOUBLE",
+                        "BOOLEAN",
+                        "STRING"
+                    ],
+                    "notes": "Data Type of the value.",
+                    "type": "string",
+                    "typeName": "DEFAULT"
+                },
+                "entityId": {
+                    "description": "UUID of the entity",
+                    "notes": "UUID of the entity",
+                    "type": "string",
+                    "typeName": "DEFAULT"
+                },
+                "entityType": {
+                    "description": "Entity Type",
+                    "notes": "Entity Type",
+                    "type": "string",
+                    "typeName": "DEFAULT"
+                },
+                "metricDisplayName": {
+                    "description": "Display name of the metric",
+                    "notes": "Display name of the metric",
+                    "type": "string",
+                    "typeName": "DEFAULT"
+                },
+                "metricName": {
+                    "description": "Name of the metric",
+                    "notes": "Name of the metric",
+                    "type": "string",
+                    "typeName": "DEFAULT"
+                },
+                "metricValueDetails": {
+                    "description": "List of metric values at different instances of time in the alert lifecycle",
+                    "items": {
+                        "$ref": "get.dto.alerts.AlertDTO$MetricValueDetails"
+                    },
+                    "notes": "List of metric values at different instances of time in the alert lifecycle",
+                    "type": "array",
+                    "typeName": "DEFAULT"
+                },
+                "unit": {
+                    "description": "Unit of the metric value.",
+                    "notes": "Unit of the metric value.",
+                    "type": "string",
+                    "typeName": "DEFAULT"
+                }
+            }
+        },
+        "get.dto.alerts.AlertDTO$MetricValueDetails": {
+            "id": "get.dto.alerts.AlertDTO$MetricValueDetails",
+            "required": [],
+            "properties": {
+                "metricThresholdValue": {
+                    "description": "Threshold value of the metric that was specified in the policy at that given time.",
+                    "notes": "Threshold value of the metric that was specified in the policy at that given time.",
+                    "type": "string",
+                    "typeName": "DEFAULT"
+                },
+                "metricValue": {
+                    "description": "Actual value of the metric at that given time.",
+                    "notes": "Actual value of the metric at that given time.",
+                    "type": "string",
+                    "typeName": "DEFAULT"
+                },
+                "stateChangeTimeStampInUsecs": {
+                    "description": "Time at which the alert's state change occurred.",
+                    "format": "int64",
+                    "notes": "Time at which the alert's state change occurred.",
+                    "type": "integer",
+                    "typeName": "DEFAULT"
+                }
+            }
+        },
+        "get.dto.alerts.AlertDTO$SeverityTrail": {
+            "id": "get.dto.alerts.AlertDTO$SeverityTrail",
+            "required": [],
+            "properties": {
+                "severity": {
+                    "description": "Severity level of the alert. Can be INFO, WARNING or CRITICAL",
+                    "notes": "Severity level of the alert. Can be INFO, WARNING or CRITICAL",
+                    "type": "string",
+                    "typeName": "DEFAULT"
+                },
+                "severityChangeTimestampInUsecs": {
+                    "description": "Time at which the severity level change occurred",
+                    "format": "int64",
+                    "notes": "Time at which the severity level change occurred",
+                    "type": "integer",
+                    "typeName": "DEFAULT"
+                }
+            }
+        },
+        "get.dto.license.AllowanceDTO": {
+            "id": "get.dto.license.AllowanceDTO",
+            "required": [],
+            "properties": {
+                "ViolationAction": {
+                    "enum": [
+                        "Warn"
+                    ],
+                    "type": "string"
+                },
+                "allowanceType": {
+                    "enum": [
+                        "BOOLEAN",
+                        "INTEGER"
+                    ],
+                    "type": "string"
+                },
+                "boolValue": {
+                    "type": "boolean"
+                },
+                "intValue": {
+                    "format": "int64",
+                    "type": "integer"
+                }
+            }
+        },
+        "get.dto.license.AllowancesDTO": {
+            "id": "get.dto.license.AllowancesDTO",
+            "required": [],
+            "properties": {
+                "allowancesType": {
+                    "enum": [
+                        "BOOLEAN",
+                        "INTEGER_LIST"
+                    ],
+                    "type": "string"
+                },
+                "boolValue": {
+                    "$ref": "get.dto.license.AllowanceDTO"
+                },
+                "displayName": {
+                    "type": "string"
+                },
+                "intValues": {
+                    "items": {
+                        "$ref": "get.dto.license.AllowanceDTO"
+                    },
+                    "type": "array"
+                }
+            }
+        },
+        "get.dto.license.FeatureViolationDTO": {
+            "id": "get.dto.license.FeatureViolationDTO",
+            "required": [],
+            "properties": {
+                "affected": {
+                    "type": "string"
+                },
+                "featureName": {
+                    "type": "string"
+                },
+                "violationDescription": {
+                    "type": "string"
+                }
+            }
+        },
+        "get.dto.license.LicenseClusterInfoDTO": {
+            "id": "get.dto.license.LicenseClusterInfoDTO",
+            "required": [],
+            "properties": {
+                "block_serial_list": {
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": "array"
+                },
+                "capacity": {
+                    "$ref": "get.dto.license.LicenseClusterInfoDTO$LicenseCapacityDTO"
+                },
+                "cluster_logical_timestamp": {
+                    "format": "int64",
+                    "type": "integer"
+                },
+                "cluster_name": {
+                    "type": "string"
+                },
+                "cluster_uuid": {
+                    "type": "string"
+                },
+                "cluster_version": {
+                    "type": "string"
+                },
+                "license_logical_timestamp": {
+                    "format": "int64",
+                    "type": "integer"
+                },
+                "node_list": {
+                    "items": {
+                        "$ref": "get.dto.license.LicenseClusterInfoDTO$LicenseNodeTypeDTO"
+                    },
+                    "type": "array"
+                },
+                "signature": {
+                    "type": "string"
+                },
+                "standby_mode": {
+                    "type": "boolean"
+                },
+                "version": {
+                    "format": "int32",
+                    "type": "integer"
+                }
+            }
+        },
+        "get.dto.license.LicenseClusterInfoDTO$LicenseCapacityDTO": {
+            "id": "get.dto.license.LicenseClusterInfoDTO$LicenseCapacityDTO",
+            "required": [],
+            "properties": {
+                "flow_num_protected_nodes": {
+                    "format": "int64",
+                    "type": "integer"
+                },
+                "hdd_size_tebibytes": {
+                    "format": "int64",
+                    "type": "integer"
+                },
+                "num_cores": {
+                    "format": "int64",
+                    "type": "integer"
+                },
+                "num_nodes": {
+                    "format": "int64",
+                    "type": "integer"
+                },
+                "ssd_size_tebibytes": {
+                    "format": "int64",
+                    "type": "integer"
+                }
+            }
+        },
+        "get.dto.license.LicenseClusterInfoDTO$LicenseNodeTypeDTO": {
+            "id": "get.dto.license.LicenseClusterInfoDTO$LicenseNodeTypeDTO",
+            "required": [],
+            "properties": {
+                "changed": {
+                    "type": "boolean"
+                },
+                "flow_num_protected_nodes": {
+                    "format": "int32",
+                    "type": "integer"
+                },
+                "license_class": {
+                    "type": "string"
+                },
+                "model": {
+                    "type": "string"
+                },
+                "num_licensed_nodes": {
+                    "format": "int32",
+                    "type": "integer"
+                },
+                "num_nodes": {
+                    "format": "int32",
+                    "type": "integer"
+                }
+            }
+        },
+        "get.dto.license.LicenseDTO": {
+            "id": "get.dto.license.LicenseDTO",
+            "required": [],
+            "properties": {
+                "addonAllowanceMap": {
+                    "$ref": "java.util.Map&lt;get.services.license.LicenseFeature, get.dto.license.AllowancesDTO&gt;"
+                },
+                "addonLicenseList": {
+                    "items": {
+                        "$ref": "get.dto.license.NodeLicenseDTO"
+                    },
+                    "type": "array"
+                },
+                "allowanceMap": {
+                    "$ref": "java.util.Map&lt;get.services.license.LicenseFeature, get.dto.license.AllowancesDTO&gt;"
+                },
+                "availableAddonList": {
+                    "items": {
+                        "$ref": "get.dto.license.LicenseTypeDto"
+                    },
+                    "type": "array"
+                },
+                "capacity": {
+                    "$ref": "get.dto.license.LicenseClusterInfoDTO$LicenseCapacityDTO"
+                },
+                "capacityLicensed": {
+                    "$ref": "get.dto.license.LicenseClusterInfoDTO$LicenseCapacityDTO"
+                },
+                "category": {
+                    "type": "string"
+                },
+                "clusterExpiryUsecs": {
+                    "format": "int64",
+                    "type": "integer"
+                },
+                "clusterLicenseList": {
+                    "items": {
+                        "$ref": "get.dto.license.NodeLicenseDTO"
+                    },
+                    "type": "array"
+                },
+                "featureViolations": {
+                    "items": {
+                        "$ref": "get.dto.license.FeatureViolationDTO"
+                    },
+                    "type": "array"
+                },
+                "licenseClass": {
+                    "type": "string"
+                },
+                "licenseExpiryMessage": {
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": "array"
+                },
+                "licenseList": {
+                    "items": {
+                        "$ref": "get.dto.license.NodeLicenseDTO"
+                    },
+                    "type": "array"
+                },
+                "licenseStandbyMessage": {
+                    "type": "string"
+                },
+                "nodeExpiryMessage": {
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": "array"
+                },
+                "nodeLicenseList": {
+                    "items": {
+                        "$ref": "get.dto.license.NodeLicenseDTO"
+                    },
+                    "type": "array"
+                },
+                "standbyMode": {
+                    "type": "boolean"
+                },
+                "subCategory": {
+                    "type": "string"
+                },
+                "totalCoinsLicensed": {
+                    "format": "int64",
+                    "type": "integer"
+                },
+                "useNonCompliantFeatures": {
+                    "type": "boolean"
+                }
+            }
+        },
+        "get.dto.license.LicenseTypeDto": {
+            "id": "get.dto.license.LicenseTypeDto",
+            "required": [],
+            "properties": {
+                "category": {
+                    "type": "string"
+                },
+                "subCategory": {
+                    "type": "string"
+                }
+            }
+        },
+        "get.dto.license.NodeLicenseDTO": {
+            "id": "get.dto.license.NodeLicenseDTO",
+            "required": [],
+            "properties": {
+                "category": {
+                    "type": "string"
+                },
+                "coinsLicensed": {
+                    "format": "int64",
+                    "type": "integer"
+                },
+                "displayName": {
+                    "type": "string"
+                },
+                "expiryUsecs": {
+                    "format": "int64",
+                    "type": "integer"
+                },
+                "licenseClass": {
+                    "type": "string"
+                },
+                "licenseId": {
+                    "type": "string"
+                },
+                "licenseType": {
+                    "type": "string"
+                },
+                "model": {
+                    "type": "string"
+                },
+                "nodeExpiryUsecs": {
+                    "format": "int64",
+                    "type": "integer"
+                },
+                "nodeId": {
+                    "type": "string"
+                },
+                "numDaysRemaining": {
+                    "format": "int32",
+                    "type": "integer"
+                },
+                "subCategory": {
+                    "type": "string"
+                },
+                "used": {
+                    "type": "boolean"
+                }
+            }
+        },
+        "java.lang.Object": {
+            "id": "java.lang.Object",
+            "required": [],
+            "properties": {}
+        },
+        "java.util.Map&lt;create.services.license.LicenseFeature, create.dto.license.AllowancesDTO&gt;": {
+            "id": "java.util.Map&lt;create.services.license.LicenseFeature, create.dto.license.AllowancesDTO&gt;",
+            "required": [],
+            "properties": {}
+        },
+        "java.util.Map&lt;get.services.license.LicenseFeature, get.dto.license.AllowancesDTO&gt;": {
+            "id": "java.util.Map&lt;get.services.license.LicenseFeature, get.dto.license.AllowancesDTO&gt;",
+            "required": [],
+            "properties": {}
+        },
+        "java.util.Map&lt;java.lang.String, java.lang.String&gt;": {
+            "id": "java.util.Map&lt;java.lang.String, java.lang.String&gt;",
+            "required": [],
+            "properties": {}
+        },
+        "javax.ws.rs.core.MultivaluedMap&lt;java.lang.String, java.lang.String&gt;": {
+            "id": "javax.ws.rs.core.MultivaluedMap&lt;java.lang.String, java.lang.String&gt;",
+            "required": [],
+            "properties": {}
+        },
+        "javax.ws.rs.core.Response": {
+            "id": "javax.ws.rs.core.Response",
+            "required": [],
+            "properties": {}
+        },
+        "javax.ws.rs.ext.Providers": {
+            "id": "javax.ws.rs.ext.Providers",
+            "required": [],
+            "properties": {}
+        },
+        "org.apache.cxf.jaxrs.ext.multipart.Attachment": {
+            "id": "org.apache.cxf.jaxrs.ext.multipart.Attachment",
+            "required": [],
+            "properties": {
+                "handler": {
+                    "type": "DataHandler"
+                },
+                "headers": {
+                    "$ref": "javax.ws.rs.core.MultivaluedMap&lt;java.lang.String, java.lang.String&gt;"
+                },
+                "object": {
+                    "$ref": "java.lang.Object"
+                },
+                "providers": {
+                    "$ref": "javax.ws.rs.ext.Providers"
+                }
+            }
+        }
+    }
+}

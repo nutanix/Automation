@@ -1,0 +1,2290 @@
+{
+    "apiVersion": "v1",
+    "swaggerVersion": "1.2",
+    "basePath": "https://any_cvm_ip:9440/PrismGateway/services/rest/v1",
+    "resourcePath": "/alerts",
+    "produces": [
+        "application/json"
+    ],
+    "consumes": [
+        "application/json"
+    ],
+    "apis": [
+        {
+            "internal": false,
+            "path": "/alerts/",
+            "operations": [
+                {
+                    "deprecated": "false",
+                    "internal": false,
+                    "method": "GET",
+                    "summary": "Get the list of Alerts.",
+                    "notes": "Get the list of Alerts generated in the cluster.",
+                    "type": "get.base.EntityCollection&lt;get.dto.alerts.AlertDTO&gt;",
+                    "nickname": "getAlerts",
+                    "parameters": [
+                        {
+                            "name": "startTimeInUsecs",
+                            "description": "Start time in microseconds",
+                            "required": false,
+                            "allowMultiple": false,
+                            "paramType": "query",
+                            "type": "integer"
+                        },
+                        {
+                            "name": "endTimeInUsecs",
+                            "description": "End time in microseconds",
+                            "required": false,
+                            "allowMultiple": false,
+                            "paramType": "query",
+                            "type": "integer"
+                        },
+                        {
+                            "name": "count",
+                            "description": "Maximum number of alerts",
+                            "required": false,
+                            "allowMultiple": false,
+                            "paramType": "query",
+                            "type": "integer"
+                        },
+                        {
+                            "name": "resolved",
+                            "description": "Alerts which have been resolved",
+                            "required": false,
+                            "allowMultiple": false,
+                            "paramType": "query",
+                            "type": "boolean"
+                        },
+                        {
+                            "name": "autoResolved",
+                            "description": "Alerts which have been auto resolved",
+                            "required": false,
+                            "allowMultiple": false,
+                            "paramType": "query",
+                            "type": "boolean"
+                        },
+                        {
+                            "name": "acknowledged",
+                            "description": "Alerts which have been acknowledged",
+                            "required": false,
+                            "allowMultiple": false,
+                            "paramType": "query",
+                            "type": "boolean"
+                        },
+                        {
+                            "name": "severity",
+                            "description": "Alert severities",
+                            "required": false,
+                            "allowMultiple": false,
+                            "paramType": "query",
+                            "type": "string"
+                        },
+                        {
+                            "name": "alertTypeUuid",
+                            "description": "Alert type ids",
+                            "required": false,
+                            "allowMultiple": false,
+                            "paramType": "query",
+                            "type": "string"
+                        },
+                        {
+                            "name": "page",
+                            "description": "Page number",
+                            "required": false,
+                            "allowMultiple": false,
+                            "paramType": "query",
+                            "type": "integer"
+                        },
+                        {
+                            "name": "entityType",
+                            "description": "Entity type",
+                            "required": false,
+                            "allowMultiple": false,
+                            "paramType": "query",
+                            "type": "string"
+                        },
+                        {
+                            "name": "entityIds",
+                            "description": "Entity ids",
+                            "required": false,
+                            "allowMultiple": false,
+                            "paramType": "query",
+                            "type": "string"
+                        },
+                        {
+                            "name": "categories",
+                            "description": "Categories",
+                            "required": false,
+                            "allowMultiple": false,
+                            "paramType": "query",
+                            "type": "string"
+                        },
+                        {
+                            "name": "alertIds",
+                            "description": "Alert ids",
+                            "required": false,
+                            "allowMultiple": false,
+                            "paramType": "query",
+                            "type": "string"
+                        },
+                        {
+                            "name": "impacts",
+                            "description": "Impacts",
+                            "required": false,
+                            "allowMultiple": false,
+                            "paramType": "query",
+                            "type": "string"
+                        },
+                        {
+                            "name": "getCauses",
+                            "description": "Get causes",
+                            "required": false,
+                            "allowMultiple": false,
+                            "paramType": "query",
+                            "type": "boolean"
+                        }
+                    ],
+                    "responseMessages": []
+                }
+            ]
+        },
+        {
+            "internal": false,
+            "path": "/alerts/acknowledge",
+            "operations": [
+                {
+                    "deprecated": "false",
+                    "internal": false,
+                    "method": "POST",
+                    "summary": "Acknowledge Alerts.",
+                    "notes": "Acknowledge alerts using a filter criteria.",
+                    "type": "create.dto.alerts.ManageAlertsDTO",
+                    "nickname": "acknowledgeAlerts",
+                    "parameters": [
+                        {
+                            "name": "startTimeInUsecs",
+                            "description": "Start time in microseconds",
+                            "required": false,
+                            "allowMultiple": false,
+                            "paramType": "query",
+                            "type": "integer"
+                        },
+                        {
+                            "name": "endTimeInUsecs",
+                            "description": "End time in microseconds",
+                            "required": false,
+                            "allowMultiple": false,
+                            "paramType": "query",
+                            "type": "integer"
+                        },
+                        {
+                            "name": "severity",
+                            "description": "Severity",
+                            "required": false,
+                            "allowMultiple": false,
+                            "paramType": "query",
+                            "type": "string"
+                        },
+                        {
+                            "name": "categories",
+                            "description": "Categories of alerts",
+                            "required": false,
+                            "allowMultiple": false,
+                            "paramType": "query",
+                            "type": "string"
+                        },
+                        {
+                            "name": "entityType",
+                            "description": "Entity Type",
+                            "required": false,
+                            "allowMultiple": false,
+                            "paramType": "query",
+                            "type": "string"
+                        },
+                        {
+                            "name": "entityTypeIds",
+                            "description": "Entity Type Ids",
+                            "required": false,
+                            "allowMultiple": false,
+                            "paramType": "query",
+                            "type": "string"
+                        },
+                        {
+                            "name": "count",
+                            "description": "Maximum number of alerts",
+                            "required": false,
+                            "allowMultiple": false,
+                            "paramType": "query",
+                            "type": "integer"
+                        }
+                    ],
+                    "responseMessages": [
+                        {
+                            "code": 500,
+                            "message": "Any internal exception while performing this operation"
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "internal": false,
+            "path": "/alerts/configuration",
+            "operations": [
+                {
+                    "deprecated": "false",
+                    "internal": false,
+                    "method": "GET",
+                    "summary": "Get the Alert configuration.",
+                    "notes": "Get the configuration that is used to send Alert emails.",
+                    "type": "get.dto.appliance.configuration.AlertConfigDTO",
+                    "nickname": "getAlertConfig",
+                    "parameters": [],
+                    "responseMessages": []
+                },
+                {
+                    "deprecated": "false",
+                    "internal": false,
+                    "method": "PATCH",
+                    "summary": "Modify the Alert configuration.",
+                    "notes": "Modify the configuration that is used to send Alert emails.",
+                    "type": "patch.dto.appliance.configuration.AlertConfigDTO",
+                    "nickname": "patchAlertConfig",
+                    "parameters": [
+                        {
+                            "description": "new Alert configuration.",
+                            "required": true,
+                            "allowMultiple": false,
+                            "paramType": "body",
+                            "type": "patch.dto.RequestDTO&lt;patch.dto.appliance.configuration.AlertConfigDTO&gt;"
+                        }
+                    ],
+                    "responseMessages": []
+                },
+                {
+                    "deprecated": "false",
+                    "internal": false,
+                    "method": "PUT",
+                    "summary": "Update the Alert configuration.",
+                    "notes": "Update the configuration that is used to send Alert emails.",
+                    "type": "update.dto.appliance.configuration.AlertConfigDTO",
+                    "nickname": "updateAlertConfig",
+                    "parameters": [
+                        {
+                            "description": "new Alert configuration.",
+                            "required": true,
+                            "allowMultiple": false,
+                            "paramType": "body",
+                            "type": "update.dto.appliance.configuration.AlertConfigDTO"
+                        }
+                    ],
+                    "responseMessages": []
+                }
+            ]
+        },
+        {
+            "internal": false,
+            "path": "/alerts/hardware",
+            "operations": [
+                {
+                    "deprecated": "false",
+                    "internal": false,
+                    "method": "GET",
+                    "summary": "Get the list of hardware Alerts.",
+                    "notes": "Get the list of hardware Alerts generated in the cluster.",
+                    "type": "get.base.EntityCollection&lt;get.dto.alerts.AlertDTO&gt;",
+                    "nickname": "getHardwareAlerts",
+                    "parameters": [
+                        {
+                            "name": "startTimeInUsecs",
+                            "description": "Start time in microseconds",
+                            "required": false,
+                            "allowMultiple": false,
+                            "paramType": "query",
+                            "type": "integer"
+                        },
+                        {
+                            "name": "endTimeInUsecs",
+                            "description": "End time in microseconds",
+                            "required": false,
+                            "allowMultiple": false,
+                            "paramType": "query",
+                            "type": "integer"
+                        },
+                        {
+                            "name": "count",
+                            "description": "Maximum number of alerts",
+                            "required": false,
+                            "allowMultiple": false,
+                            "paramType": "query",
+                            "type": "integer"
+                        },
+                        {
+                            "name": "resolved",
+                            "description": "Alerts which have been resolved",
+                            "required": false,
+                            "allowMultiple": false,
+                            "paramType": "query",
+                            "type": "boolean"
+                        },
+                        {
+                            "name": "acknowledged",
+                            "description": "Alerts which have been acknowledged",
+                            "required": false,
+                            "allowMultiple": false,
+                            "paramType": "query",
+                            "type": "boolean"
+                        },
+                        {
+                            "name": "severity",
+                            "description": "Alert severities",
+                            "required": false,
+                            "allowMultiple": false,
+                            "paramType": "query",
+                            "type": "string"
+                        },
+                        {
+                            "name": "alertTypeUuid",
+                            "description": "Alert type ids",
+                            "required": false,
+                            "allowMultiple": false,
+                            "paramType": "query",
+                            "type": "string"
+                        },
+                        {
+                            "name": "page",
+                            "description": "Page number",
+                            "required": false,
+                            "allowMultiple": false,
+                            "paramType": "query",
+                            "type": "integer"
+                        }
+                    ],
+                    "responseMessages": [
+                        {
+                            "code": 500,
+                            "message": "Any internal exception while performing this operation"
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "internal": false,
+            "path": "/alerts/resolve",
+            "operations": [
+                {
+                    "deprecated": "false",
+                    "internal": false,
+                    "method": "POST",
+                    "summary": "Resolve Alerts.",
+                    "notes": "Resolve alerts using a filter criteria.",
+                    "type": "create.dto.alerts.ManageAlertsDTO",
+                    "nickname": "resolveAlerts",
+                    "parameters": [
+                        {
+                            "name": "startTimeInUsecs",
+                            "description": "Start time in microseconds",
+                            "required": false,
+                            "allowMultiple": false,
+                            "paramType": "query",
+                            "type": "integer"
+                        },
+                        {
+                            "name": "endTimeInUsecs",
+                            "description": "End time in microseconds",
+                            "required": false,
+                            "allowMultiple": false,
+                            "paramType": "query",
+                            "type": "integer"
+                        },
+                        {
+                            "name": "severity",
+                            "description": "Severity",
+                            "required": false,
+                            "allowMultiple": false,
+                            "paramType": "query",
+                            "type": "string"
+                        },
+                        {
+                            "name": "categories",
+                            "description": "Categories of alerts",
+                            "required": false,
+                            "allowMultiple": false,
+                            "paramType": "query",
+                            "type": "string"
+                        },
+                        {
+                            "name": "entityType",
+                            "description": "Entity Type",
+                            "required": false,
+                            "allowMultiple": false,
+                            "paramType": "query",
+                            "type": "string"
+                        },
+                        {
+                            "name": "entityTypeIds",
+                            "description": "Entity Type Ids",
+                            "required": false,
+                            "allowMultiple": false,
+                            "paramType": "query",
+                            "type": "string"
+                        },
+                        {
+                            "name": "count",
+                            "description": "Maximum number of alerts",
+                            "required": false,
+                            "allowMultiple": false,
+                            "paramType": "query",
+                            "type": "integer"
+                        }
+                    ],
+                    "responseMessages": [
+                        {
+                            "code": 500,
+                            "message": "Any internal exception while performing this operation"
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "internal": false,
+            "path": "/alerts/storage",
+            "operations": [
+                {
+                    "deprecated": "false",
+                    "internal": false,
+                    "method": "GET",
+                    "summary": "Get the list of storage Alerts.",
+                    "notes": "Get the list of storage Alerts generated in the cluster.",
+                    "type": "get.base.EntityCollection&lt;get.dto.alerts.AlertDTO&gt;",
+                    "nickname": "getStorageAlerts",
+                    "parameters": [
+                        {
+                            "name": "startTimeInUsecs",
+                            "description": "Start time in microseconds",
+                            "required": false,
+                            "allowMultiple": false,
+                            "paramType": "query",
+                            "type": "integer"
+                        },
+                        {
+                            "name": "endTimeInUsecs",
+                            "description": "End time in microseconds",
+                            "required": false,
+                            "allowMultiple": false,
+                            "paramType": "query",
+                            "type": "integer"
+                        },
+                        {
+                            "name": "count",
+                            "description": "Maximum number of alerts",
+                            "required": false,
+                            "allowMultiple": false,
+                            "paramType": "query",
+                            "type": "integer"
+                        },
+                        {
+                            "name": "resolved",
+                            "description": "Alerts which have been resolved",
+                            "required": false,
+                            "allowMultiple": false,
+                            "paramType": "query",
+                            "type": "boolean"
+                        },
+                        {
+                            "name": "acknowledged",
+                            "description": "Alerts which have been acknowledged",
+                            "required": false,
+                            "allowMultiple": false,
+                            "paramType": "query",
+                            "type": "boolean"
+                        },
+                        {
+                            "name": "severity",
+                            "description": "Alert severities",
+                            "required": false,
+                            "allowMultiple": false,
+                            "paramType": "query",
+                            "type": "string"
+                        },
+                        {
+                            "name": "alertTypeUuid",
+                            "description": "Alert type ids",
+                            "required": false,
+                            "allowMultiple": false,
+                            "paramType": "query",
+                            "type": "string"
+                        },
+                        {
+                            "name": "page",
+                            "description": "Page number",
+                            "required": false,
+                            "allowMultiple": false,
+                            "paramType": "query",
+                            "type": "integer"
+                        }
+                    ],
+                    "responseMessages": [
+                        {
+                            "code": 500,
+                            "message": "Any internal exception while performing this operation"
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "internal": false,
+            "path": "/alerts/{id}/acknowledge",
+            "operations": [
+                {
+                    "deprecated": "false",
+                    "internal": false,
+                    "method": "POST",
+                    "summary": "Acknowledge Alert.",
+                    "notes": "Acknowledge Alert with the specified Id.",
+                    "type": "create.dto.alerts.ResolveAcknowledgeAlertDTO",
+                    "nickname": "acknowledgeAlert",
+                    "parameters": [
+                        {
+                            "name": "id",
+                            "description": "Alert Id",
+                            "required": true,
+                            "allowMultiple": false,
+                            "paramType": "path",
+                            "type": "string"
+                        }
+                    ],
+                    "responseMessages": [
+                        {
+                            "code": 500,
+                            "message": "Any internal exception while performing this operation"
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "internal": false,
+            "path": "/alerts/{id}/resolve",
+            "operations": [
+                {
+                    "deprecated": "false",
+                    "internal": false,
+                    "method": "POST",
+                    "summary": "Resolve Alert.",
+                    "notes": "Resolve Alert with the specified Id.",
+                    "type": "create.dto.alerts.ResolveAcknowledgeAlertDTO",
+                    "nickname": "resolveAlert",
+                    "parameters": [
+                        {
+                            "name": "id",
+                            "description": "Alert Id",
+                            "required": true,
+                            "allowMultiple": false,
+                            "paramType": "path",
+                            "type": "string"
+                        }
+                    ],
+                    "responseMessages": [
+                        {
+                            "code": 500,
+                            "message": "Any internal exception while performing this operation"
+                        }
+                    ]
+                }
+            ]
+        }
+    ],
+    "models": {
+        "create.dto.alerts.ManageAlertsDTO": {
+            "id": "create.dto.alerts.ManageAlertsDTO",
+            "required": [],
+            "properties": {
+                "alertStatusList": {
+                    "items": {
+                        "$ref": "create.dto.alerts.ResolveAcknowledgeAlertDTO"
+                    },
+                    "type": "array"
+                },
+                "numFailedUpdates": {
+                    "format": "int32",
+                    "type": "integer"
+                },
+                "numSuccessfulUpdates": {
+                    "format": "int32",
+                    "type": "integer"
+                }
+            }
+        },
+        "create.dto.alerts.ResolveAcknowledgeAlertDTO": {
+            "id": "create.dto.alerts.ResolveAcknowledgeAlertDTO",
+            "required": [],
+            "properties": {
+                "id": {
+                    "type": "string"
+                },
+                "message": {
+                    "type": "string"
+                },
+                "successful": {
+                    "type": "boolean"
+                }
+            }
+        },
+        "get.base.EntityCollection&lt;get.dto.ResultContentDescriptor&gt;": {
+            "id": "get.base.EntityCollection&lt;get.dto.ResultContentDescriptor&gt;",
+            "required": [],
+            "properties": {
+                "entities": {
+                    "items": {
+                        "$ref": "get.dto.ResultContentDescriptor"
+                    },
+                    "type": "array"
+                },
+                "errorInfo": {
+                    "$ref": "get.base.ErrorInfo"
+                },
+                "metadata": {
+                    "$ref": "get.base.Metadata"
+                }
+            }
+        },
+        "get.base.EntityCollection&lt;get.dto.alerts.AlertDTO&gt;": {
+            "id": "get.base.EntityCollection&lt;get.dto.alerts.AlertDTO&gt;",
+            "required": [],
+            "properties": {
+                "entities": {
+                    "items": {
+                        "$ref": "get.dto.alerts.AlertDTO"
+                    },
+                    "type": "array"
+                },
+                "errorInfo": {
+                    "$ref": "get.base.ErrorInfo"
+                },
+                "metadata": {
+                    "$ref": "get.base.Metadata"
+                }
+            }
+        },
+        "get.base.ErrorInfo": {
+            "id": "get.base.ErrorInfo",
+            "required": [],
+            "properties": {
+                "count": {
+                    "format": "int64",
+                    "type": "integer"
+                },
+                "entityList": {
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": "array"
+                },
+                "message": {
+                    "type": "string"
+                }
+            }
+        },
+        "get.base.Metadata": {
+            "id": "get.base.Metadata",
+            "required": [],
+            "properties": {
+                "count": {
+                    "format": "int32",
+                    "type": "integer"
+                },
+                "endIndex": {
+                    "format": "int32",
+                    "type": "integer"
+                },
+                "filterCriteria": {
+                    "type": "string"
+                },
+                "grandTotalEntities": {
+                    "format": "int32",
+                    "type": "integer"
+                },
+                "nextCursor": {
+                    "type": "string"
+                },
+                "page": {
+                    "format": "int32",
+                    "type": "integer"
+                },
+                "previousCursor": {
+                    "type": "string"
+                },
+                "searchString": {
+                    "type": "string"
+                },
+                "sortCriteria": {
+                    "type": "string"
+                },
+                "startIndex": {
+                    "format": "int32",
+                    "type": "integer"
+                },
+                "totalEntities": {
+                    "format": "int32",
+                    "type": "integer"
+                }
+            }
+        },
+        "get.dto.EntityMetadata": {
+            "id": "get.dto.EntityMetadata",
+            "required": [],
+            "properties": {
+                "additionalFields": {
+                    "$ref": "java.util.Map&lt;java.lang.String, java.lang.String&gt;"
+                },
+                "clusterUuid": {
+                    "type": "string"
+                },
+                "contextHintField": {
+                    "type": "string"
+                },
+                "contextHintValue": {
+                    "type": "string"
+                },
+                "entityId": {
+                    "type": "string"
+                },
+                "entityName": {
+                    "type": "string"
+                },
+                "entityType": {
+                    "enum": [
+                        "CLUSTER",
+                        "HARDWARE",
+                        "STORAGE",
+                        "BACKUP",
+                        "DR",
+                        "LICENSE",
+                        "DISK",
+                        "STORAGE_TIER",
+                        "HOST",
+                        "NODE",
+                        "MANAGEMENT_SERVER",
+                        "MANAGEMENT_SERVER_INFO",
+                        "VM",
+                        "SERVICE_VM",
+                        "VDISK",
+                        "VIRTUAL_DISK",
+                        "STORAGE_POOL",
+                        "CONTAINER",
+                        "STORAGE_CONTAINER",
+                        "VZONE",
+                        "SNAPSHOT",
+                        "FAST_CLONE",
+                        "RSYSLOG_SERVER",
+                        "KEY_MANAGEMENT_SERVER",
+                        "CERTIFICATE",
+                        "HTTP_PROXY",
+                        "SNMP_TRAP",
+                        "SNMP_USER",
+                        "REMOTE_SITE",
+                        "CLOUD_CREDENTIALS",
+                        "PROTECTION_DOMAIN",
+                        "CONSISTENCY_GROUP",
+                        "REPLICATION",
+                        "REPLICATION_LINK",
+                        "SYNC_REPLICATION",
+                        "VSTORE",
+                        "NETWORK_SWITCH_INTERFACE",
+                        "NETWORK_SWITCH",
+                        "VIRTUAL_NIC",
+                        "VMKERNEL_NIC",
+                        "HOST_NIC",
+                        "NIC_TEAM",
+                        "VIRTUAL_NETWORK",
+                        "VIRTUAL_SWITCH",
+                        "HOST_GPU",
+                        "VIRTUAL_GPU",
+                        "TAG",
+                        "COMMENT",
+                        "TASK",
+                        "IMAGE",
+                        "IMAGE_INFO",
+                        "ISCSI_CLIENT",
+                        "VOLUME_GROUP",
+                        "VOLUME_DISK",
+                        "VM_DISK",
+                        "FILE_SERVER",
+                        "FS_PARTNER_SERVER",
+                        "CVM",
+                        "NVM",
+                        "FILE_SERVER_SHARE",
+                        "ALERT_CAUSE",
+                        "ALERT_CHECK_SCHEMA",
+                        "ALERT_CHECK_SCHEMA_OVERRIDE",
+                        "INTER_CLUSTER_DATA_TRANSFER_INDICATOR",
+                        "RACKABLE_UNIT",
+                        "DIRECTORY_CONFIG",
+                        "HEALTH_CHECK",
+                        "NETWORK_SNMP_PROFILE",
+                        "ALERT",
+                        "SCHEDULE",
+                        "BANDWIDTH_POLICY",
+                        "FILE_GROUP",
+                        "NETWORK_MAPPING",
+                        "PROGRESS_MONITOR",
+                        "LCM_ENTITY",
+                        "LCM_AVAILABLE_VERSION",
+                        "CAPACITY_SCENARIO",
+                        "NCC_ERROR_CODES",
+                        "RESOURCE_CONSUMPTION",
+                        "REPORT_CONFIG",
+                        "REPORT_INSTANCE",
+                        "COMMON_REPORT_CONFIG",
+                        "REMOTE_CONNECTION"
+                    ],
+                    "type": "string"
+                }
+            }
+        },
+        "get.dto.ResultContentDescriptor": {
+            "id": "get.dto.ResultContentDescriptor",
+            "required": [],
+            "properties": {
+                "metadata": {
+                    "$ref": "get.dto.ResultMetadata"
+                },
+                "perspectives": {
+                    "items": {
+                        "$ref": "get.dto.ResultContentDescriptor$Perspective"
+                    },
+                    "type": "array"
+                }
+            }
+        },
+        "get.dto.ResultContentDescriptor$Perspective": {
+            "id": "get.dto.ResultContentDescriptor$Perspective",
+            "required": [],
+            "properties": {
+                "format": {
+                    "enum": [
+                        "TABLE",
+                        "BAR_CHART",
+                        "PIE_CHART",
+                        "TIME_SERIES",
+                        "KEY_VALUE",
+                        "COUNT",
+                        "HEALTH_SUMMARY",
+                        "ALERT_INFO",
+                        "CAPACITY",
+                        "OTHER"
+                    ],
+                    "type": "string"
+                },
+                "metadata": {
+                    "$ref": "get.dto.ResultMetadata"
+                },
+                "query": {},
+                "result": {},
+                "type": {
+                    "type": "string"
+                }
+            }
+        },
+        "get.dto.ResultMetadata": {
+            "id": "get.dto.ResultMetadata",
+            "required": [],
+            "properties": {
+                "entityType": {
+                    "enum": [
+                        "CLUSTER",
+                        "HARDWARE",
+                        "STORAGE",
+                        "BACKUP",
+                        "DR",
+                        "LICENSE",
+                        "DISK",
+                        "STORAGE_TIER",
+                        "HOST",
+                        "NODE",
+                        "MANAGEMENT_SERVER",
+                        "MANAGEMENT_SERVER_INFO",
+                        "VM",
+                        "SERVICE_VM",
+                        "VDISK",
+                        "VIRTUAL_DISK",
+                        "STORAGE_POOL",
+                        "CONTAINER",
+                        "STORAGE_CONTAINER",
+                        "VZONE",
+                        "SNAPSHOT",
+                        "FAST_CLONE",
+                        "RSYSLOG_SERVER",
+                        "KEY_MANAGEMENT_SERVER",
+                        "CERTIFICATE",
+                        "HTTP_PROXY",
+                        "SNMP_TRAP",
+                        "SNMP_USER",
+                        "REMOTE_SITE",
+                        "CLOUD_CREDENTIALS",
+                        "PROTECTION_DOMAIN",
+                        "CONSISTENCY_GROUP",
+                        "REPLICATION",
+                        "REPLICATION_LINK",
+                        "SYNC_REPLICATION",
+                        "VSTORE",
+                        "NETWORK_SWITCH_INTERFACE",
+                        "NETWORK_SWITCH",
+                        "VIRTUAL_NIC",
+                        "VMKERNEL_NIC",
+                        "HOST_NIC",
+                        "NIC_TEAM",
+                        "VIRTUAL_NETWORK",
+                        "VIRTUAL_SWITCH",
+                        "HOST_GPU",
+                        "VIRTUAL_GPU",
+                        "TAG",
+                        "COMMENT",
+                        "TASK",
+                        "IMAGE",
+                        "IMAGE_INFO",
+                        "ISCSI_CLIENT",
+                        "VOLUME_GROUP",
+                        "VOLUME_DISK",
+                        "VM_DISK",
+                        "FILE_SERVER",
+                        "FS_PARTNER_SERVER",
+                        "CVM",
+                        "NVM",
+                        "FILE_SERVER_SHARE",
+                        "ALERT_CAUSE",
+                        "ALERT_CHECK_SCHEMA",
+                        "ALERT_CHECK_SCHEMA_OVERRIDE",
+                        "INTER_CLUSTER_DATA_TRANSFER_INDICATOR",
+                        "RACKABLE_UNIT",
+                        "DIRECTORY_CONFIG",
+                        "HEALTH_CHECK",
+                        "NETWORK_SNMP_PROFILE",
+                        "ALERT",
+                        "SCHEDULE",
+                        "BANDWIDTH_POLICY",
+                        "FILE_GROUP",
+                        "NETWORK_MAPPING",
+                        "PROGRESS_MONITOR",
+                        "LCM_ENTITY",
+                        "LCM_AVAILABLE_VERSION",
+                        "CAPACITY_SCENARIO",
+                        "NCC_ERROR_CODES",
+                        "RESOURCE_CONSUMPTION",
+                        "REPORT_CONFIG",
+                        "REPORT_INSTANCE",
+                        "COMMON_REPORT_CONFIG",
+                        "REMOTE_CONNECTION"
+                    ],
+                    "type": "string"
+                },
+                "filters": {
+                    "items": {
+                        "$ref": "get.dto.ResultMetadata$Filter"
+                    },
+                    "type": "array"
+                },
+                "instances": {
+                    "items": {
+                        "$ref": "get.dto.EntityMetadata"
+                    },
+                    "type": "array"
+                },
+                "title": {
+                    "type": "string"
+                }
+            }
+        },
+        "get.dto.ResultMetadata$Filter": {
+            "id": "get.dto.ResultMetadata$Filter",
+            "required": [],
+            "properties": {
+                "displayForRhs": {
+                    "type": "string"
+                },
+                "lhs": {
+                    "type": "string"
+                },
+                "operator": {
+                    "description": "Operator for the filter.",
+                    "type": "string",
+                    "typeName": "DEFAULT"
+                },
+                "rhs": {
+                    "type": "string"
+                }
+            }
+        },
+        "get.dto.alerts.AlertCauseDTO": {
+            "id": "get.dto.alerts.AlertCauseDTO",
+            "required": [],
+            "properties": {
+                "actions": {
+                    "description": "Possible actions to resolve this alert",
+                    "type": "string",
+                    "typeName": "DEFAULT"
+                },
+                "additionalLinks": {
+                    "description": "Additional links",
+                    "type": "string",
+                    "typeName": "DEFAULT"
+                },
+                "alertNamespace": {
+                    "description": "Namespace this alert belongs to",
+                    "type": "string",
+                    "typeName": "DEFAULT"
+                },
+                "cause": {
+                    "description": "Detailed description",
+                    "type": "string",
+                    "typeName": "DEFAULT"
+                },
+                "chartQueries": {
+                    "$ref": "get.base.EntityCollection&lt;get.dto.ResultContentDescriptor&gt;",
+                    "description": "Charts that are relevant to this cause",
+                    "typeName": "DEFAULT"
+                },
+                "details": {
+                    "description": "Symptoms for this cause",
+                    "type": "string",
+                    "typeName": "DEFAULT"
+                },
+                "hasGlobalDetails": {
+                    "description": "Whether the alert has global details or not",
+                    "type": "boolean",
+                    "typeName": "DEFAULT"
+                },
+                "id": {
+                    "description": "Cause Id",
+                    "type": "string",
+                    "typeName": "UUID_TYPE"
+                },
+                "numResolvedCount": {
+                    "description": "Number of times this cause has resolved the alert",
+                    "format": "int64",
+                    "type": "integer",
+                    "typeName": "DEFAULT"
+                },
+                "parentCauseId": {
+                    "description": "Id of the alert/cause this is a possible cause for",
+                    "type": "string",
+                    "typeName": "DEFAULT"
+                },
+                "title": {
+                    "description": "Short description",
+                    "type": "string",
+                    "typeName": "DEFAULT"
+                },
+                "troubleshootingSteps": {
+                    "description": "Steps to determine whether this is the cause.",
+                    "type": "string",
+                    "typeName": "DEFAULT"
+                }
+            }
+        },
+        "get.dto.alerts.AlertDTO": {
+            "id": "get.dto.alerts.AlertDTO",
+            "required": [],
+            "properties": {
+                "acknowledged": {
+                    "type": "boolean"
+                },
+                "acknowledgedByUsername": {
+                    "type": "string"
+                },
+                "acknowledgedTimeStampInUsecs": {
+                    "format": "int64",
+                    "type": "integer"
+                },
+                "alertDetails": {
+                    "$ref": "get.dto.alerts.AlertDTO$AlertDetailsDTO"
+                },
+                "alertTitle": {
+                    "type": "string"
+                },
+                "alertTypeUuid": {
+                    "type": "string"
+                },
+                "autoResolved": {
+                    "type": "boolean"
+                },
+                "categories": {
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": "array"
+                },
+                "checkId": {
+                    "type": "string"
+                },
+                "clusterUuid": {
+                    "type": "string"
+                },
+                "contextTypes": {
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": "array"
+                },
+                "contextValues": {
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": "array"
+                },
+                "createdTimeStampInUsecs": {
+                    "format": "int64",
+                    "type": "integer"
+                },
+                "detailedMessage": {
+                    "type": "string"
+                },
+                "entityIds": {
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": "array"
+                },
+                "entityTypes": {
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": "array"
+                },
+                "entityUuids": {
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": "array"
+                },
+                "id": {
+                    "type": "string"
+                },
+                "impact": {
+                    "type": "string"
+                },
+                "lastOccurrenceTimeStampInUsecs": {
+                    "format": "int64",
+                    "type": "integer"
+                },
+                "message": {
+                    "type": "string"
+                },
+                "nodeUuid": {
+                    "type": "string"
+                },
+                "originatingClusterUuid": {
+                    "type": "string"
+                },
+                "possibleCauses": {
+                    "items": {
+                        "$ref": "get.dto.alerts.AlertCauseDTO"
+                    },
+                    "type": "array"
+                },
+                "resolved": {
+                    "type": "boolean"
+                },
+                "resolvedByUsername": {
+                    "type": "string"
+                },
+                "resolvedTimeStampInUsecs": {
+                    "format": "int64",
+                    "type": "integer"
+                },
+                "serviceVMId": {
+                    "type": "string"
+                },
+                "severity": {
+                    "description": "This field describes the severity of the alert.",
+                    "type": "string",
+                    "typeName": "DEFAULT"
+                }
+            }
+        },
+        "get.dto.alerts.AlertDTO$AlertDetailsDTO": {
+            "id": "get.dto.alerts.AlertDTO$AlertDetailsDTO",
+            "required": [],
+            "properties": {
+                "metricDetails": {
+                    "description": "List of metric details associated with the alert",
+                    "items": {
+                        "$ref": "get.dto.alerts.AlertDTO$MetricDetails"
+                    },
+                    "notes": "List of metric details associated with the alert",
+                    "type": "array",
+                    "typeName": "DEFAULT"
+                },
+                "severityTrails": {
+                    "description": "List that contains severity level change details",
+                    "items": {
+                        "$ref": "get.dto.alerts.AlertDTO$SeverityTrail"
+                    },
+                    "notes": "List that contains severity level change details",
+                    "type": "array",
+                    "typeName": "DEFAULT"
+                }
+            }
+        },
+        "get.dto.alerts.AlertDTO$MetricDetails": {
+            "id": "get.dto.alerts.AlertDTO$MetricDetails",
+            "required": [],
+            "properties": {
+                "comparisonOperator": {
+                    "description": "Comparison Operator to be applied for teh values.",
+                    "notes": "Comparison Operator",
+                    "type": "string",
+                    "typeName": "DEFAULT"
+                },
+                "conditionType": {
+                    "description": "Condition Type that the current metric is associated with.",
+                    "enum": [
+                        "STATIC_THRESHOLD",
+                        "ANOMALY",
+                        "SAFETY_ZONE"
+                    ],
+                    "notes": "Condition Type that the current metric is associated with.",
+                    "type": "string",
+                    "typeName": "DEFAULT"
+                },
+                "dataType": {
+                    "description": "Data Type of the value.",
+                    "enum": [
+                        "LONG",
+                        "DOUBLE",
+                        "BOOLEAN",
+                        "STRING"
+                    ],
+                    "notes": "Data Type of the value.",
+                    "type": "string",
+                    "typeName": "DEFAULT"
+                },
+                "entityId": {
+                    "description": "UUID of the entity",
+                    "notes": "UUID of the entity",
+                    "type": "string",
+                    "typeName": "DEFAULT"
+                },
+                "entityType": {
+                    "description": "Entity Type",
+                    "notes": "Entity Type",
+                    "type": "string",
+                    "typeName": "DEFAULT"
+                },
+                "metricDisplayName": {
+                    "description": "Display name of the metric",
+                    "notes": "Display name of the metric",
+                    "type": "string",
+                    "typeName": "DEFAULT"
+                },
+                "metricName": {
+                    "description": "Name of the metric",
+                    "notes": "Name of the metric",
+                    "type": "string",
+                    "typeName": "DEFAULT"
+                },
+                "metricValueDetails": {
+                    "description": "List of metric values at different instances of time in the alert lifecycle",
+                    "items": {
+                        "$ref": "get.dto.alerts.AlertDTO$MetricValueDetails"
+                    },
+                    "notes": "List of metric values at different instances of time in the alert lifecycle",
+                    "type": "array",
+                    "typeName": "DEFAULT"
+                },
+                "unit": {
+                    "description": "Unit of the metric value.",
+                    "notes": "Unit of the metric value.",
+                    "type": "string",
+                    "typeName": "DEFAULT"
+                }
+            }
+        },
+        "get.dto.alerts.AlertDTO$MetricValueDetails": {
+            "id": "get.dto.alerts.AlertDTO$MetricValueDetails",
+            "required": [],
+            "properties": {
+                "metricThresholdValue": {
+                    "description": "Threshold value of the metric that was specified in the policy at that given time.",
+                    "notes": "Threshold value of the metric that was specified in the policy at that given time.",
+                    "type": "string",
+                    "typeName": "DEFAULT"
+                },
+                "metricValue": {
+                    "description": "Actual value of the metric at that given time.",
+                    "notes": "Actual value of the metric at that given time.",
+                    "type": "string",
+                    "typeName": "DEFAULT"
+                },
+                "stateChangeTimeStampInUsecs": {
+                    "description": "Time at which the alert's state change occurred.",
+                    "format": "int64",
+                    "notes": "Time at which the alert's state change occurred.",
+                    "type": "integer",
+                    "typeName": "DEFAULT"
+                }
+            }
+        },
+        "get.dto.alerts.AlertDTO$SeverityTrail": {
+            "id": "get.dto.alerts.AlertDTO$SeverityTrail",
+            "required": [],
+            "properties": {
+                "severity": {
+                    "description": "Severity level of the alert. Can be INFO, WARNING or CRITICAL",
+                    "notes": "Severity level of the alert. Can be INFO, WARNING or CRITICAL",
+                    "type": "string",
+                    "typeName": "DEFAULT"
+                },
+                "severityChangeTimestampInUsecs": {
+                    "description": "Time at which the severity level change occurred",
+                    "format": "int64",
+                    "notes": "Time at which the severity level change occurred",
+                    "type": "integer",
+                    "typeName": "DEFAULT"
+                }
+            }
+        },
+        "get.dto.appliance.configuration.AlertConfigDTO": {
+            "id": "get.dto.appliance.configuration.AlertConfigDTO",
+            "description": "DTO representing the configuration of alerts",
+            "required": [],
+            "properties": {
+                "defaultNutanixEmail": {
+                    "description": "Default Nutanix email to which Alert emails would be sent",
+                    "type": "string",
+                    "typeName": "DEFAULT"
+                },
+                "emailConfigRules": {
+                    "description": "Rules for Email Configuration.",
+                    "items": {
+                        "$ref": "get.dto.appliance.configuration.AlertConfigDTO$EmailConfigurationRule"
+                    },
+                    "type": "array",
+                    "typeName": "DEFAULT"
+                },
+                "emailContactList": {
+                    "description": "List of email contacts.",
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": "array",
+                    "typeName": "EMAIL"
+                },
+                "emailTemplate": {
+                    "$ref": "get.dto.appliance.configuration.AlertConfigDTO$EmailTemplate",
+                    "description": "Email Template.",
+                    "typeName": "DEFAULT"
+                },
+                "enable": {
+                    "description": "Whether Alert emails should be enabled.",
+                    "type": "boolean",
+                    "typeName": "DEFAULT"
+                },
+                "enableDefaultNutanixEmail": {
+                    "description": "Whether Alert emails should be enabled.",
+                    "type": "boolean",
+                    "typeName": "DEFAULT"
+                },
+                "enableEmailDigest": {
+                    "description": "Whether Alert email digest should be enabled.",
+                    "type": "boolean",
+                    "typeName": "DEFAULT"
+                },
+                "smtpServer": {
+                    "$ref": "get.dto.appliance.configuration.SmtpServerDTO",
+                    "description": "SMTP Server used to send Alert Emails.",
+                    "typeName": "DEFAULT"
+                },
+                "tunnelDetails": {
+                    "$ref": "get.dto.appliance.configuration.RemoteTunnelDetailsDTO",
+                    "description": "Status of Remote Tunnel that is used to send Alert Emails.",
+                    "typeName": "DEFAULT"
+                }
+            }
+        },
+        "get.dto.appliance.configuration.AlertConfigDTO$EmailConfigurationRule": {
+            "id": "get.dto.appliance.configuration.AlertConfigDTO$EmailConfigurationRule",
+            "required": [],
+            "properties": {
+                "categories": {
+                    "description": "Categories to which this rule applies to.",
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": "array",
+                    "typeName": "DEFAULT"
+                },
+                "clusterUuids": {
+                    "description": "Cluster Uuids to which this rule applies to.",
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": "array",
+                    "typeName": "DEFAULT"
+                },
+                "includeGlobalEmailContactList": {
+                    "description": "Whether to include global email contact list.",
+                    "type": "boolean",
+                    "typeName": "DEFAULT"
+                },
+                "matchPhrases": {
+                    "description": "List of phrases to match the alert with.",
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": "array",
+                    "typeName": "DEFAULT"
+                },
+                "recipients": {
+                    "description": "List of recipients who will receive emails.",
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": "array",
+                    "typeName": "EMAIL"
+                },
+                "severities": {
+                    "description": "Severity to which this rule applies to.",
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": "array",
+                    "typeName": "DEFAULT"
+                }
+            }
+        },
+        "get.dto.appliance.configuration.AlertConfigDTO$EmailTemplate": {
+            "id": "get.dto.appliance.configuration.AlertConfigDTO$EmailTemplate",
+            "required": [],
+            "properties": {
+                "bodySuffix": {
+                    "description": "Email Body Suffix.",
+                    "type": "string",
+                    "typeName": "DEFAULT"
+                },
+                "subjectPrefix": {
+                    "description": "Email Subject Prefix.",
+                    "type": "string",
+                    "typeName": "DEFAULT"
+                }
+            }
+        },
+        "get.dto.appliance.configuration.HttpProxyDTO": {
+            "id": "get.dto.appliance.configuration.HttpProxyDTO",
+            "description": "http-proxy",
+            "required": [],
+            "properties": {
+                "address": {
+                    "description": "Address of the proxy",
+                    "type": "string",
+                    "typeName": "DEFAULT"
+                },
+                "name": {
+                    "description": "Proxy name.",
+                    "type": "string",
+                    "typeName": "DEFAULT"
+                },
+                "password": {
+                    "description": "Password for proxy authentication",
+                    "type": "string",
+                    "typeName": "DEFAULT"
+                },
+                "port": {
+                    "description": "Port on which proxy is binding",
+                    "format": "int32",
+                    "maximum": "65536",
+                    "minimum": "0",
+                    "notes": "Any port number which is in the range 0 - 65536",
+                    "type": "integer",
+                    "typeName": "DEFAULT"
+                },
+                "proxyTypes": {
+                    "description": "Proxy types to send applicable traffic",
+                    "items": {
+                        "enum": [
+                            "HTTP",
+                            "HTTPS",
+                            "SOCKS"
+                        ],
+                        "type": "string"
+                    },
+                    "notes": "Proxy types to send applicable traffic. Supports 'http' 'https', and 'socks' proxy configuration.",
+                    "type": "array",
+                    "typeName": "DEFAULT"
+                },
+                "username": {
+                    "description": "Username for proxy authentication",
+                    "type": "string",
+                    "typeName": "DEFAULT"
+                }
+            }
+        },
+        "get.dto.appliance.configuration.RemoteTunnelDetailsDTO": {
+            "id": "get.dto.appliance.configuration.RemoteTunnelDetailsDTO",
+            "required": [],
+            "properties": {
+                "connectionStatus": {
+                    "$ref": "get.dto.base.CommunicationStatusDTO"
+                },
+                "httpProxy": {
+                    "$ref": "get.dto.appliance.configuration.HttpProxyDTO"
+                },
+                "serviceCenter": {
+                    "$ref": "get.dto.appliance.configuration.ServiceCenterDTO"
+                },
+                "transportStatus": {
+                    "$ref": "get.dto.base.CommunicationStatusDTO"
+                }
+            }
+        },
+        "get.dto.appliance.configuration.ServiceCenterDTO": {
+            "id": "get.dto.appliance.configuration.ServiceCenterDTO",
+            "required": [],
+            "properties": {
+                "ipAddress": {
+                    "description": "Ip Address.",
+                    "type": "string",
+                    "typeName": "DEFAULT"
+                },
+                "name": {
+                    "description": "Name.",
+                    "type": "string",
+                    "typeName": "DEFAULT"
+                },
+                "port": {
+                    "description": "Port number.",
+                    "format": "int32",
+                    "maximum": "65536",
+                    "minimum": "0",
+                    "notes": "Any port number which is in the range 0 - 65536",
+                    "type": "integer",
+                    "typeName": "DEFAULT"
+                },
+                "username": {
+                    "description": "username.",
+                    "type": "string",
+                    "typeName": "DEFAULT"
+                }
+            }
+        },
+        "get.dto.appliance.configuration.SmtpServerDTO": {
+            "id": "get.dto.appliance.configuration.SmtpServerDTO",
+            "required": [],
+            "properties": {
+                "address": {
+                    "type": "string"
+                },
+                "emailStatus": {
+                    "$ref": "get.dto.base.CommunicationStatusDTO"
+                },
+                "fromEmailAddress": {
+                    "type": "string"
+                },
+                "password": {
+                    "type": "string"
+                },
+                "port": {
+                    "format": "int32",
+                    "type": "integer"
+                },
+                "secureMode": {
+                    "enum": [
+                        "STARTTLS",
+                        "SSL",
+                        "NONE"
+                    ],
+                    "type": "string"
+                },
+                "username": {
+                    "type": "string"
+                }
+            }
+        },
+        "get.dto.base.CommunicationStatusDTO": {
+            "id": "get.dto.base.CommunicationStatusDTO",
+            "required": [],
+            "properties": {
+                "lastChangedTimeStampUsecs": {
+                    "format": "int64",
+                    "type": "integer"
+                },
+                "lastCheckedTimeStampUsecs": {
+                    "format": "int64",
+                    "type": "integer"
+                },
+                "lastSuccessfulTransmissionTimeStampUsecs": {
+                    "format": "int64",
+                    "type": "integer"
+                },
+                "message": {
+                    "$ref": "get.dto.base.ParameterizedMessageDTO"
+                },
+                "status": {
+                    "enum": [
+                        "SUCCESS",
+                        "FAILED",
+                        "RETRYING",
+                        "UNKNOWN"
+                    ],
+                    "type": "string"
+                }
+            }
+        },
+        "get.dto.base.ParameterizedMessageDTO": {
+            "id": "get.dto.base.ParameterizedMessageDTO",
+            "required": [],
+            "properties": {
+                "attributes": {
+                    "$ref": "java.util.Map&lt;java.lang.String, java.lang.String&gt;"
+                },
+                "message": {
+                    "type": "string"
+                }
+            }
+        },
+        "java.util.Map&lt;java.lang.String, java.lang.String&gt;": {
+            "id": "java.util.Map&lt;java.lang.String, java.lang.String&gt;",
+            "required": [],
+            "properties": {}
+        },
+        "patch.dto.RequestDTO&lt;patch.dto.appliance.configuration.AlertConfigDTO&gt;": {
+            "id": "patch.dto.RequestDTO&lt;patch.dto.appliance.configuration.AlertConfigDTO&gt;",
+            "required": [],
+            "properties": {
+                "clusterUuid": {
+                    "type": "string"
+                },
+                "genericDTO": {
+                    "$ref": "patch.dto.appliance.configuration.AlertConfigDTO"
+                },
+                "operation": {
+                    "type": "string"
+                }
+            }
+        },
+        "patch.dto.appliance.configuration.AlertConfigDTO": {
+            "id": "patch.dto.appliance.configuration.AlertConfigDTO",
+            "description": "DTO representing the configuration of alerts",
+            "required": [],
+            "properties": {
+                "defaultNutanixEmail": {
+                    "description": "Default Nutanix email to which Alert emails would be sent",
+                    "type": "string",
+                    "typeName": "DEFAULT"
+                },
+                "emailConfigRules": {
+                    "description": "Rules for Email Configuration.",
+                    "items": {
+                        "$ref": "patch.dto.appliance.configuration.AlertConfigDTO$EmailConfigurationRule"
+                    },
+                    "type": "array",
+                    "typeName": "DEFAULT"
+                },
+                "emailContactList": {
+                    "description": "List of email contacts.",
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": "array",
+                    "typeName": "EMAIL"
+                },
+                "emailTemplate": {
+                    "$ref": "patch.dto.appliance.configuration.AlertConfigDTO$EmailTemplate",
+                    "description": "Email Template.",
+                    "typeName": "DEFAULT"
+                },
+                "enable": {
+                    "description": "Whether Alert emails should be enabled.",
+                    "type": "boolean",
+                    "typeName": "DEFAULT"
+                },
+                "enableDefaultNutanixEmail": {
+                    "description": "Whether Alert emails should be enabled.",
+                    "type": "boolean",
+                    "typeName": "DEFAULT"
+                },
+                "enableEmailDigest": {
+                    "description": "Whether Alert email digest should be enabled.",
+                    "type": "boolean",
+                    "typeName": "DEFAULT"
+                },
+                "smtpServer": {
+                    "$ref": "patch.dto.appliance.configuration.SmtpServerDTO",
+                    "description": "SMTP Server used to send Alert Emails.",
+                    "typeName": "DEFAULT"
+                },
+                "tunnelDetails": {
+                    "$ref": "patch.dto.appliance.configuration.RemoteTunnelDetailsDTO",
+                    "description": "Status of Remote Tunnel that is used to send Alert Emails.",
+                    "typeName": "DEFAULT"
+                }
+            }
+        },
+        "patch.dto.appliance.configuration.AlertConfigDTO$EmailConfigurationRule": {
+            "id": "patch.dto.appliance.configuration.AlertConfigDTO$EmailConfigurationRule",
+            "required": [
+                "recipients",
+                "severities",
+                "categories",
+                "clusterUuids"
+            ],
+            "properties": {
+                "categories": {
+                    "description": "Categories to which this rule applies to.",
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": "array",
+                    "typeName": "DEFAULT"
+                },
+                "clusterUuids": {
+                    "description": "Cluster Uuids to which this rule applies to.",
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": "array",
+                    "typeName": "DEFAULT"
+                },
+                "includeGlobalEmailContactList": {
+                    "description": "Whether to include global email contact list.",
+                    "type": "boolean",
+                    "typeName": "DEFAULT"
+                },
+                "matchPhrases": {
+                    "description": "List of phrases to match the alert with.",
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": "array",
+                    "typeName": "DEFAULT"
+                },
+                "recipients": {
+                    "description": "List of recipients who will receive emails.",
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": "array",
+                    "typeName": "EMAIL"
+                },
+                "severities": {
+                    "description": "Severity to which this rule applies to.",
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": "array",
+                    "typeName": "DEFAULT"
+                }
+            }
+        },
+        "patch.dto.appliance.configuration.AlertConfigDTO$EmailTemplate": {
+            "id": "patch.dto.appliance.configuration.AlertConfigDTO$EmailTemplate",
+            "required": [
+                "subjectPrefix",
+                "bodySuffix"
+            ],
+            "properties": {
+                "bodySuffix": {
+                    "description": "Email Body Suffix.",
+                    "type": "string",
+                    "typeName": "DEFAULT"
+                },
+                "subjectPrefix": {
+                    "description": "Email Subject Prefix.",
+                    "type": "string",
+                    "typeName": "DEFAULT"
+                }
+            }
+        },
+        "patch.dto.appliance.configuration.HttpProxyDTO": {
+            "id": "patch.dto.appliance.configuration.HttpProxyDTO",
+            "description": "http-proxy",
+            "required": [
+                "name"
+            ],
+            "properties": {
+                "address": {
+                    "description": "Address of the proxy",
+                    "type": "string",
+                    "typeName": "DEFAULT"
+                },
+                "name": {
+                    "description": "Proxy name.",
+                    "type": "string",
+                    "typeName": "DEFAULT"
+                },
+                "password": {
+                    "description": "Password for proxy authentication",
+                    "type": "string",
+                    "typeName": "DEFAULT"
+                },
+                "port": {
+                    "description": "Port on which proxy is binding",
+                    "format": "int32",
+                    "maximum": "65536",
+                    "minimum": "0",
+                    "notes": "Any port number which is in the range 0 - 65536",
+                    "type": "integer",
+                    "typeName": "DEFAULT"
+                },
+                "proxyTypes": {
+                    "description": "Proxy types to send applicable traffic",
+                    "items": {
+                        "enum": [
+                            "HTTP",
+                            "HTTPS",
+                            "SOCKS"
+                        ],
+                        "type": "string"
+                    },
+                    "notes": "Proxy types to send applicable traffic. Supports 'http' 'https', and 'socks' proxy configuration.",
+                    "type": "array",
+                    "typeName": "DEFAULT"
+                },
+                "username": {
+                    "description": "Username for proxy authentication",
+                    "type": "string",
+                    "typeName": "DEFAULT"
+                }
+            }
+        },
+        "patch.dto.appliance.configuration.RemoteTunnelDetailsDTO": {
+            "id": "patch.dto.appliance.configuration.RemoteTunnelDetailsDTO",
+            "required": [],
+            "properties": {
+                "connectionStatus": {
+                    "$ref": "patch.dto.base.CommunicationStatusDTO"
+                },
+                "httpProxy": {
+                    "$ref": "patch.dto.appliance.configuration.HttpProxyDTO"
+                },
+                "serviceCenter": {
+                    "$ref": "patch.dto.appliance.configuration.ServiceCenterDTO"
+                },
+                "transportStatus": {
+                    "$ref": "patch.dto.base.CommunicationStatusDTO"
+                }
+            }
+        },
+        "patch.dto.appliance.configuration.ServiceCenterDTO": {
+            "id": "patch.dto.appliance.configuration.ServiceCenterDTO",
+            "required": [
+                "name",
+                "ipAddress",
+                "username",
+                "port"
+            ],
+            "properties": {
+                "ipAddress": {
+                    "description": "Ip Address.",
+                    "type": "string",
+                    "typeName": "DEFAULT"
+                },
+                "name": {
+                    "description": "Name.",
+                    "type": "string",
+                    "typeName": "DEFAULT"
+                },
+                "port": {
+                    "description": "Port number.",
+                    "format": "int32",
+                    "maximum": "65536",
+                    "minimum": "0",
+                    "notes": "Any port number which is in the range 0 - 65536",
+                    "type": "integer",
+                    "typeName": "DEFAULT"
+                },
+                "username": {
+                    "description": "username.",
+                    "type": "string",
+                    "typeName": "DEFAULT"
+                }
+            }
+        },
+        "patch.dto.appliance.configuration.SmtpServerDTO": {
+            "id": "patch.dto.appliance.configuration.SmtpServerDTO",
+            "required": [],
+            "properties": {
+                "address": {
+                    "type": "string"
+                },
+                "emailStatus": {
+                    "$ref": "patch.dto.base.CommunicationStatusDTO"
+                },
+                "fromEmailAddress": {
+                    "type": "string"
+                },
+                "password": {
+                    "type": "string"
+                },
+                "port": {
+                    "format": "int32",
+                    "type": "integer"
+                },
+                "secureMode": {
+                    "enum": [
+                        "STARTTLS",
+                        "SSL",
+                        "NONE"
+                    ],
+                    "type": "string"
+                },
+                "username": {
+                    "type": "string"
+                }
+            }
+        },
+        "patch.dto.base.CommunicationStatusDTO": {
+            "id": "patch.dto.base.CommunicationStatusDTO",
+            "required": [],
+            "properties": {
+                "lastChangedTimeStampUsecs": {
+                    "format": "int64",
+                    "type": "integer"
+                },
+                "lastCheckedTimeStampUsecs": {
+                    "format": "int64",
+                    "type": "integer"
+                },
+                "lastSuccessfulTransmissionTimeStampUsecs": {
+                    "format": "int64",
+                    "type": "integer"
+                },
+                "message": {
+                    "$ref": "patch.dto.base.ParameterizedMessageDTO"
+                },
+                "status": {
+                    "enum": [
+                        "SUCCESS",
+                        "FAILED",
+                        "RETRYING",
+                        "UNKNOWN"
+                    ],
+                    "type": "string"
+                }
+            }
+        },
+        "patch.dto.base.ParameterizedMessageDTO": {
+            "id": "patch.dto.base.ParameterizedMessageDTO",
+            "required": [],
+            "properties": {
+                "attributes": {
+                    "$ref": "java.util.Map&lt;java.lang.String, java.lang.String&gt;"
+                },
+                "message": {
+                    "type": "string"
+                }
+            }
+        },
+        "update.dto.appliance.configuration.AlertConfigDTO": {
+            "id": "update.dto.appliance.configuration.AlertConfigDTO",
+            "description": "DTO representing the configuration of alerts",
+            "required": [],
+            "properties": {
+                "defaultNutanixEmail": {
+                    "description": "Default Nutanix email to which Alert emails would be sent",
+                    "type": "string",
+                    "typeName": "DEFAULT"
+                },
+                "emailConfigRules": {
+                    "description": "Rules for Email Configuration.",
+                    "items": {
+                        "$ref": "update.dto.appliance.configuration.AlertConfigDTO$EmailConfigurationRule"
+                    },
+                    "type": "array",
+                    "typeName": "DEFAULT"
+                },
+                "emailContactList": {
+                    "description": "List of email contacts.",
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": "array",
+                    "typeName": "EMAIL"
+                },
+                "emailTemplate": {
+                    "$ref": "update.dto.appliance.configuration.AlertConfigDTO$EmailTemplate",
+                    "description": "Email Template.",
+                    "typeName": "DEFAULT"
+                },
+                "enable": {
+                    "description": "Whether Alert emails should be enabled.",
+                    "type": "boolean",
+                    "typeName": "DEFAULT"
+                },
+                "enableDefaultNutanixEmail": {
+                    "description": "Whether Alert emails should be enabled.",
+                    "type": "boolean",
+                    "typeName": "DEFAULT"
+                },
+                "enableEmailDigest": {
+                    "description": "Whether Alert email digest should be enabled.",
+                    "type": "boolean",
+                    "typeName": "DEFAULT"
+                },
+                "smtpServer": {
+                    "$ref": "update.dto.appliance.configuration.SmtpServerDTO",
+                    "description": "SMTP Server used to send Alert Emails.",
+                    "typeName": "DEFAULT"
+                },
+                "tunnelDetails": {
+                    "$ref": "update.dto.appliance.configuration.RemoteTunnelDetailsDTO",
+                    "description": "Status of Remote Tunnel that is used to send Alert Emails.",
+                    "typeName": "DEFAULT"
+                }
+            }
+        },
+        "update.dto.appliance.configuration.AlertConfigDTO$EmailConfigurationRule": {
+            "id": "update.dto.appliance.configuration.AlertConfigDTO$EmailConfigurationRule",
+            "required": [],
+            "properties": {
+                "categories": {
+                    "description": "Categories to which this rule applies to.",
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": "array",
+                    "typeName": "DEFAULT"
+                },
+                "clusterUuids": {
+                    "description": "Cluster Uuids to which this rule applies to.",
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": "array",
+                    "typeName": "DEFAULT"
+                },
+                "includeGlobalEmailContactList": {
+                    "description": "Whether to include global email contact list.",
+                    "type": "boolean",
+                    "typeName": "DEFAULT"
+                },
+                "matchPhrases": {
+                    "description": "List of phrases to match the alert with.",
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": "array",
+                    "typeName": "DEFAULT"
+                },
+                "recipients": {
+                    "description": "List of recipients who will receive emails.",
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": "array",
+                    "typeName": "EMAIL"
+                },
+                "severities": {
+                    "description": "Severity to which this rule applies to.",
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": "array",
+                    "typeName": "DEFAULT"
+                }
+            }
+        },
+        "update.dto.appliance.configuration.AlertConfigDTO$EmailTemplate": {
+            "id": "update.dto.appliance.configuration.AlertConfigDTO$EmailTemplate",
+            "required": [],
+            "properties": {
+                "bodySuffix": {
+                    "description": "Email Body Suffix.",
+                    "type": "string",
+                    "typeName": "DEFAULT"
+                },
+                "subjectPrefix": {
+                    "description": "Email Subject Prefix.",
+                    "type": "string",
+                    "typeName": "DEFAULT"
+                }
+            }
+        },
+        "update.dto.appliance.configuration.HttpProxyDTO": {
+            "id": "update.dto.appliance.configuration.HttpProxyDTO",
+            "description": "http-proxy",
+            "required": [
+                "name",
+                "address",
+                "port"
+            ],
+            "properties": {
+                "address": {
+                    "description": "Address of the proxy",
+                    "type": "string",
+                    "typeName": "DEFAULT"
+                },
+                "name": {
+                    "description": "Proxy name.",
+                    "type": "string",
+                    "typeName": "DEFAULT"
+                },
+                "password": {
+                    "description": "Password for proxy authentication",
+                    "type": "string",
+                    "typeName": "DEFAULT"
+                },
+                "port": {
+                    "description": "Port on which proxy is binding",
+                    "format": "int32",
+                    "maximum": "65536",
+                    "minimum": "0",
+                    "notes": "Any port number which is in the range 0 - 65536",
+                    "type": "integer",
+                    "typeName": "DEFAULT"
+                },
+                "proxyTypes": {
+                    "description": "Proxy types to send applicable traffic",
+                    "items": {
+                        "enum": [
+                            "HTTP",
+                            "HTTPS",
+                            "SOCKS"
+                        ],
+                        "type": "string"
+                    },
+                    "notes": "Proxy types to send applicable traffic. Supports 'http' 'https', and 'socks' proxy configuration.",
+                    "type": "array",
+                    "typeName": "DEFAULT"
+                },
+                "username": {
+                    "description": "Username for proxy authentication",
+                    "type": "string",
+                    "typeName": "DEFAULT"
+                }
+            }
+        },
+        "update.dto.appliance.configuration.RemoteTunnelDetailsDTO": {
+            "id": "update.dto.appliance.configuration.RemoteTunnelDetailsDTO",
+            "required": [],
+            "properties": {
+                "connectionStatus": {
+                    "$ref": "update.dto.base.CommunicationStatusDTO"
+                },
+                "httpProxy": {
+                    "$ref": "update.dto.appliance.configuration.HttpProxyDTO"
+                },
+                "serviceCenter": {
+                    "$ref": "update.dto.appliance.configuration.ServiceCenterDTO"
+                },
+                "transportStatus": {
+                    "$ref": "update.dto.base.CommunicationStatusDTO"
+                }
+            }
+        },
+        "update.dto.appliance.configuration.ServiceCenterDTO": {
+            "id": "update.dto.appliance.configuration.ServiceCenterDTO",
+            "required": [
+                "name",
+                "ipAddress",
+                "username",
+                "port"
+            ],
+            "properties": {
+                "ipAddress": {
+                    "description": "Ip Address.",
+                    "type": "string",
+                    "typeName": "DEFAULT"
+                },
+                "name": {
+                    "description": "Name.",
+                    "type": "string",
+                    "typeName": "DEFAULT"
+                },
+                "port": {
+                    "description": "Port number.",
+                    "format": "int32",
+                    "maximum": "65536",
+                    "minimum": "0",
+                    "notes": "Any port number which is in the range 0 - 65536",
+                    "type": "integer",
+                    "typeName": "DEFAULT"
+                },
+                "username": {
+                    "description": "username.",
+                    "type": "string",
+                    "typeName": "DEFAULT"
+                }
+            }
+        },
+        "update.dto.appliance.configuration.SmtpServerDTO": {
+            "id": "update.dto.appliance.configuration.SmtpServerDTO",
+            "required": [],
+            "properties": {
+                "address": {
+                    "type": "string"
+                },
+                "emailStatus": {
+                    "$ref": "update.dto.base.CommunicationStatusDTO"
+                },
+                "fromEmailAddress": {
+                    "type": "string"
+                },
+                "password": {
+                    "type": "string"
+                },
+                "port": {
+                    "format": "int32",
+                    "type": "integer"
+                },
+                "secureMode": {
+                    "enum": [
+                        "STARTTLS",
+                        "SSL",
+                        "NONE"
+                    ],
+                    "type": "string"
+                },
+                "username": {
+                    "type": "string"
+                }
+            }
+        },
+        "update.dto.base.CommunicationStatusDTO": {
+            "id": "update.dto.base.CommunicationStatusDTO",
+            "required": [],
+            "properties": {
+                "lastChangedTimeStampUsecs": {
+                    "format": "int64",
+                    "type": "integer"
+                },
+                "lastCheckedTimeStampUsecs": {
+                    "format": "int64",
+                    "type": "integer"
+                },
+                "lastSuccessfulTransmissionTimeStampUsecs": {
+                    "format": "int64",
+                    "type": "integer"
+                },
+                "message": {
+                    "$ref": "update.dto.base.ParameterizedMessageDTO"
+                },
+                "status": {
+                    "enum": [
+                        "SUCCESS",
+                        "FAILED",
+                        "RETRYING",
+                        "UNKNOWN"
+                    ],
+                    "type": "string"
+                }
+            }
+        },
+        "update.dto.base.ParameterizedMessageDTO": {
+            "id": "update.dto.base.ParameterizedMessageDTO",
+            "required": [],
+            "properties": {
+                "attributes": {
+                    "$ref": "java.util.Map&lt;java.lang.String, java.lang.String&gt;"
+                },
+                "message": {
+                    "type": "string"
+                }
+            }
+        }
+    }
+}

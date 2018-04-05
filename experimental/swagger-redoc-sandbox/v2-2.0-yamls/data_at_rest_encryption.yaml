@@ -1,0 +1,269 @@
+swagger: '2.0'
+info:
+  version: 'v2.0'
+  title: Swagger API
+host: any_cvm_ip:9440
+basePath: /PrismGateway/services/rest/v2.0
+schemes:
+- https
+consumes:
+- application/json
+produces:
+- application/json
+paths:
+  /data_at_rest_encryption/:
+    get:
+      description: Get encryption status.
+      summary: getEncryptionStatus
+      operationId: DataAtRestEncryptionGet
+      produces:
+      - application/json
+      parameters: []
+      responses:
+        200:
+          description: ''
+          schema:
+            $ref: '#/definitions/Get.dto.encryption.clusterencryptionstatusdto'
+          examples: {}
+      x-unitTests: []
+      x-operation-settings:
+        CollectParameters: false
+        AllowDynamicQueryParameters: false
+        AllowDynamicFormParameters: false
+        IsMultiContentStreaming: false
+  /data_at_rest_encryption/enable:
+    post:
+      description: Enable encryption.
+      summary: enableEncryption
+      operationId: DataAtRestEncryptionEnablePost
+      produces:
+      - application/json
+      parameters:
+      - name: body
+        in: body
+        required: true
+        description: Desired cluster protection status
+        schema:
+          $ref: '#/definitions/Create.dto.encryption.enableencryptiondto'
+      responses:
+        200:
+          description: ''
+          schema:
+            $ref: '#/definitions/Create.dto.primitivedto&lt;java.lang.boolean&gt;'
+          examples: {}
+      x-unitTests: []
+      x-operation-settings:
+        CollectParameters: false
+        AllowDynamicQueryParameters: false
+        AllowDynamicFormParameters: false
+        IsMultiContentStreaming: false
+  /data_at_rest_encryption/recent_certificate_test_results:
+    get:
+      description: Get recent certificate test results.
+      summary: getRecentCertificateTestResults
+      operationId: DataAtRestEncryptionRecentCertificateTestResultsGet
+      produces:
+      - application/json
+      parameters:
+      - name: host_uuids
+        in: query
+        required: false
+        type: array
+        uniqueItems: false
+        items:
+          type: string
+        description: List of Host uuids
+      - name: kms_server_names
+        in: query
+        required: false
+        type: array
+        uniqueItems: false
+        items:
+          type: string
+        description: List of Key Management Server names
+      responses:
+        200:
+          description: ''
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/Get.dto.encryption.kmstestresultsdto'
+          examples: {}
+      x-unitTests: []
+      x-operation-settings:
+        CollectParameters: false
+        AllowDynamicQueryParameters: false
+        AllowDynamicFormParameters: false
+        IsMultiContentStreaming: false
+  /data_at_rest_encryption/rekey:
+    post:
+      description: Sets new passwords for encryption capable disks.
+      summary: rekey
+      operationId: DataAtRestEncryptionRekeyPost
+      produces:
+      - application/json
+      parameters:
+      - name: body
+        in: body
+        required: true
+        description: List of disk uuids on which rekey needs to be performed
+        schema:
+          type: array
+          items:
+            type: string
+      responses:
+        200:
+          description: ''
+          schema:
+            $ref: '#/definitions/Create.dto.primitivedto&lt;java.lang.boolean&gt;'
+          examples: {}
+      x-unitTests: []
+      x-operation-settings:
+        CollectParameters: false
+        AllowDynamicQueryParameters: false
+        AllowDynamicFormParameters: false
+        IsMultiContentStreaming: false
+  /data_at_rest_encryption/test:
+    post:
+      description: Test encryption configuration.
+      summary: testEncryptionConfiguration
+      operationId: DataAtRestEncryptionTestPost
+      produces:
+      - application/json
+      parameters:
+      - name: body
+        in: body
+        required: true
+        description: List of host ids and key management server names on which test to be performed
+        schema:
+          $ref: '#/definitions/Create.dto.encryption.testencryptionconfigurationrequestdto'
+      responses:
+        200:
+          description: ''
+          schema:
+            $ref: '#/definitions/Create.dto.encryption.testencryptionconfigurationresponsedto'
+          examples: {}
+      x-unitTests: []
+      x-operation-settings:
+        CollectParameters: false
+        AllowDynamicQueryParameters: false
+        AllowDynamicFormParameters: false
+        IsMultiContentStreaming: false
+definitions:
+  Create.dto.primitivedto&lt;java.lang.boolean&gt;:
+    title: create.dto.PrimitiveDTO&lt;java.lang.Boolean&gt;
+    type: object
+    properties:
+      value:
+        description: ''
+        type: boolean
+  SoftwareEncryptionScope:
+    title: software_encryption_scope
+    example: CLUSTER
+    x-enum-elements:
+    - name: CLUSTER
+      description: ''
+    - name: STORAGE_CONTAINER
+      description: ''
+    type: string
+    enum:
+    - CLUSTER
+    - STORAGE_CONTAINER
+  Create.dto.encryption.enableencryptiondto:
+    title: create.dto.encryption.EnableEncryptionDTO
+    type: object
+    properties:
+      software_encryption_scope:
+        $ref: '#/definitions/SoftwareEncryptionScope'
+      value:
+        description: ''
+        type: boolean
+  Create.dto.encryption.testencryptionconfigurationrequestdto:
+    title: create.dto.encryption.TestEncryptionConfigurationRequestDTO
+    type: object
+    properties:
+      node_id_list:
+        description: ''
+        type: array
+        items:
+          type: string
+      node_uuid_list:
+        description: ''
+        type: array
+        items:
+          type: string
+      server_list:
+        description: ''
+        type: array
+        items:
+          type: string
+  Create.dto.encryption.testencryptionconfigurationresponsedto:
+    title: create.dto.encryption.TestEncryptionConfigurationResponseDTO
+    type: object
+    properties:
+      has_failures:
+        description: ''
+        type: boolean
+  Get.dto.encryption.clusterencryptionstatusdto:
+    title: get.dto.encryption.ClusterEncryptionStatusDTO
+    type: object
+    properties:
+      desired_password_protection:
+        description: ''
+        type: boolean
+      disk_encryption_status:
+        $ref: '#/definitions/Java.util.map&lt;java.lang.string,Java.lang.boolean&gt;'
+      is_cluster_empty:
+        description: ''
+        type: boolean
+      is_ready_for_password_protection:
+        description: ''
+        type: boolean
+      is_ready_for_software_encryption:
+        description: ''
+        type: boolean
+      software_encryption_scope:
+        $ref: '#/definitions/SoftwareEncryptionScope'
+      storage_container_encryption_status:
+        $ref: '#/definitions/Java.util.map&lt;java.lang.string,Java.lang.boolean&gt;'
+  Get.dto.encryption.kmsstatusperipaddressdto:
+    title: get.dto.encryption.KMSStatusPerIpAddressDTO
+    type: object
+    properties:
+      ip_address:
+        description: Ip address of the Key Management Server.
+        type: string
+      message:
+        description: Message
+        type: string
+      port:
+        description: Port of the Key Management Server.
+        type: integer
+        format: int64
+      test_status:
+        description: Test status.
+        type: string
+  Get.dto.encryption.kmstestresultsdto:
+    title: get.dto.encryption.KMSTestResultsDTO
+    type: object
+    properties:
+      key_management_server_name:
+        description: Name of the Key Management Server.
+        type: string
+      key_management_server_uuid:
+        description: Uuid of the Key Management Server.
+        type: string
+      node_id:
+        description: Service VM uuid of the node.
+        type: string
+      node_uuid:
+        description: ''
+        type: string
+      result_list:
+        description: List of test results, per ip address.
+        type: array
+        items:
+          $ref: '#/definitions/Get.dto.encryption.kmsstatusperipaddressdto'
+  Java.util.map&lt;java.lang.string,Java.lang.boolean&gt;:
+    title: java.util.Map&lt;java.lang.String, java.lang.Boolean&gt;
+    type: object

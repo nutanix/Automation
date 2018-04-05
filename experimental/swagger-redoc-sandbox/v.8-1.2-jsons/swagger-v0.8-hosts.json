@@ -1,0 +1,160 @@
+{
+    "apiVersion": "v0.8",
+    "swaggerVersion": "1.2",
+    "basePath": "https://any_cvm_ip:9440/api/nutanix/v0.8",
+    "resourcePath": "/hosts",
+    "produces": [
+        "application/json"
+    ],
+    "consumes": [
+        "application/json"
+    ],
+    "apis": [
+        {
+            "internal": false,
+            "path": "/hosts/{hostid}/enter_maintenance_mode",
+            "operations": [
+                {
+                    "deprecated": "false",
+                    "internal": false,
+                    "method": "POST",
+                    "summary": "Put a host in maintenance mode.",
+                    "notes": "Put a host in maintenance mode. <br/><br/>It can be specified if Virtual Machines currently running on the host need to be powered off, live migrated or cold migrated. The host will be marked as unschedulable, so that no new Virtual Machines can be instantiated on it. Subsequently, an attempt is made to evacuate VMs from the host. <br/><br/>If the evacuation attempt fails (e.g., because there are insufficient resources available elsewhere in the cluster), the host will remain in the entering maintenance mode state, where it is marked unschedulable, waiting for user remediation. <br/><br/>This operation is idempotent and can be run again with different options like powering off the Virtual Machines, live or cold migrating them. <br/><br/>This is also an asynchronous operation that results in the creation of a task object. <br/><br/>The UUID of this task object is returned as the response of this operation. This task can be monitored by using the /tasks/poll API.",
+                    "type": "create.dto.acropolis.ReturnValueDTO$TaskIdDTO",
+                    "nickname": "enterMaintenanceMode",
+                    "parameters": [
+                        {
+                            "name": "hostid",
+                            "description": "UUID of host to put in maintenance mode",
+                            "required": true,
+                            "allowMultiple": false,
+                            "paramType": "path",
+                            "type": "string"
+                        },
+                        {
+                            "description": "Maintenance mode options",
+                            "required": true,
+                            "allowMultiple": false,
+                            "paramType": "body",
+                            "type": "create.dto.acropolis.MaintenanceModeDTO"
+                        }
+                    ],
+                    "responseMessages": [
+                        {
+                            "code": 500,
+                            "message": "Any internal exception while performing this operation"
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "internal": false,
+            "path": "/hosts/{hostid}/exit_maintenance_mode",
+            "operations": [
+                {
+                    "deprecated": "false",
+                    "internal": false,
+                    "method": "POST",
+                    "summary": "Pull a host out of maintenance mode or abort a prior attempt.",
+                    "notes": "Pull a host out of maintenance mode or abort a prior attempt to enter maintenance mode even if the attempt is ongoing. <br/><br/>This is an idempotent operation. If the host is no longer in maintenance mode, this command has no effect. <br/><br/>This is an asynchronous operation that results in the creation of a task object. The UUID of this task object is returned as the response of this operation. This task can be monitored by using the /tasks/poll API. <br/><br/>If a logical timestamp is specified, then this operation will be rejected if the logical timestamp specified is not the value of the host logical timestamp. The logical timestamp can be obtained from the host object.",
+                    "type": "create.dto.PrimitiveDTO&lt;java.lang.Boolean&gt;",
+                    "nickname": "exitMaintenanceMode",
+                    "parameters": [
+                        {
+                            "name": "hostid",
+                            "description": "UUID of host to pull out of maintenance mode",
+                            "required": true,
+                            "allowMultiple": false,
+                            "paramType": "path",
+                            "type": "string"
+                        },
+                        {
+                            "description": "Logical timestamp associated with host object",
+                            "required": false,
+                            "allowMultiple": false,
+                            "paramType": "body",
+                            "type": "create.dto.acropolis.RequestValueDTO$LogicalTimestampDTO"
+                        }
+                    ],
+                    "responseMessages": [
+                        {
+                            "code": 500,
+                            "message": "Any internal exception while performing this operation"
+                        }
+                    ]
+                }
+            ]
+        }
+    ],
+    "models": {
+        "create.dto.PrimitiveDTO&lt;java.lang.Boolean&gt;": {
+            "id": "create.dto.PrimitiveDTO&lt;java.lang.Boolean&gt;",
+            "required": [],
+            "properties": {
+                "value": {
+                    "type": "boolean"
+                }
+            }
+        },
+        "create.dto.acropolis.MaintenanceModeDTO": {
+            "id": "create.dto.acropolis.MaintenanceModeDTO",
+            "required": [],
+            "properties": {
+                "evacuationOption": {
+                    "description": "Indicates the action we take to evacuate Virtual Machines powered on the host. Virtual Machines can be either powered off, live migrated or cold migrated. ",
+                    "enum": [
+                        "POWER_OFF",
+                        "COLD_MIGRATE",
+                        "LIVE_MIGRATE"
+                    ],
+                    "notes": "VM Evacuation action.",
+                    "type": "string",
+                    "typeName": "DEFAULT"
+                },
+                "logicalTimestamp": {
+                    "description": "Logical timestamp that may be provided for consistency. This is an optional field. The current value for the logical timestamp can be obtained from the host object.",
+                    "format": "int64",
+                    "notes": "Logical timestamp provided for consistency.",
+                    "type": "integer",
+                    "typeName": "DEFAULT"
+                },
+                "nonMigratableVmOption": {
+                    "description": "Indicates the action to take for non migratable VMs.Non migratable VMs like ones with GPUs assigned can choose to be ACPI powered off or fail the maintenance mode.",
+                    "enum": [
+                        "BLOCK",
+                        "ACPI_SHUTDOWN_AND_POWER_OFF"
+                    ],
+                    "notes": "Indicates the action to take for non migratable VMs.",
+                    "type": "string",
+                    "typeName": "DEFAULT"
+                }
+            }
+        },
+        "create.dto.acropolis.RequestValueDTO$LogicalTimestampDTO": {
+            "id": "create.dto.acropolis.RequestValueDTO$LogicalTimestampDTO",
+            "required": [],
+            "properties": {
+                "logicalTimestamp": {
+                    "description": "Logical timestamp that may be provided for consistency.",
+                    "format": "int64",
+                    "notes": "Logical timestamp provided for consistency.",
+                    "type": "integer",
+                    "typeName": "DEFAULT"
+                }
+            }
+        },
+        "create.dto.acropolis.ReturnValueDTO$TaskIdDTO": {
+            "id": "create.dto.acropolis.ReturnValueDTO$TaskIdDTO",
+            "required": [],
+            "properties": {
+                "taskUuid": {
+                    "description": "UUID of the task.",
+                    "notes": "UUID of the task.",
+                    "type": "string",
+                    "typeName": "DEFAULT"
+                }
+            }
+        }
+    }
+}

@@ -1,0 +1,3515 @@
+{
+    "apiVersion": "v1",
+    "swaggerVersion": "1.2",
+    "basePath": "https://any_cvm_ip:9440/PrismGateway/services/rest/v1",
+    "resourcePath": "/cluster",
+    "produces": [
+        "application/json"
+    ],
+    "consumes": [
+        "application/json"
+    ],
+    "apis": [
+        {
+            "internal": false,
+            "path": "/cluster/",
+            "operations": [
+                {
+                    "deprecated": "false",
+                    "internal": false,
+                    "method": "GET",
+                    "summary": "Get Cluster details.",
+                    "notes": "Get the details of the cluster.",
+                    "type": "get.dto.appliance.configuration.ClusterDTO",
+                    "nickname": "getClusterInfo",
+                    "parameters": [],
+                    "responseMessages": []
+                },
+                {
+                    "deprecated": "false",
+                    "internal": false,
+                    "method": "PATCH",
+                    "summary": "Modify Cluster params.",
+                    "notes": "Modify the params of the cluster.",
+                    "type": "patch.dto.PrimitiveDTO&lt;java.lang.Boolean&gt;",
+                    "nickname": "patchClusterParams",
+                    "parameters": [
+                        {
+                            "description": "A Cluster instance",
+                            "required": true,
+                            "allowMultiple": false,
+                            "paramType": "body",
+                            "type": "patch.dto.RequestDTO&lt;patch.dto.appliance.configuration.ClusterDTO&gt;"
+                        }
+                    ],
+                    "responseMessages": [
+                        {
+                            "code": 500,
+                            "message": "Any internal exception while performing this operation"
+                        }
+                    ]
+                },
+                {
+                    "deprecated": "false",
+                    "internal": false,
+                    "method": "PUT",
+                    "summary": "Update Cluster params.",
+                    "notes": "Update the params of the cluster.",
+                    "type": "update.dto.PrimitiveDTO&lt;java.lang.Boolean&gt;",
+                    "nickname": "editClusterParams",
+                    "parameters": [
+                        {
+                            "description": "A Cluster instance",
+                            "required": true,
+                            "allowMultiple": false,
+                            "paramType": "body",
+                            "type": "update.dto.appliance.configuration.ClusterDTO"
+                        }
+                    ],
+                    "responseMessages": [
+                        {
+                            "code": 500,
+                            "message": "Any internal exception while performing this operation"
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "internal": false,
+            "path": "/cluster/metro_witness",
+            "operations": [
+                {
+                    "deprecated": "false",
+                    "internal": false,
+                    "method": "POST",
+                    "summary": "Add Witness VM details",
+                    "notes": "Add witness VM details.",
+                    "type": "create.dto.dr.WitnessSiteDTO",
+                    "nickname": "addMAWitness",
+                    "parameters": [
+                        {
+                            "description": "Witness VM details",
+                            "required": true,
+                            "allowMultiple": false,
+                            "paramType": "body",
+                            "type": "create.dto.dr.WitnessSiteDTO"
+                        },
+                        {
+                            "name": "testOnly",
+                            "description": "Witness VM details",
+                            "required": false,
+                            "allowMultiple": false,
+                            "paramType": "query",
+                            "type": "boolean"
+                        }
+                    ],
+                    "responseMessages": [
+                        {
+                            "code": 500,
+                            "message": "Any internal exception while performing this operation"
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "internal": false,
+            "path": "/cluster/metro_witness/",
+            "operations": [
+                {
+                    "deprecated": "false",
+                    "internal": false,
+                    "method": "GET",
+                    "summary": "List All Metro Availability Witnesses",
+                    "notes": "List All Metro Availability Witnesses",
+                    "type": "array",
+                    "items": {
+                        "$ref": "get.dto.dr.WitnessSiteDTO"
+                    },
+                    "nickname": "getAllMAWitnesses",
+                    "parameters": [],
+                    "responseMessages": [
+                        {
+                            "code": 500,
+                            "message": "Any internal exception while performing this operation"
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "internal": false,
+            "path": "/cluster/metro_witness/{uuid}",
+            "operations": [
+                {
+                    "deprecated": "false",
+                    "internal": false,
+                    "method": "DELETE",
+                    "summary": "Delete a Metro Availability Witness",
+                    "notes": "Delete a Metro Availability Witness",
+                    "type": "delete.dto.PrimitiveDTO&lt;java.lang.Boolean&gt;",
+                    "nickname": "removeWitnessSite",
+                    "parameters": [
+                        {
+                            "name": "uuid",
+                            "description": "MA Witness uuid",
+                            "required": true,
+                            "allowMultiple": false,
+                            "paramType": "path",
+                            "type": "string"
+                        },
+                        {
+                            "name": "recover",
+                            "description": "recover from an unsuccessful delete operation",
+                            "required": false,
+                            "allowMultiple": false,
+                            "paramType": "query",
+                            "type": "boolean"
+                        }
+                    ],
+                    "responseMessages": [
+                        {
+                            "code": 500,
+                            "message": "Any internal exception while performing this operation"
+                        }
+                    ]
+                },
+                {
+                    "deprecated": "false",
+                    "internal": false,
+                    "method": "PUT",
+                    "summary": "Update a Metro Availability Witness",
+                    "notes": "Update a Metro Availability Witness",
+                    "type": "update.dto.dr.WitnessSiteDTO",
+                    "nickname": "updateWitnessSite",
+                    "parameters": [
+                        {
+                            "name": "uuid",
+                            "description": "MA Witness uuid",
+                            "required": true,
+                            "allowMultiple": false,
+                            "paramType": "path",
+                            "type": "string"
+                        },
+                        {
+                            "description": "MA Witness update details",
+                            "required": true,
+                            "allowMultiple": false,
+                            "paramType": "body",
+                            "type": "update.dto.dr.WitnessSiteDTO$UpdateWitnessSiteDTO"
+                        }
+                    ],
+                    "responseMessages": [
+                        {
+                            "code": 500,
+                            "message": "Any internal exception while performing this operation"
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "internal": false,
+            "path": "/cluster/name_servers",
+            "operations": [
+                {
+                    "deprecated": "false",
+                    "internal": false,
+                    "method": "GET",
+                    "summary": "Get the list of Name Servers.",
+                    "notes": "Get the list of Name Servers configured on the cluster.",
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    },
+                    "nickname": "getNameServers",
+                    "parameters": [],
+                    "responseMessages": [
+                        {
+                            "code": 500,
+                            "message": "Any internal exception while performing this operation"
+                        }
+                    ]
+                },
+                {
+                    "deprecated": "false",
+                    "internal": false,
+                    "method": "POST",
+                    "summary": "Add name server.",
+                    "notes": "Add the server to the name servers configured on the cluster.",
+                    "type": "create.dto.PrimitiveDTO&lt;java.lang.Boolean&gt;",
+                    "nickname": "addNameServer",
+                    "parameters": [
+                        {
+                            "description": "Name of a name server",
+                            "required": true,
+                            "allowMultiple": false,
+                            "paramType": "body",
+                            "type": "create.dto.PrimitiveDTO&lt;java.lang.String&gt;"
+                        }
+                    ],
+                    "responseMessages": [
+                        {
+                            "code": 500,
+                            "message": "Any internal exception while performing this operation"
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "internal": false,
+            "path": "/cluster/name_servers/{nameServer}",
+            "operations": [
+                {
+                    "deprecated": "false",
+                    "internal": false,
+                    "method": "DELETE",
+                    "summary": "Delete the specified Name Server.",
+                    "notes": "Delete a Name Server with the specified name.",
+                    "type": "delete.dto.PrimitiveDTO&lt;java.lang.Boolean&gt;",
+                    "nickname": "removeNameServer",
+                    "parameters": [
+                        {
+                            "name": "nameServer",
+                            "description": "Name of a name server",
+                            "required": true,
+                            "allowMultiple": false,
+                            "paramType": "path",
+                            "type": "string"
+                        }
+                    ],
+                    "responseMessages": [
+                        {
+                            "code": 500,
+                            "message": "Any internal exception while performing this operation"
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "internal": false,
+            "path": "/cluster/nfs_whitelist",
+            "operations": [
+                {
+                    "deprecated": "false",
+                    "internal": false,
+                    "method": "GET",
+                    "summary": "Get NFS subnet whitelist.",
+                    "notes": "Get the NFS subnet whitelist on the cluster.",
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    },
+                    "nickname": "getNfsSubnetWhitelist",
+                    "parameters": [],
+                    "responseMessages": [
+                        {
+                            "code": 500,
+                            "message": "Any internal exception while performing this operation"
+                        }
+                    ]
+                },
+                {
+                    "deprecated": "false",
+                    "internal": false,
+                    "method": "POST",
+                    "summary": "Add NFS subnet whitelist entry.",
+                    "notes": "Add the address to the NFS subnet whitelist.",
+                    "type": "create.dto.PrimitiveDTO&lt;java.lang.Boolean&gt;",
+                    "nickname": "addNfsSubnetWhitelist",
+                    "parameters": [
+                        {
+                            "description": "NFS Whilelist",
+                            "required": true,
+                            "allowMultiple": false,
+                            "paramType": "body",
+                            "type": "create.dto.PrimitiveDTO&lt;java.lang.String&gt;"
+                        }
+                    ],
+                    "responseMessages": [
+                        {
+                            "code": 500,
+                            "message": "Any internal exception while performing this operation"
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "internal": false,
+            "path": "/cluster/nfs_whitelist/{name:.+}",
+            "operations": [
+                {
+                    "deprecated": "false",
+                    "internal": false,
+                    "method": "DELETE",
+                    "summary": "Delete NFS the specified subnet whitelist entry.",
+                    "notes": "Delete an address from the NFS subnet whitelist.",
+                    "type": "delete.dto.PrimitiveDTO&lt;java.lang.Boolean&gt;",
+                    "nickname": "removeNfsSubnetWhitelist",
+                    "parameters": [
+                        {
+                            "name": "name",
+                            "description": "NFS Whitelist",
+                            "required": true,
+                            "allowMultiple": false,
+                            "paramType": "path",
+                            "type": "string"
+                        }
+                    ],
+                    "responseMessages": [
+                        {
+                            "code": 500,
+                            "message": "Any internal exception while performing this operation"
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "internal": false,
+            "path": "/cluster/ntp_servers",
+            "operations": [
+                {
+                    "deprecated": "false",
+                    "internal": false,
+                    "method": "GET",
+                    "summary": "Get the list of NTP servers.",
+                    "notes": "Get the list of NTP servers configured on the cluster.",
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    },
+                    "nickname": "getNtpServers",
+                    "parameters": [],
+                    "responseMessages": [
+                        {
+                            "code": 500,
+                            "message": "Any internal exception while performing this operation"
+                        }
+                    ]
+                },
+                {
+                    "deprecated": "false",
+                    "internal": false,
+                    "method": "POST",
+                    "summary": "Add NTP server.",
+                    "notes": "Add the server to the NTP servers configured on the cluster.",
+                    "type": "create.dto.PrimitiveDTO&lt;java.lang.Boolean&gt;",
+                    "nickname": "addNtpServer",
+                    "parameters": [
+                        {
+                            "description": "Name of NTP server",
+                            "required": true,
+                            "allowMultiple": false,
+                            "paramType": "body",
+                            "type": "create.dto.PrimitiveDTO&lt;java.lang.String&gt;"
+                        }
+                    ],
+                    "responseMessages": [
+                        {
+                            "code": 500,
+                            "message": "Any internal exception while performing this operation"
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "internal": false,
+            "path": "/cluster/ntp_servers/{ntpServer}",
+            "operations": [
+                {
+                    "deprecated": "false",
+                    "internal": false,
+                    "method": "DELETE",
+                    "summary": "Delete an NTP server.",
+                    "notes": "Delete an NTP server with the specified name.",
+                    "type": "delete.dto.PrimitiveDTO&lt;java.lang.Boolean&gt;",
+                    "nickname": "removeNtpServer",
+                    "parameters": [
+                        {
+                            "name": "ntpServer",
+                            "description": "Name of NTP server",
+                            "required": true,
+                            "allowMultiple": false,
+                            "paramType": "path",
+                            "type": "string"
+                        }
+                    ],
+                    "responseMessages": [
+                        {
+                            "code": 500,
+                            "message": "Any internal exception while performing this operation"
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "internal": false,
+            "path": "/cluster/public_keys",
+            "operations": [
+                {
+                    "deprecated": "false",
+                    "internal": false,
+                    "method": "GET",
+                    "summary": "Get the list of Public Keys.",
+                    "notes": "Get the list of Public Keys configured in the cluster.",
+                    "type": "array",
+                    "items": {
+                        "$ref": "get.dto.appliance.configuration.ClusterDTO$PublicKeyDTO"
+                    },
+                    "nickname": "getPublicKeys",
+                    "parameters": [],
+                    "responseMessages": [
+                        {
+                            "code": 500,
+                            "message": "Any internal exception while performing this operation"
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "internal": false,
+            "path": "/cluster/public_keys/",
+            "operations": [
+                {
+                    "deprecated": "false",
+                    "internal": false,
+                    "method": "POST",
+                    "summary": "Add a Public Key.",
+                    "notes": "Add a Public Key to the cluster.",
+                    "type": "create.dto.appliance.configuration.ClusterDTO$PublicKeyDTO",
+                    "nickname": "addPublicKey",
+                    "parameters": [
+                        {
+                            "description": "A Public Key instance",
+                            "required": true,
+                            "allowMultiple": false,
+                            "paramType": "body",
+                            "type": "create.dto.appliance.configuration.ClusterDTO$PublicKeyDTO"
+                        }
+                    ],
+                    "responseMessages": [
+                        {
+                            "code": 500,
+                            "message": "Any internal exception while performing this operation"
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "internal": false,
+            "path": "/cluster/public_keys/{name}",
+            "operations": [
+                {
+                    "deprecated": "false",
+                    "internal": false,
+                    "method": "DELETE",
+                    "summary": "Delete a Public Key.",
+                    "notes": "Delete a Public Key with the specified name.",
+                    "type": "delete.dto.PrimitiveDTO&lt;java.lang.Boolean&gt;",
+                    "nickname": "deletePublicKey",
+                    "parameters": [
+                        {
+                            "name": "name",
+                            "description": "Name of the Public Key",
+                            "required": true,
+                            "allowMultiple": false,
+                            "paramType": "path",
+                            "type": "string"
+                        }
+                    ],
+                    "responseMessages": [
+                        {
+                            "code": 500,
+                            "message": "Any internal exception while performing this operation"
+                        }
+                    ]
+                },
+                {
+                    "deprecated": "false",
+                    "internal": false,
+                    "method": "GET",
+                    "summary": "Get a Public Key.",
+                    "notes": "Get a Public Key with the specified name.",
+                    "type": "get.dto.appliance.configuration.ClusterDTO$PublicKeyDTO",
+                    "nickname": "getPublicKey",
+                    "parameters": [
+                        {
+                            "name": "name",
+                            "description": "Name of the Public Key",
+                            "required": true,
+                            "allowMultiple": false,
+                            "paramType": "path",
+                            "type": "string"
+                        }
+                    ],
+                    "responseMessages": [
+                        {
+                            "code": 500,
+                            "message": "Any internal exception while performing this operation"
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "internal": false,
+            "path": "/cluster/rackable_units",
+            "operations": [
+                {
+                    "deprecated": "false",
+                    "internal": false,
+                    "method": "GET",
+                    "summary": "Get the list of Rackable Units.",
+                    "notes": "Get the list of Rackable Units configured on the cluster.",
+                    "type": "array",
+                    "items": {
+                        "$ref": "get.dto.appliance.configuration.RackableUnitDTO"
+                    },
+                    "nickname": "getRackableUnits",
+                    "parameters": [],
+                    "responseMessages": [
+                        {
+                            "code": 500,
+                            "message": "Any internal exception while performing this operation"
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "internal": false,
+            "path": "/cluster/rackable_units/{id}",
+            "operations": [
+                {
+                    "deprecated": "false",
+                    "internal": false,
+                    "method": "DELETE",
+                    "summary": "Delete the specified Rackable Unit.",
+                    "notes": "Delete a Rackable Unit with the specified id.",
+                    "type": "delete.dto.PrimitiveDTO&lt;java.lang.Boolean&gt;",
+                    "nickname": "deleteRackableUnit",
+                    "parameters": [
+                        {
+                            "name": "id",
+                            "description": "Id of a Rackable Unit",
+                            "required": true,
+                            "allowMultiple": false,
+                            "paramType": "path",
+                            "type": "string"
+                        }
+                    ],
+                    "responseMessages": [
+                        {
+                            "code": 500,
+                            "message": "Any internal exception while performing this operation"
+                        }
+                    ]
+                },
+                {
+                    "deprecated": "false",
+                    "internal": false,
+                    "method": "GET",
+                    "summary": "Get the specified Rackable Unit.",
+                    "notes": "Get a Rackable Unit with the specified id.",
+                    "type": "get.dto.appliance.configuration.RackableUnitDTO",
+                    "nickname": "getRackableUnit",
+                    "parameters": [
+                        {
+                            "name": "id",
+                            "description": "Id of a Rackable Unit",
+                            "required": true,
+                            "allowMultiple": false,
+                            "paramType": "path",
+                            "type": "string"
+                        }
+                    ],
+                    "responseMessages": [
+                        {
+                            "code": 500,
+                            "message": "Any internal exception while performing this operation"
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "internal": false,
+            "path": "/cluster/remote_support",
+            "operations": [
+                {
+                    "deprecated": "false",
+                    "internal": false,
+                    "method": "GET",
+                    "summary": "Get Remote Support settings.",
+                    "notes": "Get the status of Remote Support settings on the cluster.",
+                    "type": "get.dto.appliance.configuration.RemoteSupportConfigDTO",
+                    "nickname": "getRemoteSupportStatus",
+                    "parameters": [],
+                    "responseMessages": [
+                        {
+                            "code": 500,
+                            "message": "Any internal exception while performing this operation"
+                        }
+                    ]
+                },
+                {
+                    "deprecated": "false",
+                    "internal": false,
+                    "method": "PUT",
+                    "summary": "Update Remote Support settings.",
+                    "notes": "Update the Remote Support settings on the cluster.",
+                    "type": "update.dto.PrimitiveDTO&lt;java.lang.Boolean&gt;",
+                    "nickname": "editRemoteSupport",
+                    "parameters": [
+                        {
+                            "description": "A Timed Bool instance",
+                            "required": true,
+                            "allowMultiple": false,
+                            "paramType": "body",
+                            "type": "update.dto.appliance.configuration.TimedBoolDTO"
+                        }
+                    ],
+                    "responseMessages": [
+                        {
+                            "code": 500,
+                            "message": "Any internal exception while performing this operation"
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "internal": false,
+            "path": "/cluster/search/",
+            "operations": [
+                {
+                    "deprecated": "false",
+                    "internal": false,
+                    "method": "GET",
+                    "summary": "Get spotlight search results.",
+                    "notes": "Perform a spotlight search on the cluster.",
+                    "type": "array",
+                    "items": {
+                        "$ref": "get.dto.appliance.configuration.SpotlightSearchResultDTO"
+                    },
+                    "nickname": "doSpotlightSearch",
+                    "parameters": [
+                        {
+                            "name": "searchString",
+                            "description": "Search string",
+                            "required": true,
+                            "allowMultiple": false,
+                            "paramType": "query",
+                            "type": "string"
+                        },
+                        {
+                            "name": "entityTypes",
+                            "description": "Entity types",
+                            "required": false,
+                            "allowMultiple": false,
+                            "paramType": "query",
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        {
+                            "name": "fieldNames",
+                            "description": "Field Names",
+                            "required": false,
+                            "allowMultiple": false,
+                            "paramType": "query",
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        {
+                            "name": "maxCount",
+                            "description": "Maximum entities to retrieve, the default value is 100",
+                            "required": false,
+                            "allowMultiple": false,
+                            "paramType": "query",
+                            "type": "integer"
+                        }
+                    ],
+                    "responseMessages": [
+                        {
+                            "code": 500,
+                            "message": "Any internal exception while performing this operation"
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "internal": false,
+            "path": "/cluster/smtp",
+            "operations": [
+                {
+                    "deprecated": "false",
+                    "internal": false,
+                    "method": "DELETE",
+                    "summary": "Delete SMTP server config.",
+                    "notes": "Delete the SMTP server configuration.",
+                    "type": "delete.dto.PrimitiveDTO&lt;java.lang.Boolean&gt;",
+                    "nickname": "removeSmtpServer",
+                    "parameters": [],
+                    "responseMessages": [
+                        {
+                            "code": 500,
+                            "message": "Any internal exception while performing this operation"
+                        }
+                    ]
+                },
+                {
+                    "deprecated": "false",
+                    "internal": false,
+                    "method": "GET",
+                    "summary": "Get the SMTP server config.",
+                    "notes": "Get the SMTP server configuration.",
+                    "type": "get.dto.appliance.configuration.SmtpServerDTO",
+                    "nickname": "getSmtpServer",
+                    "parameters": [],
+                    "responseMessages": [
+                        {
+                            "code": 500,
+                            "message": "Any internal exception while performing this operation"
+                        }
+                    ]
+                },
+                {
+                    "deprecated": "false",
+                    "internal": false,
+                    "method": "PATCH",
+                    "summary": "Modify the SMTP server config.",
+                    "notes": "Modify the SMTP server configuration.",
+                    "type": "patch.dto.appliance.configuration.SmtpServerDTO",
+                    "nickname": "patchSmtpServer",
+                    "parameters": [
+                        {
+                            "description": "An SMTP Server instance",
+                            "required": true,
+                            "allowMultiple": false,
+                            "paramType": "body",
+                            "type": "patch.dto.RequestDTO&lt;patch.dto.appliance.configuration.SmtpServerDTO&gt;"
+                        }
+                    ],
+                    "responseMessages": [
+                        {
+                            "code": 500,
+                            "message": "Any internal exception while performing this operation"
+                        }
+                    ]
+                },
+                {
+                    "deprecated": "false",
+                    "internal": false,
+                    "method": "PUT",
+                    "summary": "Update the SMTP server config.",
+                    "notes": "Update the SMTP server configuration.",
+                    "type": "update.dto.appliance.configuration.SmtpServerDTO",
+                    "nickname": "updateSmtpServer",
+                    "parameters": [
+                        {
+                            "description": "An SMTP Server instance",
+                            "required": false,
+                            "allowMultiple": false,
+                            "paramType": "body",
+                            "type": "update.dto.appliance.configuration.SmtpServerDTO"
+                        }
+                    ],
+                    "responseMessages": [
+                        {
+                            "code": 500,
+                            "message": "Any internal exception while performing this operation"
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "internal": false,
+            "path": "/cluster/smtp/security_modes",
+            "operations": [
+                {
+                    "deprecated": "false",
+                    "internal": false,
+                    "method": "GET",
+                    "summary": "Get the SMTP security modes.",
+                    "notes": "Get the list of supported security modes for the SMTP server.",
+                    "type": "array",
+                    "items": {
+                        "enum": [
+                            "STARTTLS",
+                            "SSL",
+                            "NONE"
+                        ],
+                        "type": "string"
+                    },
+                    "nickname": "getSmtpServerSecurityModeType",
+                    "parameters": [],
+                    "responseMessages": [
+                        {
+                            "code": 500,
+                            "message": "Any internal exception while performing this operation"
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "internal": false,
+            "path": "/cluster/stats/",
+            "operations": [
+                {
+                    "deprecated": "false",
+                    "internal": false,
+                    "method": "GET",
+                    "summary": "Get the list of Cluster stats.",
+                    "notes": "Get the stats for the specified metrics. If start time and end time are included in the query string, then historical stats are retrieved. Otherwise, the latest statsare retrieved.",
+                    "type": "get.base.StatsResponse",
+                    "nickname": "getClusterStats",
+                    "parameters": [
+                        {
+                            "name": "metrics",
+                            "description": "List of metrics",
+                            "required": true,
+                            "allowMultiple": false,
+                            "paramType": "query",
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        {
+                            "name": "startTimeInUsecs",
+                            "description": "Start time in microseconds",
+                            "required": true,
+                            "allowMultiple": false,
+                            "paramType": "query",
+                            "type": "integer"
+                        },
+                        {
+                            "name": "endTimeInUsecs",
+                            "description": "End time in microseconds",
+                            "required": true,
+                            "allowMultiple": false,
+                            "paramType": "query",
+                            "type": "integer"
+                        },
+                        {
+                            "name": "intervalInSecs",
+                            "description": "Sampling interval of stats",
+                            "required": true,
+                            "allowMultiple": false,
+                            "paramType": "query",
+                            "type": "integer"
+                        }
+                    ],
+                    "responseMessages": [
+                        {
+                            "code": 500,
+                            "message": "Any internal exception while performing this operation"
+                        }
+                    ]
+                }
+            ]
+        }
+    ],
+    "models": {
+        "create.dto.PrimitiveDTO&lt;java.lang.Boolean&gt;": {
+            "id": "create.dto.PrimitiveDTO&lt;java.lang.Boolean&gt;",
+            "required": [],
+            "properties": {
+                "value": {
+                    "type": "boolean"
+                }
+            }
+        },
+        "create.dto.PrimitiveDTO&lt;java.lang.String&gt;": {
+            "id": "create.dto.PrimitiveDTO&lt;java.lang.String&gt;",
+            "required": [],
+            "properties": {
+                "value": {
+                    "type": "string"
+                }
+            }
+        },
+        "create.dto.appliance.configuration.ClusterDTO$PublicKeyDTO": {
+            "id": "create.dto.appliance.configuration.ClusterDTO$PublicKeyDTO",
+            "required": [],
+            "properties": {
+                "key": {
+                    "type": "string"
+                },
+                "name": {
+                    "type": "string"
+                }
+            }
+        },
+        "create.dto.dr.WitnessSiteDTO": {
+            "id": "create.dto.dr.WitnessSiteDTO",
+            "required": [
+                "markedForRemoval",
+                "ipAddresses",
+                "username",
+                "password"
+            ],
+            "properties": {
+                "clusterName": {
+                    "type": "string"
+                },
+                "clusterTimestampUsecs": {
+                    "format": "int64",
+                    "type": "integer"
+                },
+                "clusterUuid": {
+                    "type": "string"
+                },
+                "ipAddresses": {
+                    "description": "Unique identifier for the Metro Availability Witness Site, it can be either iqn or ip address",
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": "array",
+                    "typeName": "DEFAULT"
+                },
+                "markedForRemoval": {
+                    "description": "flag indicating whether the witness site is deleted or not",
+                    "type": "boolean",
+                    "typeName": "DEFAULT"
+                },
+                "nosFullVersion": {
+                    "type": "string"
+                },
+                "nosVersion": {
+                    "type": "string"
+                },
+                "password": {
+                    "description": "password used to communicate with Metro Availability Witness Site",
+                    "type": "string",
+                    "typeName": "DEFAULT"
+                },
+                "username": {
+                    "description": "username used to communicate with Metro Availability Witness Site",
+                    "type": "string",
+                    "typeName": "DEFAULT"
+                },
+                "uuid": {
+                    "description": "Unique identifier of the Metro Availability Witness Site",
+                    "type": "string",
+                    "typeName": "DEFAULT"
+                },
+                "witnessName": {
+                    "type": "string"
+                }
+            }
+        },
+        "delete.dto.PrimitiveDTO&lt;java.lang.Boolean&gt;": {
+            "id": "delete.dto.PrimitiveDTO&lt;java.lang.Boolean&gt;",
+            "required": [],
+            "properties": {
+                "value": {
+                    "type": "boolean"
+                }
+            }
+        },
+        "get.base.StatsResponse": {
+            "id": "get.base.StatsResponse",
+            "required": [],
+            "properties": {
+                "statsSpecificResponses": {
+                    "items": {
+                        "$ref": "get.base.StatsResponse$StatsSpecificResponse"
+                    },
+                    "type": "array"
+                }
+            }
+        },
+        "get.base.StatsResponse$StatsSpecificResponse": {
+            "id": "get.base.StatsResponse$StatsSpecificResponse",
+            "required": [],
+            "properties": {
+                "intervalInSecs": {
+                    "format": "int64",
+                    "type": "integer"
+                },
+                "message": {
+                    "type": "string"
+                },
+                "metric": {
+                    "type": "string"
+                },
+                "startTimeInUsecs": {
+                    "format": "int64",
+                    "type": "integer"
+                },
+                "successful": {
+                    "type": "boolean"
+                },
+                "values": {
+                    "items": {
+                        "format": "int64",
+                        "type": "integer"
+                    },
+                    "type": "array"
+                }
+            }
+        },
+        "get.dto.alerts.AlertSummaryDTO": {
+            "id": "get.dto.alerts.AlertSummaryDTO",
+            "required": [],
+            "properties": {
+                "alertSummaries": {
+                    "$ref": "java.util.Map&lt;get.dto.alerts.AlertDTO$AlertSeverity, get.base.EntityCollection&lt;get.dto.alerts.AlertDTO&gt;&gt;"
+                },
+                "count": {
+                    "format": "int64",
+                    "type": "integer"
+                }
+            }
+        },
+        "get.dto.appliance.configuration.ClusterDTO": {
+            "id": "get.dto.appliance.configuration.ClusterDTO",
+            "required": [],
+            "properties": {
+                "alertSummary": {
+                    "$ref": "get.dto.alerts.AlertSummaryDTO"
+                },
+                "allHypervNodesInFailoverCluster": {
+                    "description": "If the cluster includes Hyper-V nodes, then this property indicates whether all the Hyper-V nodes in the NOS cluster (that are not marked for removal)are a part of a Hyper-V failover cluster",
+                    "type": "boolean",
+                    "typeName": "DEFAULT"
+                },
+                "blockSerials": {
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": "array"
+                },
+                "cloudcluster": {
+                    "type": "boolean"
+                },
+                "clusterArch": {
+                    "type": "string"
+                },
+                "clusterDataState": {
+                    "$ref": "get.dto.multicluster.ClusterDataStateDTO"
+                },
+                "clusterExternalDataServicesIPAddress": {
+                    "type": "string"
+                },
+                "clusterExternalIPAddress": {
+                    "type": "string"
+                },
+                "clusterFunctions": {
+                    "description": "This field describes the type of cluster",
+                    "items": {
+                        "enum": [
+                            "NDFS",
+                            "MULTICLUSTER",
+                            "CLOUDDATAGATEWAY",
+                            "MINERVA",
+                            "SINGLE_NODE",
+                            "TWO_NODE"
+                        ],
+                        "type": "string"
+                    },
+                    "type": "array",
+                    "typeName": "DEFAULT",
+                    "uniqueItems": "true"
+                },
+                "clusterGpus": {
+                    "description": "Gpus present on the cluster",
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": "array",
+                    "typeName": "DEFAULT"
+                },
+                "clusterIncarnationId": {
+                    "format": "int64",
+                    "type": "integer"
+                },
+                "clusterRedundancyState": {
+                    "$ref": "get.dto.appliance.configuration.ClusterRedundancyStateDTO"
+                },
+                "clusterUuid": {
+                    "description": " Uuid of the cluster this entity belongs to",
+                    "type": "string",
+                    "typeName": "DEFAULT"
+                },
+                "commonCriteriaMode": {
+                    "type": "boolean"
+                },
+                "credential": {
+                    "$ref": "get.dto.hyperv.CredentialDTO",
+                    "description": "If the cluster includes Hyper-V nodes, then this propertyindicates the credential for the account that has permissions to modify the domain account representing the NOS cluster",
+                    "typeName": "DEFAULT"
+                },
+                "disableDegradedNodeMonitoring": {
+                    "type": "boolean"
+                },
+                "domain": {
+                    "description": "If the cluster includes Hyper-V nodes, then this property indicates the AD domain name that this cluster is a part of",
+                    "type": "string",
+                    "typeName": "DEFAULT"
+                },
+                "enableLockDown": {
+                    "type": "boolean"
+                },
+                "enableOnDiskDedup": {
+                    "type": "boolean"
+                },
+                "enablePasswordRemoteLoginToCluster": {
+                    "type": "boolean"
+                },
+                "enableShadowClones": {
+                    "type": "boolean"
+                },
+                "enforceRackableUnitAwarePlacement": {
+                    "description": "Indicates whether RackableUnit (RU) aware placement has been enforced.",
+                    "type": "boolean",
+                    "typeName": "DEFAULT"
+                },
+                "externalSubnet": {
+                    "type": "string"
+                },
+                "fingerprintContentCachePercentage": {
+                    "format": "int32",
+                    "type": "integer"
+                },
+                "fullVersion": {
+                    "type": "string"
+                },
+                "globalNfsWhiteList": {
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": "array"
+                },
+                "gpuDriverVersion": {
+                    "description": "Host driver version of the GPU",
+                    "type": "string",
+                    "typeName": "DEFAULT"
+                },
+                "hasSelfEncryptingDrive": {
+                    "type": "boolean"
+                },
+                "healthSummary": {
+                    "$ref": "get.dto.health.check.HealthSummaryDTO"
+                },
+                "httpProxies": {
+                    "items": {
+                        "$ref": "get.dto.appliance.configuration.HttpProxyDTO"
+                    },
+                    "type": "array"
+                },
+                "hypervisorSecurityComplianceConfig": {
+                    "$ref": "get.dto.appliance.configuration.ClusterDTO$HypervisorSecurityComplianceConfigDTO"
+                },
+                "hypervisorTypes": {
+                    "items": {
+                        "enum": [
+                            "kVMware",
+                            "kXen",
+                            "kHyperv",
+                            "kKvm",
+                            "kAmazonWebServices",
+                            "kVCenter",
+                            "kAcropolis",
+                            "kSCVMM",
+                            "kNull"
+                        ],
+                        "type": "string"
+                    },
+                    "type": "array",
+                    "uniqueItems": "true"
+                },
+                "id": {
+                    "type": "string"
+                },
+                "internalSubnet": {
+                    "type": "string"
+                },
+                "isSspEnabled": {
+                    "type": "boolean"
+                },
+                "isUpgradeInProgress": {
+                    "type": "boolean"
+                },
+                "iscsiConfig": {
+                    "$ref": "get.dto.appliance.configuration.ClusterDTO$IscsiConfig",
+                    "description": "Cluster wide iscsi configuration",
+                    "typeName": "DEFAULT"
+                },
+                "managementServers": {
+                    "items": {
+                        "$ref": "get.dto.uhura.ManagementServerInfoDTO"
+                    },
+                    "type": "array"
+                },
+                "multicluster": {
+                    "type": "boolean"
+                },
+                "name": {
+                    "type": "string"
+                },
+                "nameServers": {
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": "array"
+                },
+                "nccVersion": {
+                    "type": "string"
+                },
+                "nosClusterAndHostsDomainJoined": {
+                    "description": "If the cluster includes Hyper-V nodes, then this property indicates whether the NOS cluster and the constituent hosts are all joined to the same domain",
+                    "type": "boolean",
+                    "typeName": "DEFAULT"
+                },
+                "ntpServers": {
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": "array"
+                },
+                "numNodes": {
+                    "format": "int64",
+                    "type": "integer"
+                },
+                "operationMode": {
+                    "enum": [
+                        "NORMAL",
+                        "OVERRIDE",
+                        "READONLY",
+                        "STANDALONE",
+                        "SWITCH_TO_TWO_NODE"
+                    ],
+                    "type": "string"
+                },
+                "publicKeys": {
+                    "items": {
+                        "$ref": "get.dto.appliance.configuration.ClusterDTO$PublicKeyDTO"
+                    },
+                    "type": "array"
+                },
+                "rackableUnits": {
+                    "items": {
+                        "$ref": "get.dto.appliance.configuration.RackableUnitDTO"
+                    },
+                    "type": "array"
+                },
+                "securityComplianceConfig": {
+                    "$ref": "get.dto.appliance.configuration.ClusterDTO$SecurityComplianceConfigDTO"
+                },
+                "serviceCenters": {
+                    "items": {
+                        "$ref": "get.dto.appliance.configuration.ServiceCenterDTO"
+                    },
+                    "type": "array"
+                },
+                "smtpServer": {
+                    "$ref": "get.dto.appliance.configuration.SmtpServerDTO"
+                },
+                "ssdPinningPercentageLimit": {
+                    "description": "This field describes the allowable percentage pinning on the ssd",
+                    "format": "int32",
+                    "type": "integer",
+                    "typeName": "DEFAULT"
+                },
+                "stats": {
+                    "$ref": "java.util.Map&lt;java.lang.String, java.lang.String&gt;"
+                },
+                "storageType": {
+                    "description": "This field describes the storage type of cluster",
+                    "enum": [
+                        "ALL_FLASH",
+                        "MIXED",
+                        "ALL_HDD"
+                    ],
+                    "type": "string",
+                    "typeName": "DEFAULT"
+                },
+                "supportVerbosityType": {
+                    "enum": [
+                        "NOTHING",
+                        "BASIC",
+                        "BASIC_COREDUMP"
+                    ],
+                    "type": "string"
+                },
+                "targetVersion": {
+                    "type": "string"
+                },
+                "timezone": {
+                    "type": "string"
+                },
+                "usageStats": {
+                    "$ref": "java.util.Map&lt;java.lang.String, java.lang.String&gt;"
+                },
+                "uuid": {
+                    "type": "string"
+                },
+                "version": {
+                    "type": "string"
+                }
+            }
+        },
+        "get.dto.appliance.configuration.ClusterDTO$HypervisorSecurityComplianceConfigDTO": {
+            "id": "get.dto.appliance.configuration.ClusterDTO$HypervisorSecurityComplianceConfigDTO",
+            "required": [],
+            "properties": {}
+        },
+        "get.dto.appliance.configuration.ClusterDTO$IscsiConfig": {
+            "id": "get.dto.appliance.configuration.ClusterDTO$IscsiConfig",
+            "required": [],
+            "properties": {
+                "externalClientEnabled": {
+                    "description": "Indicates whether external iscsi initiators are enabled or not",
+                    "type": "boolean",
+                    "typeName": "DEFAULT"
+                }
+            }
+        },
+        "get.dto.appliance.configuration.ClusterDTO$PublicKeyDTO": {
+            "id": "get.dto.appliance.configuration.ClusterDTO$PublicKeyDTO",
+            "required": [],
+            "properties": {
+                "key": {
+                    "type": "string"
+                },
+                "name": {
+                    "type": "string"
+                }
+            }
+        },
+        "get.dto.appliance.configuration.ClusterDTO$SecurityComplianceConfigDTO": {
+            "id": "get.dto.appliance.configuration.ClusterDTO$SecurityComplianceConfigDTO",
+            "required": [],
+            "properties": {
+                "enableSNMPv3Only": {
+                    "type": "boolean"
+                }
+            }
+        },
+        "get.dto.appliance.configuration.ClusterRedundancyStateDTO": {
+            "id": "get.dto.appliance.configuration.ClusterRedundancyStateDTO",
+            "required": [],
+            "properties": {
+                "currentRedundancyFactor": {
+                    "format": "int32",
+                    "type": "integer"
+                },
+                "desiredRedundancyFactor": {
+                    "format": "int32",
+                    "type": "integer"
+                },
+                "redundancyStatus": {
+                    "$ref": "java.util.Map&lt;java.lang.String, java.lang.Boolean&gt;"
+                }
+            }
+        },
+        "get.dto.appliance.configuration.HttpProxyDTO": {
+            "id": "get.dto.appliance.configuration.HttpProxyDTO",
+            "description": "http-proxy",
+            "required": [],
+            "properties": {
+                "address": {
+                    "description": "Address of the proxy",
+                    "type": "string",
+                    "typeName": "DEFAULT"
+                },
+                "name": {
+                    "description": "Proxy name.",
+                    "type": "string",
+                    "typeName": "DEFAULT"
+                },
+                "password": {
+                    "description": "Password for proxy authentication",
+                    "type": "string",
+                    "typeName": "DEFAULT"
+                },
+                "port": {
+                    "description": "Port on which proxy is binding",
+                    "format": "int32",
+                    "maximum": "65536",
+                    "minimum": "0",
+                    "notes": "Any port number which is in the range 0 - 65536",
+                    "type": "integer",
+                    "typeName": "DEFAULT"
+                },
+                "proxyTypes": {
+                    "description": "Proxy types to send applicable traffic",
+                    "items": {
+                        "enum": [
+                            "HTTP",
+                            "HTTPS",
+                            "SOCKS"
+                        ],
+                        "type": "string"
+                    },
+                    "notes": "Proxy types to send applicable traffic. Supports 'http' 'https', and 'socks' proxy configuration.",
+                    "type": "array",
+                    "typeName": "DEFAULT"
+                },
+                "username": {
+                    "description": "Username for proxy authentication",
+                    "type": "string",
+                    "typeName": "DEFAULT"
+                }
+            }
+        },
+        "get.dto.appliance.configuration.RackableUnitDTO": {
+            "id": "get.dto.appliance.configuration.RackableUnitDTO",
+            "required": [],
+            "properties": {
+                "id": {
+                    "format": "int64",
+                    "type": "integer"
+                },
+                "location": {
+                    "type": "string"
+                },
+                "model": {
+                    "type": "string"
+                },
+                "modelName": {
+                    "type": "string"
+                },
+                "nodeUuids": {
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": "array"
+                },
+                "nodes": {
+                    "items": {
+                        "format": "int64",
+                        "type": "integer"
+                    },
+                    "type": "array"
+                },
+                "positions": {
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": "array"
+                },
+                "rackableUnitUuid": {
+                    "type": "string"
+                },
+                "serial": {
+                    "type": "string"
+                }
+            }
+        },
+        "get.dto.appliance.configuration.RemoteSupportConfigDTO": {
+            "id": "get.dto.appliance.configuration.RemoteSupportConfigDTO",
+            "required": [],
+            "properties": {
+                "enable": {
+                    "$ref": "get.dto.appliance.configuration.TimedBoolDTO"
+                },
+                "tunnelDetails": {
+                    "$ref": "get.dto.appliance.configuration.RemoteTunnelDetailsDTO"
+                }
+            }
+        },
+        "get.dto.appliance.configuration.RemoteTunnelDetailsDTO": {
+            "id": "get.dto.appliance.configuration.RemoteTunnelDetailsDTO",
+            "required": [],
+            "properties": {
+                "connectionStatus": {
+                    "$ref": "get.dto.base.CommunicationStatusDTO"
+                },
+                "httpProxy": {
+                    "$ref": "get.dto.appliance.configuration.HttpProxyDTO"
+                },
+                "serviceCenter": {
+                    "$ref": "get.dto.appliance.configuration.ServiceCenterDTO"
+                },
+                "transportStatus": {
+                    "$ref": "get.dto.base.CommunicationStatusDTO"
+                }
+            }
+        },
+        "get.dto.appliance.configuration.ServiceCenterDTO": {
+            "id": "get.dto.appliance.configuration.ServiceCenterDTO",
+            "required": [],
+            "properties": {
+                "ipAddress": {
+                    "description": "Ip Address.",
+                    "type": "string",
+                    "typeName": "DEFAULT"
+                },
+                "name": {
+                    "description": "Name.",
+                    "type": "string",
+                    "typeName": "DEFAULT"
+                },
+                "port": {
+                    "description": "Port number.",
+                    "format": "int32",
+                    "maximum": "65536",
+                    "minimum": "0",
+                    "notes": "Any port number which is in the range 0 - 65536",
+                    "type": "integer",
+                    "typeName": "DEFAULT"
+                },
+                "username": {
+                    "description": "username.",
+                    "type": "string",
+                    "typeName": "DEFAULT"
+                }
+            }
+        },
+        "get.dto.appliance.configuration.SmtpServerDTO": {
+            "id": "get.dto.appliance.configuration.SmtpServerDTO",
+            "required": [],
+            "properties": {
+                "address": {
+                    "type": "string"
+                },
+                "emailStatus": {
+                    "$ref": "get.dto.base.CommunicationStatusDTO"
+                },
+                "fromEmailAddress": {
+                    "type": "string"
+                },
+                "password": {
+                    "type": "string"
+                },
+                "port": {
+                    "format": "int32",
+                    "type": "integer"
+                },
+                "secureMode": {
+                    "enum": [
+                        "STARTTLS",
+                        "SSL",
+                        "NONE"
+                    ],
+                    "type": "string"
+                },
+                "username": {
+                    "type": "string"
+                }
+            }
+        },
+        "get.dto.appliance.configuration.SpotlightSearchResultDTO": {
+            "id": "get.dto.appliance.configuration.SpotlightSearchResultDTO",
+            "required": [],
+            "properties": {
+                "clusterName": {
+                    "type": "string"
+                },
+                "clusterUuid": {
+                    "type": "string"
+                },
+                "entityId": {
+                    "type": "string"
+                },
+                "entityName": {
+                    "type": "string"
+                },
+                "entityType": {
+                    "type": "string"
+                },
+                "entityUuid": {
+                    "type": "string"
+                },
+                "fieldName": {
+                    "type": "string"
+                },
+                "fieldValue": {
+                    "type": "string"
+                }
+            }
+        },
+        "get.dto.appliance.configuration.TimedBoolDTO": {
+            "id": "get.dto.appliance.configuration.TimedBoolDTO",
+            "required": [],
+            "properties": {
+                "duration": {
+                    "description": "Time to keep enabled",
+                    "format": "int64",
+                    "type": "integer",
+                    "typeName": "DEFAULT"
+                },
+                "enabled": {
+                    "type": "boolean"
+                }
+            }
+        },
+        "get.dto.base.CommunicationStatusDTO": {
+            "id": "get.dto.base.CommunicationStatusDTO",
+            "required": [],
+            "properties": {
+                "lastChangedTimeStampUsecs": {
+                    "format": "int64",
+                    "type": "integer"
+                },
+                "lastCheckedTimeStampUsecs": {
+                    "format": "int64",
+                    "type": "integer"
+                },
+                "lastSuccessfulTransmissionTimeStampUsecs": {
+                    "format": "int64",
+                    "type": "integer"
+                },
+                "message": {
+                    "$ref": "get.dto.base.ParameterizedMessageDTO"
+                },
+                "status": {
+                    "enum": [
+                        "SUCCESS",
+                        "FAILED",
+                        "RETRYING",
+                        "UNKNOWN"
+                    ],
+                    "type": "string"
+                }
+            }
+        },
+        "get.dto.base.ParameterizedMessageDTO": {
+            "id": "get.dto.base.ParameterizedMessageDTO",
+            "required": [],
+            "properties": {
+                "attributes": {
+                    "$ref": "java.util.Map&lt;java.lang.String, java.lang.String&gt;"
+                },
+                "message": {
+                    "type": "string"
+                }
+            }
+        },
+        "get.dto.dr.WitnessSiteDTO": {
+            "id": "get.dto.dr.WitnessSiteDTO",
+            "required": [],
+            "properties": {
+                "clusterName": {
+                    "type": "string"
+                },
+                "clusterTimestampUsecs": {
+                    "format": "int64",
+                    "type": "integer"
+                },
+                "clusterUuid": {
+                    "type": "string"
+                },
+                "ipAddresses": {
+                    "description": "Unique identifier for the Metro Availability Witness Site, it can be either iqn or ip address",
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": "array",
+                    "typeName": "DEFAULT"
+                },
+                "markedForRemoval": {
+                    "description": "flag indicating whether the witness site is deleted or not",
+                    "type": "boolean",
+                    "typeName": "DEFAULT"
+                },
+                "nosFullVersion": {
+                    "type": "string"
+                },
+                "nosVersion": {
+                    "type": "string"
+                },
+                "password": {
+                    "description": "password used to communicate with Metro Availability Witness Site",
+                    "type": "string",
+                    "typeName": "DEFAULT"
+                },
+                "username": {
+                    "description": "username used to communicate with Metro Availability Witness Site",
+                    "type": "string",
+                    "typeName": "DEFAULT"
+                },
+                "uuid": {
+                    "description": "Unique identifier of the Metro Availability Witness Site",
+                    "type": "string",
+                    "typeName": "DEFAULT"
+                },
+                "witnessName": {
+                    "type": "string"
+                }
+            }
+        },
+        "get.dto.health.check.EntityTypeHealthCheckSummaryDTO": {
+            "id": "get.dto.health.check.EntityTypeHealthCheckSummaryDTO",
+            "required": [],
+            "properties": {
+                "checksInError": {
+                    "$ref": "java.util.Map&lt;java.lang.String, get.dto.health.check.HealthCheckErrorsDTO&gt;"
+                },
+                "detailedCheckSummary": {
+                    "$ref": "java.util.Map&lt;java.lang.String, java.util.Map&lt;get.dto.health.check.HealthStatus, java.lang.Integer&gt;&gt;"
+                },
+                "entityType": {
+                    "enum": [
+                        "CLUSTER",
+                        "HARDWARE",
+                        "STORAGE",
+                        "BACKUP",
+                        "DR",
+                        "LICENSE",
+                        "DISK",
+                        "STORAGE_TIER",
+                        "HOST",
+                        "NODE",
+                        "MANAGEMENT_SERVER",
+                        "MANAGEMENT_SERVER_INFO",
+                        "VM",
+                        "SERVICE_VM",
+                        "VDISK",
+                        "VIRTUAL_DISK",
+                        "STORAGE_POOL",
+                        "CONTAINER",
+                        "STORAGE_CONTAINER",
+                        "VZONE",
+                        "SNAPSHOT",
+                        "FAST_CLONE",
+                        "RSYSLOG_SERVER",
+                        "KEY_MANAGEMENT_SERVER",
+                        "CERTIFICATE",
+                        "HTTP_PROXY",
+                        "SNMP_TRAP",
+                        "SNMP_USER",
+                        "REMOTE_SITE",
+                        "CLOUD_CREDENTIALS",
+                        "PROTECTION_DOMAIN",
+                        "CONSISTENCY_GROUP",
+                        "REPLICATION",
+                        "REPLICATION_LINK",
+                        "SYNC_REPLICATION",
+                        "VSTORE",
+                        "NETWORK_SWITCH_INTERFACE",
+                        "NETWORK_SWITCH",
+                        "VIRTUAL_NIC",
+                        "VMKERNEL_NIC",
+                        "HOST_NIC",
+                        "NIC_TEAM",
+                        "VIRTUAL_NETWORK",
+                        "VIRTUAL_SWITCH",
+                        "HOST_GPU",
+                        "VIRTUAL_GPU",
+                        "TAG",
+                        "COMMENT",
+                        "TASK",
+                        "IMAGE",
+                        "IMAGE_INFO",
+                        "ISCSI_CLIENT",
+                        "VOLUME_GROUP",
+                        "VOLUME_DISK",
+                        "VM_DISK",
+                        "FILE_SERVER",
+                        "FS_PARTNER_SERVER",
+                        "CVM",
+                        "NVM",
+                        "FILE_SERVER_SHARE",
+                        "ALERT_CAUSE",
+                        "ALERT_CHECK_SCHEMA",
+                        "ALERT_CHECK_SCHEMA_OVERRIDE",
+                        "INTER_CLUSTER_DATA_TRANSFER_INDICATOR",
+                        "RACKABLE_UNIT",
+                        "DIRECTORY_CONFIG",
+                        "HEALTH_CHECK",
+                        "NETWORK_SNMP_PROFILE",
+                        "ALERT",
+                        "SCHEDULE",
+                        "BANDWIDTH_POLICY",
+                        "FILE_GROUP",
+                        "NETWORK_MAPPING",
+                        "PROGRESS_MONITOR",
+                        "LCM_ENTITY",
+                        "LCM_AVAILABLE_VERSION",
+                        "CAPACITY_SCENARIO",
+                        "NCC_ERROR_CODES",
+                        "RESOURCE_CONSUMPTION",
+                        "REPORT_CONFIG",
+                        "REPORT_INSTANCE",
+                        "COMMON_REPORT_CONFIG",
+                        "REMOTE_CONNECTION"
+                    ],
+                    "type": "string"
+                },
+                "filterCriteria": {
+                    "type": "string"
+                },
+                "healthSummary": {
+                    "$ref": "java.util.Map&lt;get.dto.health.check.HealthStatus, java.lang.Integer&gt;"
+                }
+            }
+        },
+        "get.dto.health.check.HealthSummaryDTO": {
+            "id": "get.dto.health.check.HealthSummaryDTO",
+            "required": [],
+            "properties": {
+                "entityTypeSummaries": {
+                    "items": {
+                        "$ref": "get.dto.health.check.EntityTypeHealthCheckSummaryDTO"
+                    },
+                    "type": "array"
+                },
+                "healthCheckSummaries": {
+                    "$ref": "java.util.Map&lt;java.lang.String, get.dto.health.check.HealthCheckSummaryDTO&gt;"
+                },
+                "healthStatus": {
+                    "enum": [
+                        "Critical",
+                        "Warning",
+                        "Good",
+                        "Unknown",
+                        "Error"
+                    ],
+                    "type": "string"
+                }
+            }
+        },
+        "get.dto.hyperv.CredentialDTO": {
+            "id": "get.dto.hyperv.CredentialDTO",
+            "required": [],
+            "properties": {
+                "logonName": {
+                    "description": "Logon name of the account",
+                    "type": "string",
+                    "typeName": "DEFAULT"
+                },
+                "password": {
+                    "description": "Password of the account",
+                    "type": "string",
+                    "typeName": "DEFAULT"
+                }
+            }
+        },
+        "get.dto.multicluster.ClusterDataStateDTO": {
+            "id": "get.dto.multicluster.ClusterDataStateDTO",
+            "required": [],
+            "properties": {
+                "clusterAvailable": {
+                    "type": "boolean"
+                },
+                "clusterDataAvailable": {
+                    "type": "boolean"
+                },
+                "clusterRegisterTimeUsecs": {
+                    "format": "int64",
+                    "type": "integer"
+                },
+                "clusterUuid": {
+                    "type": "string"
+                },
+                "firstUnavailableTimeUsecs": {
+                    "format": "int64",
+                    "type": "integer"
+                },
+                "lastAlertsDataTransferredUsecs": {
+                    "format": "int64",
+                    "type": "integer"
+                },
+                "lastArithmosDataTransferredUsecs": {
+                    "format": "int64",
+                    "type": "integer"
+                }
+            }
+        },
+        "get.dto.uhura.ManagementServerInfoDTO": {
+            "id": "get.dto.uhura.ManagementServerInfoDTO",
+            "required": [],
+            "properties": {
+                "drsEnabled": {
+                    "description": "Denotes if DRS is enabled or not. Applicable only for vCenter.",
+                    "notes": "Denotes if DRS is enabled or not.",
+                    "type": "boolean",
+                    "typeName": "DEFAULT"
+                },
+                "drsVmBehaviour": {
+                    "description": "Denotes if DRS is enabled or not. Applicable only for vCenter.",
+                    "enum": [
+                        "UNKNOWN",
+                        "FULL_ENABLED",
+                        "ONLY_PLACEMENT_ENABLED",
+                        "MANUAL"
+                    ],
+                    "notes": "Denotes if DRS is enabled or not.",
+                    "type": "string",
+                    "typeName": "DEFAULT"
+                },
+                "haEnabled": {
+                    "description": "Denotes if HA is enabled or not.",
+                    "notes": "Denotes if HA is enabled or not.",
+                    "type": "boolean",
+                    "typeName": "DEFAULT"
+                },
+                "inUse": {
+                    "description": "Indicates whether any host is managed by this server or not.",
+                    "notes": "Indicates whether any host is managed by this server or not.",
+                    "type": "boolean",
+                    "typeName": "DEFAULT"
+                },
+                "ipAddress": {
+                    "description": "Address of the management server.",
+                    "notes": "Address of the management server.",
+                    "type": "string",
+                    "typeName": "IP4_ADDRESS"
+                },
+                "managementServerType": {
+                    "enum": [
+                        "VCENTER"
+                    ],
+                    "type": "string"
+                },
+                "registered": {
+                    "description": "Denotes whether the server is registered with Nutanix or not",
+                    "notes": "Denotes whether the server is registered with Nutanix or not",
+                    "type": "boolean",
+                    "typeName": "DEFAULT"
+                }
+            }
+        },
+        "java.util.Map&lt;get.dto.alerts.AlertDTO$AlertSeverity, get.base.EntityCollection&lt;get.dto.alerts.AlertDTO&gt;&gt;": {
+            "id": "java.util.Map&lt;get.dto.alerts.AlertDTO$AlertSeverity, get.base.EntityCollection&lt;get.dto.alerts.AlertDTO&gt;&gt;",
+            "required": [],
+            "properties": {}
+        },
+        "java.util.Map&lt;get.dto.health.check.HealthStatus, java.lang.Integer&gt;": {
+            "id": "java.util.Map&lt;get.dto.health.check.HealthStatus, java.lang.Integer&gt;",
+            "required": [],
+            "properties": {}
+        },
+        "java.util.Map&lt;java.lang.String, get.dto.health.check.HealthCheckErrorsDTO&gt;": {
+            "id": "java.util.Map&lt;java.lang.String, get.dto.health.check.HealthCheckErrorsDTO&gt;",
+            "required": [],
+            "properties": {}
+        },
+        "java.util.Map&lt;java.lang.String, get.dto.health.check.HealthCheckSummaryDTO&gt;": {
+            "id": "java.util.Map&lt;java.lang.String, get.dto.health.check.HealthCheckSummaryDTO&gt;",
+            "required": [],
+            "properties": {}
+        },
+        "java.util.Map&lt;java.lang.String, java.lang.Boolean&gt;": {
+            "id": "java.util.Map&lt;java.lang.String, java.lang.Boolean&gt;",
+            "required": [],
+            "properties": {}
+        },
+        "java.util.Map&lt;java.lang.String, java.lang.String&gt;": {
+            "id": "java.util.Map&lt;java.lang.String, java.lang.String&gt;",
+            "required": [],
+            "properties": {}
+        },
+        "java.util.Map&lt;java.lang.String, java.util.Map&lt;get.dto.health.check.HealthStatus, java.lang.Integer&gt;&gt;": {
+            "id": "java.util.Map&lt;java.lang.String, java.util.Map&lt;get.dto.health.check.HealthStatus, java.lang.Integer&gt;&gt;",
+            "required": [],
+            "properties": {}
+        },
+        "java.util.Map&lt;java.lang.String, java.util.Map&lt;patch.dto.health.check.HealthStatus, java.lang.Integer&gt;&gt;": {
+            "id": "java.util.Map&lt;java.lang.String, java.util.Map&lt;patch.dto.health.check.HealthStatus, java.lang.Integer&gt;&gt;",
+            "required": [],
+            "properties": {}
+        },
+        "java.util.Map&lt;java.lang.String, java.util.Map&lt;update.dto.health.check.HealthStatus, java.lang.Integer&gt;&gt;": {
+            "id": "java.util.Map&lt;java.lang.String, java.util.Map&lt;update.dto.health.check.HealthStatus, java.lang.Integer&gt;&gt;",
+            "required": [],
+            "properties": {}
+        },
+        "java.util.Map&lt;java.lang.String, patch.dto.health.check.HealthCheckErrorsDTO&gt;": {
+            "id": "java.util.Map&lt;java.lang.String, patch.dto.health.check.HealthCheckErrorsDTO&gt;",
+            "required": [],
+            "properties": {}
+        },
+        "java.util.Map&lt;java.lang.String, patch.dto.health.check.HealthCheckSummaryDTO&gt;": {
+            "id": "java.util.Map&lt;java.lang.String, patch.dto.health.check.HealthCheckSummaryDTO&gt;",
+            "required": [],
+            "properties": {}
+        },
+        "java.util.Map&lt;java.lang.String, update.dto.health.check.HealthCheckErrorsDTO&gt;": {
+            "id": "java.util.Map&lt;java.lang.String, update.dto.health.check.HealthCheckErrorsDTO&gt;",
+            "required": [],
+            "properties": {}
+        },
+        "java.util.Map&lt;java.lang.String, update.dto.health.check.HealthCheckSummaryDTO&gt;": {
+            "id": "java.util.Map&lt;java.lang.String, update.dto.health.check.HealthCheckSummaryDTO&gt;",
+            "required": [],
+            "properties": {}
+        },
+        "java.util.Map&lt;patch.dto.alerts.AlertDTO$AlertSeverity, patch.base.EntityCollection&lt;patch.dto.alerts.AlertDTO&gt;&gt;": {
+            "id": "java.util.Map&lt;patch.dto.alerts.AlertDTO$AlertSeverity, patch.base.EntityCollection&lt;patch.dto.alerts.AlertDTO&gt;&gt;",
+            "required": [],
+            "properties": {}
+        },
+        "java.util.Map&lt;patch.dto.health.check.HealthStatus, java.lang.Integer&gt;": {
+            "id": "java.util.Map&lt;patch.dto.health.check.HealthStatus, java.lang.Integer&gt;",
+            "required": [],
+            "properties": {}
+        },
+        "java.util.Map&lt;update.dto.alerts.AlertDTO$AlertSeverity, update.base.EntityCollection&lt;update.dto.alerts.AlertDTO&gt;&gt;": {
+            "id": "java.util.Map&lt;update.dto.alerts.AlertDTO$AlertSeverity, update.base.EntityCollection&lt;update.dto.alerts.AlertDTO&gt;&gt;",
+            "required": [],
+            "properties": {}
+        },
+        "java.util.Map&lt;update.dto.health.check.HealthStatus, java.lang.Integer&gt;": {
+            "id": "java.util.Map&lt;update.dto.health.check.HealthStatus, java.lang.Integer&gt;",
+            "required": [],
+            "properties": {}
+        },
+        "patch.dto.PrimitiveDTO&lt;java.lang.Boolean&gt;": {
+            "id": "patch.dto.PrimitiveDTO&lt;java.lang.Boolean&gt;",
+            "required": [],
+            "properties": {
+                "value": {
+                    "type": "boolean"
+                }
+            }
+        },
+        "patch.dto.RequestDTO&lt;patch.dto.appliance.configuration.ClusterDTO&gt;": {
+            "id": "patch.dto.RequestDTO&lt;patch.dto.appliance.configuration.ClusterDTO&gt;",
+            "required": [],
+            "properties": {
+                "clusterUuid": {
+                    "type": "string"
+                },
+                "genericDTO": {
+                    "$ref": "patch.dto.appliance.configuration.ClusterDTO"
+                },
+                "operation": {
+                    "type": "string"
+                }
+            }
+        },
+        "patch.dto.RequestDTO&lt;patch.dto.appliance.configuration.SmtpServerDTO&gt;": {
+            "id": "patch.dto.RequestDTO&lt;patch.dto.appliance.configuration.SmtpServerDTO&gt;",
+            "required": [],
+            "properties": {
+                "clusterUuid": {
+                    "type": "string"
+                },
+                "genericDTO": {
+                    "$ref": "patch.dto.appliance.configuration.SmtpServerDTO"
+                },
+                "operation": {
+                    "type": "string"
+                }
+            }
+        },
+        "patch.dto.alerts.AlertSummaryDTO": {
+            "id": "patch.dto.alerts.AlertSummaryDTO",
+            "required": [],
+            "properties": {
+                "alertSummaries": {
+                    "$ref": "java.util.Map&lt;patch.dto.alerts.AlertDTO$AlertSeverity, patch.base.EntityCollection&lt;patch.dto.alerts.AlertDTO&gt;&gt;"
+                },
+                "count": {
+                    "format": "int64",
+                    "type": "integer"
+                }
+            }
+        },
+        "patch.dto.appliance.configuration.ClusterDTO": {
+            "id": "patch.dto.appliance.configuration.ClusterDTO",
+            "required": [],
+            "properties": {
+                "alertSummary": {
+                    "$ref": "patch.dto.alerts.AlertSummaryDTO"
+                },
+                "blockSerials": {
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": "array"
+                },
+                "cloudcluster": {
+                    "type": "boolean"
+                },
+                "clusterArch": {
+                    "type": "string"
+                },
+                "clusterDataState": {
+                    "$ref": "patch.dto.multicluster.ClusterDataStateDTO"
+                },
+                "clusterExternalDataServicesIPAddress": {
+                    "type": "string"
+                },
+                "clusterExternalIPAddress": {
+                    "type": "string"
+                },
+                "clusterIncarnationId": {
+                    "format": "int64",
+                    "type": "integer"
+                },
+                "clusterRedundancyState": {
+                    "$ref": "patch.dto.appliance.configuration.ClusterRedundancyStateDTO"
+                },
+                "commonCriteriaMode": {
+                    "type": "boolean"
+                },
+                "disableDegradedNodeMonitoring": {
+                    "type": "boolean"
+                },
+                "enableLockDown": {
+                    "type": "boolean"
+                },
+                "enableOnDiskDedup": {
+                    "type": "boolean"
+                },
+                "enablePasswordRemoteLoginToCluster": {
+                    "type": "boolean"
+                },
+                "enableShadowClones": {
+                    "type": "boolean"
+                },
+                "externalSubnet": {
+                    "type": "string"
+                },
+                "fingerprintContentCachePercentage": {
+                    "format": "int32",
+                    "type": "integer"
+                },
+                "fullVersion": {
+                    "type": "string"
+                },
+                "globalNfsWhiteList": {
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": "array"
+                },
+                "hasSelfEncryptingDrive": {
+                    "type": "boolean"
+                },
+                "healthSummary": {
+                    "$ref": "patch.dto.health.check.HealthSummaryDTO"
+                },
+                "httpProxies": {
+                    "items": {
+                        "$ref": "patch.dto.appliance.configuration.HttpProxyDTO"
+                    },
+                    "type": "array"
+                },
+                "hypervisorSecurityComplianceConfig": {
+                    "$ref": "patch.dto.appliance.configuration.ClusterDTO$HypervisorSecurityComplianceConfigDTO"
+                },
+                "hypervisorTypes": {
+                    "items": {
+                        "enum": [
+                            "kVMware",
+                            "kXen",
+                            "kHyperv",
+                            "kKvm",
+                            "kAmazonWebServices",
+                            "kVCenter",
+                            "kAcropolis",
+                            "kSCVMM",
+                            "kNull"
+                        ],
+                        "type": "string"
+                    },
+                    "type": "array",
+                    "uniqueItems": "true"
+                },
+                "id": {
+                    "type": "string"
+                },
+                "internalSubnet": {
+                    "type": "string"
+                },
+                "isSspEnabled": {
+                    "type": "boolean"
+                },
+                "isUpgradeInProgress": {
+                    "type": "boolean"
+                },
+                "iscsiConfig": {
+                    "$ref": "patch.dto.appliance.configuration.ClusterDTO$IscsiConfig",
+                    "description": "Cluster wide iscsi configuration",
+                    "typeName": "DEFAULT"
+                },
+                "managementServers": {
+                    "items": {
+                        "$ref": "patch.dto.uhura.ManagementServerInfoDTO"
+                    },
+                    "type": "array"
+                },
+                "multicluster": {
+                    "type": "boolean"
+                },
+                "name": {
+                    "type": "string"
+                },
+                "nameServers": {
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": "array"
+                },
+                "nccVersion": {
+                    "type": "string"
+                },
+                "ntpServers": {
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": "array"
+                },
+                "numNodes": {
+                    "format": "int64",
+                    "type": "integer"
+                },
+                "operationMode": {
+                    "enum": [
+                        "NORMAL",
+                        "OVERRIDE",
+                        "READONLY",
+                        "STANDALONE",
+                        "SWITCH_TO_TWO_NODE"
+                    ],
+                    "type": "string"
+                },
+                "publicKeys": {
+                    "items": {
+                        "$ref": "patch.dto.appliance.configuration.ClusterDTO$PublicKeyDTO"
+                    },
+                    "type": "array"
+                },
+                "rackableUnits": {
+                    "items": {
+                        "$ref": "patch.dto.appliance.configuration.RackableUnitDTO"
+                    },
+                    "type": "array"
+                },
+                "securityComplianceConfig": {
+                    "$ref": "patch.dto.appliance.configuration.ClusterDTO$SecurityComplianceConfigDTO"
+                },
+                "serviceCenters": {
+                    "items": {
+                        "$ref": "patch.dto.appliance.configuration.ServiceCenterDTO"
+                    },
+                    "type": "array"
+                },
+                "smtpServer": {
+                    "$ref": "patch.dto.appliance.configuration.SmtpServerDTO"
+                },
+                "stats": {
+                    "$ref": "java.util.Map&lt;java.lang.String, java.lang.String&gt;"
+                },
+                "supportVerbosityType": {
+                    "enum": [
+                        "NOTHING",
+                        "BASIC",
+                        "BASIC_COREDUMP"
+                    ],
+                    "type": "string"
+                },
+                "targetVersion": {
+                    "type": "string"
+                },
+                "timezone": {
+                    "type": "string"
+                },
+                "usageStats": {
+                    "$ref": "java.util.Map&lt;java.lang.String, java.lang.String&gt;"
+                },
+                "uuid": {
+                    "type": "string"
+                },
+                "version": {
+                    "type": "string"
+                }
+            }
+        },
+        "patch.dto.appliance.configuration.ClusterDTO$HypervisorSecurityComplianceConfigDTO": {
+            "id": "patch.dto.appliance.configuration.ClusterDTO$HypervisorSecurityComplianceConfigDTO",
+            "required": [],
+            "properties": {}
+        },
+        "patch.dto.appliance.configuration.ClusterDTO$IscsiConfig": {
+            "id": "patch.dto.appliance.configuration.ClusterDTO$IscsiConfig",
+            "required": [],
+            "properties": {}
+        },
+        "patch.dto.appliance.configuration.ClusterDTO$PublicKeyDTO": {
+            "id": "patch.dto.appliance.configuration.ClusterDTO$PublicKeyDTO",
+            "required": [],
+            "properties": {
+                "key": {
+                    "type": "string"
+                },
+                "name": {
+                    "type": "string"
+                }
+            }
+        },
+        "patch.dto.appliance.configuration.ClusterDTO$SecurityComplianceConfigDTO": {
+            "id": "patch.dto.appliance.configuration.ClusterDTO$SecurityComplianceConfigDTO",
+            "required": [],
+            "properties": {
+                "enableSNMPv3Only": {
+                    "type": "boolean"
+                }
+            }
+        },
+        "patch.dto.appliance.configuration.ClusterRedundancyStateDTO": {
+            "id": "patch.dto.appliance.configuration.ClusterRedundancyStateDTO",
+            "required": [],
+            "properties": {
+                "currentRedundancyFactor": {
+                    "format": "int32",
+                    "type": "integer"
+                },
+                "desiredRedundancyFactor": {
+                    "format": "int32",
+                    "type": "integer"
+                },
+                "redundancyStatus": {
+                    "$ref": "java.util.Map&lt;java.lang.String, java.lang.Boolean&gt;"
+                }
+            }
+        },
+        "patch.dto.appliance.configuration.HttpProxyDTO": {
+            "id": "patch.dto.appliance.configuration.HttpProxyDTO",
+            "description": "http-proxy",
+            "required": [
+                "name"
+            ],
+            "properties": {
+                "address": {
+                    "description": "Address of the proxy",
+                    "type": "string",
+                    "typeName": "DEFAULT"
+                },
+                "name": {
+                    "description": "Proxy name.",
+                    "type": "string",
+                    "typeName": "DEFAULT"
+                },
+                "password": {
+                    "description": "Password for proxy authentication",
+                    "type": "string",
+                    "typeName": "DEFAULT"
+                },
+                "port": {
+                    "description": "Port on which proxy is binding",
+                    "format": "int32",
+                    "maximum": "65536",
+                    "minimum": "0",
+                    "notes": "Any port number which is in the range 0 - 65536",
+                    "type": "integer",
+                    "typeName": "DEFAULT"
+                },
+                "proxyTypes": {
+                    "description": "Proxy types to send applicable traffic",
+                    "items": {
+                        "enum": [
+                            "HTTP",
+                            "HTTPS",
+                            "SOCKS"
+                        ],
+                        "type": "string"
+                    },
+                    "notes": "Proxy types to send applicable traffic. Supports 'http' 'https', and 'socks' proxy configuration.",
+                    "type": "array",
+                    "typeName": "DEFAULT"
+                },
+                "username": {
+                    "description": "Username for proxy authentication",
+                    "type": "string",
+                    "typeName": "DEFAULT"
+                }
+            }
+        },
+        "patch.dto.appliance.configuration.RackableUnitDTO": {
+            "id": "patch.dto.appliance.configuration.RackableUnitDTO",
+            "required": [],
+            "properties": {
+                "id": {
+                    "format": "int64",
+                    "type": "integer"
+                },
+                "location": {
+                    "type": "string"
+                },
+                "model": {
+                    "type": "string"
+                },
+                "modelName": {
+                    "type": "string"
+                },
+                "nodeUuids": {
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": "array"
+                },
+                "nodes": {
+                    "items": {
+                        "format": "int64",
+                        "type": "integer"
+                    },
+                    "type": "array"
+                },
+                "positions": {
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": "array"
+                },
+                "rackableUnitUuid": {
+                    "type": "string"
+                },
+                "serial": {
+                    "type": "string"
+                }
+            }
+        },
+        "patch.dto.appliance.configuration.ServiceCenterDTO": {
+            "id": "patch.dto.appliance.configuration.ServiceCenterDTO",
+            "required": [
+                "name",
+                "ipAddress",
+                "username",
+                "port"
+            ],
+            "properties": {
+                "ipAddress": {
+                    "description": "Ip Address.",
+                    "type": "string",
+                    "typeName": "DEFAULT"
+                },
+                "name": {
+                    "description": "Name.",
+                    "type": "string",
+                    "typeName": "DEFAULT"
+                },
+                "port": {
+                    "description": "Port number.",
+                    "format": "int32",
+                    "maximum": "65536",
+                    "minimum": "0",
+                    "notes": "Any port number which is in the range 0 - 65536",
+                    "type": "integer",
+                    "typeName": "DEFAULT"
+                },
+                "username": {
+                    "description": "username.",
+                    "type": "string",
+                    "typeName": "DEFAULT"
+                }
+            }
+        },
+        "patch.dto.appliance.configuration.SmtpServerDTO": {
+            "id": "patch.dto.appliance.configuration.SmtpServerDTO",
+            "required": [],
+            "properties": {
+                "address": {
+                    "type": "string"
+                },
+                "emailStatus": {
+                    "$ref": "patch.dto.base.CommunicationStatusDTO"
+                },
+                "fromEmailAddress": {
+                    "type": "string"
+                },
+                "password": {
+                    "type": "string"
+                },
+                "port": {
+                    "format": "int32",
+                    "type": "integer"
+                },
+                "secureMode": {
+                    "enum": [
+                        "STARTTLS",
+                        "SSL",
+                        "NONE"
+                    ],
+                    "type": "string"
+                },
+                "username": {
+                    "type": "string"
+                }
+            }
+        },
+        "patch.dto.base.CommunicationStatusDTO": {
+            "id": "patch.dto.base.CommunicationStatusDTO",
+            "required": [],
+            "properties": {
+                "lastChangedTimeStampUsecs": {
+                    "format": "int64",
+                    "type": "integer"
+                },
+                "lastCheckedTimeStampUsecs": {
+                    "format": "int64",
+                    "type": "integer"
+                },
+                "lastSuccessfulTransmissionTimeStampUsecs": {
+                    "format": "int64",
+                    "type": "integer"
+                },
+                "message": {
+                    "$ref": "patch.dto.base.ParameterizedMessageDTO"
+                },
+                "status": {
+                    "enum": [
+                        "SUCCESS",
+                        "FAILED",
+                        "RETRYING",
+                        "UNKNOWN"
+                    ],
+                    "type": "string"
+                }
+            }
+        },
+        "patch.dto.base.ParameterizedMessageDTO": {
+            "id": "patch.dto.base.ParameterizedMessageDTO",
+            "required": [],
+            "properties": {
+                "attributes": {
+                    "$ref": "java.util.Map&lt;java.lang.String, java.lang.String&gt;"
+                },
+                "message": {
+                    "type": "string"
+                }
+            }
+        },
+        "patch.dto.health.check.EntityTypeHealthCheckSummaryDTO": {
+            "id": "patch.dto.health.check.EntityTypeHealthCheckSummaryDTO",
+            "required": [],
+            "properties": {
+                "checksInError": {
+                    "$ref": "java.util.Map&lt;java.lang.String, patch.dto.health.check.HealthCheckErrorsDTO&gt;"
+                },
+                "detailedCheckSummary": {
+                    "$ref": "java.util.Map&lt;java.lang.String, java.util.Map&lt;patch.dto.health.check.HealthStatus, java.lang.Integer&gt;&gt;"
+                },
+                "entityType": {
+                    "enum": [
+                        "CLUSTER",
+                        "HARDWARE",
+                        "STORAGE",
+                        "BACKUP",
+                        "DR",
+                        "LICENSE",
+                        "DISK",
+                        "STORAGE_TIER",
+                        "HOST",
+                        "NODE",
+                        "MANAGEMENT_SERVER",
+                        "MANAGEMENT_SERVER_INFO",
+                        "VM",
+                        "SERVICE_VM",
+                        "VDISK",
+                        "VIRTUAL_DISK",
+                        "STORAGE_POOL",
+                        "CONTAINER",
+                        "STORAGE_CONTAINER",
+                        "VZONE",
+                        "SNAPSHOT",
+                        "FAST_CLONE",
+                        "RSYSLOG_SERVER",
+                        "KEY_MANAGEMENT_SERVER",
+                        "CERTIFICATE",
+                        "HTTP_PROXY",
+                        "SNMP_TRAP",
+                        "SNMP_USER",
+                        "REMOTE_SITE",
+                        "CLOUD_CREDENTIALS",
+                        "PROTECTION_DOMAIN",
+                        "CONSISTENCY_GROUP",
+                        "REPLICATION",
+                        "REPLICATION_LINK",
+                        "SYNC_REPLICATION",
+                        "VSTORE",
+                        "NETWORK_SWITCH_INTERFACE",
+                        "NETWORK_SWITCH",
+                        "VIRTUAL_NIC",
+                        "VMKERNEL_NIC",
+                        "HOST_NIC",
+                        "NIC_TEAM",
+                        "VIRTUAL_NETWORK",
+                        "VIRTUAL_SWITCH",
+                        "HOST_GPU",
+                        "VIRTUAL_GPU",
+                        "TAG",
+                        "COMMENT",
+                        "TASK",
+                        "IMAGE",
+                        "IMAGE_INFO",
+                        "ISCSI_CLIENT",
+                        "VOLUME_GROUP",
+                        "VOLUME_DISK",
+                        "VM_DISK",
+                        "FILE_SERVER",
+                        "FS_PARTNER_SERVER",
+                        "CVM",
+                        "NVM",
+                        "FILE_SERVER_SHARE",
+                        "ALERT_CAUSE",
+                        "ALERT_CHECK_SCHEMA",
+                        "ALERT_CHECK_SCHEMA_OVERRIDE",
+                        "INTER_CLUSTER_DATA_TRANSFER_INDICATOR",
+                        "RACKABLE_UNIT",
+                        "DIRECTORY_CONFIG",
+                        "HEALTH_CHECK",
+                        "NETWORK_SNMP_PROFILE",
+                        "ALERT",
+                        "SCHEDULE",
+                        "BANDWIDTH_POLICY",
+                        "FILE_GROUP",
+                        "NETWORK_MAPPING",
+                        "PROGRESS_MONITOR",
+                        "LCM_ENTITY",
+                        "LCM_AVAILABLE_VERSION",
+                        "CAPACITY_SCENARIO",
+                        "NCC_ERROR_CODES",
+                        "RESOURCE_CONSUMPTION",
+                        "REPORT_CONFIG",
+                        "REPORT_INSTANCE",
+                        "COMMON_REPORT_CONFIG",
+                        "REMOTE_CONNECTION"
+                    ],
+                    "type": "string"
+                },
+                "filterCriteria": {
+                    "type": "string"
+                },
+                "healthSummary": {
+                    "$ref": "java.util.Map&lt;patch.dto.health.check.HealthStatus, java.lang.Integer&gt;"
+                }
+            }
+        },
+        "patch.dto.health.check.HealthSummaryDTO": {
+            "id": "patch.dto.health.check.HealthSummaryDTO",
+            "required": [],
+            "properties": {
+                "entityTypeSummaries": {
+                    "items": {
+                        "$ref": "patch.dto.health.check.EntityTypeHealthCheckSummaryDTO"
+                    },
+                    "type": "array"
+                },
+                "healthCheckSummaries": {
+                    "$ref": "java.util.Map&lt;java.lang.String, patch.dto.health.check.HealthCheckSummaryDTO&gt;"
+                },
+                "healthStatus": {
+                    "enum": [
+                        "Critical",
+                        "Warning",
+                        "Good",
+                        "Unknown",
+                        "Error"
+                    ],
+                    "type": "string"
+                }
+            }
+        },
+        "patch.dto.multicluster.ClusterDataStateDTO": {
+            "id": "patch.dto.multicluster.ClusterDataStateDTO",
+            "required": [],
+            "properties": {
+                "clusterAvailable": {
+                    "type": "boolean"
+                },
+                "clusterDataAvailable": {
+                    "type": "boolean"
+                },
+                "clusterRegisterTimeUsecs": {
+                    "format": "int64",
+                    "type": "integer"
+                },
+                "clusterUuid": {
+                    "type": "string"
+                },
+                "firstUnavailableTimeUsecs": {
+                    "format": "int64",
+                    "type": "integer"
+                },
+                "lastAlertsDataTransferredUsecs": {
+                    "format": "int64",
+                    "type": "integer"
+                },
+                "lastArithmosDataTransferredUsecs": {
+                    "format": "int64",
+                    "type": "integer"
+                }
+            }
+        },
+        "patch.dto.uhura.ManagementServerInfoDTO": {
+            "id": "patch.dto.uhura.ManagementServerInfoDTO",
+            "required": [],
+            "properties": {
+                "managementServerType": {
+                    "enum": [
+                        "VCENTER"
+                    ],
+                    "type": "string"
+                }
+            }
+        },
+        "update.dto.PrimitiveDTO&lt;java.lang.Boolean&gt;": {
+            "id": "update.dto.PrimitiveDTO&lt;java.lang.Boolean&gt;",
+            "required": [],
+            "properties": {
+                "value": {
+                    "type": "boolean"
+                }
+            }
+        },
+        "update.dto.alerts.AlertSummaryDTO": {
+            "id": "update.dto.alerts.AlertSummaryDTO",
+            "required": [],
+            "properties": {
+                "alertSummaries": {
+                    "$ref": "java.util.Map&lt;update.dto.alerts.AlertDTO$AlertSeverity, update.base.EntityCollection&lt;update.dto.alerts.AlertDTO&gt;&gt;"
+                },
+                "count": {
+                    "format": "int64",
+                    "type": "integer"
+                }
+            }
+        },
+        "update.dto.appliance.configuration.ClusterDTO": {
+            "id": "update.dto.appliance.configuration.ClusterDTO",
+            "required": [],
+            "properties": {
+                "alertSummary": {
+                    "$ref": "update.dto.alerts.AlertSummaryDTO"
+                },
+                "blockSerials": {
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": "array"
+                },
+                "cloudcluster": {
+                    "type": "boolean"
+                },
+                "clusterArch": {
+                    "type": "string"
+                },
+                "clusterDataState": {
+                    "$ref": "update.dto.multicluster.ClusterDataStateDTO"
+                },
+                "clusterExternalDataServicesIPAddress": {
+                    "type": "string"
+                },
+                "clusterExternalIPAddress": {
+                    "type": "string"
+                },
+                "clusterIncarnationId": {
+                    "format": "int64",
+                    "type": "integer"
+                },
+                "clusterRedundancyState": {
+                    "$ref": "update.dto.appliance.configuration.ClusterRedundancyStateDTO"
+                },
+                "commonCriteriaMode": {
+                    "type": "boolean"
+                },
+                "disableDegradedNodeMonitoring": {
+                    "type": "boolean"
+                },
+                "enableLockDown": {
+                    "type": "boolean"
+                },
+                "enableOnDiskDedup": {
+                    "type": "boolean"
+                },
+                "enablePasswordRemoteLoginToCluster": {
+                    "type": "boolean"
+                },
+                "enableShadowClones": {
+                    "type": "boolean"
+                },
+                "externalSubnet": {
+                    "type": "string"
+                },
+                "fingerprintContentCachePercentage": {
+                    "format": "int32",
+                    "type": "integer"
+                },
+                "fullVersion": {
+                    "type": "string"
+                },
+                "globalNfsWhiteList": {
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": "array"
+                },
+                "hasSelfEncryptingDrive": {
+                    "type": "boolean"
+                },
+                "healthSummary": {
+                    "$ref": "update.dto.health.check.HealthSummaryDTO"
+                },
+                "httpProxies": {
+                    "items": {
+                        "$ref": "update.dto.appliance.configuration.HttpProxyDTO"
+                    },
+                    "type": "array"
+                },
+                "hypervisorSecurityComplianceConfig": {
+                    "$ref": "update.dto.appliance.configuration.ClusterDTO$HypervisorSecurityComplianceConfigDTO"
+                },
+                "hypervisorTypes": {
+                    "items": {
+                        "enum": [
+                            "kVMware",
+                            "kXen",
+                            "kHyperv",
+                            "kKvm",
+                            "kAmazonWebServices",
+                            "kVCenter",
+                            "kAcropolis",
+                            "kSCVMM",
+                            "kNull"
+                        ],
+                        "type": "string"
+                    },
+                    "type": "array",
+                    "uniqueItems": "true"
+                },
+                "id": {
+                    "type": "string"
+                },
+                "internalSubnet": {
+                    "type": "string"
+                },
+                "isSspEnabled": {
+                    "type": "boolean"
+                },
+                "isUpgradeInProgress": {
+                    "type": "boolean"
+                },
+                "iscsiConfig": {
+                    "$ref": "update.dto.appliance.configuration.ClusterDTO$IscsiConfig",
+                    "description": "Cluster wide iscsi configuration",
+                    "typeName": "DEFAULT"
+                },
+                "managementServers": {
+                    "items": {
+                        "$ref": "update.dto.uhura.ManagementServerInfoDTO"
+                    },
+                    "type": "array"
+                },
+                "multicluster": {
+                    "type": "boolean"
+                },
+                "name": {
+                    "type": "string"
+                },
+                "nameServers": {
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": "array"
+                },
+                "nccVersion": {
+                    "type": "string"
+                },
+                "ntpServers": {
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": "array"
+                },
+                "numNodes": {
+                    "format": "int64",
+                    "type": "integer"
+                },
+                "operationMode": {
+                    "enum": [
+                        "NORMAL",
+                        "OVERRIDE",
+                        "READONLY",
+                        "STANDALONE",
+                        "SWITCH_TO_TWO_NODE"
+                    ],
+                    "type": "string"
+                },
+                "publicKeys": {
+                    "items": {
+                        "$ref": "update.dto.appliance.configuration.ClusterDTO$PublicKeyDTO"
+                    },
+                    "type": "array"
+                },
+                "rackableUnits": {
+                    "items": {
+                        "$ref": "update.dto.appliance.configuration.RackableUnitDTO"
+                    },
+                    "type": "array"
+                },
+                "securityComplianceConfig": {
+                    "$ref": "update.dto.appliance.configuration.ClusterDTO$SecurityComplianceConfigDTO"
+                },
+                "serviceCenters": {
+                    "items": {
+                        "$ref": "update.dto.appliance.configuration.ServiceCenterDTO"
+                    },
+                    "type": "array"
+                },
+                "smtpServer": {
+                    "$ref": "update.dto.appliance.configuration.SmtpServerDTO"
+                },
+                "stats": {
+                    "$ref": "java.util.Map&lt;java.lang.String, java.lang.String&gt;"
+                },
+                "supportVerbosityType": {
+                    "enum": [
+                        "NOTHING",
+                        "BASIC",
+                        "BASIC_COREDUMP"
+                    ],
+                    "type": "string"
+                },
+                "targetVersion": {
+                    "type": "string"
+                },
+                "timezone": {
+                    "type": "string"
+                },
+                "usageStats": {
+                    "$ref": "java.util.Map&lt;java.lang.String, java.lang.String&gt;"
+                },
+                "uuid": {
+                    "type": "string"
+                },
+                "version": {
+                    "type": "string"
+                }
+            }
+        },
+        "update.dto.appliance.configuration.ClusterDTO$HypervisorSecurityComplianceConfigDTO": {
+            "id": "update.dto.appliance.configuration.ClusterDTO$HypervisorSecurityComplianceConfigDTO",
+            "required": [],
+            "properties": {}
+        },
+        "update.dto.appliance.configuration.ClusterDTO$IscsiConfig": {
+            "id": "update.dto.appliance.configuration.ClusterDTO$IscsiConfig",
+            "required": [],
+            "properties": {}
+        },
+        "update.dto.appliance.configuration.ClusterDTO$PublicKeyDTO": {
+            "id": "update.dto.appliance.configuration.ClusterDTO$PublicKeyDTO",
+            "required": [],
+            "properties": {
+                "key": {
+                    "type": "string"
+                },
+                "name": {
+                    "type": "string"
+                }
+            }
+        },
+        "update.dto.appliance.configuration.ClusterDTO$SecurityComplianceConfigDTO": {
+            "id": "update.dto.appliance.configuration.ClusterDTO$SecurityComplianceConfigDTO",
+            "required": [],
+            "properties": {
+                "enableSNMPv3Only": {
+                    "type": "boolean"
+                }
+            }
+        },
+        "update.dto.appliance.configuration.ClusterRedundancyStateDTO": {
+            "id": "update.dto.appliance.configuration.ClusterRedundancyStateDTO",
+            "required": [],
+            "properties": {
+                "currentRedundancyFactor": {
+                    "format": "int32",
+                    "type": "integer"
+                },
+                "desiredRedundancyFactor": {
+                    "format": "int32",
+                    "type": "integer"
+                },
+                "redundancyStatus": {
+                    "$ref": "java.util.Map&lt;java.lang.String, java.lang.Boolean&gt;"
+                }
+            }
+        },
+        "update.dto.appliance.configuration.HttpProxyDTO": {
+            "id": "update.dto.appliance.configuration.HttpProxyDTO",
+            "description": "http-proxy",
+            "required": [
+                "name",
+                "address",
+                "port"
+            ],
+            "properties": {
+                "address": {
+                    "description": "Address of the proxy",
+                    "type": "string",
+                    "typeName": "DEFAULT"
+                },
+                "name": {
+                    "description": "Proxy name.",
+                    "type": "string",
+                    "typeName": "DEFAULT"
+                },
+                "password": {
+                    "description": "Password for proxy authentication",
+                    "type": "string",
+                    "typeName": "DEFAULT"
+                },
+                "port": {
+                    "description": "Port on which proxy is binding",
+                    "format": "int32",
+                    "maximum": "65536",
+                    "minimum": "0",
+                    "notes": "Any port number which is in the range 0 - 65536",
+                    "type": "integer",
+                    "typeName": "DEFAULT"
+                },
+                "proxyTypes": {
+                    "description": "Proxy types to send applicable traffic",
+                    "items": {
+                        "enum": [
+                            "HTTP",
+                            "HTTPS",
+                            "SOCKS"
+                        ],
+                        "type": "string"
+                    },
+                    "notes": "Proxy types to send applicable traffic. Supports 'http' 'https', and 'socks' proxy configuration.",
+                    "type": "array",
+                    "typeName": "DEFAULT"
+                },
+                "username": {
+                    "description": "Username for proxy authentication",
+                    "type": "string",
+                    "typeName": "DEFAULT"
+                }
+            }
+        },
+        "update.dto.appliance.configuration.RackableUnitDTO": {
+            "id": "update.dto.appliance.configuration.RackableUnitDTO",
+            "required": [],
+            "properties": {
+                "id": {
+                    "format": "int64",
+                    "type": "integer"
+                },
+                "location": {
+                    "type": "string"
+                },
+                "model": {
+                    "type": "string"
+                },
+                "modelName": {
+                    "type": "string"
+                },
+                "nodeUuids": {
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": "array"
+                },
+                "nodes": {
+                    "items": {
+                        "format": "int64",
+                        "type": "integer"
+                    },
+                    "type": "array"
+                },
+                "positions": {
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": "array"
+                },
+                "rackableUnitUuid": {
+                    "type": "string"
+                },
+                "serial": {
+                    "type": "string"
+                }
+            }
+        },
+        "update.dto.appliance.configuration.ServiceCenterDTO": {
+            "id": "update.dto.appliance.configuration.ServiceCenterDTO",
+            "required": [
+                "name",
+                "ipAddress",
+                "username",
+                "port"
+            ],
+            "properties": {
+                "ipAddress": {
+                    "description": "Ip Address.",
+                    "type": "string",
+                    "typeName": "DEFAULT"
+                },
+                "name": {
+                    "description": "Name.",
+                    "type": "string",
+                    "typeName": "DEFAULT"
+                },
+                "port": {
+                    "description": "Port number.",
+                    "format": "int32",
+                    "maximum": "65536",
+                    "minimum": "0",
+                    "notes": "Any port number which is in the range 0 - 65536",
+                    "type": "integer",
+                    "typeName": "DEFAULT"
+                },
+                "username": {
+                    "description": "username.",
+                    "type": "string",
+                    "typeName": "DEFAULT"
+                }
+            }
+        },
+        "update.dto.appliance.configuration.SmtpServerDTO": {
+            "id": "update.dto.appliance.configuration.SmtpServerDTO",
+            "required": [],
+            "properties": {
+                "address": {
+                    "type": "string"
+                },
+                "emailStatus": {
+                    "$ref": "update.dto.base.CommunicationStatusDTO"
+                },
+                "fromEmailAddress": {
+                    "type": "string"
+                },
+                "password": {
+                    "type": "string"
+                },
+                "port": {
+                    "format": "int32",
+                    "type": "integer"
+                },
+                "secureMode": {
+                    "enum": [
+                        "STARTTLS",
+                        "SSL",
+                        "NONE"
+                    ],
+                    "type": "string"
+                },
+                "username": {
+                    "type": "string"
+                }
+            }
+        },
+        "update.dto.appliance.configuration.TimedBoolDTO": {
+            "id": "update.dto.appliance.configuration.TimedBoolDTO",
+            "required": [],
+            "properties": {
+                "duration": {
+                    "description": "Time to keep enabled",
+                    "format": "int64",
+                    "type": "integer",
+                    "typeName": "DEFAULT"
+                },
+                "enabled": {
+                    "type": "boolean"
+                }
+            }
+        },
+        "update.dto.base.CommunicationStatusDTO": {
+            "id": "update.dto.base.CommunicationStatusDTO",
+            "required": [],
+            "properties": {
+                "lastChangedTimeStampUsecs": {
+                    "format": "int64",
+                    "type": "integer"
+                },
+                "lastCheckedTimeStampUsecs": {
+                    "format": "int64",
+                    "type": "integer"
+                },
+                "lastSuccessfulTransmissionTimeStampUsecs": {
+                    "format": "int64",
+                    "type": "integer"
+                },
+                "message": {
+                    "$ref": "update.dto.base.ParameterizedMessageDTO"
+                },
+                "status": {
+                    "enum": [
+                        "SUCCESS",
+                        "FAILED",
+                        "RETRYING",
+                        "UNKNOWN"
+                    ],
+                    "type": "string"
+                }
+            }
+        },
+        "update.dto.base.ParameterizedMessageDTO": {
+            "id": "update.dto.base.ParameterizedMessageDTO",
+            "required": [],
+            "properties": {
+                "attributes": {
+                    "$ref": "java.util.Map&lt;java.lang.String, java.lang.String&gt;"
+                },
+                "message": {
+                    "type": "string"
+                }
+            }
+        },
+        "update.dto.dr.WitnessSiteDTO": {
+            "id": "update.dto.dr.WitnessSiteDTO",
+            "required": [
+                "markedForRemoval",
+                "uuid",
+                "password"
+            ],
+            "properties": {
+                "clusterName": {
+                    "type": "string"
+                },
+                "clusterTimestampUsecs": {
+                    "format": "int64",
+                    "type": "integer"
+                },
+                "clusterUuid": {
+                    "type": "string"
+                },
+                "ipAddresses": {
+                    "description": "Unique identifier for the Metro Availability Witness Site, it can be either iqn or ip address",
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": "array",
+                    "typeName": "DEFAULT"
+                },
+                "markedForRemoval": {
+                    "description": "flag indicating whether the witness site is deleted or not",
+                    "type": "boolean",
+                    "typeName": "DEFAULT"
+                },
+                "nosFullVersion": {
+                    "type": "string"
+                },
+                "nosVersion": {
+                    "type": "string"
+                },
+                "password": {
+                    "description": "password used to communicate with Metro Availability Witness Site",
+                    "type": "string",
+                    "typeName": "DEFAULT"
+                },
+                "username": {
+                    "description": "username used to communicate with Metro Availability Witness Site",
+                    "type": "string",
+                    "typeName": "DEFAULT"
+                },
+                "uuid": {
+                    "description": "Unique identifier of the Metro Availability Witness Site",
+                    "type": "string",
+                    "typeName": "DEFAULT"
+                },
+                "witnessName": {
+                    "type": "string"
+                }
+            }
+        },
+        "update.dto.dr.WitnessSiteDTO$UpdateWitnessSiteDTO": {
+            "id": "update.dto.dr.WitnessSiteDTO$UpdateWitnessSiteDTO",
+            "required": [
+                "uuid"
+            ],
+            "properties": {
+                "password": {
+                    "description": "password used to communicate with Metro Availability Witness Site",
+                    "type": "string",
+                    "typeName": "DEFAULT"
+                },
+                "uuid": {
+                    "description": "id of the Metro Availability Witness Site to updated",
+                    "type": "string",
+                    "typeName": "DEFAULT"
+                }
+            }
+        },
+        "update.dto.health.check.EntityTypeHealthCheckSummaryDTO": {
+            "id": "update.dto.health.check.EntityTypeHealthCheckSummaryDTO",
+            "required": [],
+            "properties": {
+                "checksInError": {
+                    "$ref": "java.util.Map&lt;java.lang.String, update.dto.health.check.HealthCheckErrorsDTO&gt;"
+                },
+                "detailedCheckSummary": {
+                    "$ref": "java.util.Map&lt;java.lang.String, java.util.Map&lt;update.dto.health.check.HealthStatus, java.lang.Integer&gt;&gt;"
+                },
+                "entityType": {
+                    "enum": [
+                        "CLUSTER",
+                        "HARDWARE",
+                        "STORAGE",
+                        "BACKUP",
+                        "DR",
+                        "LICENSE",
+                        "DISK",
+                        "STORAGE_TIER",
+                        "HOST",
+                        "NODE",
+                        "MANAGEMENT_SERVER",
+                        "MANAGEMENT_SERVER_INFO",
+                        "VM",
+                        "SERVICE_VM",
+                        "VDISK",
+                        "VIRTUAL_DISK",
+                        "STORAGE_POOL",
+                        "CONTAINER",
+                        "STORAGE_CONTAINER",
+                        "VZONE",
+                        "SNAPSHOT",
+                        "FAST_CLONE",
+                        "RSYSLOG_SERVER",
+                        "KEY_MANAGEMENT_SERVER",
+                        "CERTIFICATE",
+                        "HTTP_PROXY",
+                        "SNMP_TRAP",
+                        "SNMP_USER",
+                        "REMOTE_SITE",
+                        "CLOUD_CREDENTIALS",
+                        "PROTECTION_DOMAIN",
+                        "CONSISTENCY_GROUP",
+                        "REPLICATION",
+                        "REPLICATION_LINK",
+                        "SYNC_REPLICATION",
+                        "VSTORE",
+                        "NETWORK_SWITCH_INTERFACE",
+                        "NETWORK_SWITCH",
+                        "VIRTUAL_NIC",
+                        "VMKERNEL_NIC",
+                        "HOST_NIC",
+                        "NIC_TEAM",
+                        "VIRTUAL_NETWORK",
+                        "VIRTUAL_SWITCH",
+                        "HOST_GPU",
+                        "VIRTUAL_GPU",
+                        "TAG",
+                        "COMMENT",
+                        "TASK",
+                        "IMAGE",
+                        "IMAGE_INFO",
+                        "ISCSI_CLIENT",
+                        "VOLUME_GROUP",
+                        "VOLUME_DISK",
+                        "VM_DISK",
+                        "FILE_SERVER",
+                        "FS_PARTNER_SERVER",
+                        "CVM",
+                        "NVM",
+                        "FILE_SERVER_SHARE",
+                        "ALERT_CAUSE",
+                        "ALERT_CHECK_SCHEMA",
+                        "ALERT_CHECK_SCHEMA_OVERRIDE",
+                        "INTER_CLUSTER_DATA_TRANSFER_INDICATOR",
+                        "RACKABLE_UNIT",
+                        "DIRECTORY_CONFIG",
+                        "HEALTH_CHECK",
+                        "NETWORK_SNMP_PROFILE",
+                        "ALERT",
+                        "SCHEDULE",
+                        "BANDWIDTH_POLICY",
+                        "FILE_GROUP",
+                        "NETWORK_MAPPING",
+                        "PROGRESS_MONITOR",
+                        "LCM_ENTITY",
+                        "LCM_AVAILABLE_VERSION",
+                        "CAPACITY_SCENARIO",
+                        "NCC_ERROR_CODES",
+                        "RESOURCE_CONSUMPTION",
+                        "REPORT_CONFIG",
+                        "REPORT_INSTANCE",
+                        "COMMON_REPORT_CONFIG",
+                        "REMOTE_CONNECTION"
+                    ],
+                    "type": "string"
+                },
+                "filterCriteria": {
+                    "type": "string"
+                },
+                "healthSummary": {
+                    "$ref": "java.util.Map&lt;update.dto.health.check.HealthStatus, java.lang.Integer&gt;"
+                }
+            }
+        },
+        "update.dto.health.check.HealthSummaryDTO": {
+            "id": "update.dto.health.check.HealthSummaryDTO",
+            "required": [],
+            "properties": {
+                "entityTypeSummaries": {
+                    "items": {
+                        "$ref": "update.dto.health.check.EntityTypeHealthCheckSummaryDTO"
+                    },
+                    "type": "array"
+                },
+                "healthCheckSummaries": {
+                    "$ref": "java.util.Map&lt;java.lang.String, update.dto.health.check.HealthCheckSummaryDTO&gt;"
+                },
+                "healthStatus": {
+                    "enum": [
+                        "Critical",
+                        "Warning",
+                        "Good",
+                        "Unknown",
+                        "Error"
+                    ],
+                    "type": "string"
+                }
+            }
+        },
+        "update.dto.multicluster.ClusterDataStateDTO": {
+            "id": "update.dto.multicluster.ClusterDataStateDTO",
+            "required": [],
+            "properties": {
+                "clusterAvailable": {
+                    "type": "boolean"
+                },
+                "clusterDataAvailable": {
+                    "type": "boolean"
+                },
+                "clusterRegisterTimeUsecs": {
+                    "format": "int64",
+                    "type": "integer"
+                },
+                "clusterUuid": {
+                    "type": "string"
+                },
+                "firstUnavailableTimeUsecs": {
+                    "format": "int64",
+                    "type": "integer"
+                },
+                "lastAlertsDataTransferredUsecs": {
+                    "format": "int64",
+                    "type": "integer"
+                },
+                "lastArithmosDataTransferredUsecs": {
+                    "format": "int64",
+                    "type": "integer"
+                }
+            }
+        },
+        "update.dto.uhura.ManagementServerInfoDTO": {
+            "id": "update.dto.uhura.ManagementServerInfoDTO",
+            "required": [],
+            "properties": {
+                "managementServerType": {
+                    "enum": [
+                        "VCENTER"
+                    ],
+                    "type": "string"
+                }
+            }
+        }
+    }
+}
