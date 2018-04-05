@@ -1,0 +1,14 @@
+# Create array of cluster to pass to function
+[array]$clusters = @(
+    @("99.99.99.98","admin","blah"),
+    @("99.99.99.99","admin","blah")
+)
+ 
+NOTE: you can also do this without hardcoding passwords using the following
+[array]$clusters = @(
+    @("99.99.99.98","admin",$(read-host "Please enter the prism user password:" -AsSecureString)),
+    @("99.99.99.99","admin",$(read-host "Please enter the prism user password:" -AsSecureString))
+)
+ 
+# Run function
+NTNX-vDisk-Report -Clusters $clusters -OutputCSVLocation "X:\TESTING\" -CSVPrefix "testReport"
