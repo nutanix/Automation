@@ -1,0 +1,21 @@
+.catalog:
+  name: "Wordpress on Nutanix volume"
+  version: "v0.1-tuxtof"
+  description: "Worpress with persistency on Nutanix volume backend"
+  questions:
+    - variable: public_port
+      description: "public port to access the wordpress site"
+      label: "Public Port"
+      required: true
+      default: "80"
+      type: "int"
+    - variable: vol_name
+      label: "name of the Nutanix volume to store db data"
+      required: true
+      default: "wordpress-db"
+      type: "string"
+
+db:
+  scale: 1
+wordpress:
+  scale: 1

@@ -1,0 +1,62 @@
+<#  
+
+ This Nutanix PowerShell script for REST API connection, authentication, getting unprotected VMs, creating a protection domain,
+ and adding unprotected VMs to a protection domain.
+ Note: You cannot add Controller VMs or Metro Available VMs.
+ Be sure that you are running the latest version of the Nutanix cmdlets. 
+
+ Set variables and authenticate to the Nutanix cluster.
+ Replace "cluster_ip_address" with the cluster IP address.
+ Replace "cluster_username" with the cluster username.
+ Replace "cluster_password" with the cluster password.
+ 
+#>
+
+$ipAddress = "cluster_ip_address"    
+$clusterUserName = "cluster_username" 
+$clusterPassword = "cluster_password"
+
+<#
+ Connect to the Nutanix cluster. Select 'Y' for Yes when authenticating to the cluster.
+#>
+Connect-NutanixCluster -Server $ipAddress -UserName $clusterUserName -Password $clusterPassword -AcceptInvalidSSLCerts
+
+<#
+ Get Nutanix cluster information.
+#>
+Get-NTNXClusterInfo
+
+<#
+ Get specific elements from the Nutanix cluster information.
+#>
+Get-NTNXClusterInfo | Select ID, Name, ClusterExternalIPAddress, NumNodes, Version, HypervisorTypes
+
+<#
+ Add a protection domain to the cluster.
+ Replace "pd_name" with the name of the protection domain.
+#>
+Add-NTNXProtectionDomain -Input "pd_name"
+
+<#
+ Find the unprotected VMs in a cluster.
+#>
+Get-NTNXUnprotectedVM
+
+<# 
+Get the list of user unprotected VMs and add the list to a protection domain.
+Replace "pd_name" with the name of the protection domain.
+#>
+Get-NTNXUnprotectedVM | where {-not $_.iscontrollerVM} | foreach-object{Add-NTNXProtectionDomainVM -Name "pd_name" -Names $_.vmName}
+
+<#
+ Add a specific VM to a protection domain.
+ Replace "pd_name" with the name of the protection domain.
+ Replace "vm_name" with the name of the VM.
+#>
+Add-NTNXProtectionDomainVM -Name "pd_name" -Names "vm_name"
+
+<#
+ Get the VMs that have been added to a protection domain.
+ Replace "pd_name" with the name of your protection domain.
+#>
+Get-NTNXvm | where{$_.protectiondomainname -eq "pd_name"}
