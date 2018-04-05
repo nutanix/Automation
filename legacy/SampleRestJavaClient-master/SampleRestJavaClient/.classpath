@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+  <classpathentry kind="src" path="src"/>
+  <classpathentry kind="lib" path="lib/cxf-api-2.7.2.jar"/>
+  <classpathentry kind="lib" path="lib/cxf-rt-bindings-xml-2.7.2.jar"/>
+  <classpathentry kind="lib" path="lib/cxf-rt-core-2.7.2.jar"/>
+  <classpathentry kind="lib" path="lib/cxf-rt-frontend-jaxrs-2.7.2.jar"/>
+  <classpathentry kind="lib" path="lib/cxf-rt-rs-extension-search-2.7.2.jar"/>
+  <classpathentry kind="lib" path="lib/cxf-rt-transports-http-2.7.2.jar"/>
+  <classpathentry kind="lib" path="lib/guava-11.0.2.jar"/>
+  <classpathentry kind="lib" path="lib/jackson-annotations-2.1.5.jar"/>
+  <classpathentry kind="lib" path="lib/jackson-core-2.1.5.jar"/>
+  <classpathentry kind="lib" path="lib/jackson-core-asl-1.9.9.jar"/>
+  <classpathentry kind="lib" path="lib/jackson-databind-2.1.5.jar"/>
+  <classpathentry kind="lib" path="lib/jackson-jaxrs-1.9.9.jar"/>
+  <classpathentry kind="lib" path="lib/jackson-jaxrs-json-provider-2.0.0.jar"/>
+  <classpathentry kind="lib" path="lib/jackson-mapper-asl-1.9.9.jar"/>
+  <classpathentry kind="lib" path="lib/jackson-module-jaxb-annotations-2.0.0.jar"/>
+  <classpathentry kind="lib" path="lib/jackson-module-jsonSchema-2.1.0.jar"/>
+  <classpathentry kind="lib" path="lib/jackson-module-scala_2.9.1-2.1.5.jar"/>
+  <classpathentry kind="lib" path="lib/javax.ws.rs-api-2.0-m10.jar"/>
+  <classpathentry kind="lib" path="lib/jaxb-impl-2.1.13.jar"/>
+  <classpathentry kind="lib" path="lib/prism_sdk_rest-danube-4.0.2-stable-SNAPSHOT.jar"/>
+  <classpathentry kind="lib" path="lib/prism_services_java-danube-4.0.2-stable-SNAPSHOT.jar"/>
+  <classpathentry kind="lib" path="lib/wsdl4j-1.6.2.jar"/>
+  <classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.6"/>
+  <classpathentry kind="output" path="bin"/>
+</classpath>
