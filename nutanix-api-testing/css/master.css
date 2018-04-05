@@ -1,0 +1,27 @@
+body {
+    margin: 10px;
+}
+
+h1 {
+    margin-bottom: 40px;
+}
+
+.row {
+    margin-bottom: 10px;
+}
+
+.none {
+    display: none;
+}
+
+#api_output {
+    padding: 10px;
+}
+
+#object_explanation {
+    color: #ccc;
+}
+
+pre.prettyprint {
+    padding: 7px !important;
+}

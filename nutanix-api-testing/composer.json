@@ -1,0 +1,13 @@
+{
+  "name": "Nutanix API Testing",
+  "description": "Small web-based demo that can be used to test the output of various Nutanix API calls",
+  "authors": [
+    {
+      "name": "Chris Rasmussen, Senior Systems Engineer, Nutanix",
+      "email": "crasmussen@nutanix.com"
+    }
+  ],
+  "require": {
+    "guzzlehttp/guzzle": "~5.0"
+  }
+}
