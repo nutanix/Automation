@@ -1,0 +1,18 @@
+dbca -silent \
+-createDatabase \
+-templateName General_Purpose.dbc \
+-gdbName RACDB \
+-adminManaged \
+-nodelist racnode1,racnode2 \
+-emConfiguration DBEXPRESS  \
+-SysPassword Nutanix1 \
+-SystemPassword Nutanix1 \
+-asmsnmpPassword Nutanix1 \
+-asmSysPassword Nutanix1 \
+-storageType ASM \
+-diskGroupName DATA \
+-memoryPercentage 40 \
+-registerWithDirService false \
+-characterSet AL32UTF8 \
+-nationalCharacterSet AL16UTF16 \
+-databaseType MULTIPURPOSE \
