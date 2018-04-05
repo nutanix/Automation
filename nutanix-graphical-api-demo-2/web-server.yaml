@@ -1,0 +1,16 @@
+#cloud-config
+users:
+  - name: nutanix
+    sudo: ['ALL=(ALL) NOPASSWD:ALL']
+    lock-passwd: false
+    passwd: $6$qxg9VycBEn76FVjP$mVdBH3ohk0FZEpiyooDa84PqYnknWqEOu50vh27iPi9kHUgiFmaWZAUIQFn8E3y2/p8m9GexK7WUyVLnfGmvp/
+
+packages:
+  - httpd
+package_upgrade: true
+hostname: centos-web-auto
+runcmd:
+  - systemctl enable httpd.service
+  - systemctl start httpd.service
+  - systemctl stop firewalld
+  - systemctl disable firewalld

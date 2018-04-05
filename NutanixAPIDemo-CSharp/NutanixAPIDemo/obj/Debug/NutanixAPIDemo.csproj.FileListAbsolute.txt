@@ -1,0 +1,22 @@
+C:\Users\chris\Data\Solutions\c#\NutanixAPIDemo\NutanixAPIDemo\NutanixAPIDemo\bin\Debug\NutanixAPIDemo.exe.config
+C:\Users\chris\Data\Solutions\c#\NutanixAPIDemo\NutanixAPIDemo\NutanixAPIDemo\bin\Debug\NutanixAPIDemo.exe
+C:\Users\chris\Data\Solutions\c#\NutanixAPIDemo\NutanixAPIDemo\NutanixAPIDemo\bin\Debug\NutanixAPIDemo.pdb
+C:\Users\chris\Data\Solutions\c#\NutanixAPIDemo\NutanixAPIDemo\NutanixAPIDemo\obj\Debug\NutanixAPIDemo.csprojResolveAssemblyReference.cache
+C:\Users\chris\Data\Solutions\c#\NutanixAPIDemo\NutanixAPIDemo\NutanixAPIDemo\obj\Debug\NutanixAPIDemo.Form1.resources
+C:\Users\chris\Data\Solutions\c#\NutanixAPIDemo\NutanixAPIDemo\NutanixAPIDemo\obj\Debug\NutanixAPIDemo.Properties.Resources.resources
+C:\Users\chris\Data\Solutions\c#\NutanixAPIDemo\NutanixAPIDemo\NutanixAPIDemo\obj\Debug\NutanixAPIDemo.csproj.GenerateResource.Cache
+C:\Users\chris\Data\Solutions\c#\NutanixAPIDemo\NutanixAPIDemo\NutanixAPIDemo\obj\Debug\NutanixAPIDemo.exe
+C:\Users\chris\Data\Solutions\c#\NutanixAPIDemo\NutanixAPIDemo\NutanixAPIDemo\obj\Debug\NutanixAPIDemo.pdb
+C:\Users\chris\Data\Solutions\c#\NutanixAPIDemo\NutanixAPIDemo\NutanixAPIDemo\bin\Debug\Newtonsoft.Json.dll
+C:\Users\chris\Data\Solutions\c#\NutanixAPIDemo\NutanixAPIDemo\NutanixAPIDemo\bin\Debug\Newtonsoft.Json.xml
+C:\Users\Chris Rasmussen\Data\Solutions\NutanixAPIDemo-CSharp\NutanixAPIDemo\bin\Debug\NutanixAPIDemo.exe.config
+C:\Users\Chris Rasmussen\Data\Solutions\NutanixAPIDemo-CSharp\NutanixAPIDemo\bin\Debug\NutanixAPIDemo.exe
+C:\Users\Chris Rasmussen\Data\Solutions\NutanixAPIDemo-CSharp\NutanixAPIDemo\bin\Debug\NutanixAPIDemo.pdb
+C:\Users\Chris Rasmussen\Data\Solutions\NutanixAPIDemo-CSharp\NutanixAPIDemo\bin\Debug\Newtonsoft.Json.dll
+C:\Users\Chris Rasmussen\Data\Solutions\NutanixAPIDemo-CSharp\NutanixAPIDemo\bin\Debug\Newtonsoft.Json.xml
+C:\Users\Chris Rasmussen\Data\Solutions\NutanixAPIDemo-CSharp\NutanixAPIDemo\obj\Debug\NutanixAPIDemo.csprojResolveAssemblyReference.cache
+C:\Users\Chris Rasmussen\Data\Solutions\NutanixAPIDemo-CSharp\NutanixAPIDemo\obj\Debug\NutanixAPIDemo.Form1.resources
+C:\Users\Chris Rasmussen\Data\Solutions\NutanixAPIDemo-CSharp\NutanixAPIDemo\obj\Debug\NutanixAPIDemo.Properties.Resources.resources
+C:\Users\Chris Rasmussen\Data\Solutions\NutanixAPIDemo-CSharp\NutanixAPIDemo\obj\Debug\NutanixAPIDemo.csproj.GenerateResource.Cache
+C:\Users\Chris Rasmussen\Data\Solutions\NutanixAPIDemo-CSharp\NutanixAPIDemo\obj\Debug\NutanixAPIDemo.exe
+C:\Users\Chris Rasmussen\Data\Solutions\NutanixAPIDemo-CSharp\NutanixAPIDemo\obj\Debug\NutanixAPIDemo.pdb

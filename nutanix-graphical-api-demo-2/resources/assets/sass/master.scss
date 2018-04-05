@@ -1,0 +1,172 @@
+@import "partials/base";
+@import "partials/mixins";
+@import "partials/variables";
+
+html {
+  padding: 0px !important;
+}
+
+body {
+  font-family: $font-family;
+  font-size: 16px;
+}
+
+.panel-numbering {
+  font-weight: bold;
+  font-size: 48px;
+  color: #269347;
+  text-align: center;
+}
+
+h1, h2, h3, h4 {
+  /* color: #024da1; */
+}
+
+.item-header {
+  font-weight: bold;
+  text-align: center;
+}
+
+.item-content {
+  font-weight: bold;
+  font-size: 48px;
+  color: #269347;
+  text-align: center;
+}
+
+.none {
+  display: none;
+}
+
+.tab-pane {
+  margin: 10px 0 0 0 !important;
+}
+
+.good {
+  color: #3c763d;
+  font-family: $sub-font;
+}
+
+.bad {
+  color: #a94442;
+}
+
+.action-messages {
+  margin-top: 10px;
+}
+
+#demo-messages {
+  display: inline-block;
+}
+
+#result-messages, #demo-messages {
+  font-family: $sub-font;
+  margin: 0 10px;
+}
+
+#hide-show-credentials {
+  font-family: $sub-font;
+  cursor: crosshair;
+}
+
+.opacity-normal {
+  opacity: 0.75;
+}
+
+.opacity-high {
+  opacity: 1;
+}
+
+#demo-read, #demo-read-v3, #demo-container, #demo-shell, #demo-deploy, #demo-raw {
+  margin: 5px 0;
+  padding: 5px 0;
+}
+
+#demo-read-v3, #demo-container, #demo-shell, #demo-deploy, #demo-raw {
+  display: none;
+}
+
+.step-heading {
+  display: inline-block;
+  margin: 0 10px 0 0;
+}
+
+.step-desc {
+  display: inline-block;
+}
+
+.get-profile, .get-profile-custom {
+  margin: 3px 0;
+}
+
+#deploy-expand {
+  margin: 10px 0;
+}
+
+#deploy-details {
+  display: none;
+  border-top: 1px solid #ddd;
+  border-bottom: 1px solid #ddd;
+  margin: 0 5px;
+  padding: 10px;
+}
+
+#deploy-get-details {
+  margin: 0 0 10px 0;
+}
+
+#deploy-details-messages {
+  display: inline-block;
+  margin: 0 0 0 10px;
+}
+
+.deploy-details-header {
+  text-align: center;
+  font-weight: bold;
+}
+
+.server-profile-list {
+  margin-top: 3px;
+  font-size: 75%;
+}
+
+.none {
+  display: none;
+}
+
+.center {
+  text-align: center;
+}
+
+.left {
+  text-align: left;
+}
+
+.emphasised {
+  font-weight: bold;
+}
+
+.need-details {
+  margin: 0 15px;
+}
+
+#dialog-confirm {
+  display: none;
+  font-size: 14px;
+}
+
+#object-explanation, #parameters-explanation {
+  color: #ccc;
+}
+
+#apiOutput {
+  padding: 10px;
+}
+
+pre.prettyprint {
+  padding: 7px !important;
+}
+
+.prefix {
+  padding: 5px 0 0 0;
+}

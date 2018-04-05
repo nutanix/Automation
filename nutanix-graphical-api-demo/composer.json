@@ -1,0 +1,15 @@
+{
+    "name": "Nutanix Graphical API Demo",
+    "description": "Small web-based demo of a site that consumes data exposed by the Nutanix API",
+    "authors": [
+        {
+            "name": "Chris Rasmussen",
+            "email": "crasmussen@nutanix.com"
+        }
+    ],
+    "require": {
+        "guzzlehttp/guzzle": "~5.0",
+        "digitalformula/api-request": "dev-master",
+        "digitalformula/formatting": "dev-master"
+    }
+}

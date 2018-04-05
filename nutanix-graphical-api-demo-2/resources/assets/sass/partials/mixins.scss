@@ -1,0 +1,21 @@
+@mixin box_common {
+	-webkit-border-radius: $b_radius;
+	-moz-border-radius: $b_radius;
+	border-radius: $b_radius;
+	border: 1px solid;
+	padding: 5px 5px 5px 25px;
+	width: 50%;
+	margin: 0 auto !important;
+}
+
+@mixin dark_border {
+	border-radius: $b_radius;
+	border: 1px solid $dark_border;
+}
+
+@mixin tooltip_common {
+	padding: 7px 15px;
+	width: 200px;
+	// display: none;
+	color: #fff;
+}

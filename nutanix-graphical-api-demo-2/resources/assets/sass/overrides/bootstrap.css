@@ -1,0 +1,11 @@
+html, body {
+    margin: 0 !important;
+}
+
+body {
+    padding-bottom: 170px;
+}
+
+.table {
+    margin: 0 0 10px 0 !important;
+}
