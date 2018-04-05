@@ -8,15 +8,13 @@ Many of these are *not* production-grade scripts, and are used to either do spec
 
 ## Repo Admins
 
-Chris Rasmussen, Solutions Architect, Nutanix (Melbourne, AU)
-
-Jon Kohler, Technical Director, Nutanix (Vermont, US)
+* Chris Rasmussen, Solutions Architect, Nutanix (Melbourne, AU)
+* Jon Kohler, Technical Director, Nutanix (Vermont, US)
 
 ## High Level Changelog
 
-2018.04.05 - Consolidated Chris Rasmussen (digitalformula) repos
-
-2018.04.05 - Consolidated random /nutanix/ org repos
+* 2018.04.05 - Consolidated Chris Rasmussen (digitalformula) repos
+* 2018.04.05 - Consolidated random /nutanix/ org repos
 
 ## Support
 
