@@ -23,3 +23,6 @@ Then just browse to http://localhost:8000 (and hope nothing else is already usin
 ## Screenshot
 
 ![Demo app screenshot](https://raw.githubusercontent.com/digitalformula/nutanix-api-testing/master/screenshot.jpg)
+
+# Note
+Moved to /nutanix/automation from https://github.com/digitalformula/nutanix-api-testing (JonKohler 2018.04.06)

@@ -114,6 +114,10 @@ The following requirements must be met before the Apache web server deployment w
 
 # Updates
 
+2018.04.06
+
+- moved to /nutanix/automation from https://github.com/digitalformula/nutanix-graphical-api-demo (JonKohler
+)
 2016.06.28
 
 - Added "DEMO-<date>-" prefix to all created objects (containers, VMs)

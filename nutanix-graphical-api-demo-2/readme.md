@@ -25,3 +25,6 @@ Demo app aimed at showing how to consume the Nutanix API using PHP.
 - Select the required demo from Step 2
 - Click 'Run Demo'
 - Check out the results in Step 3 
+
+# Note
+moved to /nutanix/automation from https://github.com/digitalformula/nutanix-graphical-api-demo-2 (JonKohler 2018.04.06)

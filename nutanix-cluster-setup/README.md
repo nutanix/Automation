@@ -63,3 +63,6 @@ Assumes the included settings (see above) are OK for your environment - this is 
 This program is free software; Project Public License.
 
 This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+
+# Note
+Moved to /nutanix/automation from https://github.com/digitalformula/nutanix-cluster-setup (JonKohler 2018.04.06)

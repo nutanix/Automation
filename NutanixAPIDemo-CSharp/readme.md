@@ -27,3 +27,6 @@ You can email crasmussen@nutanix.com if you have any questions.
 
 Please note that this demo my own and is not supported, endorsed or approved by Nutanix in any way.
 
+# Note
+Moved to /nutanix/automation from https://github.com/digitalformula/NutanixAPIDemo-CSharp (JonKohler 2018.04.06)
+
