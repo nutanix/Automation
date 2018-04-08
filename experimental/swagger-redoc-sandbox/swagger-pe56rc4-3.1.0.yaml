@@ -89,10 +89,7 @@ basePath: /api/nutanix/v3
 schemes:
   - https
 consumes:
-  #TODO - grep aplos and see if these are indeed the only consumption MIME types
   - application/json
-  - application/octet-stream #TODO - validate from images this is actually correct
-  - application/x-www-form-urlencoded #TODO - validate oauth consumes and update here
 produces:
   - application/json
 paths:

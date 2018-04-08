@@ -1,0 +1,2193 @@
+swagger: '2.0'
+info:
+  version: 'v2.0'
+  title: Swagger API
+host: any_cvm_ip:9440
+basePath: /PrismGateway/services/rest/v2.0
+schemes:
+- https
+consumes:
+- application/json
+produces:
+- application/json
+paths:
+# all of this is from /alerts
+  base:
+    #/alerts
+    get:
+      tags:
+      - alerts
+      description: Get the list of Alerts.
+      summary: getAlerts
+      operationId: AlertsGet
+      produces:
+      - application/json
+      parameters:
+      - name: start_time_in_usecs
+        in: query
+        required: false
+        type: integer
+        format: int32
+        description: Start time in microseconds
+      - name: end_time_in_usecs
+        in: query
+        required: false
+        type: integer
+        format: int32
+        description: End time in microseconds
+      - name: count
+        in: query
+        required: false
+        type: integer
+        format: int32
+        description: Maximum number of alerts
+      - name: resolved
+        in: query
+        required: false
+        type: boolean
+        description: Alerts which have been resolved
+      - name: auto_resolved
+        in: query
+        required: false
+        type: boolean
+        description: Alerts which have been auto resolved
+      - name: acknowledged
+        in: query
+        required: false
+        type: boolean
+        description: Alerts which have been acknowledged
+      - name: severity
+        in: query
+        required: false
+        type: string
+        description: Alert severities
+      - name: alert_type_uuid
+        in: query
+        required: false
+        type: string
+        description: Alert type ids
+      - name: page
+        in: query
+        required: false
+        type: integer
+        format: int32
+        description: Page number
+      - name: entity_type
+        in: query
+        required: false
+        type: string
+        description: Entity type
+      - name: entity_ids
+        in: query
+        required: false
+        type: string
+        description: Entity ids
+      - name: impact_types
+        in: query
+        required: false
+        type: string
+        description: Impact Types
+      - name: classification
+        in: query
+        required: false
+        type: string
+        description: Classification
+      - name: alert_ids
+        in: query
+        required: false
+        type: string
+        description: Alert ids
+      - name: get_causes
+        in: query
+        required: false
+        type: boolean
+        description: Get causes
+      - name: detailed_info
+        in: query
+        required: false
+        type: boolean
+        description: Get detailed info
+      responses:
+        200:
+          description: ''
+          schema:
+            $ref: '#/definitions/Get.base.entitycollection&lt;get.dto.alerts.alertdto&gt;'
+          examples: {}
+      x-unitTests: []
+      x-operation-settings:
+        CollectParameters: false
+        AllowDynamicQueryParameters: false
+        AllowDynamicFormParameters: false
+        IsMultiContentStreaming: false
+  acknowledge:
+    #/alerts/acknowledge
+    post:
+      tags:
+      - alerts
+      description: Acknowledge Alerts.
+      summary: acknowledgeAlerts
+      operationId: AlertsAcknowledgePost
+      produces:
+      - application/json
+      parameters:
+      - name: start_time_in_usecs
+        in: query
+        required: false
+        type: integer
+        format: int32
+        description: Start time in microseconds
+      - name: end_time_in_usecs
+        in: query
+        required: false
+        type: integer
+        format: int32
+        description: End time in microseconds
+      - name: severity
+        in: query
+        required: false
+        type: string
+        description: Severity
+      - name: impact_types
+        in: query
+        required: false
+        type: string
+        description: Impact Type of alerts
+      - name: classifications
+        in: query
+        required: false
+        type: string
+        description: Classification of alerts
+      - name: entity_type
+        in: query
+        required: false
+        type: string
+        description: Entity Type
+      - name: entity_type_ids
+        in: query
+        required: false
+        type: string
+        description: Entity Type Ids
+      - name: count
+        in: query
+        required: false
+        type: integer
+        format: int32
+        description: Maximum number of alerts
+      responses:
+        200:
+          description: ''
+          schema:
+            $ref: '#/definitions/Create.dto.alerts.managealertsdto'
+          examples: {}
+        default:
+          description: Any internal exception while performing this operation
+          schema: {}
+      x-unitTests: []
+      x-operation-settings:
+        CollectParameters: false
+        AllowDynamicQueryParameters: false
+        AllowDynamicFormParameters: false
+        IsMultiContentStreaming: false
+  /alerts/configuration:
+    get:
+      description: Get the Alert configuration.
+      summary: getAlertConfig
+      operationId: AlertsConfigurationGet
+      produces:
+      - application/json
+      parameters: []
+      responses:
+        200:
+          description: ''
+          schema:
+            $ref: '#/definitions/Get.dto.appliance.configuration.alertconfigdto'
+          examples: {}
+      x-unitTests: []
+      x-operation-settings:
+        CollectParameters: false
+        AllowDynamicQueryParameters: false
+        AllowDynamicFormParameters: false
+        IsMultiContentStreaming: false
+    put:
+      description: Update the Alert configuration.
+      summary: updateAlertConfig
+      operationId: AlertsConfigurationPut
+      produces:
+      - application/json
+      parameters:
+      - name: body
+        in: body
+        required: true
+        description: new Alert configuration.
+        schema:
+          $ref: '#/definitions/Update.dto.appliance.configuration.alertconfigdto'
+      responses:
+        200:
+          description: ''
+          schema:
+            $ref: '#/definitions/Update.dto.appliance.configuration.alertconfigdto'
+          examples: {}
+      x-unitTests: []
+      x-operation-settings:
+        CollectParameters: false
+        AllowDynamicQueryParameters: false
+        AllowDynamicFormParameters: false
+        IsMultiContentStreaming: false
+    patch:
+      description: Modify the Alert configuration.
+      summary: patchAlertConfig
+      operationId: AlertsConfigurationPatch
+      produces:
+      - application/json
+      parameters:
+      - name: body
+        in: body
+        required: true
+        description: new Alert configuration.
+        schema:
+          $ref: '#/definitions/Patch.dto.requestdto&lt;patch.dto.appliance.configuration.alertconfigdto&gt;'
+      responses:
+        200:
+          description: ''
+          schema:
+            $ref: '#/definitions/Patch.dto.appliance.configuration.alertconfigdto'
+          examples: {}
+      x-unitTests: []
+      x-operation-settings:
+        CollectParameters: false
+        AllowDynamicQueryParameters: false
+        AllowDynamicFormParameters: false
+        IsMultiContentStreaming: false
+  /alerts/policies:
+    get:
+      description: Get all User Defined Alert Policies
+      summary: getAlertPolicies
+      operationId: AlertsPoliciesGet
+      produces:
+      - application/json
+      parameters:
+      - name: entity_type
+        in: query
+        required: false
+        type: string
+        description: Entity type
+      - name: entity_ids
+        in: query
+        required: false
+        type: string
+        description: Entity ids
+      responses:
+        200:
+          description: ''
+          schema:
+            $ref: '#/definitions/Get.base.entitycollection&lt;get.dto.alerts.alertpolicydto&gt;'
+          examples: {}
+        default:
+          description: Any internal exception while performing this operation
+          schema: {}
+      x-unitTests: []
+      x-operation-settings:
+        CollectParameters: false
+        AllowDynamicQueryParameters: false
+        AllowDynamicFormParameters: false
+        IsMultiContentStreaming: false
+    put:
+      description: Update a User Defined Alert Policy
+      summary: updatePolicy
+      operationId: AlertsPoliciesPut
+      produces:
+      - application/json
+      parameters:
+      - name: body
+        in: body
+        required: true
+        description: Alert Policy with updated configurations
+        schema:
+          $ref: '#/definitions/Update.dto.alerts.alertpolicydto'
+      responses:
+        200:
+          description: ''
+          schema:
+            $ref: '#/definitions/Update.dto.alerts.alertpolicydto'
+          examples: {}
+        default:
+          description: Any internal exception while performing this operation
+          schema: {}
+      x-unitTests: []
+      x-operation-settings:
+        CollectParameters: false
+        AllowDynamicQueryParameters: false
+        AllowDynamicFormParameters: false
+        IsMultiContentStreaming: false
+    post:
+      description: Create a new User Defined Alert Policy
+      summary: createPolicy
+      operationId: AlertsPoliciesPost
+      produces:
+      - application/json
+      parameters:
+      - name: body
+        in: body
+        required: true
+        description: New User Defined Alert Policy
+        schema:
+          $ref: '#/definitions/Create.dto.alerts.alertpolicydto'
+      responses:
+        200:
+          description: ''
+          schema:
+            $ref: '#/definitions/Create.dto.alerts.alertpolicydto'
+          examples: {}
+        default:
+          description: Any internal exception while performing this operation
+          schema: {}
+      x-unitTests: []
+      x-operation-settings:
+        CollectParameters: false
+        AllowDynamicQueryParameters: false
+        AllowDynamicFormParameters: false
+        IsMultiContentStreaming: false
+  /alerts/policies/{policy_id}:
+    get:
+      description: Get the User Defined Alert Policy
+      summary: getAlertPolicy
+      operationId: AlertsPoliciesByPolicyIdGet
+      produces:
+      - application/json
+      parameters:
+      - name: policy_id
+        in: path
+        required: true
+        type: string
+        description: Alert Policy ID
+      responses:
+        200:
+          description: ''
+          schema:
+            $ref: '#/definitions/Get.dto.alerts.alertpolicydto'
+          examples: {}
+        default:
+          description: Any internal exception while performing this operation
+          schema: {}
+      x-unitTests: []
+      x-operation-settings:
+        CollectParameters: false
+        AllowDynamicQueryParameters: false
+        AllowDynamicFormParameters: false
+        IsMultiContentStreaming: false
+    delete:
+      description: Delete the specified User Defined Alert Policy
+      summary: deleteAlertPolicy
+      operationId: AlertsPoliciesByPolicyIdDelete
+      produces:
+      - application/json
+      parameters:
+      - name: policy_id
+        in: path
+        required: true
+        type: string
+        description: Alert Policy ID
+      responses:
+        200:
+          description: ''
+          schema:
+            $ref: '#/definitions/Delete.dto.primitivedto&lt;java.lang.boolean&gt;'
+          examples: {}
+        default:
+          description: Any internal exception while performing this operation
+          schema: {}
+      x-unitTests: []
+      x-operation-settings:
+        CollectParameters: false
+        AllowDynamicQueryParameters: false
+        AllowDynamicFormParameters: false
+        IsMultiContentStreaming: false
+  /alerts/resolve:
+    post:
+      description: Resolve Alerts.
+      summary: resolveAlerts
+      operationId: AlertsResolvePost
+      produces:
+      - application/json
+      parameters:
+      - name: start_time_in_usecs
+        in: query
+        required: false
+        type: integer
+        format: int32
+        description: Start time in microseconds
+      - name: end_time_in_usecs
+        in: query
+        required: false
+        type: integer
+        format: int32
+        description: End time in microseconds
+      - name: severity
+        in: query
+        required: false
+        type: string
+        description: Severity
+      - name: impact_types
+        in: query
+        required: false
+        type: string
+        description: Impact Type of alerts
+      - name: classifications
+        in: query
+        required: false
+        type: string
+        description: Classifications of alerts
+      - name: entity_type
+        in: query
+        required: false
+        type: string
+        description: Entity Type
+      - name: entity_type_ids
+        in: query
+        required: false
+        type: string
+        description: Entity Type Ids
+      - name: count
+        in: query
+        required: false
+        type: integer
+        format: int32
+        description: Maximum number of alerts
+      responses:
+        200:
+          description: ''
+          schema:
+            $ref: '#/definitions/Create.dto.alerts.managealertsdto'
+          examples: {}
+        default:
+          description: Any internal exception while performing this operation
+          schema: {}
+      x-unitTests: []
+      x-operation-settings:
+        CollectParameters: false
+        AllowDynamicQueryParameters: false
+        AllowDynamicFormParameters: false
+        IsMultiContentStreaming: false
+  /alerts/{id}/acknowledge:
+    post:
+      description: Acknowledge Alert.
+      summary: acknowledgeAlert
+      operationId: AlertsAcknowledgeByIdPost
+      produces:
+      - application/json
+      parameters:
+      - name: id
+        in: path
+        required: true
+        type: string
+        description: Alert Id
+      responses:
+        200:
+          description: ''
+          schema:
+            $ref: '#/definitions/Create.dto.alerts.resolveacknowledgealertdto'
+          examples: {}
+      x-unitTests: []
+      x-operation-settings:
+        CollectParameters: false
+        AllowDynamicQueryParameters: false
+        AllowDynamicFormParameters: false
+        IsMultiContentStreaming: false
+  /alerts/{id}/resolve:
+    post:
+      description: Resolve Alert.
+      summary: resolveAlert
+      operationId: AlertsResolveByIdPost
+      produces:
+      - application/json
+      parameters:
+      - name: id
+        in: path
+        required: true
+        type: string
+        description: Alert Id
+      responses:
+        200:
+          description: ''
+          schema:
+            $ref: '#/definitions/Create.dto.alerts.resolveacknowledgealertdto'
+          examples: {}
+      x-unitTests: []
+      x-operation-settings:
+        CollectParameters: false
+        AllowDynamicQueryParameters: false
+        AllowDynamicFormParameters: false
+        IsMultiContentStreaming: false
+definitions:
+  Create.dto.alerts.alertpolicydto:
+    title: create.dto.alerts.AlertPolicyDTO
+    type: object
+    properties:
+      auto_resolve:
+        description: Whether the auto resolve feature is enabled for this policy
+        type: boolean
+      enabled:
+        description: Enable/Disable flag for the policy
+        type: boolean
+      filter:
+        description: Filter expression for the policy in FIQL
+        type: string
+      title:
+        description: Title of the Policy
+        type: string
+      trigger_conditions:
+        description: Trigger conditions for the policy. If there are multiple Trigger conditions, they will be ANDed.
+        type: array
+        items:
+          $ref: '#/definitions/Create.dto.alerts.alertpolicydto$triggercondition'
+      created_by:
+        description: Username of the user who created the Policy
+        type: string
+      description:
+        description: Description of the Policy.
+        type: string
+      error_on_conflict:
+        description: Error if conflicting Alert Policies are found
+        type: boolean
+      id:
+        description: ID of the Policy
+        type: string
+      impact_types:
+        description: Impact Types that are to be associated with the resulting Alert
+        type: array
+        items:
+          type: string
+      last_updated_timestamp_in_usecs:
+        description: Last updated timestamp of the Policy. Will be used as the CAS value during updates.
+        type: integer
+        format: int64
+      policies_to_override:
+        description: List of Alert Policy Ids to override
+        type: array
+        items:
+          type: string
+      related_policies:
+        description: List of Alert Policies that are related to the entities of the current policy
+        type: array
+        items:
+          $ref: '#/definitions/Create.dto.alerts.alertpolicydto$relatedpolicies'
+      trigger_wait_period_in_secs:
+        description: Duration to wait before triggering the alert when the specified condition is met
+        type: integer
+        format: int64
+    required:
+    - auto_resolve
+    - enabled
+    - filter
+    - title
+    - trigger_conditions
+  Create.dto.alerts.alertpolicydto$relatedpolicies:
+    title: create.dto.alerts.AlertPolicyDTO$RelatedPolicies
+    type: object
+    properties:
+      entity_uuid:
+        description: Entity UUID
+        type: string
+      policy_ids:
+        description: Policy Ids that are related to the specified entity
+        type: array
+        items:
+          type: string
+  ConditionType:
+    title: condition_type
+    example: STATIC_THRESHOLD
+    x-enum-elements:
+    - name: STATIC_THRESHOLD
+      description: ''
+    - name: ANOMALY
+      description: ''
+    - name: SAFETY_ZONE
+      description: ''
+    type: string
+    enum:
+    - STATIC_THRESHOLD
+    - ANOMALY
+    - SAFETY_ZONE
+  SeverityLevel:
+    title: severity_level
+    example: CRITICAL
+    x-enum-elements:
+    - name: CRITICAL
+      description: ''
+    - name: WARNING
+      description: ''
+    - name: INFO
+      description: ''
+    - name: AUDIT
+      description: ''
+    type: string
+    enum:
+    - CRITICAL
+    - WARNING
+    - INFO
+    - AUDIT
+  Create.dto.alerts.alertpolicydto$triggercondition:
+    title: create.dto.alerts.AlertPolicyDTO$TriggerCondition
+    type: object
+    properties:
+      condition:
+        description: Conditions to be met to trigger the alert. Conditions are expressed in FIQL
+        type: string
+      condition_type:
+        $ref: '#/definitions/ConditionType'
+      severity_level:
+        $ref: '#/definitions/SeverityLevel'
+    required:
+    - condition
+    - condition_type
+    - severity_level
+  Create.dto.alerts.managealertsdto:
+    title: create.dto.alerts.ManageAlertsDTO
+    type: object
+    properties:
+      alert_status_list:
+        description: ''
+        type: array
+        items:
+          $ref: '#/definitions/Create.dto.alerts.resolveacknowledgealertdto'
+      num_failed_updates:
+        description: ''
+        type: integer
+        format: int32
+      num_successful_updates:
+        description: ''
+        type: integer
+        format: int32
+  Create.dto.alerts.resolveacknowledgealertdto:
+    title: create.dto.alerts.ResolveAcknowledgeAlertDTO
+    type: object
+    properties:
+      id:
+        description: ''
+        type: string
+      message:
+        description: ''
+        type: string
+      successful:
+        description: ''
+        type: boolean
+  Delete.dto.primitivedto&lt;java.lang.boolean&gt;:
+    title: delete.dto.PrimitiveDTO&lt;java.lang.Boolean&gt;
+    type: object
+    properties:
+      value:
+        description: ''
+        type: boolean
+  Get.base.entitycollection&lt;get.dto.resultcontentdescriptor&gt;:
+    title: get.base.EntityCollection&lt;get.dto.ResultContentDescriptor&gt;
+    type: object
+    properties:
+      entities:
+        description: ''
+        type: array
+        items:
+          $ref: '#/definitions/Get.dto.resultcontentdescriptor'
+      error_info:
+        $ref: '#/definitions/Get.base.errorinfo'
+      metadata:
+        $ref: '#/definitions/Get.base.metadata'
+  Get.base.entitycollection&lt;get.dto.alerts.alertdto&gt;:
+    title: get.base.EntityCollection&lt;get.dto.alerts.AlertDTO&gt;
+    type: object
+    properties:
+      entities:
+        description: ''
+        type: array
+        items:
+          $ref: '#/definitions/Get.dto.alerts.alertdto'
+      error_info:
+        $ref: '#/definitions/Get.base.errorinfo'
+      metadata:
+        $ref: '#/definitions/Get.base.metadata'
+  Get.base.entitycollection&lt;get.dto.alerts.alertpolicydto&gt;:
+    title: get.base.EntityCollection&lt;get.dto.alerts.AlertPolicyDTO&gt;
+    type: object
+    properties:
+      entities:
+        description: ''
+        type: array
+        items:
+          $ref: '#/definitions/Get.dto.alerts.alertpolicydto'
+      error_info:
+        $ref: '#/definitions/Get.base.errorinfo'
+      metadata:
+        $ref: '#/definitions/Get.base.metadata'
+  Get.base.errorinfo:
+    title: get.base.ErrorInfo
+    type: object
+    properties:
+      count:
+        description: ''
+        type: integer
+        format: int64
+      entity_list:
+        description: ''
+        type: array
+        items:
+          type: string
+      message:
+        description: ''
+        type: string
+  Get.base.metadata:
+    title: get.base.Metadata
+    type: object
+    properties:
+      count:
+        description: ''
+        type: integer
+        format: int32
+      end_index:
+        description: ''
+        type: integer
+        format: int32
+      filter_criteria:
+        description: ''
+        type: string
+      grand_total_entities:
+        description: ''
+        type: integer
+        format: int32
+      next_cursor:
+        description: ''
+        type: string
+      page:
+        description: ''
+        type: integer
+        format: int32
+      previous_cursor:
+        description: ''
+        type: string
+      search_string:
+        description: ''
+        type: string
+      sort_criteria:
+        description: ''
+        type: string
+      start_index:
+        description: ''
+        type: integer
+        format: int32
+      total_entities:
+        description: ''
+        type: integer
+        format: int32
+  EntityType:
+    title: entity_type
+    example: CLUSTER
+    x-enum-elements:
+    - name: CLUSTER
+      description: ''
+    - name: HARDWARE
+      description: ''
+    - name: STORAGE
+      description: ''
+    - name: BACKUP
+      description: ''
+    - name: DR
+      description: ''
+    - name: LICENSE
+      description: ''
+    - name: DISK
+      description: ''
+    - name: STORAGE_TIER
+      description: ''
+    - name: HOST
+      description: ''
+    - name: NODE
+      description: ''
+    - name: MANAGEMENT_SERVER
+      description: ''
+    - name: MANAGEMENT_SERVER_INFO
+      description: ''
+    - name: VM
+      description: ''
+    - name: SERVICE_VM
+      description: ''
+    - name: VDISK
+      description: ''
+    - name: VIRTUAL_DISK
+      description: ''
+    - name: STORAGE_POOL
+      description: ''
+    - name: CONTAINER
+      description: ''
+    - name: STORAGE_CONTAINER
+      description: ''
+    - name: VZONE
+      description: ''
+    - name: SNAPSHOT
+      description: ''
+    - name: FAST_CLONE
+      description: ''
+    - name: RSYSLOG_SERVER
+      description: ''
+    - name: KEY_MANAGEMENT_SERVER
+      description: ''
+    - name: CERTIFICATE
+      description: ''
+    - name: HTTP_PROXY
+      description: ''
+    - name: SNMP_TRAP
+      description: ''
+    - name: SNMP_USER
+      description: ''
+    - name: REMOTE_SITE
+      description: ''
+    - name: CLOUD_CREDENTIALS
+      description: ''
+    - name: PROTECTION_DOMAIN
+      description: ''
+    - name: CONSISTENCY_GROUP
+      description: ''
+    - name: REPLICATION
+      description: ''
+    - name: REPLICATION_LINK
+      description: ''
+    - name: SYNC_REPLICATION
+      description: ''
+    - name: VSTORE
+      description: ''
+    - name: NETWORK_SWITCH_INTERFACE
+      description: ''
+    - name: NETWORK_SWITCH
+      description: ''
+    - name: VIRTUAL_NIC
+      description: ''
+    - name: VMKERNEL_NIC
+      description: ''
+    - name: HOST_NIC
+      description: ''
+    - name: NIC_TEAM
+      description: ''
+    - name: VIRTUAL_NETWORK
+      description: ''
+    - name: VIRTUAL_SWITCH
+      description: ''
+    - name: HOST_GPU
+      description: ''
+    - name: VIRTUAL_GPU
+      description: ''
+    - name: TAG
+      description: ''
+    - name: COMMENT
+      description: ''
+    - name: TASK
+      description: ''
+    - name: IMAGE
+      description: ''
+    - name: IMAGE_INFO
+      description: ''
+    - name: ISCSI_CLIENT
+      description: ''
+    - name: VOLUME_GROUP
+      description: ''
+    - name: VOLUME_DISK
+      description: ''
+    - name: VM_DISK
+      description: ''
+    - name: FILE_SERVER
+      description: ''
+    - name: FS_PARTNER_SERVER
+      description: ''
+    - name: CVM
+      description: ''
+    - name: NVM
+      description: ''
+    - name: FILE_SERVER_SHARE
+      description: ''
+    - name: ALERT_CAUSE
+      description: ''
+    - name: ALERT_CHECK_SCHEMA
+      description: ''
+    - name: ALERT_CHECK_SCHEMA_OVERRIDE
+      description: ''
+    - name: INTER_CLUSTER_DATA_TRANSFER_INDICATOR
+      description: ''
+    - name: RACKABLE_UNIT
+      description: ''
+    - name: DIRECTORY_CONFIG
+      description: ''
+    - name: HEALTH_CHECK
+      description: ''
+    - name: NETWORK_SNMP_PROFILE
+      description: ''
+    - name: ALERT
+      description: ''
+    - name: SCHEDULE
+      description: ''
+    - name: BANDWIDTH_POLICY
+      description: ''
+    - name: FILE_GROUP
+      description: ''
+    - name: NETWORK_MAPPING
+      description: ''
+    - name: PROGRESS_MONITOR
+      description: ''
+    - name: LCM_ENTITY
+      description: ''
+    - name: LCM_AVAILABLE_VERSION
+      description: ''
+    - name: CAPACITY_SCENARIO
+      description: ''
+    - name: NCC_ERROR_CODES
+      description: ''
+    - name: RESOURCE_CONSUMPTION
+      description: ''
+    - name: REPORT_CONFIG
+      description: ''
+    - name: REPORT_INSTANCE
+      description: ''
+    - name: COMMON_REPORT_CONFIG
+      description: ''
+    - name: REMOTE_CONNECTION
+      description: ''
+    type: string
+    enum:
+    - CLUSTER
+    - HARDWARE
+    - STORAGE
+    - BACKUP
+    - DR
+    - LICENSE
+    - DISK
+    - STORAGE_TIER
+    - HOST
+    - NODE
+    - MANAGEMENT_SERVER
+    - MANAGEMENT_SERVER_INFO
+    - VM
+    - SERVICE_VM
+    - VDISK
+    - VIRTUAL_DISK
+    - STORAGE_POOL
+    - CONTAINER
+    - STORAGE_CONTAINER
+    - VZONE
+    - SNAPSHOT
+    - FAST_CLONE
+    - RSYSLOG_SERVER
+    - KEY_MANAGEMENT_SERVER
+    - CERTIFICATE
+    - HTTP_PROXY
+    - SNMP_TRAP
+    - SNMP_USER
+    - REMOTE_SITE
+    - CLOUD_CREDENTIALS
+    - PROTECTION_DOMAIN
+    - CONSISTENCY_GROUP
+    - REPLICATION
+    - REPLICATION_LINK
+    - SYNC_REPLICATION
+    - VSTORE
+    - NETWORK_SWITCH_INTERFACE
+    - NETWORK_SWITCH
+    - VIRTUAL_NIC
+    - VMKERNEL_NIC
+    - HOST_NIC
+    - NIC_TEAM
+    - VIRTUAL_NETWORK
+    - VIRTUAL_SWITCH
+    - HOST_GPU
+    - VIRTUAL_GPU
+    - TAG
+    - COMMENT
+    - TASK
+    - IMAGE
+    - IMAGE_INFO
+    - ISCSI_CLIENT
+    - VOLUME_GROUP
+    - VOLUME_DISK
+    - VM_DISK
+    - FILE_SERVER
+    - FS_PARTNER_SERVER
+    - CVM
+    - NVM
+    - FILE_SERVER_SHARE
+    - ALERT_CAUSE
+    - ALERT_CHECK_SCHEMA
+    - ALERT_CHECK_SCHEMA_OVERRIDE
+    - INTER_CLUSTER_DATA_TRANSFER_INDICATOR
+    - RACKABLE_UNIT
+    - DIRECTORY_CONFIG
+    - HEALTH_CHECK
+    - NETWORK_SNMP_PROFILE
+    - ALERT
+    - SCHEDULE
+    - BANDWIDTH_POLICY
+    - FILE_GROUP
+    - NETWORK_MAPPING
+    - PROGRESS_MONITOR
+    - LCM_ENTITY
+    - LCM_AVAILABLE_VERSION
+    - CAPACITY_SCENARIO
+    - NCC_ERROR_CODES
+    - RESOURCE_CONSUMPTION
+    - REPORT_CONFIG
+    - REPORT_INSTANCE
+    - COMMON_REPORT_CONFIG
+    - REMOTE_CONNECTION
+  Get.dto.entitymetadata:
+    title: get.dto.EntityMetadata
+    type: object
+    properties:
+      additional_fields:
+        $ref: '#/definitions/Java.util.map&lt;java.lang.string,Java.lang.string&gt;'
+      cluster_uuid:
+        description: ''
+        type: string
+      context_hint_field:
+        description: ''
+        type: string
+      context_hint_value:
+        description: ''
+        type: string
+      entity_id:
+        description: ''
+        type: string
+      entity_name:
+        description: ''
+        type: string
+      entity_type:
+        $ref: '#/definitions/EntityType'
+  Get.dto.resultcontentdescriptor:
+    title: get.dto.ResultContentDescriptor
+    type: object
+    properties:
+      metadata:
+        $ref: '#/definitions/Get.dto.resultmetadata'
+      perspectives:
+        description: ''
+        type: array
+        items:
+          $ref: '#/definitions/Get.dto.resultcontentdescriptor$perspective'
+  Format:
+    title: format
+    example: TABLE
+    x-enum-elements:
+    - name: TABLE
+      description: ''
+    - name: BAR_CHART
+      description: ''
+    - name: PIE_CHART
+      description: ''
+    - name: TIME_SERIES
+      description: ''
+    - name: KEY_VALUE
+      description: ''
+    - name: COUNT
+      description: ''
+    - name: HEALTH_SUMMARY
+      description: ''
+    - name: ALERT_INFO
+      description: ''
+    - name: CAPACITY
+      description: ''
+    - name: OTHER
+      description: ''
+    type: string
+    enum:
+    - TABLE
+    - BAR_CHART
+    - PIE_CHART
+    - TIME_SERIES
+    - KEY_VALUE
+    - COUNT
+    - HEALTH_SUMMARY
+    - ALERT_INFO
+    - CAPACITY
+    - OTHER
+  Get.dto.resultcontentdescriptor$perspective:
+    title: get.dto.ResultContentDescriptor$Perspective
+    type: object
+    properties:
+      format:
+        $ref: '#/definitions/Format'
+      metadata:
+        $ref: '#/definitions/Get.dto.resultmetadata'
+      query:
+        description: ''
+        type: string
+      result:
+        description: ''
+        type: string
+      type:
+        description: ''
+        type: string
+  Get.dto.resultmetadata:
+    title: get.dto.ResultMetadata
+    type: object
+    properties:
+      entity_type:
+        $ref: '#/definitions/EntityType'
+      filters:
+        description: ''
+        type: array
+        items:
+          $ref: '#/definitions/Get.dto.resultmetadata$filter'
+      instances:
+        description: ''
+        type: array
+        items:
+          $ref: '#/definitions/Get.dto.entitymetadata'
+      title:
+        description: ''
+        type: string
+  Get.dto.resultmetadata$filter:
+    title: get.dto.ResultMetadata$Filter
+    type: object
+    properties:
+      display_for_rhs:
+        description: ''
+        type: string
+      lhs:
+        description: ''
+        type: string
+      operator:
+        description: Operator for the filter.
+        type: string
+      rhs:
+        description: ''
+        type: string
+  Get.dto.alerts.alertcausedto:
+    title: get.dto.alerts.AlertCauseDTO
+    type: object
+    properties:
+      actions:
+        description: Possible actions to resolve this alert
+        type: string
+      additional_links:
+        description: Additional links
+        type: string
+      alert_namespace:
+        description: Namespace this alert belongs to
+        type: string
+      cause:
+        description: Detailed description
+        type: string
+      chart_queries:
+        $ref: '#/definitions/Get.base.entitycollection&lt;get.dto.resultcontentdescriptor&gt;'
+      details:
+        description: Symptoms for this cause
+        type: string
+      has_global_details:
+        description: Whether the alert has global details or not
+        type: boolean
+      id:
+        description: Cause Id
+        type: string
+      num_resolved_count:
+        description: Number of times this cause has resolved the alert
+        type: integer
+        format: int64
+      parent_cause_id:
+        description: Id of the alert/cause this is a possible cause for
+        type: string
+      title:
+        description: Short description
+        type: string
+      troubleshooting_steps:
+        description: Steps to determine whether this is the cause.
+        type: string
+  Get.dto.alerts.alertdto:
+    title: get.dto.alerts.AlertDTO
+    type: object
+    properties:
+      acknowledged:
+        description: ''
+        type: boolean
+      acknowledged_by_username:
+        description: ''
+        type: string
+      acknowledged_time_stamp_in_usecs:
+        description: ''
+        type: integer
+        format: int64
+      affected_entities:
+        description: ''
+        type: array
+        items:
+          $ref: '#/definitions/Get.dto.alerts.alertdto$affectedentity'
+      alert_details:
+        $ref: '#/definitions/Get.dto.alerts.alertdto$alertdetailsdto'
+      alert_title:
+        description: ''
+        type: string
+      alert_type_uuid:
+        description: ''
+        type: string
+      auto_resolved:
+        description: ''
+        type: boolean
+      check_id:
+        description: ''
+        type: string
+      classifications:
+        description: ''
+        type: array
+        items:
+          type: string
+      cluster_uuid:
+        description: ''
+        type: string
+      context_types:
+        description: ''
+        type: array
+        items:
+          type: string
+      context_values:
+        description: ''
+        type: array
+        items:
+          type: string
+      created_time_stamp_in_usecs:
+        description: ''
+        type: integer
+        format: int64
+      detailed_message:
+        description: ''
+        type: string
+      id:
+        description: ''
+        type: string
+      impact_types:
+        description: ''
+        type: array
+        items:
+          type: string
+      last_occurrence_time_stamp_in_usecs:
+        description: ''
+        type: integer
+        format: int64
+      message:
+        description: ''
+        type: string
+      node_uuid:
+        description: ''
+        type: string
+      originating_cluster_uuid:
+        description: ''
+        type: string
+      possible_causes:
+        description: ''
+        type: array
+        items:
+          $ref: '#/definitions/Get.dto.alerts.alertcausedto'
+      resolved:
+        description: ''
+        type: boolean
+      resolved_by_username:
+        description: ''
+        type: string
+      resolved_time_stamp_in_usecs:
+        description: ''
+        type: integer
+        format: int64
+      service_v_m_id:
+        description: ''
+        type: string
+      severity:
+        description: This field describes the severity of the alert.
+        type: string
+      user_defined:
+        description: ''
+        type: boolean
+  Get.dto.alerts.alertdto$affectedentity:
+    title: get.dto.alerts.AlertDTO$AffectedEntity
+    type: object
+    properties:
+      entity_name:
+        description: ''
+        type: string
+      entity_type:
+        description: ''
+        type: string
+      entity_type_display_name:
+        description: ''
+        type: string
+      id:
+        description: ''
+        type: string
+      uuid:
+        description: ''
+        type: string
+  Get.dto.alerts.alertdto$alertdetailsdto:
+    title: get.dto.alerts.AlertDTO$AlertDetailsDTO
+    type: object
+    properties:
+      metric_details:
+        description: List of metric details associated with the alert
+        type: array
+        items:
+          $ref: '#/definitions/Get.dto.alerts.alertdto$metricdetails'
+      severity_trails:
+        description: List that contains severity level change details
+        type: array
+        items:
+          $ref: '#/definitions/Get.dto.alerts.alertdto$severitytrail'
+  DataType:
+    title: data_type
+    example: LONG
+    x-enum-elements:
+    - name: LONG
+      description: ''
+    - name: DOUBLE
+      description: ''
+    - name: BOOLEAN
+      description: ''
+    - name: STRING
+      description: ''
+    type: string
+    enum:
+    - LONG
+    - DOUBLE
+    - BOOLEAN
+    - STRING
+  Get.dto.alerts.alertdto$metricdetails:
+    title: get.dto.alerts.AlertDTO$MetricDetails
+    type: object
+    properties:
+      comparison_operator:
+        description: Comparison Operator to be applied for teh values.
+        type: string
+      condition_type:
+        $ref: '#/definitions/ConditionType'
+      data_type:
+        $ref: '#/definitions/DataType'
+      entity_id:
+        description: UUID of the entity
+        type: string
+      entity_type:
+        description: Entity Type
+        type: string
+      metric_display_name:
+        description: Display name of the metric
+        type: string
+      metric_name:
+        description: Name of the metric
+        type: string
+      metric_value_details:
+        description: List of metric values at different instances of time in the alert lifecycle
+        type: array
+        items:
+          $ref: '#/definitions/Get.dto.alerts.alertdto$metricvaluedetails'
+      unit:
+        description: Unit of the metric value.
+        type: string
+  Get.dto.alerts.alertdto$metricvaluedetails:
+    title: get.dto.alerts.AlertDTO$MetricValueDetails
+    type: object
+    properties:
+      metric_threshold_value:
+        description: Threshold value of the metric that was specified in the policy at that given time.
+        type: string
+      metric_value:
+        description: Actual value of the metric at that given time.
+        type: string
+      state_change_time_stamp_in_usecs:
+        description: Time at which the alert's state change occurred.
+        type: integer
+        format: int64
+  Get.dto.alerts.alertdto$severitytrail:
+    title: get.dto.alerts.AlertDTO$SeverityTrail
+    type: object
+    properties:
+      severity:
+        description: Severity level of the alert. Can be INFO, WARNING or CRITICAL
+        type: string
+      severity_change_timestamp_in_usecs:
+        description: Time at which the severity level change occurred
+        type: integer
+        format: int64
+  Get.dto.alerts.alertpolicydto:
+    title: get.dto.alerts.AlertPolicyDTO
+    type: object
+    properties:
+      auto_resolve:
+        description: Whether the auto resolve feature is enabled for this policy
+        type: boolean
+      created_by:
+        description: Username of the user who created the Policy
+        type: string
+      description:
+        description: Description of the Policy.
+        type: string
+      enabled:
+        description: Enable/Disable flag for the policy
+        type: boolean
+      error_on_conflict:
+        description: Error if conflicting Alert Policies are found
+        type: boolean
+      filter:
+        description: Filter expression for the policy in FIQL
+        type: string
+      id:
+        description: ID of the Policy
+        type: string
+      impact_types:
+        description: Impact Types that are to be associated with the resulting Alert
+        type: array
+        items:
+          type: string
+      last_updated_timestamp_in_usecs:
+        description: Last updated timestamp of the Policy. Will be used as the CAS value during updates.
+        type: integer
+        format: int64
+      policies_to_override:
+        description: List of Alert Policy Ids to override
+        type: array
+        items:
+          type: string
+      related_policies:
+        description: List of Alert Policies that are related to the entities of the current policy
+        type: array
+        items:
+          $ref: '#/definitions/Get.dto.alerts.alertpolicydto$relatedpolicies'
+      title:
+        description: Title of the Policy
+        type: string
+      trigger_conditions:
+        description: Trigger conditions for the policy. If there are multiple Trigger conditions, they will be ANDed.
+        type: array
+        items:
+          $ref: '#/definitions/Get.dto.alerts.alertpolicydto$triggercondition'
+      trigger_wait_period_in_secs:
+        description: Duration to wait before triggering the alert when the specified condition is met
+        type: integer
+        format: int64
+  Get.dto.alerts.alertpolicydto$relatedpolicies:
+    title: get.dto.alerts.AlertPolicyDTO$RelatedPolicies
+    type: object
+    properties:
+      entity_uuid:
+        description: Entity UUID
+        type: string
+      policy_ids:
+        description: Policy Ids that are related to the specified entity
+        type: array
+        items:
+          type: string
+  Get.dto.alerts.alertpolicydto$triggercondition:
+    title: get.dto.alerts.AlertPolicyDTO$TriggerCondition
+    type: object
+    properties:
+      condition:
+        description: Conditions to be met to trigger the alert. Conditions are expressed in FIQL
+        type: string
+      condition_type:
+        $ref: '#/definitions/ConditionType'
+      severity_level:
+        $ref: '#/definitions/SeverityLevel'
+  Get.dto.appliance.configuration.alertconfigdto:
+    title: get.dto.appliance.configuration.AlertConfigDTO
+    description: DTO representing the configuration of alerts
+    type: object
+    properties:
+      default_nutanix_email:
+        description: Default Nutanix email to which Alert emails would be sent
+        type: string
+      email_config_rules:
+        description: Rules for Email Configuration.
+        type: array
+        items:
+          $ref: '#/definitions/Get.dto.appliance.configuration.alertconfigdto$emailconfigurationrule'
+      email_contact_list:
+        description: List of email contacts.
+        type: array
+        items:
+          type: string
+      email_template:
+        $ref: '#/definitions/Get.dto.appliance.configuration.alertconfigdto$emailtemplate'
+      enable:
+        description: Whether Alert emails should be enabled.
+        type: boolean
+      enable_default_nutanix_email:
+        description: Whether Alert emails should be enabled.
+        type: boolean
+      enable_email_digest:
+        description: Whether Alert email digest should be enabled.
+        type: boolean
+      smtp_server:
+        $ref: '#/definitions/Get.dto.appliance.configuration.smtpserverdto'
+      tunnel_details:
+        $ref: '#/definitions/Get.dto.appliance.configuration.remotetunneldetailsdto'
+  Get.dto.appliance.configuration.alertconfigdto$emailconfigurationrule:
+    title: get.dto.appliance.configuration.AlertConfigDTO$EmailConfigurationRule
+    type: object
+    properties:
+      cluster_uuids:
+        description: Cluster Uuids to which this rule applies to.
+        type: array
+        items:
+          type: string
+      impact_types:
+        description: Impact types to which this rule applies to.
+        type: array
+        items:
+          type: string
+      include_global_email_contact_list:
+        description: Whether to include global email contact list.
+        type: boolean
+      match_phrases:
+        description: List of phrases to match the alert with.
+        type: array
+        items:
+          type: string
+      recipients:
+        description: List of recipients who will receive emails.
+        type: array
+        items:
+          type: string
+      severities:
+        description: Severity to which this rule applies to.
+        type: array
+        items:
+          type: string
+  Get.dto.appliance.configuration.alertconfigdto$emailtemplate:
+    title: get.dto.appliance.configuration.AlertConfigDTO$EmailTemplate
+    type: object
+    properties:
+      body_suffix:
+        description: Email Body Suffix.
+        type: string
+      subject_prefix:
+        description: Email Subject Prefix.
+        type: string
+  Get.dto.appliance.configuration.httpproxydto:
+    title: get.dto.appliance.configuration.HttpProxyDTO
+    description: http-proxy
+    type: object
+    properties:
+      address:
+        description: Address of the proxy
+        type: string
+      name:
+        description: Proxy name.
+        type: string
+      password:
+        description: Password for proxy authentication
+        type: string
+      port:
+        description: Port on which proxy is binding
+        type: integer
+        format: int32
+      proxy_types:
+        description: Proxy types to send applicable traffic
+        type: array
+        items:
+          type: string
+      username:
+        description: Username for proxy authentication
+        type: string
+  Get.dto.appliance.configuration.remotetunneldetailsdto:
+    title: get.dto.appliance.configuration.RemoteTunnelDetailsDTO
+    type: object
+    properties:
+      connection_status:
+        $ref: '#/definitions/Get.dto.base.communicationstatusdto'
+      http_proxy:
+        $ref: '#/definitions/Get.dto.appliance.configuration.httpproxydto'
+      service_center:
+        $ref: '#/definitions/Get.dto.appliance.configuration.servicecenterdto'
+      transport_status:
+        $ref: '#/definitions/Get.dto.base.communicationstatusdto'
+  Get.dto.appliance.configuration.servicecenterdto:
+    title: get.dto.appliance.configuration.ServiceCenterDTO
+    type: object
+    properties:
+      ip_address:
+        description: Ip Address.
+        type: string
+      name:
+        description: Name.
+        type: string
+      port:
+        description: Port number.
+        type: integer
+        format: int32
+      username:
+        description: username.
+        type: string
+  SecureMode:
+    title: secure_mode
+    example: STARTTLS
+    x-enum-elements:
+    - name: STARTTLS
+      description: ''
+    - name: SSL
+      description: ''
+    - name: NONE
+      description: ''
+    type: string
+    enum:
+    - STARTTLS
+    - SSL
+    - NONE
+  Get.dto.appliance.configuration.smtpserverdto:
+    title: get.dto.appliance.configuration.SmtpServerDTO
+    type: object
+    properties:
+      address:
+        description: ''
+        type: string
+      email_status:
+        $ref: '#/definitions/Get.dto.base.communicationstatusdto'
+      from_email_address:
+        description: ''
+        type: string
+      password:
+        description: ''
+        type: string
+      port:
+        description: ''
+        type: integer
+        format: int32
+      secure_mode:
+        $ref: '#/definitions/SecureMode'
+      username:
+        description: ''
+        type: string
+  Status:
+    title: status
+    example: SUCCESS
+    x-enum-elements:
+    - name: SUCCESS
+      description: ''
+    - name: FAILED
+      description: ''
+    - name: RETRYING
+      description: ''
+    - name: UNKNOWN
+      description: ''
+    type: string
+    enum:
+    - SUCCESS
+    - FAILED
+    - RETRYING
+    - UNKNOWN
+  Get.dto.base.communicationstatusdto:
+    title: get.dto.base.CommunicationStatusDTO
+    type: object
+    properties:
+      last_changed_time_stamp_usecs:
+        description: ''
+        type: integer
+        format: int64
+      last_checked_time_stamp_usecs:
+        description: ''
+        type: integer
+        format: int64
+      last_successful_transmission_time_stamp_usecs:
+        description: ''
+        type: integer
+        format: int64
+      message:
+        $ref: '#/definitions/Get.dto.base.parameterizedmessagedto'
+      status:
+        $ref: '#/definitions/Status'
+  Get.dto.base.parameterizedmessagedto:
+    title: get.dto.base.ParameterizedMessageDTO
+    type: object
+    properties:
+      attributes:
+        $ref: '#/definitions/Java.util.map&lt;java.lang.string,Java.lang.string&gt;'
+      message:
+        description: ''
+        type: string
+  Java.util.map&lt;java.lang.string,Java.lang.string&gt;:
+    title: java.util.Map&lt;java.lang.String, java.lang.String&gt;
+    type: object
+  Patch.dto.requestdto&lt;patch.dto.appliance.configuration.alertconfigdto&gt;:
+    title: patch.dto.RequestDTO&lt;patch.dto.appliance.configuration.AlertConfigDTO&gt;
+    type: object
+    properties:
+      cluster_uuid:
+        description: ''
+        type: string
+      generic_d_t_o:
+        $ref: '#/definitions/Patch.dto.appliance.configuration.alertconfigdto'
+      operation:
+        description: ''
+        type: string
+  Patch.dto.appliance.configuration.alertconfigdto:
+    title: patch.dto.appliance.configuration.AlertConfigDTO
+    description: DTO representing the configuration of alerts
+    type: object
+    properties:
+      default_nutanix_email:
+        description: Default Nutanix email to which Alert emails would be sent
+        type: string
+      email_config_rules:
+        description: Rules for Email Configuration.
+        type: array
+        items:
+          $ref: '#/definitions/Patch.dto.appliance.configuration.alertconfigdto$emailconfigurationrule'
+      email_contact_list:
+        description: List of email contacts.
+        type: array
+        items:
+          type: string
+      email_template:
+        $ref: '#/definitions/Patch.dto.appliance.configuration.alertconfigdto$emailtemplate'
+      enable:
+        description: Whether Alert emails should be enabled.
+        type: boolean
+      enable_default_nutanix_email:
+        description: Whether Alert emails should be enabled.
+        type: boolean
+      enable_email_digest:
+        description: Whether Alert email digest should be enabled.
+        type: boolean
+      smtp_server:
+        $ref: '#/definitions/Patch.dto.appliance.configuration.smtpserverdto'
+      tunnel_details:
+        $ref: '#/definitions/Patch.dto.appliance.configuration.remotetunneldetailsdto'
+  Patch.dto.appliance.configuration.alertconfigdto$emailconfigurationrule:
+    title: patch.dto.appliance.configuration.AlertConfigDTO$EmailConfigurationRule
+    type: object
+    properties:
+      cluster_uuids:
+        description: Cluster Uuids to which this rule applies to.
+        type: array
+        items:
+          type: string
+      impact_types:
+        description: Impact types to which this rule applies to.
+        type: array
+        items:
+          type: string
+      recipients:
+        description: List of recipients who will receive emails.
+        type: array
+        items:
+          type: string
+      severities:
+        description: Severity to which this rule applies to.
+        type: array
+        items:
+          type: string
+      include_global_email_contact_list:
+        description: Whether to include global email contact list.
+        type: boolean
+      match_phrases:
+        description: List of phrases to match the alert with.
+        type: array
+        items:
+          type: string
+    required:
+    - cluster_uuids
+    - impact_types
+    - recipients
+    - severities
+  Patch.dto.appliance.configuration.alertconfigdto$emailtemplate:
+    title: patch.dto.appliance.configuration.AlertConfigDTO$EmailTemplate
+    type: object
+    properties:
+      body_suffix:
+        description: Email Body Suffix.
+        type: string
+      subject_prefix:
+        description: Email Subject Prefix.
+        type: string
+    required:
+    - body_suffix
+    - subject_prefix
+  Patch.dto.appliance.configuration.httpproxydto:
+    title: patch.dto.appliance.configuration.HttpProxyDTO
+    description: http-proxy
+    type: object
+    properties:
+      name:
+        description: Proxy name.
+        type: string
+      address:
+        description: Address of the proxy
+        type: string
+      password:
+        description: Password for proxy authentication
+        type: string
+      port:
+        description: Port on which proxy is binding
+        type: integer
+        format: int32
+      proxy_types:
+        description: Proxy types to send applicable traffic
+        type: array
+        items:
+          type: string
+      username:
+        description: Username for proxy authentication
+        type: string
+    required:
+    - name
+  Patch.dto.appliance.configuration.remotetunneldetailsdto:
+    title: patch.dto.appliance.configuration.RemoteTunnelDetailsDTO
+    type: object
+    properties:
+      connection_status:
+        $ref: '#/definitions/Patch.dto.base.communicationstatusdto'
+      http_proxy:
+        $ref: '#/definitions/Patch.dto.appliance.configuration.httpproxydto'
+      service_center:
+        $ref: '#/definitions/Patch.dto.appliance.configuration.servicecenterdto'
+      transport_status:
+        $ref: '#/definitions/Patch.dto.base.communicationstatusdto'
+  Patch.dto.appliance.configuration.servicecenterdto:
+    title: patch.dto.appliance.configuration.ServiceCenterDTO
+    type: object
+    properties:
+      ip_address:
+        description: Ip Address.
+        type: string
+      name:
+        description: Name.
+        type: string
+      port:
+        description: Port number.
+        type: integer
+        format: int32
+      username:
+        description: username.
+        type: string
+    required:
+    - ip_address
+    - name
+    - port
+    - username
+  Patch.dto.appliance.configuration.smtpserverdto:
+    title: patch.dto.appliance.configuration.SmtpServerDTO
+    type: object
+    properties:
+      address:
+        description: ''
+        type: string
+      email_status:
+        $ref: '#/definitions/Patch.dto.base.communicationstatusdto'
+      from_email_address:
+        description: ''
+        type: string
+      password:
+        description: ''
+        type: string
+      port:
+        description: ''
+        type: integer
+        format: int32
+      secure_mode:
+        $ref: '#/definitions/SecureMode'
+      username:
+        description: ''
+        type: string
+  Patch.dto.base.communicationstatusdto:
+    title: patch.dto.base.CommunicationStatusDTO
+    type: object
+    properties:
+      last_changed_time_stamp_usecs:
+        description: ''
+        type: integer
+        format: int64
+      last_checked_time_stamp_usecs:
+        description: ''
+        type: integer
+        format: int64
+      last_successful_transmission_time_stamp_usecs:
+        description: ''
+        type: integer
+        format: int64
+      message:
+        $ref: '#/definitions/Patch.dto.base.parameterizedmessagedto'
+      status:
+        $ref: '#/definitions/Status'
+  Patch.dto.base.parameterizedmessagedto:
+    title: patch.dto.base.ParameterizedMessageDTO
+    type: object
+    properties:
+      attributes:
+        $ref: '#/definitions/Java.util.map&lt;java.lang.string,Java.lang.string&gt;'
+      message:
+        description: ''
+        type: string
+  Update.dto.alerts.alertpolicydto:
+    title: update.dto.alerts.AlertPolicyDTO
+    type: object
+    properties:
+      auto_resolve:
+        description: Whether the auto resolve feature is enabled for this policy
+        type: boolean
+      enabled:
+        description: Enable/Disable flag for the policy
+        type: boolean
+      filter:
+        description: Filter expression for the policy in FIQL
+        type: string
+      id:
+        description: ID of the Policy
+        type: string
+      last_updated_timestamp_in_usecs:
+        description: Last updated timestamp of the Policy. Will be used as the CAS value during updates.
+        type: integer
+        format: int64
+      title:
+        description: Title of the Policy
+        type: string
+      trigger_conditions:
+        description: Trigger conditions for the policy. If there are multiple Trigger conditions, they will be ANDed.
+        type: array
+        items:
+          $ref: '#/definitions/Update.dto.alerts.alertpolicydto$triggercondition'
+      created_by:
+        description: Username of the user who created the Policy
+        type: string
+      description:
+        description: Description of the Policy.
+        type: string
+      error_on_conflict:
+        description: Error if conflicting Alert Policies are found
+        type: boolean
+      impact_types:
+        description: Impact Types that are to be associated with the resulting Alert
+        type: array
+        items:
+          type: string
+      policies_to_override:
+        description: List of Alert Policy Ids to override
+        type: array
+        items:
+          type: string
+      related_policies:
+        description: List of Alert Policies that are related to the entities of the current policy
+        type: array
+        items:
+          $ref: '#/definitions/Update.dto.alerts.alertpolicydto$relatedpolicies'
+      trigger_wait_period_in_secs:
+        description: Duration to wait before triggering the alert when the specified condition is met
+        type: integer
+        format: int64
+    required:
+    - auto_resolve
+    - enabled
+    - filter
+    - id
+    - last_updated_timestamp_in_usecs
+    - title
+    - trigger_conditions
+  Update.dto.alerts.alertpolicydto$relatedpolicies:
+    title: update.dto.alerts.AlertPolicyDTO$RelatedPolicies
+    type: object
+    properties:
+      policy_ids:
+        description: Policy Ids that are related to the specified entity
+        type: array
+        items:
+          type: string
+  Update.dto.alerts.alertpolicydto$triggercondition:
+    title: update.dto.alerts.AlertPolicyDTO$TriggerCondition
+    type: object
+    properties:
+      condition:
+        description: Conditions to be met to trigger the alert. Conditions are expressed in FIQL
+        type: string
+      condition_type:
+        $ref: '#/definitions/ConditionType'
+      severity_level:
+        $ref: '#/definitions/SeverityLevel'
+    required:
+    - condition
+    - condition_type
+    - severity_level
+  Update.dto.appliance.configuration.alertconfigdto:
+    title: update.dto.appliance.configuration.AlertConfigDTO
+    description: DTO representing the configuration of alerts
+    type: object
+    properties:
+      default_nutanix_email:
+        description: Default Nutanix email to which Alert emails would be sent
+        type: string
+      email_config_rules:
+        description: Rules for Email Configuration.
+        type: array
+        items:
+          $ref: '#/definitions/Update.dto.appliance.configuration.alertconfigdto$emailconfigurationrule'
+      email_contact_list:
+        description: List of email contacts.
+        type: array
+        items:
+          type: string
+      email_template:
+        $ref: '#/definitions/Update.dto.appliance.configuration.alertconfigdto$emailtemplate'
+      enable:
+        description: Whether Alert emails should be enabled.
+        type: boolean
+      enable_default_nutanix_email:
+        description: Whether Alert emails should be enabled.
+        type: boolean
+      enable_email_digest:
+        description: Whether Alert email digest should be enabled.
+        type: boolean
+      smtp_server:
+        $ref: '#/definitions/Update.dto.appliance.configuration.smtpserverdto'
+      tunnel_details:
+        $ref: '#/definitions/Update.dto.appliance.configuration.remotetunneldetailsdto'
+  Update.dto.appliance.configuration.alertconfigdto$emailconfigurationrule:
+    title: update.dto.appliance.configuration.AlertConfigDTO$EmailConfigurationRule
+    type: object
+    properties:
+      cluster_uuids:
+        description: Cluster Uuids to which this rule applies to.
+        type: array
+        items:
+          type: string
+      impact_types:
+        description: Impact types to which this rule applies to.
+        type: array
+        items:
+          type: string
+      include_global_email_contact_list:
+        description: Whether to include global email contact list.
+        type: boolean
+      match_phrases:
+        description: List of phrases to match the alert with.
+        type: array
+        items:
+          type: string
+      recipients:
+        description: List of recipients who will receive emails.
+        type: array
+        items:
+          type: string
+      severities:
+        description: Severity to which this rule applies to.
+        type: array
+        items:
+          type: string
+  Update.dto.appliance.configuration.alertconfigdto$emailtemplate:
+    title: update.dto.appliance.configuration.AlertConfigDTO$EmailTemplate
+    type: object
+    properties:
+      body_suffix:
+        description: Email Body Suffix.
+        type: string
+      subject_prefix:
+        description: Email Subject Prefix.
+        type: string
+  Update.dto.appliance.configuration.httpproxydto:
+    title: update.dto.appliance.configuration.HttpProxyDTO
+    description: http-proxy
+    type: object
+    properties:
+      address:
+        description: Address of the proxy
+        type: string
+      name:
+        description: Proxy name.
+        type: string
+      port:
+        description: Port on which proxy is binding
+        type: integer
+        format: int32
+      password:
+        description: Password for proxy authentication
+        type: string
+      proxy_types:
+        description: Proxy types to send applicable traffic
+        type: array
+        items:
+          type: string
+      username:
+        description: Username for proxy authentication
+        type: string
+    required:
+    - address
+    - name
+    - port
+  Update.dto.appliance.configuration.remotetunneldetailsdto:
+    title: update.dto.appliance.configuration.RemoteTunnelDetailsDTO
+    type: object
+    properties:
+      connection_status:
+        $ref: '#/definitions/Update.dto.base.communicationstatusdto'
+      http_proxy:
+        $ref: '#/definitions/Update.dto.appliance.configuration.httpproxydto'
+      service_center:
+        $ref: '#/definitions/Update.dto.appliance.configuration.servicecenterdto'
+      transport_status:
+        $ref: '#/definitions/Update.dto.base.communicationstatusdto'
+  Update.dto.appliance.configuration.servicecenterdto:
+    title: update.dto.appliance.configuration.ServiceCenterDTO
+    type: object
+    properties:
+      ip_address:
+        description: Ip Address.
+        type: string
+      name:
+        description: Name.
+        type: string
+      port:
+        description: Port number.
+        type: integer
+        format: int32
+      username:
+        description: username.
+        type: string
+    required:
+    - ip_address
+    - name
+    - port
+    - username
+  Update.dto.appliance.configuration.smtpserverdto:
+    title: update.dto.appliance.configuration.SmtpServerDTO
+    type: object
+    properties:
+      address:
+        description: ''
+        type: string
+      email_status:
+        $ref: '#/definitions/Update.dto.base.communicationstatusdto'
+      from_email_address:
+        description: ''
+        type: string
+      password:
+        description: ''
+        type: string
+      port:
+        description: ''
+        type: integer
+        format: int32
+      secure_mode:
+        $ref: '#/definitions/SecureMode'
+      username:
+        description: ''
+        type: string
+  Update.dto.base.communicationstatusdto:
+    title: update.dto.base.CommunicationStatusDTO
+    type: object
+    properties:
+      last_changed_time_stamp_usecs:
+        description: ''
+        type: integer
+        format: int64
+      last_checked_time_stamp_usecs:
+        description: ''
+        type: integer
+        format: int64
+      last_successful_transmission_time_stamp_usecs:
+        description: ''
+        type: integer
+        format: int64
+      message:
+        $ref: '#/definitions/Update.dto.base.parameterizedmessagedto'
+      status:
+        $ref: '#/definitions/Status'
+  Update.dto.base.parameterizedmessagedto:
+    title: update.dto.base.ParameterizedMessageDTO
+    type: object
+    properties:
+      attributes:
+        $ref: '#/definitions/Java.util.map&lt;java.lang.string,Java.lang.string&gt;'
+      message:
+        description: ''
+        type: string
