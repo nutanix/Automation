@@ -2,7 +2,6 @@ swagger: '2.0'
 info:
   version: 'v2.0'
   title: Swagger API
-host: any_cvm_ip:9440
 basePath: /PrismGateway/services/rest/v2.0
 schemes:
 - https
@@ -74,11 +73,7 @@ paths:
       produces:
       - application/json
       parameters:
-      - name: uuid
-        in: path
-        required: true
-        type: string
-        description: Id of the Virtual Machine
+      - $ref: '#/parameters/uuid'
       - name: include_vm_disk_config
         in: query
         required: false
@@ -95,6 +90,8 @@ paths:
           schema:
             $ref: '#/definitions/Get.dto.uhura.vmconfigdto'
           examples: {}
+        500:
+          $ref: '#/responses/response_500'
       x-unitTests: []
       x-operation-settings:
         CollectParameters: false
@@ -109,11 +106,7 @@ paths:
       produces:
       - application/json
       parameters:
-      - name: uuid
-        in: path
-        required: true
-        type: string
-        description: Id of the Virtual Machine
+      - $ref: '#/parameters/uuid'
       - name: body
         in: body
         required: true
@@ -139,11 +132,7 @@ paths:
       produces:
       - application/json
       parameters:
-      - name: uuid
-        in: path
-        required: true
-        type: string
-        description: Id of the Virtual Machine
+      - $ref: '#/parameters/uuid'
       - name: delete_snapshots
         in: query
         required: false
@@ -175,11 +164,7 @@ paths:
       produces:
       - application/json
       parameters:
-      - name: uuid
-        in: path
-        required: true
-        type: string
-        description: Id of the Virtual Machine
+      - $ref: '#/parameters/uuid'
       - name: body
         in: body
         required: false
@@ -206,11 +191,7 @@ paths:
       produces:
       - application/json
       parameters:
-      - name: uuid
-        in: path
-        required: true
-        type: string
-        description: Id of the Virtual Machine
+      - $ref: '#/parameters/uuid'
       - name: body
         in: body
         required: true
@@ -237,11 +218,7 @@ paths:
       produces:
       - application/json
       parameters:
-      - name: uuid
-        in: path
-        required: true
-        type: string
-        description: Id of the Virtual Machine
+      - $ref: '#/parameters/uuid'
       - name: body
         in: body
         required: true
@@ -268,11 +245,7 @@ paths:
       produces:
       - application/json
       parameters:
-      - name: uuid
-        in: path
-        required: true
-        type: string
-        description: UUID of the Virtual Machine
+      - $ref: '#/parameters/uuid'
       - name: body
         in: body
         required: true
@@ -299,11 +272,7 @@ paths:
       produces:
       - application/json
       parameters:
-      - name: uuid
-        in: path
-        required: true
-        type: string
-        description: UUID of the Virtual Machine
+      - $ref: '#/parameters/uuid'
       - name: include_address_assignments
         in: query
         required: false
@@ -328,11 +297,7 @@ paths:
       produces:
       - application/json
       parameters:
-      - name: uuid
-        in: path
-        required: true
-        type: string
-        description: UUID of the Virtual Machine
+      - $ref: '#/parameters/uuid'
       - name: body
         in: body
         required: true
@@ -351,42 +316,6 @@ paths:
         AllowDynamicQueryParameters: false
         AllowDynamicFormParameters: false
         IsMultiContentStreaming: false
-  /vms/{uuid}/nics/{nic_id}:
-    put:
-      description: Update a NIC for a Virtual Machine.
-      summary: updateNic
-      operationId: VmsNicsByUuidAndNicIdPut
-      produces:
-      - application/json
-      parameters:
-      - name: uuid
-        in: path
-        required: true
-        type: string
-        description: UUID of the Virtual Machine
-      - name: nic_id
-        in: path
-        required: true
-        type: string
-        description: Virtual Machine NIC identifier (MAC address)
-      - name: body
-        in: body
-        required: true
-        description: NIC Config Update Info
-        schema:
-          $ref: '#/definitions/Update.dto.acropolis.vmnicupdatedto'
-      responses:
-        200:
-          description: ''
-          schema:
-            $ref: '#/definitions/Update.dto.acropolis.returnvaluedto$taskiddto'
-          examples: {}
-      x-unitTests: []
-      x-operation-settings:
-        CollectParameters: false
-        AllowDynamicQueryParameters: false
-        AllowDynamicFormParameters: false
-        IsMultiContentStreaming: false
   /vms/{uuid}/restore:
     post:
       description: Restore a Virtual Machine to a snapshotted state.
@@ -395,11 +324,7 @@ paths:
       produces:
       - application/json
       parameters:
-      - name: uuid
-        in: path
-        required: true
-        type: string
-        description: Uuid of the Virtual Machine
+      - $ref: '#/parameters/uuid'
       - name: body
         in: body
         required: true
@@ -426,11 +351,7 @@ paths:
       produces:
       - application/json
       parameters:
-      - name: uuid
-        in: path
-        required: true
-        type: string
-        description: Id of the Virtual Machine
+      - $ref: '#/parameters/uuid'
       - name: body
         in: body
         required: true
@@ -449,7 +370,7 @@ paths:
         AllowDynamicQueryParameters: false
         AllowDynamicFormParameters: false
         IsMultiContentStreaming: false
-  /vms/{vm_uuid}/nics/{nic_id}:
+  /vms/{uuid}/nics/{mac_address}:
     get:
       description: Details of a NIC in a Virtual Machine.
       summary: getNic
@@ -457,16 +378,8 @@ paths:
       produces:
       - application/json
       parameters:
-      - name: vm_uuid
-        in: path
-        required: true
-        type: string
-        description: Id of the Virtual Machine
-      - name: nic_id
-        in: path
-        required: true
-        type: string
-        description: Virtual Machine NIC identifier (MAC address)
+      - $ref: '#/parameters/uuid'
+      - $ref: '#/parameters/mac_address'
       - name: include_address_assignments
         in: query
         required: false
@@ -484,6 +397,33 @@ paths:
         AllowDynamicQueryParameters: false
         AllowDynamicFormParameters: false
         IsMultiContentStreaming: false
+    put:
+      description: Update a NIC for a Virtual Machine.
+      summary: updateNic
+      operationId: VmsNicsByUuidAndNicIdPut
+      produces:
+      - application/json
+      parameters:
+      - $ref: '#/parameters/uuid'
+      - $ref: '#/parameters/mac_address'
+      - name: body
+        in: body
+        required: true
+        description: NIC Config Update Info
+        schema:
+          $ref: '#/definitions/Update.dto.acropolis.vmnicupdatedto'
+      responses:
+        200:
+          description: ''
+          schema:
+            $ref: '#/definitions/Update.dto.acropolis.returnvaluedto$taskiddto'
+          examples: {}
+      x-unitTests: []
+      x-operation-settings:
+        CollectParameters: false
+        AllowDynamicQueryParameters: false
+        AllowDynamicFormParameters: false
+        IsMultiContentStreaming: false
     delete:
       description: Delete a NIC from a Virtual Machine.
       summary: deleteNic
@@ -491,16 +431,8 @@ paths:
       produces:
       - application/json
       parameters:
-      - name: vm_uuid
-        in: path
-        required: true
-        type: string
-        description: UUID of the Virtual Machine
-      - name: nic_id
-        in: path
-        required: true
-        type: string
-        description: Virtual Machine NIC identifier (MAC address)
+      - $ref: '#/parameters/uuid'
+      - $ref: '#/parameters/mac_address'
       - name: vm_logical_timestamp
         in: query
         required: false
@@ -1353,14 +1285,15 @@ definitions:
         type: integer
         format: int32
       type:
-        description: >-
-          The backing type for this serial port.
-
-          Possible values- null(The serial device is present, but has no backing), server(The serial device is accessible via a websocket.) (Acceptable values are: "NULL", "SERVER")
-        example: NULL
+        description: |
+          The backing type for this serial port. Possible values- 
+          null(The serial device is present, but has no backing), 
+          server(The serial device is accessible via a websocket.) 
+          (Acceptable values are NULL, SERVER)
+        example: 'NULL'
         type: string
-        default: NULL
-  PowerState:
+        default: 'NULL'
+  power_state:
     title: power_state
     example: UNKNOWN
     x-enum-elements:
@@ -1392,6 +1325,8 @@ definitions:
       description: ''
     type: string
     enum:
+    - on
+    - off
     - UNKNOWN
     - OFF
     - POWERING_ON
@@ -1474,7 +1409,7 @@ definitions:
         type: integer
         format: int32
       power_state:
-        $ref: '#/definitions/PowerState'
+        $ref: '#/definitions/power_state'
       serial_ports:
         description: Virtual serial ports.
         type: array
@@ -1506,6 +1441,7 @@ definitions:
         items:
           $ref: '#/definitions/Get.dto.uhura.vmdiskinfodto'
       vm_features:
+        description: List of features to be enabled for the Virtual Machine.
         $ref: '#/definitions/Java.util.map&lt;get.dto.uhura.vmconfigdto$vmfeature,Java.lang.boolean&gt;'
       vm_gpus:
         description: List of GPUs requested for the Virtual Machine. If "gpus_assigned" is True, then this field represents the assigned physical GPUs.
@@ -1783,3 +1719,85 @@ definitions:
       storage_container_uuid:
         description: UUID of container to create disk in. If this is specified, then Container Name and ID should not be specified.
         type: string
+  response_500:
+    title: response_500
+    type: object
+    properties: 
+      message: 
+        description: high level / general response message
+        type: string
+      detailed_message: 
+        description: detailed response, usually a java dump
+        type: string      
+      error_code: 
+        type: array
+        items:
+          $ref: '#/definitions/error_code'
+  error_code: 
+    title: error code
+    type: object
+    properties: 
+      code: 
+        description: look me up! (no idea where this comes from)
+        type: integer
+      help_url: 
+        description: link to http://my.nutanix.com ... should this change?
+        type: string  
+parameters:
+  uuid:
+    name: uuid
+    description: Id of the Virtual Machine
+    in: path
+    required: true
+    type: string
+    format: UUID
+    pattern: '^[a-fA-F0-9]{8}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{12}$'
+    x-example: '6a5c75f8-5b13-4f1b-91fd-723f04375ad5'
+  mac_address:
+    name: mac_address
+    description: Virtual Machine NIC identifier (MAC address)
+    in: path
+    required: true
+    type: string
+    pattern: '^([0-9A-Fa-f]{2}[:-]){5}([0-9A-Fa-f]{2})$'
+    x-example: '50:6b:8d:ee:de:2b'
+securityDefinitions:
+  basicAuth:
+    type: basic
+security:
+  - basicAuth: []
+
+responses:
+  response_500:
+    description: Error 500
+    schema:
+      $ref: '#/definitions/response_500'
+    headers:
+      content-type: 
+        type: string
+        default: 'application/json'
+      server:
+        description: Should always return Nutanix Prism
+        type: string
+        default: 'Nutanix Prism'
+      x-ntnx-env:
+        description: The Nutanix Prism environemn
+        type: string
+        enum:
+          - PE
+          - PC
+      exception:
+        description: Describes the error hit in an error or exception condition
+        type: string
+    examples:
+      application/json:
+        message: "Error occurred while getting VM list"
+        detailed_message: "com.nutanix.prism.exception.vmmanagement.VMAdministrationException: ..."
+        error_code: 
+          code: 1202
+          help_url: "http://my.nutanix.com"
+
+
+# headers
+# server: Nutanix Prism
+# x-ntnx-env: PE
