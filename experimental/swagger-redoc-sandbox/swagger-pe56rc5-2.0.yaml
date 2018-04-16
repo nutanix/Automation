@@ -42,10 +42,15 @@ consumes:
 produces:
   - application/json
 paths:
+  # alerts
   /alerts:
     $ref: 'v2-2.0-yamls/alerts-src.yaml#/paths/base'
   /alerts/acknowledge:
     $ref: 'v2-2.0-yamls/alerts-src.yaml#/paths/acknowledge'
+
+  # vms
+  /vms:
+    $ref: 'v2-2.0-yamls/vms-src.yaml#/paths/vms'
 definitions:
 
 parameters:
