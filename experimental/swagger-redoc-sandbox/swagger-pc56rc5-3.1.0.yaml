@@ -9302,6 +9302,7 @@ parameters:
     required: true
     type: string
     name: uuid
+    x-example: 'a4f2c117-ba9b-41c1-8054-13320fe41724'
 produces:
   - application/json
 basePath: /api/nutanix/v3
