@@ -147,7 +147,7 @@ As of version 2.0, this script uses 'WeasyPrint' for PDF generation.  Please see
 
 This is what the PDF looks like, once generated.
 
-![Generated PDF screenshot](https://github.com/digitalformula/nutanix-cluster-info/raw/master/screenshot-pdf.png)
+![Generated PDF screenshot](https://raw.githubusercontent.com/nutanix/Automation/master/nutanix-cluster-info/screenshot-pdf.png)
 
 ## Support
 
