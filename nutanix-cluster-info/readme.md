@@ -151,8 +151,6 @@ This is what the PDF looks like, once generated.
 
 ## Support
 
-As at April 2018, the Nutanix v3 APIs are *tech-preview only*.  Please don't use them in production!
-
 These scripts are *unofficial* and are not supported or maintained by Nutanix in any way.
 
 In addition, please also be advised that these scripts may run and operate in a way that do not follow best practices.  Please check through each script to ensure it meets your requirements.
