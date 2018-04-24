@@ -18,8 +18,6 @@
             <ul class="nav navbar-nav">
                 <li class="active"><a href="http://www.nutanix.com" target="_blank" title="Nutanix.com">Nutanix.com</a>
                 </li>
-                <li><a href="http://go.nutanix.com/rs/nutanix/images/Nutanix_Spec_Sheet.pdf" target="_blank"
-                       title="Nutanix Spec Sheet">Nutanix Spec Sheet</a></li>
                 <li><a href="http://www.nutanix.com/resources" target="_blank" title="Nutanix Resources">Nutanix
                         Resources</a></li>
                 <li><a href="http://www.nutanix.com/products/features/management-and-analytics/programmatic-interface/"
