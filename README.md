@@ -13,6 +13,7 @@ Many of these are *not* production-grade scripts, and are used to either do spec
 
 ## High Level Changelog
 
+* 2018.04.24 - Chris - Added detailed instructions to graphical API demo app
 * 2018.04.24 - Chris - Removed a few old/legacy scripts
 * 2018.04.05 - Jon - Consolidated Chris Rasmussen (digitalformula) repos
 * 2018.04.05 - Jon - Consolidated random /nutanix/ org repos
