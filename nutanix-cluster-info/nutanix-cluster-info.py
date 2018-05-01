@@ -349,18 +349,16 @@ def convert_html_to_pdf(source_html, output_filename):
         
     font_config = FontConfiguration()
         
-    # HTML(string=source_html).write_pdf(output_filename,stylesheets=[CSS(string='@font-face {font-family: grb;src: url(./resources/Bariol.ttf);}#header_content {left: 50pt; width: 512pt; top: 50pt; height: 40pt;}#footer_content {left: 50pt; width: 512pt; top: 772pt; height: 20pt;}#main_content {left: 50pt; width: 512pt; top: 90pt; height: 632pt;}margin: 2cm;body { font-family: grb; font-size: 120%; }h1 { color: #3f6fb4; }tr.final { border-bottom: 1px solid #eee; padding: 3px 0; }tr.footer { padding: 5px; text-align: center; }div#footer_content { text-align: center; }h1 { font-family: Gentium }', font_config=font_config)])
-    
     x=HTML(string=source_html)
     x.write_pdf(output_filename,stylesheets=[CSS(string='''
-        @font-face { font-family: bariol; src: url(Bariol.ttf); }
         h1 { color: #3f6fb4; }
-        body { font-family: sans-serif; font-size: 80%; }
+        body { font-family: sans-serif; font-size: 80%; line-height: 1.2em; }
         #main_content { margin: 0 auto; text-align: left; width: 75%; }
         table{ width: 100%; border-bottom: 1px solid #ddd; padding-bottom: 20px; }
         tr.final { border-bottom: 1px solid #eee; padding: 3px 0; }
         tr.footer { padding: 5px; text-align: center; }
         tr.tr_header { font-weight: bold; }
+        td,p { padding: 3px; }
         div#footer_content { text-align: center; margin-top: 20px; }
     ''',font_config=font_config)])
     

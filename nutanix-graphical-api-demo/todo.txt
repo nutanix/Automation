@@ -1,2 +1,0 @@
-A)  Clean up script.js
-B)  Improve output templates

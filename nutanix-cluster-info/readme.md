@@ -12,9 +12,9 @@ Chris Rasmussen, Solutions Architect, Nutanix (Melbourne, AU)
 
 ## Changelog
 
-2018.04.05 - Moved repo to nutanix/automation/nutanix-cluster-info (JonKohler)
-2018.04.04 - Published version based on Prism Central and v3 API
-2017.09.06 - Published new version based on Python 3
+- 2018.04.22 - Updated with installation and usage instructions for Windows 10 64-bit
+- 2018.04.04 - Published version based on Prism Central and v3 API
+- 2017.09.06 - Published new version based on Python 3
 
 ## Details
 
@@ -46,11 +46,39 @@ Install [HomeBrew](https://brew.sh/):
 brew install python3 cairo pango gdk-pixbuf libffi
 pip3 install urllib3 requests weasyprint
 ```
-### Windows
+### Windows 10 (64-bit!)
 
-Follow the instructions here: [http://weasyprint.readthedocs.io/en/latest/install.html#windows](http://weasyprint.readthedocs.io/en/latest/install.html#windows)
+- Install [Python3](https://www.python.org/downloads/windows/) (add the binary directory to your PATH, when prompted)
+- Install [Git](https://git-scm.com/download/win)
+- Upgrade pip, if required:
 
-Sorry, I haven't been able to test any of this on Windows just yet.
+```
+python -m pip install --upgrade pip
+```
+
+- Install required Python libraries:
+
+```
+pip3 install requests urllib3 weasyprint
+```
+
+- Look for a message in that output that specifies a directory that must be added to your PATH
+- Add that directory to your PATH
+- Install [GTK for Windows](https://github.com/tschoonj/GTK-for-Windows-Runtime-Environment-Installer/releases) to C:\gtk
+- Add c:\gtk and c:\gtk\bin to your PATH
+- Install lxml fromhttps://www.lfd.uci.edu/~gohlke/pythonlibs/#lxml (I installed cp36 for amd64):
+
+```
+pip install <whl_filename>
+```
+
+- Install pycairo from https://www.lfd.uci.edu/~gohlke/pythonlibs/#lxml (I installed cp36 for amd64)
+
+```
+pip install <whl_filename>
+```
+
+*Note you may need to reboot for the PATH changes to take effect*
 
 ## Script Usage (General)
 
@@ -70,6 +98,18 @@ There are a number of global options that can be set in this script.
 ```
 /usr/local/bin/python3 nutanix-cluster-info.py
 ```
+
+## Script Usage (Windows 10)
+
+- Make sure you are in the directory containing `nutanix-cluster-info.py`
+- Run the script:
+
+```
+python nutanix-cluster-info.py
+```
+
+- Ignore any warnings about @font-face not being supported on Windows for now
+- If you get a prompt asking for the Prism Central IP address, everything is working
 
 ## Custom Templates
 
@@ -107,11 +147,9 @@ As of version 2.0, this script uses 'WeasyPrint' for PDF generation.  Please see
 
 This is what the PDF looks like, once generated.
 
-![Generated PDF screenshot](https://github.com/digitalformula/nutanix-cluster-info/raw/master/screenshot-pdf.png)
+![Generated PDF screenshot](https://raw.githubusercontent.com/nutanix/Automation/master/nutanix-cluster-info/screenshot-pdf.png)
 
 ## Support
-
-As at April 2018, the Nutanix v3 APIs are *tech-preview only*.  Please don't use them in production!
 
 These scripts are *unofficial* and are not supported or maintained by Nutanix in any way.
 
