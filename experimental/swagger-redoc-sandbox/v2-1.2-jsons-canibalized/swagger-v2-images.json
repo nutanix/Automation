@@ -1,0 +1,728 @@
+{
+    "apiVersion": "v2.0",
+    "swaggerVersion": "1.2",
+    "basePath": "https://any_cvm_ip:9440/api/nutanix/v2.0",
+    "resourcePath": "/images",
+    "produces": [
+        "application/json"
+    ],
+    "consumes": [
+        "application/json"
+    ],
+    "apis": [
+        {
+            "internal": false,
+            "path": "/images/",
+            "operations": [
+                {
+                    "deprecated": "false",
+                    "internal": false,
+                    "method": "GET",
+                    "summary": "Get the list of Disk Images.",
+                    "notes": "Get the list of Images",
+                    "type": "get.base.EntityCollection&lt;get.dto.acropolis.ImageInfoDTO&gt;",
+                    "nickname": "getImages",
+                    "parameters": [
+                        {
+                            "name": "include_vm_disk_sizes",
+                            "description": "Include VmDisk sizes",
+                            "required": false,
+                            "allowMultiple": false,
+                            "paramType": "query",
+                            "type": "boolean"
+                        }
+                    ],
+                    "responseMessages": []
+                },
+                {
+                    "deprecated": "false",
+                    "internal": false,
+                    "method": "POST",
+                    "summary": "Create a Disk Image.",
+                    "notes": "Create a Image with specified configuration. <br/><br/>There are two modes of creation, one mode you either provide some source (URL, vmdisk, or uploaded file) or you just create the metadata for the image. <br/>If a UUID is specified for the Image, this operation will be idempotent. <br/><br/>This is an asynchronous operation that results in the creation of a task object. The UUID of this task object is returned as the response of this operation. This task can be monitored by using the /tasks/poll API.",
+                    "type": "create.dto.acropolis.ReturnValueDTO$TaskIdDTO",
+                    "nickname": "createImage",
+                    "parameters": [
+                        {
+                            "description": "Image Creation Specs",
+                            "required": true,
+                            "allowMultiple": false,
+                            "paramType": "body",
+                            "type": "create.dto.acropolis.ImageSpecDTO"
+                        },
+                        {
+                            "name": "X-NTNX-PC-UUID",
+                            "required": false,
+                            "allowMultiple": false,
+                            "paramType": "header",
+                            "type": "string"
+                        }
+                    ],
+                    "responseMessages": []
+                }
+            ]
+        },
+        {
+            "internal": false,
+            "path": "/images/{uuid}/",
+            "operations": [
+                {
+                    "deprecated": "false",
+                    "internal": false,
+                    "method": "DELETE",
+                    "summary": "Delete a Disk Image.",
+                    "notes": "Delete a Disk Image. <br/><br/>This is an idempotent operation.<br/><br/>The logical timestamp can optionally be provided for consistency. If a logical timestamp is specified, then this operation will be rejected if the logical timestamp specified is not the value of the Image logical timestamp. The logical timestamp can be obtained from the Image Info object. <br/><br/>This is also an asynchronous operation that results in the creation of a task object. The UUID of this task object is returned as the response of this operation. This task can be monitored by using the /tasks/poll API.",
+                    "type": "delete.dto.acropolis.ReturnValueDTO$TaskIdDTO",
+                    "nickname": "deleteImage",
+                    "parameters": [
+                        {
+                            "name": "uuid",
+                            "description": "Id of the Image",
+                            "required": true,
+                            "allowMultiple": false,
+                            "paramType": "path",
+                            "type": "string"
+                        },
+                        {
+                            "name": "logical_timestamp",
+                            "description": "Logical timestamp for synchronized delete",
+                            "required": false,
+                            "allowMultiple": false,
+                            "paramType": "query",
+                            "type": "integer"
+                        },
+                        {
+                            "name": "X-NTNX-PC-UUID",
+                            "required": false,
+                            "allowMultiple": false,
+                            "paramType": "header",
+                            "type": "string"
+                        }
+                    ],
+                    "responseMessages": []
+                },
+                {
+                    "deprecated": "false",
+                    "internal": false,
+                    "method": "GET",
+                    "summary": "Get details of a specific Image based on the given Id.",
+                    "notes": "Get details of a specific Disk Image based on the given Id.",
+                    "type": "get.dto.acropolis.ImageInfoDTO",
+                    "nickname": "getImage",
+                    "parameters": [
+                        {
+                            "name": "uuid",
+                            "description": "Id of the Image",
+                            "required": true,
+                            "allowMultiple": false,
+                            "paramType": "path",
+                            "type": "string"
+                        },
+                        {
+                            "name": "include_vm_disk_sizes",
+                            "description": "Include VmDisk size",
+                            "required": false,
+                            "allowMultiple": false,
+                            "paramType": "query",
+                            "type": "boolean"
+                        }
+                    ],
+                    "responseMessages": []
+                },
+                {
+                    "deprecated": "false",
+                    "internal": false,
+                    "method": "PUT",
+                    "summary": "Update a Disk Image.",
+                    "notes": "Update a Disk Image. <br/><br/>Fields that are not set or are not specified are ignored.<br/><br/>If an Image is already in ACTIVE state then its source can't be updated. But you can still update the image name, image type and image annotation.<br/><br/>If a logical timestamp is specified, then this operation will be rejected if the logical timestamp specified is not the value of the Image logical timestamp. The logical timestamp can be obtained from the Image object.",
+                    "type": "update.dto.acropolis.ReturnValueDTO$TaskIdDTO",
+                    "nickname": "updateImage",
+                    "parameters": [
+                        {
+                            "name": "uuid",
+                            "description": "Id of the Disk Image",
+                            "required": true,
+                            "allowMultiple": false,
+                            "paramType": "path",
+                            "type": "string"
+                        },
+                        {
+                            "description": "Disk Image Update Info",
+                            "required": true,
+                            "allowMultiple": false,
+                            "paramType": "body",
+                            "type": "update.dto.acropolis.ImageSpecDTO"
+                        }
+                    ],
+                    "responseMessages": []
+                }
+            ]
+        }
+    ],
+    "models": {
+        "create.dto.acropolis.ImageImportSpecDTO": {
+            "id": "create.dto.acropolis.ImageImportSpecDTO",
+            "required": [],
+            "properties": {
+                "checksum": {
+                    "description": "The Checksum in bytes.",
+                    "notes": "The Checksum of the image.",
+                    "type": "string",
+                    "typeName": "DEFAULT"
+                },
+                "checksum_type": {
+                    "description": "The type of Checksum to be used for the Image. Possible values are \"SHA_256\" and \"SHA_1\".",
+                    "enum": [
+                        "SHA_256",
+                        "SHA_1"
+                    ],
+                    "notes": "The Checksum type of the image.",
+                    "type": "string",
+                    "typeName": "DEFAULT"
+                },
+                "storage_container_id": {
+                    "description": "ID of a Storage Container which will contain the newly created Image. Storage container UUID, ID, or Name must be provided.",
+                    "format": "int64",
+                    "notes": "ID of a Storage Container which will contain the newly created Image.",
+                    "type": "integer",
+                    "typeName": "DEFAULT"
+                },
+                "storage_container_name": {
+                    "description": "Name of a Storage Container which will contain the newly created Image. Storage container UUID, ID, or Name must be provided.",
+                    "notes": "Name of a Storage Container which will contain the newly created Image.",
+                    "type": "string",
+                    "typeName": "DEFAULT"
+                },
+                "storage_container_uuid": {
+                    "description": "UUID of a Storage Container which will contain the newly created Image. Storage container UUID, ID, or Name must be provided.",
+                    "notes": "UUID of a Storage Container which will contain the newly created Image.",
+                    "type": "string",
+                    "typeName": "DEFAULT"
+                },
+                "url": {
+                    "description": "A string describing the source URL for the Image. Note that the source URL can point to an NFS or HTTP target. NFS URLs should look like: nfs://<source address>/<path to file>",
+                    "notes": "A string describing the source URL for the Image.",
+                    "type": "string",
+                    "typeName": "DEFAULT"
+                }
+            }
+        },
+        "create.dto.acropolis.ImageSpecDTO": {
+            "id": "create.dto.acropolis.ImageSpecDTO",
+            "required": [],
+            "properties": {
+                "annotation": {
+                    "description": "A string describing the Image.",
+                    "notes": "A string describing the Image.",
+                    "type": "string",
+                    "typeName": "DEFAULT"
+                },
+                "image_import_spec": {
+                    "$ref": "create.dto.acropolis.ImageImportSpecDTO",
+                    "description": "The spec for the imported image. Either this or the VMDiskSpecCloneDTO needs to be specified",
+                    "notes": "The spec for the imported image",
+                    "typeName": "DEFAULT"
+                },
+                "image_type": {
+                    "description": "The Image type specifies whether its a Disk image or ISO image. Possible values are \"disk_image\" and \"iso_image\".",
+                    "enum": [
+                        "DISK_IMAGE",
+                        "ISO_IMAGE"
+                    ],
+                    "notes": "The Image type.",
+                    "type": "string",
+                    "typeName": "DEFAULT"
+                },
+                "name": {
+                    "description": "The Image's human readable name.",
+                    "notes": "The Image's human readable name.",
+                    "type": "string",
+                    "typeName": "DEFAULT"
+                },
+                "uuid": {
+                    "description": "A version 4 UUID that the client may specify for idempotence.",
+                    "notes": "A version 4 UUID that the client may specify for idempotence.",
+                    "type": "string",
+                    "typeName": "DEFAULT"
+                },
+                "vm_disk_clone_spec": {
+                    "$ref": "create.dto.uhura.VmDiskCloneDTO",
+                    "description": "The spec for the VMDisk to be cloned. Either this or the ImageImportSpecDTO needs to be specified",
+                    "notes": "The spec for the VMDisk to be cloned",
+                    "typeName": "DEFAULT"
+                }
+            }
+        },
+        "create.dto.acropolis.ReturnValueDTO$TaskIdDTO": {
+            "id": "create.dto.acropolis.ReturnValueDTO$TaskIdDTO",
+            "required": [],
+            "properties": {
+                "task_uuid": {
+                    "description": "UUID of the task.",
+                    "notes": "UUID of the task.",
+                    "type": "string",
+                    "typeName": "DEFAULT"
+                }
+            }
+        },
+        "create.dto.acropolis.VMDiskAddressDTO": {
+            "id": "create.dto.acropolis.VMDiskAddressDTO",
+            "required": [],
+            "properties": {
+                "device_bus": {
+                    "description": "The device bus for the virtual disk device.Possible values are SCSI, IDE and PCI. Along with this the deviceIndex is used to specify a vdisk address. When specifying a vmdisk address, then only one of the following combinations of fields must be set - (device_bus, device_index) or vmdisk_uuid or ndfs_filepath.",
+                    "enum": [
+                        "SCSI",
+                        "IDE",
+                        "PCI",
+                        "SATA",
+                        "SPAPR"
+                    ],
+                    "notes": "The device bus for the virtual disk device.",
+                    "type": "string",
+                    "typeName": "DEFAULT"
+                },
+                "device_index": {
+                    "description": "Index of the device on the adapter type. If left unspecified, the system will allocate the next available slot on the default bus.",
+                    "format": "int32",
+                    "notes": "Index of the device on the adapter type.",
+                    "type": "integer",
+                    "typeName": "DEFAULT"
+                },
+                "ndfs_filepath": {
+                    "description": "NDFS path to existing virtual disk. This field will not be set when this message is used in a create mode.When specifying a vmdisk address, then only one of the following combinations of fields must be set - (device_bus, device_index) or vmdisk_uuid or ndfs_filepath.",
+                    "notes": "NDFS path to existing virtual disk.",
+                    "type": "string",
+                    "typeName": "DEFAULT"
+                },
+                "vmdisk_uuid": {
+                    "description": "Virtual disk identifier. This field will not be set when this message is used in a create mode. When specifying a vmdisk address, then only one of the following combinations of fields must be set - (device_bus, device_index) or vmdisk_uuid or ndfs_filepath.",
+                    "notes": "Virtual disk identifier.",
+                    "type": "string",
+                    "typeName": "DEFAULT"
+                },
+                "volume_group_uuid": {
+                    "type": "string"
+                }
+            }
+        },
+        "create.dto.uhura.VmDiskCloneDTO": {
+            "id": "create.dto.uhura.VmDiskCloneDTO",
+            "required": [
+                "disk_address"
+            ],
+            "properties": {
+                "disk_address": {
+                    "$ref": "create.dto.acropolis.VMDiskAddressDTO",
+                    "description": "Address of the source disk or image from which to clone. Disk address is represented by vmdisk_uuid or ndfs_filepath.",
+                    "notes": "Address of the source disk or image from which to clone.",
+                    "typeName": "DEFAULT"
+                },
+                "minimum_size": {
+                    "description": "The minimum size of the resulting clone in bytes. This should only be specified if 'vmdisk_uuid' is specified.",
+                    "format": "int64",
+                    "notes": "The minimum size of the resulting clone in bytes.",
+                    "type": "integer",
+                    "typeName": "DEFAULT"
+                },
+                "snapshot_group_uuid": {
+                    "description": "UUID of the snapshot consistency group from which to clone a snapshot vmdisk.",
+                    "notes": "UUID of the snapshot consistency group from which to clone a snapshot vmdisk.",
+                    "type": "string",
+                    "typeName": "UUID_TYPE"
+                },
+                "storage_container_uuid": {
+                    "description": "The Uuid of the storage container in which the specified image or vmdisk is stored. If the source is a vmdisk, this field is recommended, but optional. If the source is a snapshot vmdisk, this field is required. If the source is an absolute image path, this field is prohibited. If the source is a relative image path, this field is required.",
+                    "notes": "The Uuid of the storage container in which the specified image or vmdisk is stored.",
+                    "type": "string",
+                    "typeName": "UUID_TYPE"
+                }
+            }
+        },
+        "delete.dto.acropolis.ReturnValueDTO$TaskIdDTO": {
+            "id": "delete.dto.acropolis.ReturnValueDTO$TaskIdDTO",
+            "required": [],
+            "properties": {
+                "task_uuid": {
+                    "description": "UUID of the task.",
+                    "notes": "UUID of the task.",
+                    "type": "string",
+                    "typeName": "DEFAULT"
+                }
+            }
+        },
+        "get.base.EntityCollection&lt;get.dto.acropolis.ImageInfoDTO&gt;": {
+            "id": "get.base.EntityCollection&lt;get.dto.acropolis.ImageInfoDTO&gt;",
+            "required": [],
+            "properties": {
+                "entities": {
+                    "items": {
+                        "$ref": "get.dto.acropolis.ImageInfoDTO"
+                    },
+                    "type": "array"
+                },
+                "error_info": {
+                    "$ref": "get.base.ErrorInfo"
+                },
+                "metadata": {
+                    "$ref": "get.base.Metadata"
+                }
+            }
+        },
+        "get.base.ErrorInfo": {
+            "id": "get.base.ErrorInfo",
+            "required": [],
+            "properties": {
+                "count": {
+                    "format": "int64",
+                    "type": "integer"
+                },
+                "entity_list": {
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": "array"
+                },
+                "message": {
+                    "type": "string"
+                }
+            }
+        },
+        "get.base.Metadata": {
+            "id": "get.base.Metadata",
+            "required": [],
+            "properties": {
+                "count": {
+                    "format": "int32",
+                    "type": "integer"
+                },
+                "end_index": {
+                    "format": "int32",
+                    "type": "integer"
+                },
+                "filter_criteria": {
+                    "type": "string"
+                },
+                "grand_total_entities": {
+                    "format": "int32",
+                    "type": "integer"
+                },
+                "next_cursor": {
+                    "type": "string"
+                },
+                "page": {
+                    "format": "int32",
+                    "type": "integer"
+                },
+                "previous_cursor": {
+                    "type": "string"
+                },
+                "search_string": {
+                    "type": "string"
+                },
+                "sort_criteria": {
+                    "type": "string"
+                },
+                "start_index": {
+                    "format": "int32",
+                    "type": "integer"
+                },
+                "total_entities": {
+                    "format": "int32",
+                    "type": "integer"
+                }
+            }
+        },
+        "get.dto.acropolis.ImageInfoDTO": {
+            "id": "get.dto.acropolis.ImageInfoDTO",
+            "required": [],
+            "properties": {
+                "annotation": {
+                    "description": "A string describing the Image.",
+                    "notes": "A string describing the Image.",
+                    "type": "string",
+                    "typeName": "DEFAULT"
+                },
+                "checksum": {
+                    "description": "The Checksum in bytes.",
+                    "notes": "The Checksum of the image.",
+                    "type": "string",
+                    "typeName": "DEFAULT"
+                },
+                "checksum_type": {
+                    "description": "The type of Checksum to be used for the Image. Possible values are \"SHA_256\" and \"SHA_1\".",
+                    "enum": [
+                        "SHA_256",
+                        "SHA_1"
+                    ],
+                    "notes": "The Checksum type of the image.",
+                    "type": "string",
+                    "typeName": "DEFAULT"
+                },
+                "created_time_in_usecs": {
+                    "description": "The epoch time in microseconds when this image was created.",
+                    "format": "int64",
+                    "notes": "The Image creation time.",
+                    "type": "integer",
+                    "typeName": "DEFAULT"
+                },
+                "deleted": {
+                    "description": "Indicates whether the image has been deleted or not.",
+                    "notes": "Indicates whether the image has been deleted or not.",
+                    "type": "boolean",
+                    "typeName": "DEFAULT"
+                },
+                "image_state": {
+                    "description": "The Image state specifies whether its usable or not. Possible values are \"ACTIVE\" and \"INACTIVE\".",
+                    "enum": [
+                        "ACTIVE",
+                        "INACTIVE"
+                    ],
+                    "notes": "The Image state.",
+                    "type": "string",
+                    "typeName": "DEFAULT"
+                },
+                "image_type": {
+                    "description": "The Image type specifies whether its a disk image or ISO image. Possible values are \"DISK_IMAGE\" and \"ISO_IMAGE\".",
+                    "enum": [
+                        "DISK_IMAGE",
+                        "ISO_IMAGE"
+                    ],
+                    "notes": "The Image type.",
+                    "type": "string",
+                    "typeName": "DEFAULT"
+                },
+                "logical_timestamp": {
+                    "description": "The Image logical timestamp. This can be used as input to other Image related APIs for consistency",
+                    "format": "int64",
+                    "notes": "The Image logical timestamp.",
+                    "type": "integer",
+                    "typeName": "DEFAULT"
+                },
+                "name": {
+                    "description": "A string depicting the Image name.",
+                    "notes": "A string depicting the Image name.",
+                    "type": "string",
+                    "typeName": "DEFAULT"
+                },
+                "storage_container_id": {
+                    "description": "An ID identifying the container the Image resides.",
+                    "format": "int64",
+                    "notes": "An ID identifying the container in which the Image resides.",
+                    "type": "integer",
+                    "typeName": "DEFAULT"
+                },
+                "storage_container_uuid": {
+                    "description": "A version 4 UUID identifying the container where the Image resides.",
+                    "notes": "A version 4 UUID identifying the container in which where the Image resides.",
+                    "type": "string",
+                    "typeName": "DEFAULT"
+                },
+                "updated_time_in_usecs": {
+                    "description": "The epoch time in microseconds when this image was updated.",
+                    "format": "int64",
+                    "notes": "The Image update time.",
+                    "type": "integer",
+                    "typeName": "DEFAULT"
+                },
+                "uuid": {
+                    "description": "A version 4 UUID identifying the Image.",
+                    "notes": "A version 4 UUID identifying the Image.",
+                    "type": "string",
+                    "typeName": "UUID_TYPE"
+                },
+                "vm_disk_id": {
+                    "description": "A version 4 UUID identifying the backing VMDisk.",
+                    "notes": "A version 4 UUID identifying the backing VMDisk.",
+                    "type": "string",
+                    "typeName": "DEFAULT"
+                },
+                "vm_disk_size": {
+                    "description": "This is only filled in on demand whenever an image is fetched and the size is requested.",
+                    "format": "int64",
+                    "notes": "The Image's VMDisk size in bytes.",
+                    "type": "integer",
+                    "typeName": "DEFAULT"
+                }
+            }
+        },
+        "update.dto.acropolis.ImageImportSpecDTO": {
+            "id": "update.dto.acropolis.ImageImportSpecDTO",
+            "required": [],
+            "properties": {
+                "checksum": {
+                    "description": "The Checksum in bytes.",
+                    "notes": "The Checksum of the image.",
+                    "type": "string",
+                    "typeName": "DEFAULT"
+                },
+                "checksum_type": {
+                    "description": "The type of Checksum to be used for the Image. Possible values are \"SHA_256\" and \"SHA_1\".",
+                    "enum": [
+                        "SHA_256",
+                        "SHA_1"
+                    ],
+                    "notes": "The Checksum type of the image.",
+                    "type": "string",
+                    "typeName": "DEFAULT"
+                },
+                "storage_container_id": {
+                    "description": "ID of a Storage Container which will contain the newly created Image. Storage container UUID, ID, or Name must be provided.",
+                    "format": "int64",
+                    "notes": "ID of a Storage Container which will contain the newly created Image.",
+                    "type": "integer",
+                    "typeName": "DEFAULT"
+                },
+                "storage_container_name": {
+                    "description": "Name of a Storage Container which will contain the newly created Image. Storage container UUID, ID, or Name must be provided.",
+                    "notes": "Name of a Storage Container which will contain the newly created Image.",
+                    "type": "string",
+                    "typeName": "DEFAULT"
+                },
+                "storage_container_uuid": {
+                    "description": "UUID of a Storage Container which will contain the newly created Image. Storage container UUID, ID, or Name must be provided.",
+                    "notes": "UUID of a Storage Container which will contain the newly created Image.",
+                    "type": "string",
+                    "typeName": "DEFAULT"
+                },
+                "url": {
+                    "description": "A string describing the source URL for the Image. Note that the source URL can point to an NFS or HTTP target. NFS URLs should look like: nfs://<source address>/<path to file>",
+                    "notes": "A string describing the source URL for the Image.",
+                    "type": "string",
+                    "typeName": "DEFAULT"
+                }
+            }
+        },
+        "update.dto.acropolis.ImageSpecDTO": {
+            "id": "update.dto.acropolis.ImageSpecDTO",
+            "required": [],
+            "properties": {
+                "annotation": {
+                    "description": "A string describing the Image.",
+                    "notes": "A string describing the Image.",
+                    "type": "string",
+                    "typeName": "DEFAULT"
+                },
+                "image_import_spec": {
+                    "$ref": "update.dto.acropolis.ImageImportSpecDTO",
+                    "description": "The spec for the imported image. Either this or the VMDiskSpecCloneDTO needs to be specified",
+                    "notes": "The spec for the imported image",
+                    "typeName": "DEFAULT"
+                },
+                "image_type": {
+                    "description": "The Image type specifies whether its a Disk image or ISO image. Possible values are \"disk_image\" and \"iso_image\".",
+                    "enum": [
+                        "DISK_IMAGE",
+                        "ISO_IMAGE"
+                    ],
+                    "notes": "The Image type.",
+                    "type": "string",
+                    "typeName": "DEFAULT"
+                },
+                "logical_timestamp": {
+                    "description": "Logical timestamp specified for consistency. This can be obtained from the Image Info object.",
+                    "format": "int64",
+                    "notes": "Logical timestamp specified for consistency.",
+                    "type": "integer",
+                    "typeName": "DEFAULT"
+                },
+                "name": {
+                    "description": "The Image's human readable name.",
+                    "notes": "The Image's human readable name.",
+                    "type": "string",
+                    "typeName": "DEFAULT"
+                },
+                "vm_disk_clone_spec": {
+                    "$ref": "update.dto.uhura.VmDiskCloneDTO",
+                    "description": "The spec for the VMDisk to be cloned. Either this or the ImageImportSpecDTO needs to be specified",
+                    "notes": "The spec for the VMDisk to be cloned",
+                    "typeName": "DEFAULT"
+                }
+            }
+        },
+        "update.dto.acropolis.ReturnValueDTO$TaskIdDTO": {
+            "id": "update.dto.acropolis.ReturnValueDTO$TaskIdDTO",
+            "required": [],
+            "properties": {
+                "task_uuid": {
+                    "description": "UUID of the task.",
+                    "notes": "UUID of the task.",
+                    "type": "string",
+                    "typeName": "DEFAULT"
+                }
+            }
+        },
+        "update.dto.acropolis.VMDiskAddressDTO": {
+            "id": "update.dto.acropolis.VMDiskAddressDTO",
+            "required": [],
+            "properties": {
+                "device_bus": {
+                    "description": "The device bus for the virtual disk device.Possible values are SCSI, IDE and PCI. Along with this the deviceIndex is used to specify a vdisk address. When specifying a vmdisk address, then only one of the following combinations of fields must be set - (device_bus, device_index) or vmdisk_uuid or ndfs_filepath.",
+                    "enum": [
+                        "SCSI",
+                        "IDE",
+                        "PCI",
+                        "SATA",
+                        "SPAPR"
+                    ],
+                    "notes": "The device bus for the virtual disk device.",
+                    "type": "string",
+                    "typeName": "DEFAULT"
+                },
+                "device_index": {
+                    "description": "Index of the device on the adapter type. If left unspecified, the system will allocate the next available slot on the default bus.",
+                    "format": "int32",
+                    "notes": "Index of the device on the adapter type.",
+                    "type": "integer",
+                    "typeName": "DEFAULT"
+                },
+                "ndfs_filepath": {
+                    "description": "NDFS path to existing virtual disk. This field will not be set when this message is used in a create mode.When specifying a vmdisk address, then only one of the following combinations of fields must be set - (device_bus, device_index) or vmdisk_uuid or ndfs_filepath.",
+                    "notes": "NDFS path to existing virtual disk.",
+                    "type": "string",
+                    "typeName": "DEFAULT"
+                },
+                "vmdisk_uuid": {
+                    "description": "Virtual disk identifier. This field will not be set when this message is used in a create mode. When specifying a vmdisk address, then only one of the following combinations of fields must be set - (device_bus, device_index) or vmdisk_uuid or ndfs_filepath.",
+                    "notes": "Virtual disk identifier.",
+                    "type": "string",
+                    "typeName": "DEFAULT"
+                },
+                "volume_group_uuid": {
+                    "type": "string"
+                }
+            }
+        },
+        "update.dto.uhura.VmDiskCloneDTO": {
+            "id": "update.dto.uhura.VmDiskCloneDTO",
+            "required": [],
+            "properties": {
+                "disk_address": {
+                    "$ref": "update.dto.acropolis.VMDiskAddressDTO",
+                    "description": "Address of the source disk or image from which to clone. Disk address is represented by vmdisk_uuid or ndfs_filepath.",
+                    "notes": "Address of the source disk or image from which to clone.",
+                    "typeName": "DEFAULT"
+                },
+                "minimum_size": {
+                    "description": "The minimum size of the resulting clone in bytes. This should only be specified if 'vmdisk_uuid' is specified.",
+                    "format": "int64",
+                    "notes": "The minimum size of the resulting clone in bytes.",
+                    "type": "integer",
+                    "typeName": "DEFAULT"
+                },
+                "snapshot_group_uuid": {
+                    "description": "UUID of the snapshot consistency group from which to clone a snapshot vmdisk.",
+                    "notes": "UUID of the snapshot consistency group from which to clone a snapshot vmdisk.",
+                    "type": "string",
+                    "typeName": "UUID_TYPE"
+                },
+                "storage_container_uuid": {
+                    "description": "The Uuid of the storage container in which the specified image or vmdisk is stored. If the source is a vmdisk, this field is recommended, but optional. If the source is a snapshot vmdisk, this field is required. If the source is an absolute image path, this field is prohibited. If the source is a relative image path, this field is required.",
+                    "notes": "The Uuid of the storage container in which the specified image or vmdisk is stored.",
+                    "type": "string",
+                    "typeName": "UUID_TYPE"
+                }
+            }
+        }
+    }
+}

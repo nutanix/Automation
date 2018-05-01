@@ -1,0 +1,797 @@
+swagger: '2.0'
+info:
+  version: 'v2.0'
+  title: Swagger API
+host: any_cvm_ip:9440
+basePath: /PrismGateway/services/rest/v2.0
+schemes:
+- https
+consumes:
+- application/json
+produces:
+- application/json
+paths:
+  /health_checks/:
+    get:
+      description: Get the list of Health Checks.
+      summary: getHealthChecks
+      operationId: HealthChecksGet
+      produces:
+      - application/json
+      parameters:
+      - name: check_ids
+        in: query
+        required: false
+        type: array
+        uniqueItems: false
+        items:
+          type: string
+        description: Check Ids
+      - name: global_config
+        in: query
+        required: false
+        type: boolean
+        description: Whether to get the global config list or not.
+      - name: include_internal_checks
+        in: query
+        required: false
+        type: boolean
+        description: Whether to include internal checks or not.
+      - name: category_types
+        in: query
+        required: false
+        type: array
+        uniqueItems: false
+        items:
+          type: string
+        description: Categories of the Health Check.
+      responses:
+        200:
+          description: ''
+          schema:
+            $ref: '#/definitions/Get.base.entitycollection&lt;get.dto.health.check.healthcheckdto&gt;'
+          examples: {}
+      x-unitTests: []
+      x-operation-settings:
+        CollectParameters: false
+        AllowDynamicQueryParameters: false
+        AllowDynamicFormParameters: false
+        IsMultiContentStreaming: false
+    put:
+      description: Update Health Check details.
+      summary: updateHealthCheck
+      operationId: HealthChecksPut
+      produces:
+      - application/json
+      parameters:
+      - name: body
+        in: body
+        required: true
+        description: An Health Check instance
+        schema:
+          $ref: '#/definitions/Update.dto.health.check.healthcheckdto'
+      responses:
+        200:
+          description: ''
+          schema:
+            $ref: '#/definitions/Update.dto.health.check.healthcheckdto'
+          examples: {}
+      x-unitTests: []
+      x-operation-settings:
+        CollectParameters: false
+        AllowDynamicQueryParameters: false
+        AllowDynamicFormParameters: false
+        IsMultiContentStreaming: false
+    patch:
+      description: Modify Health Check details.
+      summary: patchHealthCheck
+      operationId: HealthChecksPatch
+      produces:
+      - application/json
+      parameters:
+      - name: body
+        in: body
+        required: true
+        description: An Health Check instance
+        schema:
+          $ref: '#/definitions/Patch.dto.requestdto&lt;patch.dto.health.check.healthcheckdto&gt;'
+      responses:
+        200:
+          description: ''
+          schema:
+            $ref: '#/definitions/Patch.dto.health.check.healthcheckdto'
+          examples: {}
+      x-unitTests: []
+      x-operation-settings:
+        CollectParameters: false
+        AllowDynamicQueryParameters: false
+        AllowDynamicFormParameters: false
+        IsMultiContentStreaming: false
+  /health_checks/{id}:
+    get:
+      description: Get Health Check details.
+      summary: getHealthCheck
+      operationId: HealthChecksByIdGet
+      produces:
+      - application/json
+      parameters:
+      - name: id
+        in: path
+        required: true
+        type: string
+        description: Id of the health check
+      - name: global_config
+        in: query
+        required: false
+        type: boolean
+        description: Whether to get the global config list or not.
+      responses:
+        200:
+          description: ''
+          schema:
+            $ref: '#/definitions/Get.dto.health.check.healthcheckdto'
+          examples: {}
+      x-unitTests: []
+      x-operation-settings:
+        CollectParameters: false
+        AllowDynamicQueryParameters: false
+        AllowDynamicFormParameters: false
+        IsMultiContentStreaming: false
+definitions:
+  Get.base.entitycollection&lt;get.dto.health.check.healthcheckdto&gt;:
+    title: get.base.EntityCollection&lt;get.dto.health.check.HealthCheckDTO&gt;
+    type: object
+    properties:
+      entities:
+        description: ''
+        type: array
+        items:
+          $ref: '#/definitions/Get.dto.health.check.healthcheckdto'
+      error_info:
+        $ref: '#/definitions/Get.base.errorinfo'
+      metadata:
+        $ref: '#/definitions/Get.base.metadata'
+  Get.base.errorinfo:
+    title: get.base.ErrorInfo
+    type: object
+    properties:
+      count:
+        description: ''
+        type: integer
+        format: int64
+      entity_list:
+        description: ''
+        type: array
+        items:
+          type: string
+      message:
+        description: ''
+        type: string
+  Get.base.metadata:
+    title: get.base.Metadata
+    type: object
+    properties:
+      count:
+        description: ''
+        type: integer
+        format: int32
+      end_index:
+        description: ''
+        type: integer
+        format: int32
+      filter_criteria:
+        description: ''
+        type: string
+      grand_total_entities:
+        description: ''
+        type: integer
+        format: int32
+      next_cursor:
+        description: ''
+        type: string
+      page:
+        description: ''
+        type: integer
+        format: int32
+      previous_cursor:
+        description: ''
+        type: string
+      search_string:
+        description: ''
+        type: string
+      sort_criteria:
+        description: ''
+        type: string
+      start_index:
+        description: ''
+        type: integer
+        format: int32
+      total_entities:
+        description: ''
+        type: integer
+        format: int32
+  AutoResolve:
+    title: auto_resolve
+    example: ENABLED
+    x-enum-elements:
+    - name: ENABLED
+      description: ''
+    - name: DISABLED
+      description: ''
+    - name: NOT_SUPPORTED
+      description: ''
+    type: string
+    enum:
+    - ENABLED
+    - DISABLED
+    - NOT_SUPPORTED
+  CheckType:
+    title: check_type
+    example: SCHEDULED
+    x-enum-elements:
+    - name: SCHEDULED
+      description: ''
+    - name: NOT_SCHEDULED
+      description: ''
+    - name: EVENT_DRIVEN
+      description: ''
+    type: string
+    enum:
+    - SCHEDULED
+    - NOT_SCHEDULED
+    - EVENT_DRIVEN
+  Get.dto.health.check.healthcheckdto:
+    title: get.dto.health.check.HealthCheckDTO
+    description: health-check
+    type: object
+    properties:
+      affected_entity_types:
+        description: Affected entity types.
+        type: array
+        items:
+          type: string
+      alert_config_exception_groups:
+        description: Those clusters that have their Alert configurable params that are different from that in PC
+        type: array
+        items:
+          $ref: '#/definitions/Get.dto.health.check.healthcheckdto$alertconfigexceptiongroup'
+      alert_configurable_parameters:
+        description: Configurable Parameters for the Alert Type.
+        type: array
+        items:
+          $ref: '#/definitions/Get.dto.health.check.healthcheckdto$alertconfigparamdto'
+      alert_type_id:
+        description: Id of an alert type.
+        type: string
+      applicable_for_multi_cluster:
+        description: Whether the check is applicable for Prism Central or not.
+        type: boolean
+      applicable_for_single_cluster:
+        description: Whether the check is applicable for Prism Element or not.
+        type: boolean
+      auto_resolve:
+        $ref: '#/definitions/AutoResolve'
+      causes:
+        description: Causes.
+        type: array
+        items:
+          type: string
+      check_type:
+        $ref: '#/definitions/CheckType'
+      classifications:
+        description: 'Classification of the Health Check. Ex: DR, Hardware, etc'
+        type: array
+        items:
+          type: string
+      description:
+        description: Description of a health check.
+        type: string
+      enabled:
+        description: Whether health check is enabled.
+        type: boolean
+      exception_count:
+        description: Numbers of clusters having exceptions w.r.t Alert config.
+        type: integer
+        format: int64
+      id:
+        description: Id of a health check.
+        type: string
+      impact_types:
+        description: Impact type on affected entities.
+        type: array
+        items:
+          type: string
+      is_global_config:
+        description: Whether the check is a default one or not
+        type: boolean
+      is_user_defined:
+        description: Whether the health check is user defined or not.
+        type: boolean
+      kb_list:
+        description: List of kb article numbers.
+        type: array
+        items:
+          type: string
+      message:
+        description: Message for an alert type.
+        type: string
+      metrics:
+        description: Metrics.
+        type: array
+        items:
+          $ref: '#/definitions/Get.dto.health.check.healthcheckdto$healthcheckmetricdto'
+      modified_by_username:
+        description: ''
+        type: string
+      modified_time_stamp_in_usecs:
+        description: ''
+        type: integer
+        format: int64
+      name:
+        description: Name of a health check.
+        type: string
+      parameters:
+        $ref: '#/definitions/Java.util.map&lt;java.lang.string,Get.dto.health.check.healthcheckdto$healthcheckparameterdto&gt;'
+      policy_uuid:
+        description: Policy Uuid of the health check. Will be set only for user defined policies.
+        type: string
+      resolutions:
+        description: Resolutions.
+        type: array
+        items:
+          type: string
+      schedule_interval_in_secs:
+        description: Interval between checks in seconds.
+        type: integer
+        format: int32
+      scope:
+        description: Scope of health check.
+        type: string
+      severity_threshold_infos:
+        description: Enable/Disable info for each Severity.
+        type: array
+        items:
+          $ref: '#/definitions/Get.dto.health.check.healthcheckdto$severitythresholdinfodto'
+      title:
+        description: Title of an alert type.
+        type: string
+  Get.dto.health.check.healthcheckdto$alertconfigexceptiongroup:
+    title: get.dto.health.check.HealthCheckDTO$AlertConfigExceptionGroup
+    type: object
+    properties:
+      auto_resolve:
+        $ref: '#/definitions/AutoResolve'
+      cluster_uuids:
+        description: ''
+        type: array
+        items:
+          type: string
+      configurable_parameters:
+        description: ''
+        type: array
+        items:
+          $ref: '#/definitions/Get.dto.health.check.healthcheckdto$alertconfigparamdto'
+      severity_threshold_infos:
+        description: ''
+        type: array
+        items:
+          $ref: '#/definitions/Get.dto.health.check.healthcheckdto$severitythresholdinfodto'
+  Get.dto.health.check.healthcheckdto$alertconfigparamdto:
+    title: get.dto.health.check.HealthCheckDTO$AlertConfigParamDTO
+    description: DTO representing the configurable parameters for an alert type
+    type: object
+    properties:
+      parameter_boolean_value:
+        description: If the parameter value is a Boolean, its value.
+        type: boolean
+      parameter_default_boolean_value:
+        description: If the parameter value is a Boolean, its default value.
+        type: boolean
+      parameter_default_long_value:
+        description: If the parameter value is Long, its default value.
+        type: integer
+        format: int64
+      parameter_default_string_value:
+        description: If the parameter value is a String, its default value.
+        type: string
+      parameter_display_name:
+        description: Display name of the parameter.
+        type: string
+      parameter_long_value:
+        description: If the parameter value is Long, its value.
+        type: integer
+        format: int64
+      parameter_name:
+        description: Name of the parameter.
+        type: string
+      parameter_string_value:
+        description: If the parameter value is a String, its value.
+        type: string
+      parameter_unit:
+        description: Unit of the parameter value.
+        type: string
+      parameter_valid_values:
+        description: Valid values for a parameter
+        type: array
+        items:
+          type: string
+      severity:
+        description: Severity for which this parameter value applies.
+        type: string
+  Get.dto.health.check.healthcheckdto$healthcheckmetricdto:
+    title: get.dto.health.check.HealthCheckDTO$HealthCheckMetricDTO
+    type: object
+    properties:
+      display_name:
+        description: ''
+        type: string
+      name:
+        description: ''
+        type: string
+  Get.dto.health.check.healthcheckdto$severitythresholdinfodto:
+    title: get.dto.health.check.HealthCheckDTO$SeverityThresholdInfoDTO
+    type: object
+    properties:
+      enabled:
+        description: ''
+        type: boolean
+      severity:
+        description: ''
+        type: string
+  Java.util.map&lt;java.lang.string,Get.dto.health.check.healthcheckdto$healthcheckparameterdto&gt;:
+    title: java.util.Map&lt;java.lang.String, get.dto.health.check.HealthCheckDTO$HealthCheckParameterDTO&gt;
+    type: object
+  Java.util.map&lt;java.lang.string,Patch.dto.health.check.healthcheckdto$healthcheckparameterdto&gt;:
+    title: java.util.Map&lt;java.lang.String, patch.dto.health.check.HealthCheckDTO$HealthCheckParameterDTO&gt;
+    type: object
+  Java.util.map&lt;java.lang.string,Update.dto.health.check.healthcheckdto$healthcheckparameterdto&gt;:
+    title: java.util.Map&lt;java.lang.String, update.dto.health.check.HealthCheckDTO$HealthCheckParameterDTO&gt;
+    type: object
+  Patch.dto.requestdto&lt;patch.dto.health.check.healthcheckdto&gt;:
+    title: patch.dto.RequestDTO&lt;patch.dto.health.check.HealthCheckDTO&gt;
+    type: object
+    properties:
+      cluster_uuid:
+        description: ''
+        type: string
+      generic_d_t_o:
+        $ref: '#/definitions/Patch.dto.health.check.healthcheckdto'
+      operation:
+        description: ''
+        type: string
+  Patch.dto.health.check.healthcheckdto:
+    title: patch.dto.health.check.HealthCheckDTO
+    description: health-check
+    type: object
+    properties:
+      affected_entity_types:
+        description: Affected entity types.
+        type: array
+        items:
+          type: string
+      alert_configurable_parameters:
+        description: Configurable Parameters for the Alert Type.
+        type: array
+        items:
+          $ref: '#/definitions/Patch.dto.health.check.healthcheckdto$alertconfigparamdto'
+      alert_type_id:
+        description: Id of an alert type.
+        type: string
+      applicable_for_multi_cluster:
+        description: Whether the check is applicable for Prism Central or not.
+        type: boolean
+      applicable_for_single_cluster:
+        description: Whether the check is applicable for Prism Element or not.
+        type: boolean
+      auto_resolve:
+        $ref: '#/definitions/AutoResolve'
+      causes:
+        description: Causes.
+        type: array
+        items:
+          type: string
+      check_type:
+        $ref: '#/definitions/CheckType'
+      classifications:
+        description: 'Classification of the Health Check. Ex: DR, Hardware, etc'
+        type: array
+        items:
+          type: string
+      description:
+        description: Description of a health check.
+        type: string
+      enabled:
+        description: Whether health check is enabled.
+        type: boolean
+      id:
+        description: Id of a health check.
+        type: string
+      impact_types:
+        description: Impact type on affected entities.
+        type: array
+        items:
+          type: string
+      is_global_config:
+        description: Whether the check is a default one or not
+        type: boolean
+      is_user_defined:
+        description: Whether the health check is user defined or not.
+        type: boolean
+      kb_list:
+        description: List of kb article numbers.
+        type: array
+        items:
+          type: string
+      message:
+        description: Message for an alert type.
+        type: string
+      metrics:
+        description: Metrics.
+        type: array
+        items:
+          $ref: '#/definitions/Patch.dto.health.check.healthcheckdto$healthcheckmetricdto'
+      modified_by_username:
+        description: ''
+        type: string
+      modified_time_stamp_in_usecs:
+        description: ''
+        type: integer
+        format: int64
+      name:
+        description: Name of a health check.
+        type: string
+      parameters:
+        $ref: '#/definitions/Java.util.map&lt;java.lang.string,Patch.dto.health.check.healthcheckdto$healthcheckparameterdto&gt;'
+      policy_uuid:
+        description: Policy Uuid of the health check. Will be set only for user defined policies.
+        type: string
+      resolutions:
+        description: Resolutions.
+        type: array
+        items:
+          type: string
+      schedule_interval_in_secs:
+        description: Interval between checks in seconds.
+        type: integer
+        format: int32
+      scope:
+        description: Scope of health check.
+        type: string
+      severity_threshold_infos:
+        description: Enable/Disable info for each Severity.
+        type: array
+        items:
+          $ref: '#/definitions/Patch.dto.health.check.healthcheckdto$severitythresholdinfodto'
+  Patch.dto.health.check.healthcheckdto$alertconfigparamdto:
+    title: patch.dto.health.check.HealthCheckDTO$AlertConfigParamDTO
+    description: DTO representing the configurable parameters for an alert type
+    type: object
+    properties:
+      parameter_name:
+        description: Name of the parameter.
+        type: string
+      severity:
+        description: Severity for which this parameter value applies.
+        type: string
+      parameter_boolean_value:
+        description: If the parameter value is a Boolean, its value.
+        type: boolean
+      parameter_default_boolean_value:
+        description: If the parameter value is a Boolean, its default value.
+        type: boolean
+      parameter_default_long_value:
+        description: If the parameter value is Long, its default value.
+        type: integer
+        format: int64
+      parameter_default_string_value:
+        description: If the parameter value is a String, its default value.
+        type: string
+      parameter_display_name:
+        description: Display name of the parameter.
+        type: string
+      parameter_long_value:
+        description: If the parameter value is Long, its value.
+        type: integer
+        format: int64
+      parameter_string_value:
+        description: If the parameter value is a String, its value.
+        type: string
+      parameter_unit:
+        description: Unit of the parameter value.
+        type: string
+      parameter_valid_values:
+        description: Valid values for a parameter
+        type: array
+        items:
+          type: string
+    required:
+    - parameter_name
+    - severity
+  Patch.dto.health.check.healthcheckdto$healthcheckmetricdto:
+    title: patch.dto.health.check.HealthCheckDTO$HealthCheckMetricDTO
+    type: object
+    properties:
+      display_name:
+        description: ''
+        type: string
+      name:
+        description: ''
+        type: string
+  Patch.dto.health.check.healthcheckdto$severitythresholdinfodto:
+    title: patch.dto.health.check.HealthCheckDTO$SeverityThresholdInfoDTO
+    type: object
+    properties:
+      enabled:
+        description: ''
+        type: boolean
+      severity:
+        description: ''
+        type: string
+  Update.dto.health.check.healthcheckdto:
+    title: update.dto.health.check.HealthCheckDTO
+    description: health-check
+    type: object
+    properties:
+      affected_entity_types:
+        description: Affected entity types.
+        type: array
+        items:
+          type: string
+      alert_configurable_parameters:
+        description: Configurable Parameters for the Alert Type.
+        type: array
+        items:
+          $ref: '#/definitions/Update.dto.health.check.healthcheckdto$alertconfigparamdto'
+      alert_type_id:
+        description: Id of an alert type.
+        type: string
+      applicable_for_multi_cluster:
+        description: Whether the check is applicable for Prism Central or not.
+        type: boolean
+      applicable_for_single_cluster:
+        description: Whether the check is applicable for Prism Element or not.
+        type: boolean
+      auto_resolve:
+        $ref: '#/definitions/AutoResolve'
+      causes:
+        description: Causes.
+        type: array
+        items:
+          type: string
+      check_type:
+        $ref: '#/definitions/CheckType'
+      classifications:
+        description: 'Classification of the Health Check. Ex: DR, Hardware, etc'
+        type: array
+        items:
+          type: string
+      description:
+        description: Description of a health check.
+        type: string
+      enabled:
+        description: Whether health check is enabled.
+        type: boolean
+      id:
+        description: Id of a health check.
+        type: string
+      impact_types:
+        description: Impact type on affected entities.
+        type: array
+        items:
+          type: string
+      is_global_config:
+        description: Whether the check is a default one or not
+        type: boolean
+      is_user_defined:
+        description: Whether the health check is user defined or not.
+        type: boolean
+      kb_list:
+        description: List of kb article numbers.
+        type: array
+        items:
+          type: string
+      message:
+        description: Message for an alert type.
+        type: string
+      metrics:
+        description: Metrics.
+        type: array
+        items:
+          $ref: '#/definitions/Update.dto.health.check.healthcheckdto$healthcheckmetricdto'
+      modified_by_username:
+        description: ''
+        type: string
+      modified_time_stamp_in_usecs:
+        description: ''
+        type: integer
+        format: int64
+      name:
+        description: Name of a health check.
+        type: string
+      parameters:
+        $ref: '#/definitions/Java.util.map&lt;java.lang.string,Update.dto.health.check.healthcheckdto$healthcheckparameterdto&gt;'
+      policy_uuid:
+        description: Policy Uuid of the health check. Will be set only for user defined policies.
+        type: string
+      resolutions:
+        description: Resolutions.
+        type: array
+        items:
+          type: string
+      schedule_interval_in_secs:
+        description: Interval between checks in seconds.
+        type: integer
+        format: int32
+      scope:
+        description: Scope of health check.
+        type: string
+      severity_threshold_infos:
+        description: Enable/Disable info for each Severity.
+        type: array
+        items:
+          $ref: '#/definitions/Update.dto.health.check.healthcheckdto$severitythresholdinfodto'
+  Update.dto.health.check.healthcheckdto$alertconfigparamdto:
+    title: update.dto.health.check.HealthCheckDTO$AlertConfigParamDTO
+    description: DTO representing the configurable parameters for an alert type
+    type: object
+    properties:
+      parameter_name:
+        description: Name of the parameter.
+        type: string
+      severity:
+        description: Severity for which this parameter value applies.
+        type: string
+      parameter_boolean_value:
+        description: If the parameter value is a Boolean, its value.
+        type: boolean
+      parameter_default_boolean_value:
+        description: If the parameter value is a Boolean, its default value.
+        type: boolean
+      parameter_default_long_value:
+        description: If the parameter value is Long, its default value.
+        type: integer
+        format: int64
+      parameter_default_string_value:
+        description: If the parameter value is a String, its default value.
+        type: string
+      parameter_display_name:
+        description: Display name of the parameter.
+        type: string
+      parameter_long_value:
+        description: If the parameter value is Long, its value.
+        type: integer
+        format: int64
+      parameter_string_value:
+        description: If the parameter value is a String, its value.
+        type: string
+      parameter_unit:
+        description: Unit of the parameter value.
+        type: string
+      parameter_valid_values:
+        description: Valid values for a parameter
+        type: array
+        items:
+          type: string
+    required:
+    - parameter_name
+    - severity
+  Update.dto.health.check.healthcheckdto$healthcheckmetricdto:
+    title: update.dto.health.check.HealthCheckDTO$HealthCheckMetricDTO
+    type: object
+    properties:
+      display_name:
+        description: ''
+        type: string
+      name:
+        description: ''
+        type: string
+  Update.dto.health.check.healthcheckdto$severitythresholdinfodto:
+    title: update.dto.health.check.HealthCheckDTO$SeverityThresholdInfoDTO
+    type: object
+    properties:
+      enabled:
+        description: ''
+        type: boolean
+      severity:
+        description: ''
+        type: string

@@ -1,0 +1,1099 @@
+swagger: '2.0'
+info:
+  version: 'v2.0'
+  title: Swagger API
+host: any_cvm_ip:9440
+basePath: /api/nutanix/v2.0
+schemes:
+- https
+consumes:
+- application/json
+produces:
+- application/json
+paths:
+  /volume_groups/:
+    get:
+      description: Retrieve Volume Group configuration
+      summary: getVolumeGroups
+      operationId: VolumeGroupsGet
+      produces:
+      - application/json
+      parameters:
+      - name: include_disk_size
+        in: query
+        required: false
+        type: boolean
+        description: Whether to include disk sizes, true by default
+      responses:
+        200:
+          description: ''
+          schema:
+            $ref: '#/definitions/Get.base.entitycollection&lt;get.dto.acropolis.volumegroups.volumegroupconfigdto&gt;'
+          examples: {}
+      x-unitTests: []
+      x-operation-settings:
+        CollectParameters: false
+        AllowDynamicQueryParameters: false
+        AllowDynamicFormParameters: false
+        IsMultiContentStreaming: false
+    post:
+      description: Create a new Volume Group configuration
+      summary: createVolumeGroup
+      operationId: VolumeGroupsPost
+      produces:
+      - application/json
+      parameters:
+      - name: body
+        in: body
+        required: true
+        description: Create a Volume Group
+        schema:
+          $ref: '#/definitions/Create.dto.acropolis.volumegroups.volumegroupcreatedto'
+      responses:
+        200:
+          description: ''
+          schema:
+            $ref: '#/definitions/Create.dto.acropolis.returnvaluedto$taskiddto'
+          examples: {}
+      x-unitTests: []
+      x-operation-settings:
+        CollectParameters: false
+        AllowDynamicQueryParameters: false
+        AllowDynamicFormParameters: false
+        IsMultiContentStreaming: false
+  /volume_groups/{uuid}:
+    get:
+      description: Retrieve Volume Group configuration
+      summary: getVolumeGroup
+      operationId: VolumeGroupsByUuidGet
+      produces:
+      - application/json
+      parameters:
+      - name: uuid
+        in: path
+        required: true
+        type: string
+        description: UUID of the Volume Group
+      - name: include_disk_size
+        in: query
+        required: false
+        type: boolean
+        description: Whether to include disk sizes
+      responses:
+        200:
+          description: ''
+          schema:
+            $ref: '#/definitions/Get.dto.acropolis.volumegroups.volumegroupconfigdto'
+          examples: {}
+      x-unitTests: []
+      x-operation-settings:
+        CollectParameters: false
+        AllowDynamicQueryParameters: false
+        AllowDynamicFormParameters: false
+        IsMultiContentStreaming: false
+    put:
+      description: Modify an existing Volume Group configuration
+      summary: updateVolumeGroup
+      operationId: VolumeGroupsByUuidPut
+      produces:
+      - application/json
+      parameters:
+      - name: uuid
+        in: path
+        required: true
+        type: string
+        description: UUID of the Volume Group
+      - name: body
+        in: body
+        required: true
+        description: Update Volume Group
+        schema:
+          $ref: '#/definitions/Update.dto.acropolis.volumegroups.volumegroupupdatedto'
+      responses:
+        200:
+          description: ''
+          schema:
+            $ref: '#/definitions/Update.dto.acropolis.volumegroups.volumegroupconfigdto'
+          examples: {}
+      x-unitTests: []
+      x-operation-settings:
+        CollectParameters: false
+        AllowDynamicQueryParameters: false
+        AllowDynamicFormParameters: false
+        IsMultiContentStreaming: false
+    delete:
+      description: Remove an existing Volume Group configuration
+      summary: removeVolumeGroup
+      operationId: VolumeGroupsByUuidDelete
+      produces:
+      - application/json
+      parameters:
+      - name: uuid
+        in: path
+        required: true
+        type: string
+        description: UUID of the Volume Group
+      - name: logical_timestamp
+        in: query
+        required: false
+        type: integer
+        format: int32
+        description: The logical timestamp
+      responses:
+        200:
+          description: ''
+          schema:
+            $ref: '#/definitions/Delete.dto.acropolis.returnvaluedto$taskiddto'
+          examples: {}
+      x-unitTests: []
+      x-operation-settings:
+        CollectParameters: false
+        AllowDynamicQueryParameters: false
+        AllowDynamicFormParameters: false
+        IsMultiContentStreaming: false
+  /volume_groups/{uuid}/attach:
+    post:
+      description: Attach Volume Group to Virtual Machine.
+      summary: attachVirtualMachine
+      operationId: VolumeGroupsAttachByUuidPost
+      produces:
+      - application/json
+      parameters:
+      - name: uuid
+        in: path
+        required: true
+        type: string
+        description: UUID of the Volume Group
+      - name: body
+        in: body
+        required: true
+        description: Virtual Machine attach configuration
+        schema:
+          $ref: '#/definitions/Create.dto.acropolis.volumegroups.volumegroupattachvmdto'
+      responses:
+        200:
+          description: ''
+          schema:
+            $ref: '#/definitions/Create.dto.acropolis.returnvaluedto$taskiddto'
+          examples: {}
+      x-unitTests: []
+      x-operation-settings:
+        CollectParameters: false
+        AllowDynamicQueryParameters: false
+        AllowDynamicFormParameters: false
+        IsMultiContentStreaming: false
+  /volume_groups/{uuid}/clone:
+    post:
+      description: Clone a new Volume Group
+      summary: cloneVolumeGroup
+      operationId: VolumeGroupsCloneByUuidPost
+      produces:
+      - application/json
+      parameters:
+      - name: uuid
+        in: path
+        required: true
+        type: string
+        description: UUID of the source Volume Group
+      - name: body
+        in: body
+        required: true
+        description: Clone a Volume Group
+        schema:
+          $ref: '#/definitions/Create.dto.acropolis.volumegroups.volumegroupclonedto'
+      responses:
+        200:
+          description: ''
+          schema:
+            $ref: '#/definitions/Create.dto.acropolis.returnvaluedto$taskiddto'
+          examples: {}
+      x-unitTests: []
+      x-operation-settings:
+        CollectParameters: false
+        AllowDynamicQueryParameters: false
+        AllowDynamicFormParameters: false
+        IsMultiContentStreaming: false
+  /volume_groups/{uuid}/close:
+    post:
+      description: Close Volume Group for iSCSI initiators
+      summary: closeVolumeGroup
+      operationId: VolumeGroupsCloseByUuidPost
+      produces:
+      - application/json
+      parameters:
+      - name: uuid
+        in: path
+        required: true
+        type: string
+        description: UUID of the Volume Group
+      - name: body
+        in: body
+        required: true
+        description: Volume Group detach configuration
+        schema:
+          $ref: '#/definitions/Create.dto.acropolis.volumegroups.volumegroupattachexternaldto'
+      responses:
+        200:
+          description: ''
+          schema:
+            $ref: '#/definitions/Create.dto.primitivedto&lt;java.lang.boolean&gt;'
+          examples: {}
+      x-unitTests: []
+      x-operation-settings:
+        CollectParameters: false
+        AllowDynamicQueryParameters: false
+        AllowDynamicFormParameters: false
+        IsMultiContentStreaming: false
+  /volume_groups/{uuid}/detach:
+    post:
+      description: Detach Volume Group to Virtual Machine.
+      summary: detachVirtualMachine
+      operationId: VolumeGroupsDetachByUuidPost
+      produces:
+      - application/json
+      parameters:
+      - name: uuid
+        in: path
+        required: true
+        type: string
+        description: UUID of the Volume Group
+      - name: body
+        in: body
+        required: true
+        description: Virtual Machine detach configuration
+        schema:
+          $ref: '#/definitions/Create.dto.acropolis.volumegroups.volumegroupattachvmdto'
+      responses:
+        200:
+          description: ''
+          schema:
+            $ref: '#/definitions/Create.dto.acropolis.returnvaluedto$taskiddto'
+          examples: {}
+      x-unitTests: []
+      x-operation-settings:
+        CollectParameters: false
+        AllowDynamicQueryParameters: false
+        AllowDynamicFormParameters: false
+        IsMultiContentStreaming: false
+  /volume_groups/{uuid}/disks:
+    put:
+      description: Updates a Volume Disk
+      summary: updateVolumeDisk
+      operationId: VolumeGroupsDisksByUuidPut
+      produces:
+      - application/json
+      parameters:
+      - name: uuid
+        in: path
+        required: true
+        type: string
+        description: UUID of the Volume Group
+      - name: body
+        in: body
+        required: true
+        description: Update a Volume Disk
+        schema:
+          $ref: '#/definitions/Update.dto.acropolis.volumegroups.volumediskupdatedto'
+      responses:
+        200:
+          description: ''
+          schema:
+            $ref: '#/definitions/Update.dto.acropolis.volumegroups.volumediskconfigdto'
+          examples: {}
+      x-unitTests: []
+      x-operation-settings:
+        CollectParameters: false
+        AllowDynamicQueryParameters: false
+        AllowDynamicFormParameters: false
+        IsMultiContentStreaming: false
+    post:
+      description: Create a Volume Disk
+      summary: createVolumeDisk
+      operationId: VolumeGroupsDisksByUuidPost
+      produces:
+      - application/json
+      parameters:
+      - name: uuid
+        in: path
+        required: true
+        type: string
+        description: UUID of the Volume Group
+      - name: body
+        in: body
+        required: true
+        description: Create a Volume Disk
+        schema:
+          $ref: '#/definitions/Create.dto.acropolis.volumegroups.volumediskcreatespecdto'
+      responses:
+        200:
+          description: ''
+          schema:
+            $ref: '#/definitions/Create.dto.acropolis.returnvaluedto$taskiddto'
+          examples: {}
+      x-unitTests: []
+      x-operation-settings:
+        CollectParameters: false
+        AllowDynamicQueryParameters: false
+        AllowDynamicFormParameters: false
+        IsMultiContentStreaming: false
+  /volume_groups/{uuid}/disks/{index}:
+    delete:
+      description: Delete a Volume Disk
+      summary: deleteVolumeDisk
+      operationId: VolumeGroupsDisksByUuidAndIndexDelete
+      produces:
+      - application/json
+      parameters:
+      - name: uuid
+        in: path
+        required: true
+        type: string
+        description: UUID of the Volume Group
+      - name: index
+        in: path
+        required: true
+        type: integer
+        format: int32
+        description: Volume Group index of the disk
+      - name: logical_timestamp
+        in: query
+        required: false
+        type: integer
+        format: int32
+        description: The logical timestamp
+      responses:
+        200:
+          description: ''
+          schema:
+            $ref: '#/definitions/Delete.dto.acropolis.returnvaluedto$taskiddto'
+          examples: {}
+      x-unitTests: []
+      x-operation-settings:
+        CollectParameters: false
+        AllowDynamicQueryParameters: false
+        AllowDynamicFormParameters: false
+        IsMultiContentStreaming: false
+  /volume_groups/{uuid}/open:
+    post:
+      description: Open Volume Group for iSCSI initiators
+      summary: openVolumeGroup
+      operationId: VolumeGroupsOpenByUuidPost
+      produces:
+      - application/json
+      parameters:
+      - name: uuid
+        in: path
+        required: true
+        type: string
+        description: UUID of the Volume Group
+      - name: body
+        in: body
+        required: true
+        description: Volume Group attach configuration
+        schema:
+          $ref: '#/definitions/Create.dto.acropolis.volumegroups.volumegroupattachexternaldto'
+      responses:
+        200:
+          description: ''
+          schema:
+            $ref: '#/definitions/Create.dto.primitivedto&lt;java.lang.boolean&gt;'
+          examples: {}
+      x-unitTests: []
+      x-operation-settings:
+        CollectParameters: false
+        AllowDynamicQueryParameters: false
+        AllowDynamicFormParameters: false
+        IsMultiContentStreaming: false
+  /volume_groups/{uuid}/stats/:
+    get:
+      description: Get the stats for a specified VolumeGroup.
+      summary: getVolumeGroupStats
+      operationId: VolumeGroupsStatsByUuidGet
+      produces:
+      - application/json
+      parameters:
+      - name: uuid
+        in: path
+        required: true
+        type: string
+        description: Uuid of the VolumeGroup
+      - name: metrics
+        in: query
+        required: true
+        type: array
+        uniqueItems: false
+        items:
+          type: string
+        description: List of metrics
+      - name: start_time_usecs
+        in: query
+        required: false
+        type: integer
+        format: int32
+        description: Start time in microseconds
+      - name: end_time_usecs
+        in: query
+        required: false
+        type: integer
+        format: int32
+        description: End time in microseconds
+      - name: interval_in_secs
+        in: query
+        required: false
+        type: integer
+        format: int32
+        description: Sampling interval of stats
+      responses:
+        200:
+          description: ''
+          schema:
+            $ref: '#/definitions/Get.base.statsresponse'
+          examples: {}
+        default:
+          description: Any internal exception while performing this operation
+          schema: {}
+      x-unitTests: []
+      x-operation-settings:
+        CollectParameters: false
+        AllowDynamicQueryParameters: false
+        AllowDynamicFormParameters: false
+        IsMultiContentStreaming: false
+definitions:
+  Create.dto.primitivedto&lt;java.lang.boolean&gt;:
+    title: create.dto.PrimitiveDTO&lt;java.lang.Boolean&gt;
+    type: object
+    properties:
+      value:
+        description: ''
+        type: boolean
+  Create.dto.acropolis.returnvaluedto$taskiddto:
+    title: create.dto.acropolis.ReturnValueDTO$TaskIdDTO
+    type: object
+    properties:
+      task_uuid:
+        description: UUID of the task.
+        type: string
+  DeviceBus:
+    title: device_bus
+    example: SCSI
+    x-enum-elements:
+    - name: SCSI
+      description: ''
+    - name: IDE
+      description: ''
+    - name: PCI
+      description: ''
+    - name: SATA
+      description: ''
+    - name: SPAPR
+      description: ''
+    type: string
+    enum:
+    - SCSI
+    - IDE
+    - PCI
+    - SATA
+    - SPAPR
+  Create.dto.acropolis.vmdiskaddressdto:
+    title: create.dto.acropolis.VMDiskAddressDTO
+    type: object
+    properties:
+      device_bus:
+        $ref: '#/definitions/DeviceBus'
+      device_index:
+        description: Index of the device on the adapter type. If left unspecified, the system will allocate the next available slot on the default bus.
+        type: integer
+        format: int32
+      ndfs_filepath:
+        description: NDFS path to existing virtual disk. This field will not be set when this message is used in a create mode.When specifying a vmdisk address, then only one of the following combinations of fields must be set - (device_bus, device_index) or vmdisk_uuid or ndfs_filepath.
+        type: string
+      vmdisk_uuid:
+        description: Virtual disk identifier. This field will not be set when this message is used in a create mode. When specifying a vmdisk address, then only one of the following combinations of fields must be set - (device_bus, device_index) or vmdisk_uuid or ndfs_filepath.
+        type: string
+      volume_group_uuid:
+        description: ''
+        type: string
+  AuthType:
+    title: auth_type
+    example: CHAP
+    x-enum-elements:
+    - name: CHAP
+      description: ''
+    - name: NONE
+      description: ''
+    type: string
+    enum:
+    - CHAP
+    - NONE
+  Create.dto.acropolis.volumegroups.clientauthenticationdto:
+    title: create.dto.acropolis.volumegroups.ClientAuthenticationDTO
+    type: object
+    properties:
+      auth_type:
+        $ref: '#/definitions/AuthType'
+      password:
+        description: Password of the supported authentication type
+        type: string
+  Create.dto.acropolis.volumegroups.iscsiclientdto:
+    title: create.dto.acropolis.volumegroups.IscsiClientDTO
+    type: object
+    properties:
+      client_address:
+        description: Unique identifier for the client, it can be either iqn or ip address
+        type: string
+      enabled_authentications:
+        description: List of supported authentication types
+        type: array
+        items:
+          $ref: '#/definitions/Create.dto.acropolis.volumegroups.clientauthenticationdto'
+      uuid:
+        description: Uuid of the iscsi client
+        type: string
+    required:
+    - client_address
+  Create.dto.acropolis.volumegroups.volumediskcreatespecdto:
+    title: create.dto.acropolis.volumegroups.VolumeDiskCreateSpecDTO
+    type: object
+    properties:
+      clone_config:
+        $ref: '#/definitions/Create.dto.uhura.vmdiskclonedto'
+      create_config:
+        $ref: '#/definitions/Create.dto.uhura.vmdiskcreatedto'
+      index:
+        description: Volume Group index of the disk
+        type: integer
+        format: int32
+      volume_group_uuid:
+        description: ''
+        type: string
+  Operation:
+    title: operation
+    example: ATTACH
+    x-enum-elements:
+    - name: ATTACH
+      description: ''
+    - name: DETACH
+      description: ''
+    type: string
+    enum:
+    - ATTACH
+    - DETACH
+  Create.dto.acropolis.volumegroups.volumegroupattachexternaldto:
+    title: create.dto.acropolis.volumegroups.VolumeGroupAttachExternalDTO
+    type: object
+    properties:
+      iscsi_client:
+        $ref: '#/definitions/Create.dto.acropolis.volumegroups.iscsiclientdto'
+      iscsi_client_ip:
+        description: iSCSI client ip address
+        type: string
+      logical_timestamp:
+        description: The logical timestamp
+        type: integer
+        format: int64
+      operation:
+        $ref: '#/definitions/Operation'
+      uuid:
+        description: ''
+        type: string
+  Create.dto.acropolis.volumegroups.volumegroupattachvmdto:
+    title: create.dto.acropolis.volumegroups.VolumeGroupAttachVmDTO
+    type: object
+    properties:
+      vm_uuid:
+        description: Virtual machine UUID
+        type: string
+      index:
+        description: Volume Group index of the disk
+        type: integer
+        format: int32
+      logical_timestamp:
+        description: The volume group logical timestamp
+        type: integer
+        format: int64
+      operation:
+        $ref: '#/definitions/Operation'
+      uuid:
+        description: ''
+        type: string
+      vm_logical_timestamp:
+        description: The virtual machine logical timestamp
+        type: integer
+        format: int64
+    required:
+    - vm_uuid
+  Create.dto.acropolis.volumegroups.volumegroupclonedto:
+    title: create.dto.acropolis.volumegroups.VolumeGroupCloneDTO
+    type: object
+    properties:
+      enabled_authentications:
+        description: List of supported authentication types
+        type: array
+        items:
+          $ref: '#/definitions/Create.dto.acropolis.volumegroups.clientauthenticationdto'
+      iscsi_target:
+        description: iSCSI target name for the clone (optional)
+        type: string
+      iscsi_target_prefix:
+        description: iSCSI target prefix for the clone (optional)
+        type: string
+      logical_timestamp:
+        description: The logical timestamp
+        type: integer
+        format: int64
+      name:
+        description: Name of the clone (optional)
+        type: string
+      uuid:
+        description: UUID of the cloned Volume Group (optional)
+        type: string
+  Create.dto.acropolis.volumegroups.volumegroupcreatedto:
+    title: create.dto.acropolis.volumegroups.VolumeGroupCreateDTO
+    type: object
+    properties:
+      name:
+        description: Volume Group name
+        type: string
+      attached_clients:
+        description: List of the attached clients
+        type: array
+        items:
+          $ref: '#/definitions/Create.dto.acropolis.volumegroups.iscsiclientdto'
+      description:
+        description: Volume Group description
+        type: string
+      disk_list:
+        description: Volume Group disk specification
+        type: array
+        items:
+          $ref: '#/definitions/Create.dto.acropolis.volumegroups.volumediskcreatespecdto'
+      enabled_authentications:
+        description: List of supported authentication types
+        type: array
+        items:
+          $ref: '#/definitions/Create.dto.acropolis.volumegroups.clientauthenticationdto'
+      flash_mode_enabled:
+        description: Flash mode enabled or not for the volume group
+        type: boolean
+      is_shared:
+        description: True or false indicating whether volume is shared across multiple iSCSI initiators
+        type: boolean
+      iscsi_target:
+        description: iSCSI target name
+        type: string
+      iscsi_target_prefix:
+        description: iSCSI target prefix name
+        type: string
+      uuid:
+        description: Volume Group UUID (optional)
+        type: string
+    required:
+    - name
+  Create.dto.uhura.vmdiskclonedto:
+    title: create.dto.uhura.VmDiskCloneDTO
+    type: object
+    properties:
+      disk_address:
+        $ref: '#/definitions/Create.dto.acropolis.vmdiskaddressdto'
+      minimum_size:
+        description: The minimum size of the resulting clone in bytes. This should only be specified if 'vmdisk_uuid' is specified.
+        type: integer
+        format: int64
+      snapshot_group_uuid:
+        description: UUID of the snapshot consistency group from which to clone a snapshot vmdisk.
+        type: string
+      storage_container_uuid:
+        description: The Uuid of the storage container in which the specified image or vmdisk is stored. If the source is a vmdisk, this field is recommended, but optional. If the source is a snapshot vmdisk, this field is required. If the source is an absolute image path, this field is prohibited. If the source is a relative image path, this field is required.
+        type: string
+    required:
+    - disk_address
+  Create.dto.uhura.vmdiskcreatedto:
+    title: create.dto.uhura.VmDiskCreateDTO
+    type: object
+    properties:
+      size:
+        description: Size of the Virtual Machine disk to be created in bytes.
+        type: integer
+        format: int64
+      storage_container_uuid:
+        description: UUID of container to create disk in. If this is specified, then Container Name and ID should not be specified.
+        type: string
+  Delete.dto.acropolis.returnvaluedto$taskiddto:
+    title: delete.dto.acropolis.ReturnValueDTO$TaskIdDTO
+    type: object
+    properties:
+      task_uuid:
+        description: UUID of the task.
+        type: string
+  Get.base.entitycollection&lt;get.dto.acropolis.volumegroups.volumegroupconfigdto&gt;:
+    title: get.base.EntityCollection&lt;get.dto.acropolis.volumegroups.VolumeGroupConfigDTO&gt;
+    type: object
+    properties:
+      entities:
+        description: ''
+        type: array
+        items:
+          $ref: '#/definitions/Get.dto.acropolis.volumegroups.volumegroupconfigdto'
+      error_info:
+        $ref: '#/definitions/Get.base.errorinfo'
+      metadata:
+        $ref: '#/definitions/Get.base.metadata'
+  Get.base.errorinfo:
+    title: get.base.ErrorInfo
+    type: object
+    properties:
+      count:
+        description: ''
+        type: integer
+        format: int64
+      entity_list:
+        description: ''
+        type: array
+        items:
+          type: string
+      message:
+        description: ''
+        type: string
+  Get.base.metadata:
+    title: get.base.Metadata
+    type: object
+    properties:
+      count:
+        description: ''
+        type: integer
+        format: int32
+      end_index:
+        description: ''
+        type: integer
+        format: int32
+      filter_criteria:
+        description: ''
+        type: string
+      grand_total_entities:
+        description: ''
+        type: integer
+        format: int32
+      next_cursor:
+        description: ''
+        type: string
+      page:
+        description: ''
+        type: integer
+        format: int32
+      previous_cursor:
+        description: ''
+        type: string
+      search_string:
+        description: ''
+        type: string
+      sort_criteria:
+        description: ''
+        type: string
+      start_index:
+        description: ''
+        type: integer
+        format: int32
+      total_entities:
+        description: ''
+        type: integer
+        format: int32
+  Get.base.statsresponse:
+    title: get.base.StatsResponse
+    type: object
+    properties:
+      stats_specific_responses:
+        description: ''
+        type: array
+        items:
+          $ref: '#/definitions/Get.base.statsresponse$statsspecificresponse'
+  Get.base.statsresponse$statsspecificresponse:
+    title: get.base.StatsResponse$StatsSpecificResponse
+    type: object
+    properties:
+      interval_in_secs:
+        description: ''
+        type: integer
+        format: int64
+      message:
+        description: ''
+        type: string
+      metric:
+        description: ''
+        type: string
+      start_time_in_usecs:
+        description: ''
+        type: integer
+        format: int64
+      successful:
+        description: ''
+        type: boolean
+      values:
+        description: ''
+        type: array
+        items:
+          type: integer
+          format: int32
+  Get.dto.acropolis.volumegroups.clientauthenticationdto:
+    title: get.dto.acropolis.volumegroups.ClientAuthenticationDTO
+    type: object
+    properties:
+      auth_type:
+        $ref: '#/definitions/AuthType'
+      password:
+        description: Password of the supported authentication type
+        type: string
+  Get.dto.acropolis.volumegroups.volumeattachmentdto:
+    title: get.dto.acropolis.volumegroups.VolumeAttachmentDTO
+    type: object
+    properties:
+      client_uuid:
+        description: UUID of the iscsi client
+        type: string
+      enabled_authentications:
+        description: List of enabled authentications for the client
+        type: array
+        items:
+          $ref: '#/definitions/Get.dto.acropolis.volumegroups.clientauthenticationdto'
+      initiator_ip_address:
+        description: Ip of the iscsi initiator
+        type: string
+      iscsi_initiator_name:
+        description: Name of the iSCSI initiator
+        type: string
+      vm_uuid:
+        description: UUID of VM to which this volume is attached
+        type: string
+  Get.dto.acropolis.volumegroups.volumediskconfigdto:
+    title: get.dto.acropolis.volumegroups.VolumeDiskConfigDTO
+    type: object
+    properties:
+      flash_mode_enabled:
+        description: Flash mode enabled or not for the disk
+        type: boolean
+      index:
+        description: Volume Group index of the disk
+        type: integer
+        format: int32
+      storage_container_id:
+        description: Storage Container ID of the volume where the disk resides
+        type: integer
+        format: int64
+      storage_container_uuid:
+        description: Storage Container UUID of the volume where the disk resides
+        type: string
+      vmdisk_size_bytes:
+        description: Disk size in Bytes
+        type: integer
+        format: int64
+      vmdisk_size_mb:
+        description: Disk size in MiB
+        type: integer
+        format: int64
+      vmdisk_uuid:
+        description: UUID of the volume disk
+        type: string
+  Get.dto.acropolis.volumegroups.volumegroupconfigdto:
+    title: get.dto.acropolis.volumegroups.VolumeGroupConfigDTO
+    type: object
+    properties:
+      attachment_list:
+        description: Currently attached iSCSI initiators
+        type: array
+        items:
+          $ref: '#/definitions/Get.dto.acropolis.volumegroups.volumeattachmentdto'
+      description:
+        description: Volume group description
+        type: string
+      disk_list:
+        description: Ordered list of volume diskSpec
+        type: array
+        items:
+          $ref: '#/definitions/Get.dto.acropolis.volumegroups.volumediskconfigdto'
+      enabled_authentications:
+        description: List of supported authentication types
+        type: array
+        items:
+          $ref: '#/definitions/Get.dto.acropolis.volumegroups.clientauthenticationdto'
+      flash_mode_enabled:
+        description: Flash mode enabled or not for the volume group
+        type: boolean
+      is_deleted:
+        description: Whether the volume has been deleted
+        type: boolean
+      is_shared:
+        description: Whether or not this volume can be shared
+        type: boolean
+      iscsi_target:
+        description: iSCSI target name for attachment
+        type: string
+      last_modified_timestamp_usecs:
+        description: Volume group last modified timestamp
+        type: integer
+        format: int64
+      logical_timestamp:
+        description: Volume group logical timestamp
+        type: integer
+        format: int64
+      name:
+        description: Volume group name
+        type: string
+      uuid:
+        description: Volume group UUID
+        type: string
+  Update.dto.acropolis.vmdiskaddressdto:
+    title: update.dto.acropolis.VMDiskAddressDTO
+    type: object
+    properties:
+      device_bus:
+        $ref: '#/definitions/DeviceBus'
+      device_index:
+        description: Index of the device on the adapter type. If left unspecified, the system will allocate the next available slot on the default bus.
+        type: integer
+        format: int32
+      ndfs_filepath:
+        description: NDFS path to existing virtual disk. This field will not be set when this message is used in a create mode.When specifying a vmdisk address, then only one of the following combinations of fields must be set - (device_bus, device_index) or vmdisk_uuid or ndfs_filepath.
+        type: string
+      vmdisk_uuid:
+        description: Virtual disk identifier. This field will not be set when this message is used in a create mode. When specifying a vmdisk address, then only one of the following combinations of fields must be set - (device_bus, device_index) or vmdisk_uuid or ndfs_filepath.
+        type: string
+      volume_group_uuid:
+        description: ''
+        type: string
+  Update.dto.acropolis.volumegroups.clientauthenticationdto:
+    title: update.dto.acropolis.volumegroups.ClientAuthenticationDTO
+    type: object
+    properties:
+      auth_type:
+        $ref: '#/definitions/AuthType'
+      password:
+        description: Password of the supported authentication type
+        type: string
+  Update.dto.acropolis.volumegroups.iscsiclientdto:
+    title: update.dto.acropolis.volumegroups.IscsiClientDTO
+    type: object
+    properties:
+      client_address:
+        description: Unique identifier for the client, it can be either iqn or ip address
+        type: string
+      enabled_authentications:
+        description: List of supported authentication types
+        type: array
+        items:
+          $ref: '#/definitions/Update.dto.acropolis.volumegroups.clientauthenticationdto'
+      uuid:
+        description: Uuid of the iscsi client
+        type: string
+    required:
+    - client_address
+  Update.dto.acropolis.volumegroups.volumediskconfigdto:
+    title: update.dto.acropolis.volumegroups.VolumeDiskConfigDTO
+    type: object
+    properties:
+      flash_mode_enabled:
+        description: Flash mode enabled or not for the disk
+        type: boolean
+  Update.dto.acropolis.volumegroups.volumediskupdatedto:
+    title: update.dto.acropolis.volumegroups.VolumeDiskUpdateDTO
+    type: object
+    properties:
+      index:
+        description: Volume Group index of the disk
+        type: integer
+        format: int32
+      clone:
+        $ref: '#/definitions/Update.dto.uhura.vmdiskclonedto'
+      flash_mode_enabled:
+        description: Flash mode enabled or not for the volume
+        type: boolean
+      upgrade_spec:
+        $ref: '#/definitions/Update.dto.acropolis.volumegroups.volumediskupdatedto$upgradespec'
+      volume_group_uuid:
+        description: ''
+        type: string
+    required:
+    - index
+  Update.dto.acropolis.volumegroups.volumediskupdatedto$upgradespec:
+    title: update.dto.acropolis.volumegroups.VolumeDiskUpdateDTO$UpgradeSpec
+    type: object
+    properties:
+      preserve_data:
+        description: When set to true, re-size disk in place. Else, create a new disk by cloning from other disks or providing creation spec. True by default.
+        type: boolean
+      size:
+        description: Disk size in Bytes
+        type: integer
+        format: int64
+      size_mb:
+        description: Disk size in MiB
+        type: integer
+        format: int64
+      storage_container_uuid:
+        description: Re-creates the empty disk on specified container. Is mutually exclusive with the preserveData flag.
+        type: string
+  Update.dto.acropolis.volumegroups.volumegroupconfigdto:
+    title: update.dto.acropolis.volumegroups.VolumeGroupConfigDTO
+    type: object
+    properties:
+      enabled_authentications:
+        description: List of supported authentication types
+        type: array
+        items:
+          $ref: '#/definitions/Update.dto.acropolis.volumegroups.clientauthenticationdto'
+      flash_mode_enabled:
+        description: Flash mode enabled or not for the volume group
+        type: boolean
+  Update.dto.acropolis.volumegroups.volumegroupupdatedto:
+    title: update.dto.acropolis.volumegroups.VolumeGroupUpdateDTO
+    type: object
+    properties:
+      attached_clients:
+        description: List of the attached clients
+        type: array
+        items:
+          $ref: '#/definitions/Update.dto.acropolis.volumegroups.iscsiclientdto'
+      description:
+        description: Volume Group description
+        type: string
+      enabled_authentications:
+        description: List of supported authentication types
+        type: array
+        items:
+          $ref: '#/definitions/Update.dto.acropolis.volumegroups.clientauthenticationdto'
+      flash_mode_enabled:
+        description: Flash mode enabled or not for the volume group
+        type: boolean
+      is_shared:
+        description: True or false indicating whether volume is shared across multiple iSCSI initiators
+        type: boolean
+      iscsi_target:
+        description: iSCSI target name
+        type: string
+      iscsi_target_prefix:
+        description: iSCSI target prefix
+        type: string
+      logical_timestamp:
+        description: The logical timestamp
+        type: integer
+        format: int64
+      name:
+        description: Volume Group name
+        type: string
+      uuid:
+        description: ''
+        type: string
+  Update.dto.uhura.vmdiskclonedto:
+    title: update.dto.uhura.VmDiskCloneDTO
+    type: object
+    properties:
+      disk_address:
+        $ref: '#/definitions/Update.dto.acropolis.vmdiskaddressdto'
+      minimum_size:
+        description: The minimum size of the resulting clone in bytes. This should only be specified if 'vmdisk_uuid' is specified.
+        type: integer
+        format: int64
+      snapshot_group_uuid:
+        description: UUID of the snapshot consistency group from which to clone a snapshot vmdisk.
+        type: string
+      storage_container_uuid:
+        description: The Uuid of the storage container in which the specified image or vmdisk is stored. If the source is a vmdisk, this field is recommended, but optional. If the source is a snapshot vmdisk, this field is required. If the source is an absolute image path, this field is prohibited. If the source is a relative image path, this field is required.
+        type: string

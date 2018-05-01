@@ -1,0 +1,2998 @@
+{
+    "apiVersion": "v2.0",
+    "swaggerVersion": "1.2",
+    "basePath": "https://any_cvm_ip:9440/PrismGateway/services/rest/v2.0",
+    "resourcePath": "/storage_containers",
+    "produces": [
+        "application/json"
+    ],
+    "consumes": [
+        "application/json"
+    ],
+    "apis": [
+        {
+            "internal": false,
+            "path": "/storage_containers/",
+            "operations": [
+                {
+                    "deprecated": "false",
+                    "internal": false,
+                    "method": "GET",
+                    "summary": "Get the list of Storage Containers.",
+                    "notes": "Get the list of Storage Containers configured in the cluster.",
+                    "type": "get.base.EntityCollection&lt;get.dto.appliance.configuration.ContainerDTO&gt;",
+                    "nickname": "getContainers",
+                    "parameters": [
+                        {
+                            "name": "count",
+                            "description": "Number of Storage Containers to retrieve",
+                            "required": false,
+                            "allowMultiple": false,
+                            "paramType": "query",
+                            "type": "integer"
+                        },
+                        {
+                            "name": "filter_criteria",
+                            "description": "Filter criteria",
+                            "required": false,
+                            "allowMultiple": false,
+                            "paramType": "query",
+                            "type": "string"
+                        },
+                        {
+                            "name": "sort_criteria",
+                            "description": "Sort criteria",
+                            "required": false,
+                            "allowMultiple": false,
+                            "paramType": "query",
+                            "type": "string"
+                        },
+                        {
+                            "name": "search_string",
+                            "description": "Search string",
+                            "required": false,
+                            "allowMultiple": false,
+                            "paramType": "query",
+                            "type": "string"
+                        },
+                        {
+                            "name": "search_attribute_list",
+                            "description": "Search attribute list",
+                            "required": false,
+                            "allowMultiple": false,
+                            "paramType": "query",
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        {
+                            "name": "page",
+                            "description": "Page number",
+                            "required": false,
+                            "allowMultiple": false,
+                            "paramType": "query",
+                            "type": "integer"
+                        },
+                        {
+                            "name": "projection",
+                            "description": "Projections on the attributes",
+                            "required": false,
+                            "allowMultiple": false,
+                            "paramType": "query",
+                            "type": "string"
+                        }
+                    ],
+                    "responseMessages": []
+                },
+                {
+                    "deprecated": "false",
+                    "internal": false,
+                    "method": "PATCH",
+                    "summary": "Modify a Storage Container.",
+                    "notes": "Modify the specified Storage Container.",
+                    "type": "patch.dto.PrimitiveDTO&lt;java.lang.Boolean&gt;",
+                    "nickname": "patchContainer",
+                    "parameters": [
+                        {
+                            "description": "A Storage Container instance",
+                            "required": true,
+                            "allowMultiple": false,
+                            "paramType": "body",
+                            "type": "patch.dto.RequestDTO&lt;patch.dto.appliance.configuration.ContainerDTO&gt;"
+                        }
+                    ],
+                    "responseMessages": []
+                },
+                {
+                    "deprecated": "false",
+                    "internal": false,
+                    "method": "POST",
+                    "summary": "Add a Storage Container.",
+                    "notes": "Add a Storage Container to the cluster.",
+                    "type": "create.dto.PrimitiveDTO&lt;java.lang.Boolean&gt;",
+                    "nickname": "addContainer",
+                    "parameters": [
+                        {
+                            "description": "A Storage Container instance",
+                            "required": true,
+                            "allowMultiple": false,
+                            "paramType": "body",
+                            "type": "create.dto.appliance.configuration.ContainerDTO"
+                        }
+                    ],
+                    "responseMessages": []
+                },
+                {
+                    "deprecated": "false",
+                    "internal": false,
+                    "method": "PUT",
+                    "summary": "Update a Storage Container.",
+                    "notes": "Update the specified Storage Container.",
+                    "type": "update.dto.PrimitiveDTO&lt;java.lang.Boolean&gt;",
+                    "nickname": "editContainer",
+                    "parameters": [
+                        {
+                            "description": "A Storage Container instance",
+                            "required": true,
+                            "allowMultiple": false,
+                            "paramType": "body",
+                            "type": "update.dto.appliance.configuration.ContainerDTO"
+                        }
+                    ],
+                    "responseMessages": []
+                }
+            ]
+        },
+        {
+            "internal": false,
+            "path": "/storage_containers/alerts",
+            "operations": [
+                {
+                    "deprecated": "true",
+                    "internal": false,
+                    "method": "GET",
+                    "summary": "Get the list of alerts generated on any Storage Container.",
+                    "notes": "",
+                    "type": "get.base.EntityCollection&lt;get.dto.alerts.AlertDTO&gt;",
+                    "nickname": "getContainerAlerts",
+                    "parameters": [
+                        {
+                            "name": "start_time_in_usecs",
+                            "description": "Start time in microseconds",
+                            "required": false,
+                            "allowMultiple": false,
+                            "paramType": "query",
+                            "type": "integer"
+                        },
+                        {
+                            "name": "end_time_in_usecs",
+                            "description": "End time in microseconds",
+                            "required": false,
+                            "allowMultiple": false,
+                            "paramType": "query",
+                            "type": "integer"
+                        },
+                        {
+                            "name": "count",
+                            "description": "Maximum number of alerts",
+                            "required": false,
+                            "allowMultiple": false,
+                            "paramType": "query",
+                            "type": "integer"
+                        },
+                        {
+                            "name": "resolved",
+                            "description": "Alerts which have been resolved",
+                            "required": false,
+                            "allowMultiple": false,
+                            "paramType": "query",
+                            "type": "boolean"
+                        },
+                        {
+                            "name": "acknowledged",
+                            "description": "Alerts which have been acknowledged",
+                            "required": false,
+                            "allowMultiple": false,
+                            "paramType": "query",
+                            "type": "boolean"
+                        },
+                        {
+                            "name": "severity",
+                            "description": "Alert severities",
+                            "required": false,
+                            "allowMultiple": false,
+                            "paramType": "query",
+                            "type": "string"
+                        },
+                        {
+                            "name": "alert_type_uuid",
+                            "description": "Alert type ids",
+                            "required": false,
+                            "allowMultiple": false,
+                            "paramType": "query",
+                            "type": "string"
+                        },
+                        {
+                            "name": "page",
+                            "description": "Page number",
+                            "required": false,
+                            "allowMultiple": false,
+                            "paramType": "query",
+                            "type": "integer"
+                        }
+                    ],
+                    "responseMessages": []
+                }
+            ]
+        },
+        {
+            "internal": false,
+            "path": "/storage_containers/datastores",
+            "operations": [
+                {
+                    "deprecated": "false",
+                    "internal": false,
+                    "method": "GET",
+                    "summary": "Get the list of NFS Datastores.",
+                    "notes": "Get the list of NFS Datastores mounted using Storage Containers in the cluster.",
+                    "type": "array",
+                    "items": {
+                        "$ref": "get.dto.esx.NfsDatastoreInfoDTO"
+                    },
+                    "nickname": "getNfsDatastores",
+                    "parameters": [],
+                    "responseMessages": []
+                }
+            ]
+        },
+        {
+            "internal": false,
+            "path": "/storage_containers/datastores/add_datastore",
+            "operations": [
+                {
+                    "deprecated": "false",
+                    "internal": false,
+                    "method": "POST",
+                    "summary": "Add an NFS Datastore.",
+                    "notes": "Add an NFS Datastore.",
+                    "type": "create.dto.esx.CreateNfsDatastoreStatusDTO",
+                    "nickname": "createNfsDatastores",
+                    "parameters": [
+                        {
+                            "description": "Add request",
+                            "required": true,
+                            "allowMultiple": false,
+                            "paramType": "body",
+                            "type": "create.dto.esx.CreateNfsDatastoreRequestDTO"
+                        }
+                    ],
+                    "responseMessages": []
+                }
+            ]
+        },
+        {
+            "internal": false,
+            "path": "/storage_containers/datastores/remove_datastore",
+            "operations": [
+                {
+                    "deprecated": "false",
+                    "internal": false,
+                    "method": "POST",
+                    "summary": "Remove an NFS Datastore.",
+                    "notes": "Remove an NFS Datastore.",
+                    "type": "create.dto.esx.DeleteNfsDatastoreStatusDTO",
+                    "nickname": "deleteNfsDatastores",
+                    "parameters": [
+                        {
+                            "description": "Remove request",
+                            "required": true,
+                            "allowMultiple": false,
+                            "paramType": "body",
+                            "type": "create.dto.esx.DeleteNfsDatastoreRequestDTO"
+                        }
+                    ],
+                    "responseMessages": []
+                }
+            ]
+        },
+        {
+            "internal": false,
+            "path": "/storage_containers/events",
+            "operations": [
+                {
+                    "deprecated": "true",
+                    "internal": false,
+                    "method": "GET",
+                    "summary": "Get the list of events generated on any Storage Container.",
+                    "notes": "",
+                    "type": "get.base.EntityCollection&lt;get.dto.alerts.AlertDTO&gt;",
+                    "nickname": "getContainerEvents",
+                    "parameters": [
+                        {
+                            "name": "start_time_in_usecs",
+                            "description": "Start time in microseconds",
+                            "required": false,
+                            "allowMultiple": false,
+                            "paramType": "query",
+                            "type": "integer"
+                        },
+                        {
+                            "name": "end_time_in_usecs",
+                            "description": "End time in microseconds",
+                            "required": false,
+                            "allowMultiple": false,
+                            "paramType": "query",
+                            "type": "integer"
+                        },
+                        {
+                            "name": "count",
+                            "description": "Maximum number of events",
+                            "required": false,
+                            "allowMultiple": false,
+                            "paramType": "query",
+                            "type": "integer"
+                        },
+                        {
+                            "name": "acknowledged",
+                            "description": "Events which have been acknowledged",
+                            "required": false,
+                            "allowMultiple": false,
+                            "paramType": "query",
+                            "type": "boolean"
+                        },
+                        {
+                            "name": "page",
+                            "description": "Page number",
+                            "required": false,
+                            "allowMultiple": false,
+                            "paramType": "query",
+                            "type": "integer"
+                        }
+                    ],
+                    "responseMessages": []
+                }
+            ]
+        },
+        {
+            "internal": false,
+            "path": "/storage_containers/{uuid}",
+            "operations": [
+                {
+                    "deprecated": "false",
+                    "internal": false,
+                    "method": "DELETE",
+                    "summary": "Delete a Storage Container.",
+                    "notes": "Delete a Storage Container with the specified uuid from the cluster.",
+                    "type": "delete.dto.PrimitiveDTO&lt;java.lang.Boolean&gt;",
+                    "nickname": "deleteContainer",
+                    "parameters": [
+                        {
+                            "name": "uuid",
+                            "description": "Uuid of the Storage Container",
+                            "required": true,
+                            "allowMultiple": false,
+                            "paramType": "path",
+                            "type": "string"
+                        },
+                        {
+                            "name": "ignore_small_files",
+                            "description": "Ignore small file",
+                            "required": false,
+                            "allowMultiple": false,
+                            "paramType": "query",
+                            "type": "boolean"
+                        }
+                    ],
+                    "responseMessages": []
+                },
+                {
+                    "deprecated": "false",
+                    "internal": false,
+                    "method": "GET",
+                    "summary": "Get a Storage Container.",
+                    "notes": "Get a Storage Container with the specified uuid.",
+                    "type": "get.dto.appliance.configuration.ContainerDTO",
+                    "nickname": "getContainer",
+                    "parameters": [
+                        {
+                            "name": "uuid",
+                            "description": "Uuid of the Storage Container",
+                            "required": true,
+                            "allowMultiple": false,
+                            "paramType": "path",
+                            "type": "string"
+                        },
+                        {
+                            "name": "projection",
+                            "description": "Projections on the attributes",
+                            "required": false,
+                            "allowMultiple": false,
+                            "paramType": "query",
+                            "type": "string"
+                        }
+                    ],
+                    "responseMessages": []
+                }
+            ]
+        },
+        {
+            "internal": false,
+            "path": "/storage_containers/{uuid}/alerts",
+            "operations": [
+                {
+                    "deprecated": "true",
+                    "internal": false,
+                    "method": "GET",
+                    "summary": "Get the list of alerts generated on a specified Storage Container.",
+                    "notes": "",
+                    "type": "get.base.EntityCollection&lt;get.dto.alerts.AlertDTO&gt;",
+                    "nickname": "getAlertsForContainer",
+                    "parameters": [
+                        {
+                            "name": "uuid",
+                            "description": "Uuid of a Storage Container",
+                            "required": true,
+                            "allowMultiple": false,
+                            "paramType": "path",
+                            "type": "string"
+                        },
+                        {
+                            "name": "start_time_in_usecs",
+                            "description": "Start time in microseconds",
+                            "required": false,
+                            "allowMultiple": false,
+                            "paramType": "query",
+                            "type": "integer"
+                        },
+                        {
+                            "name": "end_time_in_usecs",
+                            "description": "End time in microseconds",
+                            "required": false,
+                            "allowMultiple": false,
+                            "paramType": "query",
+                            "type": "integer"
+                        },
+                        {
+                            "name": "count",
+                            "description": "Maximum number of alerts",
+                            "required": false,
+                            "allowMultiple": false,
+                            "paramType": "query",
+                            "type": "integer"
+                        },
+                        {
+                            "name": "resolved",
+                            "description": "Alerts which have been resolved",
+                            "required": false,
+                            "allowMultiple": false,
+                            "paramType": "query",
+                            "type": "boolean"
+                        },
+                        {
+                            "name": "acknowledged",
+                            "description": "Alerts which have been acknowledged",
+                            "required": false,
+                            "allowMultiple": false,
+                            "paramType": "query",
+                            "type": "boolean"
+                        },
+                        {
+                            "name": "severity",
+                            "description": "Alert severities",
+                            "required": false,
+                            "allowMultiple": false,
+                            "paramType": "query",
+                            "type": "string"
+                        },
+                        {
+                            "name": "alert_type_uuid",
+                            "description": "Alert type ids",
+                            "required": false,
+                            "allowMultiple": false,
+                            "paramType": "query",
+                            "type": "string"
+                        },
+                        {
+                            "name": "page",
+                            "description": "Page number",
+                            "required": false,
+                            "allowMultiple": false,
+                            "paramType": "query",
+                            "type": "integer"
+                        }
+                    ],
+                    "responseMessages": []
+                }
+            ]
+        },
+        {
+            "internal": false,
+            "path": "/storage_containers/{uuid}/events",
+            "operations": [
+                {
+                    "deprecated": "true",
+                    "internal": false,
+                    "method": "GET",
+                    "summary": "Get the list of events generated on a specified Container.",
+                    "notes": "",
+                    "type": "get.base.EntityCollection&lt;get.dto.alerts.AlertDTO&gt;",
+                    "nickname": "getEventsForContainer",
+                    "parameters": [
+                        {
+                            "name": "uuid",
+                            "description": "Uuid of a Storage Container",
+                            "required": true,
+                            "allowMultiple": false,
+                            "paramType": "path",
+                            "type": "string"
+                        },
+                        {
+                            "name": "start_time_in_usecs",
+                            "description": "Start time in microseconds",
+                            "required": false,
+                            "allowMultiple": false,
+                            "paramType": "query",
+                            "type": "integer"
+                        },
+                        {
+                            "name": "end_time_in_usecs",
+                            "description": "End time in microseconds",
+                            "required": false,
+                            "allowMultiple": false,
+                            "paramType": "query",
+                            "type": "integer"
+                        },
+                        {
+                            "name": "count",
+                            "description": "Maximum number of events",
+                            "required": false,
+                            "allowMultiple": false,
+                            "paramType": "query",
+                            "type": "integer"
+                        },
+                        {
+                            "name": "acknowledged",
+                            "description": "Events which have been acknowledged",
+                            "required": false,
+                            "allowMultiple": false,
+                            "paramType": "query",
+                            "type": "boolean"
+                        },
+                        {
+                            "name": "page",
+                            "description": "Page number",
+                            "required": false,
+                            "allowMultiple": false,
+                            "paramType": "query",
+                            "type": "integer"
+                        }
+                    ],
+                    "responseMessages": []
+                }
+            ]
+        },
+        {
+            "internal": false,
+            "path": "/storage_containers/{uuid}/stats/",
+            "operations": [
+                {
+                    "deprecated": "false",
+                    "internal": false,
+                    "method": "GET",
+                    "summary": "Get the stats for a specified Storage Container.",
+                    "notes": "If start time and end time are included in the query string, then historical stats are retrieved. Otherwise, the latest stats are retrieved.",
+                    "type": "get.base.StatsResponse",
+                    "nickname": "getContainerStats",
+                    "parameters": [
+                        {
+                            "name": "uuid",
+                            "description": "Uuid of a Storage Container",
+                            "required": true,
+                            "allowMultiple": false,
+                            "paramType": "path",
+                            "type": "string"
+                        },
+                        {
+                            "name": "metrics",
+                            "description": "List of metrics",
+                            "required": true,
+                            "allowMultiple": false,
+                            "paramType": "query",
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        {
+                            "name": "start_time_in_usecs",
+                            "description": "Start time in microseconds",
+                            "required": false,
+                            "allowMultiple": false,
+                            "paramType": "query",
+                            "type": "integer"
+                        },
+                        {
+                            "name": "end_time_in_usecs",
+                            "description": "End time in microseconds",
+                            "required": false,
+                            "allowMultiple": false,
+                            "paramType": "query",
+                            "type": "integer"
+                        },
+                        {
+                            "name": "interval_in_secs",
+                            "description": "Sampling interval of stats",
+                            "required": false,
+                            "allowMultiple": false,
+                            "paramType": "query",
+                            "type": "integer"
+                        }
+                    ],
+                    "responseMessages": []
+                }
+            ]
+        },
+        {
+            "internal": false,
+            "path": "/storage_containers/{uuid}/vdisks",
+            "operations": [
+                {
+                    "deprecated": "false",
+                    "internal": false,
+                    "method": "GET",
+                    "summary": "Get the list of VDisks.",
+                    "notes": "Get the list of VDisks of the specified Container.",
+                    "type": "get.base.EntityCollection&lt;get.dto.appliance.configuration.VDiskDTO&gt;",
+                    "nickname": "getVDisksInContainer",
+                    "parameters": [
+                        {
+                            "name": "uuid",
+                            "description": "Uuid of a Storage Container",
+                            "required": true,
+                            "allowMultiple": false,
+                            "paramType": "path",
+                            "type": "string"
+                        }
+                    ],
+                    "responseMessages": []
+                }
+            ]
+        }
+    ],
+    "models": {
+        "create.dto.PrimitiveDTO&lt;java.lang.Boolean&gt;": {
+            "id": "create.dto.PrimitiveDTO&lt;java.lang.Boolean&gt;",
+            "required": [],
+            "properties": {
+                "value": {
+                    "type": "boolean"
+                }
+            }
+        },
+        "create.dto.alerts.AlertSummaryDTO": {
+            "id": "create.dto.alerts.AlertSummaryDTO",
+            "required": [],
+            "properties": {
+                "alert_summaries": {
+                    "$ref": "java.util.Map&lt;create.dto.alerts.AlertDTO$AlertSeverity, create.base.EntityCollection&lt;create.dto.alerts.AlertDTO&gt;&gt;"
+                },
+                "count": {
+                    "format": "int64",
+                    "type": "integer"
+                }
+            }
+        },
+        "create.dto.appliance.configuration.ContainerDTO": {
+            "id": "create.dto.appliance.configuration.ContainerDTO",
+            "required": [],
+            "properties": {
+                "advertised_capacity": {
+                    "format": "int64",
+                    "type": "integer"
+                },
+                "alert_summary": {
+                    "$ref": "create.dto.alerts.AlertSummaryDTO"
+                },
+                "compression_delay_in_secs": {
+                    "format": "int32",
+                    "type": "integer"
+                },
+                "compression_enabled": {
+                    "type": "boolean"
+                },
+                "down_migrate_times_in_secs": {
+                    "$ref": "java.util.Map&lt;java.lang.String, java.lang.Integer&gt;"
+                },
+                "enable_software_encryption": {
+                    "type": "boolean"
+                },
+                "erasure_code": {
+                    "type": "string"
+                },
+                "erasure_code_delay_secs": {
+                    "format": "int32",
+                    "type": "integer"
+                },
+                "finger_print_on_write": {
+                    "enum": [
+                        "NONE",
+                        "OFF",
+                        "ON"
+                    ],
+                    "type": "string"
+                },
+                "health_summary": {
+                    "$ref": "create.dto.health.check.HealthSummaryDTO"
+                },
+                "id": {
+                    "type": "string"
+                },
+                "ilm_policy": {
+                    "type": "string"
+                },
+                "is_nutanix_managed": {
+                    "type": "boolean"
+                },
+                "mapped_remote_containers": {
+                    "$ref": "java.util.Map&lt;java.lang.String, java.lang.String&gt;"
+                },
+                "marked_for_removal": {
+                    "type": "boolean"
+                },
+                "max_capacity": {
+                    "format": "int64",
+                    "type": "integer"
+                },
+                "name": {
+                    "type": "string"
+                },
+                "nfs_whitelist": {
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": "array"
+                },
+                "nfs_whitelist_inherited": {
+                    "type": "boolean"
+                },
+                "on_disk_dedup": {
+                    "enum": [
+                        "NONE",
+                        "OFF",
+                        "POST_PROCESS"
+                    ],
+                    "type": "string"
+                },
+                "oplog_replication_factor": {
+                    "format": "int32",
+                    "type": "integer"
+                },
+                "random_io_preference": {
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": "array"
+                },
+                "replication_factor": {
+                    "format": "int32",
+                    "type": "integer"
+                },
+                "seq_io_preference": {
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": "array"
+                },
+                "stats": {
+                    "$ref": "java.util.Map&lt;java.lang.String, java.lang.String&gt;"
+                },
+                "storage_container_uuid": {
+                    "type": "string"
+                },
+                "total_explicit_reserved_capacity": {
+                    "format": "int64",
+                    "type": "integer"
+                },
+                "total_implicit_reserved_capacity": {
+                    "format": "int64",
+                    "type": "integer"
+                },
+                "usage_stats": {
+                    "$ref": "java.util.Map&lt;java.lang.String, java.lang.String&gt;"
+                },
+                "vstore_name_list": {
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": "array"
+                }
+            }
+        },
+        "create.dto.esx.CreateNfsDatastoreRequestDTO": {
+            "id": "create.dto.esx.CreateNfsDatastoreRequestDTO",
+            "required": [],
+            "properties": {
+                "datastore_name": {
+                    "type": "string"
+                },
+                "node_ids": {
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": "array"
+                },
+                "node_uuids": {
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": "array"
+                },
+                "read_only": {
+                    "type": "boolean"
+                },
+                "storage_container_name": {
+                    "type": "string"
+                },
+                "target_path": {
+                    "type": "string"
+                }
+            }
+        },
+        "create.dto.esx.CreateNfsDatastoreStatusDTO": {
+            "id": "create.dto.esx.CreateNfsDatastoreStatusDTO",
+            "required": [],
+            "properties": {
+                "node_specific_status": {
+                    "items": {
+                        "$ref": "create.dto.esx.CreateNfsDatastoreStatusDTO$NodeSpecificCreateStatus"
+                    },
+                    "type": "array"
+                }
+            }
+        },
+        "create.dto.esx.CreateNfsDatastoreStatusDTO$NodeSpecificCreateStatus": {
+            "id": "create.dto.esx.CreateNfsDatastoreStatusDTO$NodeSpecificCreateStatus",
+            "required": [],
+            "properties": {
+                "capacity": {
+                    "format": "int64",
+                    "type": "integer"
+                },
+                "free_space": {
+                    "format": "int64",
+                    "type": "integer"
+                },
+                "message": {
+                    "type": "string"
+                },
+                "node_id": {
+                    "type": "string"
+                },
+                "node_ip_address": {
+                    "type": "string"
+                },
+                "node_uuid": {
+                    "type": "string"
+                },
+                "successful": {
+                    "type": "boolean"
+                }
+            }
+        },
+        "create.dto.esx.DeleteNfsDatastoreRequestDTO": {
+            "id": "create.dto.esx.DeleteNfsDatastoreRequestDTO",
+            "required": [],
+            "properties": {
+                "datastore_name": {
+                    "type": "string"
+                },
+                "node_ids": {
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": "array"
+                },
+                "node_uuids": {
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": "array"
+                }
+            }
+        },
+        "create.dto.esx.DeleteNfsDatastoreStatusDTO": {
+            "id": "create.dto.esx.DeleteNfsDatastoreStatusDTO",
+            "required": [],
+            "properties": {
+                "node_specific_status": {
+                    "items": {
+                        "$ref": "create.dto.esx.DeleteNfsDatastoreStatusDTO$NodeSpecificDeleteStatus"
+                    },
+                    "type": "array"
+                }
+            }
+        },
+        "create.dto.esx.DeleteNfsDatastoreStatusDTO$NodeSpecificDeleteStatus": {
+            "id": "create.dto.esx.DeleteNfsDatastoreStatusDTO$NodeSpecificDeleteStatus",
+            "required": [],
+            "properties": {
+                "message": {
+                    "type": "string"
+                },
+                "node_id": {
+                    "type": "string"
+                },
+                "node_uuid": {
+                    "type": "string"
+                },
+                "successful": {
+                    "type": "boolean"
+                }
+            }
+        },
+        "create.dto.health.check.EntityTypeHealthCheckSummaryDTO": {
+            "id": "create.dto.health.check.EntityTypeHealthCheckSummaryDTO",
+            "required": [],
+            "properties": {
+                "checks_in_error": {
+                    "$ref": "java.util.Map&lt;java.lang.String, create.dto.health.check.HealthCheckErrorsDTO&gt;"
+                },
+                "detailed_check_summary": {
+                    "$ref": "java.util.Map&lt;java.lang.String, java.util.Map&lt;create.dto.health.check.HealthStatus, java.lang.Integer&gt;&gt;"
+                },
+                "entity_type": {
+                    "enum": [
+                        "CLUSTER",
+                        "HARDWARE",
+                        "STORAGE",
+                        "BACKUP",
+                        "DR",
+                        "LICENSE",
+                        "DISK",
+                        "STORAGE_TIER",
+                        "HOST",
+                        "NODE",
+                        "MANAGEMENT_SERVER",
+                        "MANAGEMENT_SERVER_INFO",
+                        "VM",
+                        "SERVICE_VM",
+                        "VDISK",
+                        "VIRTUAL_DISK",
+                        "STORAGE_POOL",
+                        "CONTAINER",
+                        "STORAGE_CONTAINER",
+                        "VZONE",
+                        "SNAPSHOT",
+                        "FAST_CLONE",
+                        "RSYSLOG_SERVER",
+                        "KEY_MANAGEMENT_SERVER",
+                        "CERTIFICATE",
+                        "HTTP_PROXY",
+                        "SNMP_TRAP",
+                        "SNMP_USER",
+                        "REMOTE_SITE",
+                        "CLOUD_CREDENTIALS",
+                        "PROTECTION_DOMAIN",
+                        "CONSISTENCY_GROUP",
+                        "REPLICATION",
+                        "REPLICATION_LINK",
+                        "SYNC_REPLICATION",
+                        "VSTORE",
+                        "NETWORK_SWITCH_INTERFACE",
+                        "NETWORK_SWITCH",
+                        "VIRTUAL_NIC",
+                        "VMKERNEL_NIC",
+                        "HOST_NIC",
+                        "NIC_TEAM",
+                        "VIRTUAL_NETWORK",
+                        "VIRTUAL_SWITCH",
+                        "HOST_GPU",
+                        "VIRTUAL_GPU",
+                        "TAG",
+                        "COMMENT",
+                        "TASK",
+                        "IMAGE",
+                        "IMAGE_INFO",
+                        "ISCSI_CLIENT",
+                        "VOLUME_GROUP",
+                        "VOLUME_DISK",
+                        "VM_DISK",
+                        "FILE_SERVER",
+                        "FS_PARTNER_SERVER",
+                        "CVM",
+                        "NVM",
+                        "FILE_SERVER_SHARE",
+                        "ALERT_CAUSE",
+                        "ALERT_CHECK_SCHEMA",
+                        "ALERT_CHECK_SCHEMA_OVERRIDE",
+                        "INTER_CLUSTER_DATA_TRANSFER_INDICATOR",
+                        "RACKABLE_UNIT",
+                        "DIRECTORY_CONFIG",
+                        "HEALTH_CHECK",
+                        "NETWORK_SNMP_PROFILE",
+                        "ALERT",
+                        "SCHEDULE",
+                        "BANDWIDTH_POLICY",
+                        "FILE_GROUP",
+                        "NETWORK_MAPPING",
+                        "PROGRESS_MONITOR",
+                        "LCM_ENTITY",
+                        "LCM_AVAILABLE_VERSION",
+                        "CAPACITY_SCENARIO",
+                        "NCC_ERROR_CODES",
+                        "RESOURCE_CONSUMPTION",
+                        "REPORT_CONFIG",
+                        "REPORT_INSTANCE",
+                        "COMMON_REPORT_CONFIG",
+                        "REMOTE_CONNECTION"
+                    ],
+                    "type": "string"
+                },
+                "filter_criteria": {
+                    "type": "string"
+                },
+                "health_summary": {
+                    "$ref": "java.util.Map&lt;create.dto.health.check.HealthStatus, java.lang.Integer&gt;"
+                }
+            }
+        },
+        "create.dto.health.check.HealthSummaryDTO": {
+            "id": "create.dto.health.check.HealthSummaryDTO",
+            "required": [],
+            "properties": {
+                "entity_type_summaries": {
+                    "items": {
+                        "$ref": "create.dto.health.check.EntityTypeHealthCheckSummaryDTO"
+                    },
+                    "type": "array"
+                },
+                "health_check_summaries": {
+                    "$ref": "java.util.Map&lt;java.lang.String, create.dto.health.check.HealthCheckSummaryDTO&gt;"
+                },
+                "health_status": {
+                    "enum": [
+                        "Critical",
+                        "Warning",
+                        "Good",
+                        "Unknown",
+                        "Error"
+                    ],
+                    "type": "string"
+                }
+            }
+        },
+        "delete.dto.PrimitiveDTO&lt;java.lang.Boolean&gt;": {
+            "id": "delete.dto.PrimitiveDTO&lt;java.lang.Boolean&gt;",
+            "required": [],
+            "properties": {
+                "value": {
+                    "type": "boolean"
+                }
+            }
+        },
+        "get.base.EntityCollection&lt;get.dto.ResultContentDescriptor&gt;": {
+            "id": "get.base.EntityCollection&lt;get.dto.ResultContentDescriptor&gt;",
+            "required": [],
+            "properties": {
+                "entities": {
+                    "items": {
+                        "$ref": "get.dto.ResultContentDescriptor"
+                    },
+                    "type": "array"
+                },
+                "error_info": {
+                    "$ref": "get.base.ErrorInfo"
+                },
+                "metadata": {
+                    "$ref": "get.base.Metadata"
+                }
+            }
+        },
+        "get.base.EntityCollection&lt;get.dto.alerts.AlertDTO&gt;": {
+            "id": "get.base.EntityCollection&lt;get.dto.alerts.AlertDTO&gt;",
+            "required": [],
+            "properties": {
+                "entities": {
+                    "items": {
+                        "$ref": "get.dto.alerts.AlertDTO"
+                    },
+                    "type": "array"
+                },
+                "error_info": {
+                    "$ref": "get.base.ErrorInfo"
+                },
+                "metadata": {
+                    "$ref": "get.base.Metadata"
+                }
+            }
+        },
+        "get.base.EntityCollection&lt;get.dto.appliance.configuration.ContainerDTO&gt;": {
+            "id": "get.base.EntityCollection&lt;get.dto.appliance.configuration.ContainerDTO&gt;",
+            "required": [],
+            "properties": {
+                "entities": {
+                    "items": {
+                        "$ref": "get.dto.appliance.configuration.ContainerDTO"
+                    },
+                    "type": "array"
+                },
+                "error_info": {
+                    "$ref": "get.base.ErrorInfo"
+                },
+                "metadata": {
+                    "$ref": "get.base.Metadata"
+                }
+            }
+        },
+        "get.base.EntityCollection&lt;get.dto.appliance.configuration.VDiskDTO&gt;": {
+            "id": "get.base.EntityCollection&lt;get.dto.appliance.configuration.VDiskDTO&gt;",
+            "required": [],
+            "properties": {
+                "entities": {
+                    "items": {
+                        "$ref": "get.dto.appliance.configuration.VDiskDTO"
+                    },
+                    "type": "array"
+                },
+                "error_info": {
+                    "$ref": "get.base.ErrorInfo"
+                },
+                "metadata": {
+                    "$ref": "get.base.Metadata"
+                }
+            }
+        },
+        "get.base.ErrorInfo": {
+            "id": "get.base.ErrorInfo",
+            "required": [],
+            "properties": {
+                "count": {
+                    "format": "int64",
+                    "type": "integer"
+                },
+                "entity_list": {
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": "array"
+                },
+                "message": {
+                    "type": "string"
+                }
+            }
+        },
+        "get.base.Metadata": {
+            "id": "get.base.Metadata",
+            "required": [],
+            "properties": {
+                "count": {
+                    "format": "int32",
+                    "type": "integer"
+                },
+                "end_index": {
+                    "format": "int32",
+                    "type": "integer"
+                },
+                "filter_criteria": {
+                    "type": "string"
+                },
+                "grand_total_entities": {
+                    "format": "int32",
+                    "type": "integer"
+                },
+                "next_cursor": {
+                    "type": "string"
+                },
+                "page": {
+                    "format": "int32",
+                    "type": "integer"
+                },
+                "previous_cursor": {
+                    "type": "string"
+                },
+                "search_string": {
+                    "type": "string"
+                },
+                "sort_criteria": {
+                    "type": "string"
+                },
+                "start_index": {
+                    "format": "int32",
+                    "type": "integer"
+                },
+                "total_entities": {
+                    "format": "int32",
+                    "type": "integer"
+                }
+            }
+        },
+        "get.base.StatsResponse": {
+            "id": "get.base.StatsResponse",
+            "required": [],
+            "properties": {
+                "stats_specific_responses": {
+                    "items": {
+                        "$ref": "get.base.StatsResponse$StatsSpecificResponse"
+                    },
+                    "type": "array"
+                }
+            }
+        },
+        "get.base.StatsResponse$StatsSpecificResponse": {
+            "id": "get.base.StatsResponse$StatsSpecificResponse",
+            "required": [],
+            "properties": {
+                "interval_in_secs": {
+                    "format": "int64",
+                    "type": "integer"
+                },
+                "message": {
+                    "type": "string"
+                },
+                "metric": {
+                    "type": "string"
+                },
+                "start_time_in_usecs": {
+                    "format": "int64",
+                    "type": "integer"
+                },
+                "successful": {
+                    "type": "boolean"
+                },
+                "values": {
+                    "items": {
+                        "format": "int64",
+                        "type": "integer"
+                    },
+                    "type": "array"
+                }
+            }
+        },
+        "get.dto.EntityMetadata": {
+            "id": "get.dto.EntityMetadata",
+            "required": [],
+            "properties": {
+                "additional_fields": {
+                    "$ref": "java.util.Map&lt;java.lang.String, java.lang.String&gt;"
+                },
+                "cluster_uuid": {
+                    "type": "string"
+                },
+                "context_hint_field": {
+                    "type": "string"
+                },
+                "context_hint_value": {
+                    "type": "string"
+                },
+                "entity_id": {
+                    "type": "string"
+                },
+                "entity_name": {
+                    "type": "string"
+                },
+                "entity_type": {
+                    "enum": [
+                        "CLUSTER",
+                        "HARDWARE",
+                        "STORAGE",
+                        "BACKUP",
+                        "DR",
+                        "LICENSE",
+                        "DISK",
+                        "STORAGE_TIER",
+                        "HOST",
+                        "NODE",
+                        "MANAGEMENT_SERVER",
+                        "MANAGEMENT_SERVER_INFO",
+                        "VM",
+                        "SERVICE_VM",
+                        "VDISK",
+                        "VIRTUAL_DISK",
+                        "STORAGE_POOL",
+                        "CONTAINER",
+                        "STORAGE_CONTAINER",
+                        "VZONE",
+                        "SNAPSHOT",
+                        "FAST_CLONE",
+                        "RSYSLOG_SERVER",
+                        "KEY_MANAGEMENT_SERVER",
+                        "CERTIFICATE",
+                        "HTTP_PROXY",
+                        "SNMP_TRAP",
+                        "SNMP_USER",
+                        "REMOTE_SITE",
+                        "CLOUD_CREDENTIALS",
+                        "PROTECTION_DOMAIN",
+                        "CONSISTENCY_GROUP",
+                        "REPLICATION",
+                        "REPLICATION_LINK",
+                        "SYNC_REPLICATION",
+                        "VSTORE",
+                        "NETWORK_SWITCH_INTERFACE",
+                        "NETWORK_SWITCH",
+                        "VIRTUAL_NIC",
+                        "VMKERNEL_NIC",
+                        "HOST_NIC",
+                        "NIC_TEAM",
+                        "VIRTUAL_NETWORK",
+                        "VIRTUAL_SWITCH",
+                        "HOST_GPU",
+                        "VIRTUAL_GPU",
+                        "TAG",
+                        "COMMENT",
+                        "TASK",
+                        "IMAGE",
+                        "IMAGE_INFO",
+                        "ISCSI_CLIENT",
+                        "VOLUME_GROUP",
+                        "VOLUME_DISK",
+                        "VM_DISK",
+                        "FILE_SERVER",
+                        "FS_PARTNER_SERVER",
+                        "CVM",
+                        "NVM",
+                        "FILE_SERVER_SHARE",
+                        "ALERT_CAUSE",
+                        "ALERT_CHECK_SCHEMA",
+                        "ALERT_CHECK_SCHEMA_OVERRIDE",
+                        "INTER_CLUSTER_DATA_TRANSFER_INDICATOR",
+                        "RACKABLE_UNIT",
+                        "DIRECTORY_CONFIG",
+                        "HEALTH_CHECK",
+                        "NETWORK_SNMP_PROFILE",
+                        "ALERT",
+                        "SCHEDULE",
+                        "BANDWIDTH_POLICY",
+                        "FILE_GROUP",
+                        "NETWORK_MAPPING",
+                        "PROGRESS_MONITOR",
+                        "LCM_ENTITY",
+                        "LCM_AVAILABLE_VERSION",
+                        "CAPACITY_SCENARIO",
+                        "NCC_ERROR_CODES",
+                        "RESOURCE_CONSUMPTION",
+                        "REPORT_CONFIG",
+                        "REPORT_INSTANCE",
+                        "COMMON_REPORT_CONFIG",
+                        "REMOTE_CONNECTION"
+                    ],
+                    "type": "string"
+                }
+            }
+        },
+        "get.dto.ResultContentDescriptor": {
+            "id": "get.dto.ResultContentDescriptor",
+            "required": [],
+            "properties": {
+                "metadata": {
+                    "$ref": "get.dto.ResultMetadata"
+                },
+                "perspectives": {
+                    "items": {
+                        "$ref": "get.dto.ResultContentDescriptor$Perspective"
+                    },
+                    "type": "array"
+                }
+            }
+        },
+        "get.dto.ResultContentDescriptor$Perspective": {
+            "id": "get.dto.ResultContentDescriptor$Perspective",
+            "required": [],
+            "properties": {
+                "format": {
+                    "enum": [
+                        "TABLE",
+                        "BAR_CHART",
+                        "PIE_CHART",
+                        "TIME_SERIES",
+                        "KEY_VALUE",
+                        "COUNT",
+                        "HEALTH_SUMMARY",
+                        "ALERT_INFO",
+                        "CAPACITY",
+                        "OTHER"
+                    ],
+                    "type": "string"
+                },
+                "metadata": {
+                    "$ref": "get.dto.ResultMetadata"
+                },
+                "query": {},
+                "result": {},
+                "type": {
+                    "type": "string"
+                }
+            }
+        },
+        "get.dto.ResultMetadata": {
+            "id": "get.dto.ResultMetadata",
+            "required": [],
+            "properties": {
+                "entity_type": {
+                    "enum": [
+                        "CLUSTER",
+                        "HARDWARE",
+                        "STORAGE",
+                        "BACKUP",
+                        "DR",
+                        "LICENSE",
+                        "DISK",
+                        "STORAGE_TIER",
+                        "HOST",
+                        "NODE",
+                        "MANAGEMENT_SERVER",
+                        "MANAGEMENT_SERVER_INFO",
+                        "VM",
+                        "SERVICE_VM",
+                        "VDISK",
+                        "VIRTUAL_DISK",
+                        "STORAGE_POOL",
+                        "CONTAINER",
+                        "STORAGE_CONTAINER",
+                        "VZONE",
+                        "SNAPSHOT",
+                        "FAST_CLONE",
+                        "RSYSLOG_SERVER",
+                        "KEY_MANAGEMENT_SERVER",
+                        "CERTIFICATE",
+                        "HTTP_PROXY",
+                        "SNMP_TRAP",
+                        "SNMP_USER",
+                        "REMOTE_SITE",
+                        "CLOUD_CREDENTIALS",
+                        "PROTECTION_DOMAIN",
+                        "CONSISTENCY_GROUP",
+                        "REPLICATION",
+                        "REPLICATION_LINK",
+                        "SYNC_REPLICATION",
+                        "VSTORE",
+                        "NETWORK_SWITCH_INTERFACE",
+                        "NETWORK_SWITCH",
+                        "VIRTUAL_NIC",
+                        "VMKERNEL_NIC",
+                        "HOST_NIC",
+                        "NIC_TEAM",
+                        "VIRTUAL_NETWORK",
+                        "VIRTUAL_SWITCH",
+                        "HOST_GPU",
+                        "VIRTUAL_GPU",
+                        "TAG",
+                        "COMMENT",
+                        "TASK",
+                        "IMAGE",
+                        "IMAGE_INFO",
+                        "ISCSI_CLIENT",
+                        "VOLUME_GROUP",
+                        "VOLUME_DISK",
+                        "VM_DISK",
+                        "FILE_SERVER",
+                        "FS_PARTNER_SERVER",
+                        "CVM",
+                        "NVM",
+                        "FILE_SERVER_SHARE",
+                        "ALERT_CAUSE",
+                        "ALERT_CHECK_SCHEMA",
+                        "ALERT_CHECK_SCHEMA_OVERRIDE",
+                        "INTER_CLUSTER_DATA_TRANSFER_INDICATOR",
+                        "RACKABLE_UNIT",
+                        "DIRECTORY_CONFIG",
+                        "HEALTH_CHECK",
+                        "NETWORK_SNMP_PROFILE",
+                        "ALERT",
+                        "SCHEDULE",
+                        "BANDWIDTH_POLICY",
+                        "FILE_GROUP",
+                        "NETWORK_MAPPING",
+                        "PROGRESS_MONITOR",
+                        "LCM_ENTITY",
+                        "LCM_AVAILABLE_VERSION",
+                        "CAPACITY_SCENARIO",
+                        "NCC_ERROR_CODES",
+                        "RESOURCE_CONSUMPTION",
+                        "REPORT_CONFIG",
+                        "REPORT_INSTANCE",
+                        "COMMON_REPORT_CONFIG",
+                        "REMOTE_CONNECTION"
+                    ],
+                    "type": "string"
+                },
+                "filters": {
+                    "items": {
+                        "$ref": "get.dto.ResultMetadata$Filter"
+                    },
+                    "type": "array"
+                },
+                "instances": {
+                    "items": {
+                        "$ref": "get.dto.EntityMetadata"
+                    },
+                    "type": "array"
+                },
+                "title": {
+                    "type": "string"
+                }
+            }
+        },
+        "get.dto.ResultMetadata$Filter": {
+            "id": "get.dto.ResultMetadata$Filter",
+            "required": [],
+            "properties": {
+                "display_for_rhs": {
+                    "type": "string"
+                },
+                "lhs": {
+                    "type": "string"
+                },
+                "operator": {
+                    "description": "Operator for the filter.",
+                    "type": "string",
+                    "typeName": "DEFAULT"
+                },
+                "rhs": {
+                    "type": "string"
+                }
+            }
+        },
+        "get.dto.alerts.AlertCauseDTO": {
+            "id": "get.dto.alerts.AlertCauseDTO",
+            "required": [],
+            "properties": {
+                "actions": {
+                    "description": "Possible actions to resolve this alert",
+                    "type": "string",
+                    "typeName": "DEFAULT"
+                },
+                "additional_links": {
+                    "description": "Additional links",
+                    "type": "string",
+                    "typeName": "DEFAULT"
+                },
+                "alert_namespace": {
+                    "description": "Namespace this alert belongs to",
+                    "type": "string",
+                    "typeName": "DEFAULT"
+                },
+                "cause": {
+                    "description": "Detailed description",
+                    "type": "string",
+                    "typeName": "DEFAULT"
+                },
+                "chart_queries": {
+                    "$ref": "get.base.EntityCollection&lt;get.dto.ResultContentDescriptor&gt;",
+                    "description": "Charts that are relevant to this cause",
+                    "typeName": "DEFAULT"
+                },
+                "details": {
+                    "description": "Symptoms for this cause",
+                    "type": "string",
+                    "typeName": "DEFAULT"
+                },
+                "has_global_details": {
+                    "description": "Whether the alert has global details or not",
+                    "type": "boolean",
+                    "typeName": "DEFAULT"
+                },
+                "id": {
+                    "description": "Cause Id",
+                    "type": "string",
+                    "typeName": "UUID_TYPE"
+                },
+                "num_resolved_count": {
+                    "description": "Number of times this cause has resolved the alert",
+                    "format": "int64",
+                    "type": "integer",
+                    "typeName": "DEFAULT"
+                },
+                "parent_cause_id": {
+                    "description": "Id of the alert/cause this is a possible cause for",
+                    "type": "string",
+                    "typeName": "DEFAULT"
+                },
+                "title": {
+                    "description": "Short description",
+                    "type": "string",
+                    "typeName": "DEFAULT"
+                },
+                "troubleshooting_steps": {
+                    "description": "Steps to determine whether this is the cause.",
+                    "type": "string",
+                    "typeName": "DEFAULT"
+                }
+            }
+        },
+        "get.dto.alerts.AlertDTO": {
+            "id": "get.dto.alerts.AlertDTO",
+            "required": [],
+            "properties": {
+                "acknowledged": {
+                    "type": "boolean"
+                },
+                "acknowledged_by_username": {
+                    "type": "string"
+                },
+                "acknowledged_time_stamp_in_usecs": {
+                    "format": "int64",
+                    "type": "integer"
+                },
+                "affected_entities": {
+                    "items": {
+                        "$ref": "get.dto.alerts.AlertDTO$AffectedEntity"
+                    },
+                    "type": "array"
+                },
+                "alert_details": {
+                    "$ref": "get.dto.alerts.AlertDTO$AlertDetailsDTO"
+                },
+                "alert_title": {
+                    "type": "string"
+                },
+                "alert_type_uuid": {
+                    "type": "string"
+                },
+                "auto_resolved": {
+                    "type": "boolean"
+                },
+                "check_id": {
+                    "type": "string"
+                },
+                "classifications": {
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": "array"
+                },
+                "cluster_uuid": {
+                    "type": "string"
+                },
+                "context_types": {
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": "array"
+                },
+                "context_values": {
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": "array"
+                },
+                "created_time_stamp_in_usecs": {
+                    "format": "int64",
+                    "type": "integer"
+                },
+                "detailed_message": {
+                    "type": "string"
+                },
+                "id": {
+                    "type": "string"
+                },
+                "impact_types": {
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": "array"
+                },
+                "last_occurrence_time_stamp_in_usecs": {
+                    "format": "int64",
+                    "type": "integer"
+                },
+                "message": {
+                    "type": "string"
+                },
+                "node_uuid": {
+                    "type": "string"
+                },
+                "originating_cluster_uuid": {
+                    "type": "string"
+                },
+                "possible_causes": {
+                    "items": {
+                        "$ref": "get.dto.alerts.AlertCauseDTO"
+                    },
+                    "type": "array"
+                },
+                "resolved": {
+                    "type": "boolean"
+                },
+                "resolved_by_username": {
+                    "type": "string"
+                },
+                "resolved_time_stamp_in_usecs": {
+                    "format": "int64",
+                    "type": "integer"
+                },
+                "service_v_m_id": {
+                    "type": "string"
+                },
+                "severity": {
+                    "description": "This field describes the severity of the alert.",
+                    "type": "string",
+                    "typeName": "DEFAULT"
+                },
+                "user_defined": {
+                    "type": "boolean"
+                }
+            }
+        },
+        "get.dto.alerts.AlertDTO$AffectedEntity": {
+            "id": "get.dto.alerts.AlertDTO$AffectedEntity",
+            "required": [],
+            "properties": {
+                "entity_name": {
+                    "type": "string"
+                },
+                "entity_type": {
+                    "type": "string"
+                },
+                "entity_type_display_name": {
+                    "type": "string"
+                },
+                "id": {
+                    "type": "string"
+                },
+                "uuid": {
+                    "type": "string"
+                }
+            }
+        },
+        "get.dto.alerts.AlertDTO$AlertDetailsDTO": {
+            "id": "get.dto.alerts.AlertDTO$AlertDetailsDTO",
+            "required": [],
+            "properties": {
+                "metric_details": {
+                    "description": "List of metric details associated with the alert",
+                    "items": {
+                        "$ref": "get.dto.alerts.AlertDTO$MetricDetails"
+                    },
+                    "notes": "List of metric details associated with the alert",
+                    "type": "array",
+                    "typeName": "DEFAULT"
+                },
+                "severity_trails": {
+                    "description": "List that contains severity level change details",
+                    "items": {
+                        "$ref": "get.dto.alerts.AlertDTO$SeverityTrail"
+                    },
+                    "notes": "List that contains severity level change details",
+                    "type": "array",
+                    "typeName": "DEFAULT"
+                }
+            }
+        },
+        "get.dto.alerts.AlertDTO$MetricDetails": {
+            "id": "get.dto.alerts.AlertDTO$MetricDetails",
+            "required": [],
+            "properties": {
+                "comparison_operator": {
+                    "description": "Comparison Operator to be applied for teh values.",
+                    "notes": "Comparison Operator",
+                    "type": "string",
+                    "typeName": "DEFAULT"
+                },
+                "condition_type": {
+                    "description": "Condition Type that the current metric is associated with.",
+                    "enum": [
+                        "STATIC_THRESHOLD",
+                        "ANOMALY",
+                        "SAFETY_ZONE"
+                    ],
+                    "notes": "Condition Type that the current metric is associated with.",
+                    "type": "string",
+                    "typeName": "DEFAULT"
+                },
+                "data_type": {
+                    "description": "Data Type of the value.",
+                    "enum": [
+                        "LONG",
+                        "DOUBLE",
+                        "BOOLEAN",
+                        "STRING"
+                    ],
+                    "notes": "Data Type of the value.",
+                    "type": "string",
+                    "typeName": "DEFAULT"
+                },
+                "entity_id": {
+                    "description": "UUID of the entity",
+                    "notes": "UUID of the entity",
+                    "type": "string",
+                    "typeName": "DEFAULT"
+                },
+                "entity_type": {
+                    "description": "Entity Type",
+                    "notes": "Entity Type",
+                    "type": "string",
+                    "typeName": "DEFAULT"
+                },
+                "metric_display_name": {
+                    "description": "Display name of the metric",
+                    "notes": "Display name of the metric",
+                    "type": "string",
+                    "typeName": "DEFAULT"
+                },
+                "metric_name": {
+                    "description": "Name of the metric",
+                    "notes": "Name of the metric",
+                    "type": "string",
+                    "typeName": "DEFAULT"
+                },
+                "metric_value_details": {
+                    "description": "List of metric values at different instances of time in the alert lifecycle",
+                    "items": {
+                        "$ref": "get.dto.alerts.AlertDTO$MetricValueDetails"
+                    },
+                    "notes": "List of metric values at different instances of time in the alert lifecycle",
+                    "type": "array",
+                    "typeName": "DEFAULT"
+                },
+                "unit": {
+                    "description": "Unit of the metric value.",
+                    "notes": "Unit of the metric value.",
+                    "type": "string",
+                    "typeName": "DEFAULT"
+                }
+            }
+        },
+        "get.dto.alerts.AlertDTO$MetricValueDetails": {
+            "id": "get.dto.alerts.AlertDTO$MetricValueDetails",
+            "required": [],
+            "properties": {
+                "metric_threshold_value": {
+                    "description": "Threshold value of the metric that was specified in the policy at that given time.",
+                    "notes": "Threshold value of the metric that was specified in the policy at that given time.",
+                    "type": "string",
+                    "typeName": "DEFAULT"
+                },
+                "metric_value": {
+                    "description": "Actual value of the metric at that given time.",
+                    "notes": "Actual value of the metric at that given time.",
+                    "type": "string",
+                    "typeName": "DEFAULT"
+                },
+                "state_change_time_stamp_in_usecs": {
+                    "description": "Time at which the alert's state change occurred.",
+                    "format": "int64",
+                    "notes": "Time at which the alert's state change occurred.",
+                    "type": "integer",
+                    "typeName": "DEFAULT"
+                }
+            }
+        },
+        "get.dto.alerts.AlertDTO$SeverityTrail": {
+            "id": "get.dto.alerts.AlertDTO$SeverityTrail",
+            "required": [],
+            "properties": {
+                "severity": {
+                    "description": "Severity level of the alert. Can be INFO, WARNING or CRITICAL",
+                    "notes": "Severity level of the alert. Can be INFO, WARNING or CRITICAL",
+                    "type": "string",
+                    "typeName": "DEFAULT"
+                },
+                "severity_change_timestamp_in_usecs": {
+                    "description": "Time at which the severity level change occurred",
+                    "format": "int64",
+                    "notes": "Time at which the severity level change occurred",
+                    "type": "integer",
+                    "typeName": "DEFAULT"
+                }
+            }
+        },
+        "get.dto.alerts.AlertSummaryDTO": {
+            "id": "get.dto.alerts.AlertSummaryDTO",
+            "required": [],
+            "properties": {
+                "alert_summaries": {
+                    "$ref": "java.util.Map&lt;get.dto.alerts.AlertDTO$AlertSeverity, get.base.EntityCollection&lt;get.dto.alerts.AlertDTO&gt;&gt;"
+                },
+                "count": {
+                    "format": "int64",
+                    "type": "integer"
+                }
+            }
+        },
+        "get.dto.appliance.configuration.ContainerDTO": {
+            "id": "get.dto.appliance.configuration.ContainerDTO",
+            "required": [],
+            "properties": {
+                "advertised_capacity": {
+                    "format": "int64",
+                    "type": "integer"
+                },
+                "alert_summary": {
+                    "$ref": "get.dto.alerts.AlertSummaryDTO"
+                },
+                "cluster_uuid": {
+                    "description": " Uuid of the cluster this entity belongs to",
+                    "type": "string",
+                    "typeName": "DEFAULT"
+                },
+                "compression_delay_in_secs": {
+                    "format": "int32",
+                    "type": "integer"
+                },
+                "compression_enabled": {
+                    "type": "boolean"
+                },
+                "down_migrate_times_in_secs": {
+                    "$ref": "java.util.Map&lt;java.lang.String, java.lang.Integer&gt;"
+                },
+                "enable_software_encryption": {
+                    "type": "boolean"
+                },
+                "erasure_code": {
+                    "type": "string"
+                },
+                "erasure_code_delay_secs": {
+                    "format": "int32",
+                    "type": "integer"
+                },
+                "finger_print_on_write": {
+                    "enum": [
+                        "NONE",
+                        "OFF",
+                        "ON"
+                    ],
+                    "type": "string"
+                },
+                "health_summary": {
+                    "$ref": "get.dto.health.check.HealthSummaryDTO"
+                },
+                "id": {
+                    "type": "string"
+                },
+                "ilm_policy": {
+                    "type": "string"
+                },
+                "is_nutanix_managed": {
+                    "type": "boolean"
+                },
+                "mapped_remote_containers": {
+                    "$ref": "java.util.Map&lt;java.lang.String, java.lang.String&gt;"
+                },
+                "marked_for_removal": {
+                    "type": "boolean"
+                },
+                "max_capacity": {
+                    "format": "int64",
+                    "type": "integer"
+                },
+                "name": {
+                    "type": "string"
+                },
+                "nfs_whitelist": {
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": "array"
+                },
+                "nfs_whitelist_inherited": {
+                    "type": "boolean"
+                },
+                "on_disk_dedup": {
+                    "enum": [
+                        "NONE",
+                        "OFF",
+                        "POST_PROCESS"
+                    ],
+                    "type": "string"
+                },
+                "oplog_replication_factor": {
+                    "format": "int32",
+                    "type": "integer"
+                },
+                "random_io_preference": {
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": "array"
+                },
+                "replication_factor": {
+                    "format": "int32",
+                    "type": "integer"
+                },
+                "seq_io_preference": {
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": "array"
+                },
+                "stats": {
+                    "$ref": "java.util.Map&lt;java.lang.String, java.lang.String&gt;"
+                },
+                "storage_container_uuid": {
+                    "type": "string"
+                },
+                "total_explicit_reserved_capacity": {
+                    "format": "int64",
+                    "type": "integer"
+                },
+                "total_implicit_reserved_capacity": {
+                    "format": "int64",
+                    "type": "integer"
+                },
+                "usage_stats": {
+                    "$ref": "java.util.Map&lt;java.lang.String, java.lang.String&gt;"
+                },
+                "vstore_name_list": {
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": "array"
+                }
+            }
+        },
+        "get.dto.appliance.configuration.VDiskDTO": {
+            "id": "get.dto.appliance.configuration.VDiskDTO",
+            "required": [],
+            "properties": {
+                "alert_summary": {
+                    "$ref": "get.dto.alerts.AlertSummaryDTO"
+                },
+                "cluster_uuid": {
+                    "description": " Uuid of the cluster this entity belongs to",
+                    "type": "string",
+                    "typeName": "DEFAULT"
+                },
+                "creation_time_in_micros_since_epoch": {
+                    "format": "int64",
+                    "type": "integer"
+                },
+                "disabled": {
+                    "type": "boolean"
+                },
+                "erasure_code": {
+                    "type": "string"
+                },
+                "erasure_code_delay_secs": {
+                    "format": "int32",
+                    "type": "integer"
+                },
+                "finger_print_on_write": {
+                    "enum": [
+                        "NONE",
+                        "OFF",
+                        "ON"
+                    ],
+                    "type": "string"
+                },
+                "health_summary": {
+                    "$ref": "get.dto.health.check.HealthSummaryDTO"
+                },
+                "immutable": {
+                    "type": "boolean"
+                },
+                "iscsi_lun": {
+                    "format": "int32",
+                    "type": "integer"
+                },
+                "iscsi_target_name": {
+                    "type": "string"
+                },
+                "marked_for_removal": {
+                    "type": "boolean",
+                    "typeName": "DEFAULT"
+                },
+                "max_capacity_bytes": {
+                    "format": "int64",
+                    "type": "integer"
+                },
+                "name": {
+                    "type": "string"
+                },
+                "nfs_file": {
+                    "type": "boolean"
+                },
+                "nfs_file_name": {
+                    "type": "string"
+                },
+                "on_disk_dedup": {
+                    "enum": [
+                        "NONE",
+                        "OFF",
+                        "POST_PROCESS"
+                    ],
+                    "type": "string"
+                },
+                "parent_nfs_file_name": {
+                    "type": "string"
+                },
+                "qos_fairshare": {
+                    "type": "string"
+                },
+                "qos_priority": {
+                    "type": "string"
+                },
+                "shared": {
+                    "type": "boolean"
+                },
+                "snapshot": {
+                    "type": "boolean"
+                },
+                "snapshots": {
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": "array"
+                },
+                "stats": {
+                    "$ref": "java.util.Map&lt;java.lang.String, java.lang.String&gt;"
+                },
+                "storage_container_id": {
+                    "type": "string"
+                },
+                "storage_container_name": {
+                    "type": "string"
+                },
+                "storage_container_uuid": {
+                    "type": "string"
+                },
+                "total_reserved_capacity_bytes": {
+                    "format": "int64",
+                    "type": "integer"
+                },
+                "usage_stats": {
+                    "$ref": "java.util.Map&lt;java.lang.String, java.lang.String&gt;"
+                },
+                "vdisk_uuid": {
+                    "type": "string"
+                }
+            }
+        },
+        "get.dto.esx.NfsDatastoreInfoDTO": {
+            "id": "get.dto.esx.NfsDatastoreInfoDTO",
+            "required": [],
+            "properties": {
+                "capacity": {
+                    "format": "int64",
+                    "type": "integer"
+                },
+                "datastore_name": {
+                    "type": "string"
+                },
+                "free_space": {
+                    "format": "int64",
+                    "type": "integer"
+                },
+                "host_id": {
+                    "type": "string"
+                },
+                "host_ip_address": {
+                    "type": "string"
+                },
+                "host_uuid": {
+                    "type": "string"
+                },
+                "storage_container_id": {
+                    "type": "string"
+                },
+                "storage_container_name": {
+                    "type": "string"
+                },
+                "storage_container_uuid": {
+                    "type": "string"
+                },
+                "vm_names": {
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": "array"
+                }
+            }
+        },
+        "get.dto.health.check.EntityTypeHealthCheckSummaryDTO": {
+            "id": "get.dto.health.check.EntityTypeHealthCheckSummaryDTO",
+            "required": [],
+            "properties": {
+                "checks_in_error": {
+                    "$ref": "java.util.Map&lt;java.lang.String, get.dto.health.check.HealthCheckErrorsDTO&gt;"
+                },
+                "detailed_check_summary": {
+                    "$ref": "java.util.Map&lt;java.lang.String, java.util.Map&lt;get.dto.health.check.HealthStatus, java.lang.Integer&gt;&gt;"
+                },
+                "entity_type": {
+                    "enum": [
+                        "CLUSTER",
+                        "HARDWARE",
+                        "STORAGE",
+                        "BACKUP",
+                        "DR",
+                        "LICENSE",
+                        "DISK",
+                        "STORAGE_TIER",
+                        "HOST",
+                        "NODE",
+                        "MANAGEMENT_SERVER",
+                        "MANAGEMENT_SERVER_INFO",
+                        "VM",
+                        "SERVICE_VM",
+                        "VDISK",
+                        "VIRTUAL_DISK",
+                        "STORAGE_POOL",
+                        "CONTAINER",
+                        "STORAGE_CONTAINER",
+                        "VZONE",
+                        "SNAPSHOT",
+                        "FAST_CLONE",
+                        "RSYSLOG_SERVER",
+                        "KEY_MANAGEMENT_SERVER",
+                        "CERTIFICATE",
+                        "HTTP_PROXY",
+                        "SNMP_TRAP",
+                        "SNMP_USER",
+                        "REMOTE_SITE",
+                        "CLOUD_CREDENTIALS",
+                        "PROTECTION_DOMAIN",
+                        "CONSISTENCY_GROUP",
+                        "REPLICATION",
+                        "REPLICATION_LINK",
+                        "SYNC_REPLICATION",
+                        "VSTORE",
+                        "NETWORK_SWITCH_INTERFACE",
+                        "NETWORK_SWITCH",
+                        "VIRTUAL_NIC",
+                        "VMKERNEL_NIC",
+                        "HOST_NIC",
+                        "NIC_TEAM",
+                        "VIRTUAL_NETWORK",
+                        "VIRTUAL_SWITCH",
+                        "HOST_GPU",
+                        "VIRTUAL_GPU",
+                        "TAG",
+                        "COMMENT",
+                        "TASK",
+                        "IMAGE",
+                        "IMAGE_INFO",
+                        "ISCSI_CLIENT",
+                        "VOLUME_GROUP",
+                        "VOLUME_DISK",
+                        "VM_DISK",
+                        "FILE_SERVER",
+                        "FS_PARTNER_SERVER",
+                        "CVM",
+                        "NVM",
+                        "FILE_SERVER_SHARE",
+                        "ALERT_CAUSE",
+                        "ALERT_CHECK_SCHEMA",
+                        "ALERT_CHECK_SCHEMA_OVERRIDE",
+                        "INTER_CLUSTER_DATA_TRANSFER_INDICATOR",
+                        "RACKABLE_UNIT",
+                        "DIRECTORY_CONFIG",
+                        "HEALTH_CHECK",
+                        "NETWORK_SNMP_PROFILE",
+                        "ALERT",
+                        "SCHEDULE",
+                        "BANDWIDTH_POLICY",
+                        "FILE_GROUP",
+                        "NETWORK_MAPPING",
+                        "PROGRESS_MONITOR",
+                        "LCM_ENTITY",
+                        "LCM_AVAILABLE_VERSION",
+                        "CAPACITY_SCENARIO",
+                        "NCC_ERROR_CODES",
+                        "RESOURCE_CONSUMPTION",
+                        "REPORT_CONFIG",
+                        "REPORT_INSTANCE",
+                        "COMMON_REPORT_CONFIG",
+                        "REMOTE_CONNECTION"
+                    ],
+                    "type": "string"
+                },
+                "filter_criteria": {
+                    "type": "string"
+                },
+                "health_summary": {
+                    "$ref": "java.util.Map&lt;get.dto.health.check.HealthStatus, java.lang.Integer&gt;"
+                }
+            }
+        },
+        "get.dto.health.check.HealthSummaryDTO": {
+            "id": "get.dto.health.check.HealthSummaryDTO",
+            "required": [],
+            "properties": {
+                "entity_type_summaries": {
+                    "items": {
+                        "$ref": "get.dto.health.check.EntityTypeHealthCheckSummaryDTO"
+                    },
+                    "type": "array"
+                },
+                "health_check_summaries": {
+                    "$ref": "java.util.Map&lt;java.lang.String, get.dto.health.check.HealthCheckSummaryDTO&gt;"
+                },
+                "health_status": {
+                    "enum": [
+                        "Critical",
+                        "Warning",
+                        "Good",
+                        "Unknown",
+                        "Error"
+                    ],
+                    "type": "string"
+                }
+            }
+        },
+        "java.util.Map&lt;create.dto.alerts.AlertDTO$AlertSeverity, create.base.EntityCollection&lt;create.dto.alerts.AlertDTO&gt;&gt;": {
+            "id": "java.util.Map&lt;create.dto.alerts.AlertDTO$AlertSeverity, create.base.EntityCollection&lt;create.dto.alerts.AlertDTO&gt;&gt;",
+            "required": [],
+            "properties": {}
+        },
+        "java.util.Map&lt;create.dto.health.check.HealthStatus, java.lang.Integer&gt;": {
+            "id": "java.util.Map&lt;create.dto.health.check.HealthStatus, java.lang.Integer&gt;",
+            "required": [],
+            "properties": {}
+        },
+        "java.util.Map&lt;get.dto.alerts.AlertDTO$AlertSeverity, get.base.EntityCollection&lt;get.dto.alerts.AlertDTO&gt;&gt;": {
+            "id": "java.util.Map&lt;get.dto.alerts.AlertDTO$AlertSeverity, get.base.EntityCollection&lt;get.dto.alerts.AlertDTO&gt;&gt;",
+            "required": [],
+            "properties": {}
+        },
+        "java.util.Map&lt;get.dto.health.check.HealthStatus, java.lang.Integer&gt;": {
+            "id": "java.util.Map&lt;get.dto.health.check.HealthStatus, java.lang.Integer&gt;",
+            "required": [],
+            "properties": {}
+        },
+        "java.util.Map&lt;java.lang.String, create.dto.health.check.HealthCheckErrorsDTO&gt;": {
+            "id": "java.util.Map&lt;java.lang.String, create.dto.health.check.HealthCheckErrorsDTO&gt;",
+            "required": [],
+            "properties": {}
+        },
+        "java.util.Map&lt;java.lang.String, create.dto.health.check.HealthCheckSummaryDTO&gt;": {
+            "id": "java.util.Map&lt;java.lang.String, create.dto.health.check.HealthCheckSummaryDTO&gt;",
+            "required": [],
+            "properties": {}
+        },
+        "java.util.Map&lt;java.lang.String, get.dto.health.check.HealthCheckErrorsDTO&gt;": {
+            "id": "java.util.Map&lt;java.lang.String, get.dto.health.check.HealthCheckErrorsDTO&gt;",
+            "required": [],
+            "properties": {}
+        },
+        "java.util.Map&lt;java.lang.String, get.dto.health.check.HealthCheckSummaryDTO&gt;": {
+            "id": "java.util.Map&lt;java.lang.String, get.dto.health.check.HealthCheckSummaryDTO&gt;",
+            "required": [],
+            "properties": {}
+        },
+        "java.util.Map&lt;java.lang.String, java.lang.Integer&gt;": {
+            "id": "java.util.Map&lt;java.lang.String, java.lang.Integer&gt;",
+            "required": [],
+            "properties": {}
+        },
+        "java.util.Map&lt;java.lang.String, java.lang.String&gt;": {
+            "id": "java.util.Map&lt;java.lang.String, java.lang.String&gt;",
+            "required": [],
+            "properties": {}
+        },
+        "java.util.Map&lt;java.lang.String, java.util.Map&lt;create.dto.health.check.HealthStatus, java.lang.Integer&gt;&gt;": {
+            "id": "java.util.Map&lt;java.lang.String, java.util.Map&lt;create.dto.health.check.HealthStatus, java.lang.Integer&gt;&gt;",
+            "required": [],
+            "properties": {}
+        },
+        "java.util.Map&lt;java.lang.String, java.util.Map&lt;get.dto.health.check.HealthStatus, java.lang.Integer&gt;&gt;": {
+            "id": "java.util.Map&lt;java.lang.String, java.util.Map&lt;get.dto.health.check.HealthStatus, java.lang.Integer&gt;&gt;",
+            "required": [],
+            "properties": {}
+        },
+        "java.util.Map&lt;java.lang.String, java.util.Map&lt;patch.dto.health.check.HealthStatus, java.lang.Integer&gt;&gt;": {
+            "id": "java.util.Map&lt;java.lang.String, java.util.Map&lt;patch.dto.health.check.HealthStatus, java.lang.Integer&gt;&gt;",
+            "required": [],
+            "properties": {}
+        },
+        "java.util.Map&lt;java.lang.String, java.util.Map&lt;update.dto.health.check.HealthStatus, java.lang.Integer&gt;&gt;": {
+            "id": "java.util.Map&lt;java.lang.String, java.util.Map&lt;update.dto.health.check.HealthStatus, java.lang.Integer&gt;&gt;",
+            "required": [],
+            "properties": {}
+        },
+        "java.util.Map&lt;java.lang.String, patch.dto.health.check.HealthCheckErrorsDTO&gt;": {
+            "id": "java.util.Map&lt;java.lang.String, patch.dto.health.check.HealthCheckErrorsDTO&gt;",
+            "required": [],
+            "properties": {}
+        },
+        "java.util.Map&lt;java.lang.String, patch.dto.health.check.HealthCheckSummaryDTO&gt;": {
+            "id": "java.util.Map&lt;java.lang.String, patch.dto.health.check.HealthCheckSummaryDTO&gt;",
+            "required": [],
+            "properties": {}
+        },
+        "java.util.Map&lt;java.lang.String, update.dto.health.check.HealthCheckErrorsDTO&gt;": {
+            "id": "java.util.Map&lt;java.lang.String, update.dto.health.check.HealthCheckErrorsDTO&gt;",
+            "required": [],
+            "properties": {}
+        },
+        "java.util.Map&lt;java.lang.String, update.dto.health.check.HealthCheckSummaryDTO&gt;": {
+            "id": "java.util.Map&lt;java.lang.String, update.dto.health.check.HealthCheckSummaryDTO&gt;",
+            "required": [],
+            "properties": {}
+        },
+        "java.util.Map&lt;patch.dto.alerts.AlertDTO$AlertSeverity, patch.base.EntityCollection&lt;patch.dto.alerts.AlertDTO&gt;&gt;": {
+            "id": "java.util.Map&lt;patch.dto.alerts.AlertDTO$AlertSeverity, patch.base.EntityCollection&lt;patch.dto.alerts.AlertDTO&gt;&gt;",
+            "required": [],
+            "properties": {}
+        },
+        "java.util.Map&lt;patch.dto.health.check.HealthStatus, java.lang.Integer&gt;": {
+            "id": "java.util.Map&lt;patch.dto.health.check.HealthStatus, java.lang.Integer&gt;",
+            "required": [],
+            "properties": {}
+        },
+        "java.util.Map&lt;update.dto.alerts.AlertDTO$AlertSeverity, update.base.EntityCollection&lt;update.dto.alerts.AlertDTO&gt;&gt;": {
+            "id": "java.util.Map&lt;update.dto.alerts.AlertDTO$AlertSeverity, update.base.EntityCollection&lt;update.dto.alerts.AlertDTO&gt;&gt;",
+            "required": [],
+            "properties": {}
+        },
+        "java.util.Map&lt;update.dto.health.check.HealthStatus, java.lang.Integer&gt;": {
+            "id": "java.util.Map&lt;update.dto.health.check.HealthStatus, java.lang.Integer&gt;",
+            "required": [],
+            "properties": {}
+        },
+        "patch.dto.PrimitiveDTO&lt;java.lang.Boolean&gt;": {
+            "id": "patch.dto.PrimitiveDTO&lt;java.lang.Boolean&gt;",
+            "required": [],
+            "properties": {
+                "value": {
+                    "type": "boolean"
+                }
+            }
+        },
+        "patch.dto.RequestDTO&lt;patch.dto.appliance.configuration.ContainerDTO&gt;": {
+            "id": "patch.dto.RequestDTO&lt;patch.dto.appliance.configuration.ContainerDTO&gt;",
+            "required": [],
+            "properties": {
+                "cluster_uuid": {
+                    "type": "string"
+                },
+                "generic_d_t_o": {
+                    "$ref": "patch.dto.appliance.configuration.ContainerDTO"
+                },
+                "operation": {
+                    "type": "string"
+                }
+            }
+        },
+        "patch.dto.alerts.AlertSummaryDTO": {
+            "id": "patch.dto.alerts.AlertSummaryDTO",
+            "required": [],
+            "properties": {
+                "alert_summaries": {
+                    "$ref": "java.util.Map&lt;patch.dto.alerts.AlertDTO$AlertSeverity, patch.base.EntityCollection&lt;patch.dto.alerts.AlertDTO&gt;&gt;"
+                },
+                "count": {
+                    "format": "int64",
+                    "type": "integer"
+                }
+            }
+        },
+        "patch.dto.appliance.configuration.ContainerDTO": {
+            "id": "patch.dto.appliance.configuration.ContainerDTO",
+            "required": [],
+            "properties": {
+                "advertised_capacity": {
+                    "format": "int64",
+                    "type": "integer"
+                },
+                "alert_summary": {
+                    "$ref": "patch.dto.alerts.AlertSummaryDTO"
+                },
+                "compression_delay_in_secs": {
+                    "format": "int32",
+                    "type": "integer"
+                },
+                "compression_enabled": {
+                    "type": "boolean"
+                },
+                "down_migrate_times_in_secs": {
+                    "$ref": "java.util.Map&lt;java.lang.String, java.lang.Integer&gt;"
+                },
+                "enable_software_encryption": {
+                    "type": "boolean"
+                },
+                "erasure_code": {
+                    "type": "string"
+                },
+                "erasure_code_delay_secs": {
+                    "format": "int32",
+                    "type": "integer"
+                },
+                "finger_print_on_write": {
+                    "enum": [
+                        "NONE",
+                        "OFF",
+                        "ON"
+                    ],
+                    "type": "string"
+                },
+                "health_summary": {
+                    "$ref": "patch.dto.health.check.HealthSummaryDTO"
+                },
+                "id": {
+                    "type": "string"
+                },
+                "ilm_policy": {
+                    "type": "string"
+                },
+                "is_nutanix_managed": {
+                    "type": "boolean"
+                },
+                "mapped_remote_containers": {
+                    "$ref": "java.util.Map&lt;java.lang.String, java.lang.String&gt;"
+                },
+                "marked_for_removal": {
+                    "type": "boolean"
+                },
+                "max_capacity": {
+                    "format": "int64",
+                    "type": "integer"
+                },
+                "name": {
+                    "type": "string"
+                },
+                "nfs_whitelist": {
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": "array"
+                },
+                "nfs_whitelist_inherited": {
+                    "type": "boolean"
+                },
+                "on_disk_dedup": {
+                    "enum": [
+                        "NONE",
+                        "OFF",
+                        "POST_PROCESS"
+                    ],
+                    "type": "string"
+                },
+                "oplog_replication_factor": {
+                    "format": "int32",
+                    "type": "integer"
+                },
+                "random_io_preference": {
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": "array"
+                },
+                "replication_factor": {
+                    "format": "int32",
+                    "type": "integer"
+                },
+                "seq_io_preference": {
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": "array"
+                },
+                "stats": {
+                    "$ref": "java.util.Map&lt;java.lang.String, java.lang.String&gt;"
+                },
+                "storage_container_uuid": {
+                    "type": "string"
+                },
+                "total_explicit_reserved_capacity": {
+                    "format": "int64",
+                    "type": "integer"
+                },
+                "total_implicit_reserved_capacity": {
+                    "format": "int64",
+                    "type": "integer"
+                },
+                "usage_stats": {
+                    "$ref": "java.util.Map&lt;java.lang.String, java.lang.String&gt;"
+                },
+                "vstore_name_list": {
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": "array"
+                }
+            }
+        },
+        "patch.dto.health.check.EntityTypeHealthCheckSummaryDTO": {
+            "id": "patch.dto.health.check.EntityTypeHealthCheckSummaryDTO",
+            "required": [],
+            "properties": {
+                "checks_in_error": {
+                    "$ref": "java.util.Map&lt;java.lang.String, patch.dto.health.check.HealthCheckErrorsDTO&gt;"
+                },
+                "detailed_check_summary": {
+                    "$ref": "java.util.Map&lt;java.lang.String, java.util.Map&lt;patch.dto.health.check.HealthStatus, java.lang.Integer&gt;&gt;"
+                },
+                "entity_type": {
+                    "enum": [
+                        "CLUSTER",
+                        "HARDWARE",
+                        "STORAGE",
+                        "BACKUP",
+                        "DR",
+                        "LICENSE",
+                        "DISK",
+                        "STORAGE_TIER",
+                        "HOST",
+                        "NODE",
+                        "MANAGEMENT_SERVER",
+                        "MANAGEMENT_SERVER_INFO",
+                        "VM",
+                        "SERVICE_VM",
+                        "VDISK",
+                        "VIRTUAL_DISK",
+                        "STORAGE_POOL",
+                        "CONTAINER",
+                        "STORAGE_CONTAINER",
+                        "VZONE",
+                        "SNAPSHOT",
+                        "FAST_CLONE",
+                        "RSYSLOG_SERVER",
+                        "KEY_MANAGEMENT_SERVER",
+                        "CERTIFICATE",
+                        "HTTP_PROXY",
+                        "SNMP_TRAP",
+                        "SNMP_USER",
+                        "REMOTE_SITE",
+                        "CLOUD_CREDENTIALS",
+                        "PROTECTION_DOMAIN",
+                        "CONSISTENCY_GROUP",
+                        "REPLICATION",
+                        "REPLICATION_LINK",
+                        "SYNC_REPLICATION",
+                        "VSTORE",
+                        "NETWORK_SWITCH_INTERFACE",
+                        "NETWORK_SWITCH",
+                        "VIRTUAL_NIC",
+                        "VMKERNEL_NIC",
+                        "HOST_NIC",
+                        "NIC_TEAM",
+                        "VIRTUAL_NETWORK",
+                        "VIRTUAL_SWITCH",
+                        "HOST_GPU",
+                        "VIRTUAL_GPU",
+                        "TAG",
+                        "COMMENT",
+                        "TASK",
+                        "IMAGE",
+                        "IMAGE_INFO",
+                        "ISCSI_CLIENT",
+                        "VOLUME_GROUP",
+                        "VOLUME_DISK",
+                        "VM_DISK",
+                        "FILE_SERVER",
+                        "FS_PARTNER_SERVER",
+                        "CVM",
+                        "NVM",
+                        "FILE_SERVER_SHARE",
+                        "ALERT_CAUSE",
+                        "ALERT_CHECK_SCHEMA",
+                        "ALERT_CHECK_SCHEMA_OVERRIDE",
+                        "INTER_CLUSTER_DATA_TRANSFER_INDICATOR",
+                        "RACKABLE_UNIT",
+                        "DIRECTORY_CONFIG",
+                        "HEALTH_CHECK",
+                        "NETWORK_SNMP_PROFILE",
+                        "ALERT",
+                        "SCHEDULE",
+                        "BANDWIDTH_POLICY",
+                        "FILE_GROUP",
+                        "NETWORK_MAPPING",
+                        "PROGRESS_MONITOR",
+                        "LCM_ENTITY",
+                        "LCM_AVAILABLE_VERSION",
+                        "CAPACITY_SCENARIO",
+                        "NCC_ERROR_CODES",
+                        "RESOURCE_CONSUMPTION",
+                        "REPORT_CONFIG",
+                        "REPORT_INSTANCE",
+                        "COMMON_REPORT_CONFIG",
+                        "REMOTE_CONNECTION"
+                    ],
+                    "type": "string"
+                },
+                "filter_criteria": {
+                    "type": "string"
+                },
+                "health_summary": {
+                    "$ref": "java.util.Map&lt;patch.dto.health.check.HealthStatus, java.lang.Integer&gt;"
+                }
+            }
+        },
+        "patch.dto.health.check.HealthSummaryDTO": {
+            "id": "patch.dto.health.check.HealthSummaryDTO",
+            "required": [],
+            "properties": {
+                "entity_type_summaries": {
+                    "items": {
+                        "$ref": "patch.dto.health.check.EntityTypeHealthCheckSummaryDTO"
+                    },
+                    "type": "array"
+                },
+                "health_check_summaries": {
+                    "$ref": "java.util.Map&lt;java.lang.String, patch.dto.health.check.HealthCheckSummaryDTO&gt;"
+                },
+                "health_status": {
+                    "enum": [
+                        "Critical",
+                        "Warning",
+                        "Good",
+                        "Unknown",
+                        "Error"
+                    ],
+                    "type": "string"
+                }
+            }
+        },
+        "update.dto.PrimitiveDTO&lt;java.lang.Boolean&gt;": {
+            "id": "update.dto.PrimitiveDTO&lt;java.lang.Boolean&gt;",
+            "required": [],
+            "properties": {
+                "value": {
+                    "type": "boolean"
+                }
+            }
+        },
+        "update.dto.alerts.AlertSummaryDTO": {
+            "id": "update.dto.alerts.AlertSummaryDTO",
+            "required": [],
+            "properties": {
+                "alert_summaries": {
+                    "$ref": "java.util.Map&lt;update.dto.alerts.AlertDTO$AlertSeverity, update.base.EntityCollection&lt;update.dto.alerts.AlertDTO&gt;&gt;"
+                },
+                "count": {
+                    "format": "int64",
+                    "type": "integer"
+                }
+            }
+        },
+        "update.dto.appliance.configuration.ContainerDTO": {
+            "id": "update.dto.appliance.configuration.ContainerDTO",
+            "required": [],
+            "properties": {
+                "advertised_capacity": {
+                    "format": "int64",
+                    "type": "integer"
+                },
+                "alert_summary": {
+                    "$ref": "update.dto.alerts.AlertSummaryDTO"
+                },
+                "compression_delay_in_secs": {
+                    "format": "int32",
+                    "type": "integer"
+                },
+                "compression_enabled": {
+                    "type": "boolean"
+                },
+                "down_migrate_times_in_secs": {
+                    "$ref": "java.util.Map&lt;java.lang.String, java.lang.Integer&gt;"
+                },
+                "enable_software_encryption": {
+                    "type": "boolean"
+                },
+                "erasure_code": {
+                    "type": "string"
+                },
+                "erasure_code_delay_secs": {
+                    "format": "int32",
+                    "type": "integer"
+                },
+                "finger_print_on_write": {
+                    "enum": [
+                        "NONE",
+                        "OFF",
+                        "ON"
+                    ],
+                    "type": "string"
+                },
+                "health_summary": {
+                    "$ref": "update.dto.health.check.HealthSummaryDTO"
+                },
+                "id": {
+                    "type": "string"
+                },
+                "ilm_policy": {
+                    "type": "string"
+                },
+                "is_nutanix_managed": {
+                    "type": "boolean"
+                },
+                "mapped_remote_containers": {
+                    "$ref": "java.util.Map&lt;java.lang.String, java.lang.String&gt;"
+                },
+                "marked_for_removal": {
+                    "type": "boolean"
+                },
+                "max_capacity": {
+                    "format": "int64",
+                    "type": "integer"
+                },
+                "name": {
+                    "type": "string"
+                },
+                "nfs_whitelist": {
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": "array"
+                },
+                "nfs_whitelist_inherited": {
+                    "type": "boolean"
+                },
+                "on_disk_dedup": {
+                    "enum": [
+                        "NONE",
+                        "OFF",
+                        "POST_PROCESS"
+                    ],
+                    "type": "string"
+                },
+                "oplog_replication_factor": {
+                    "format": "int32",
+                    "type": "integer"
+                },
+                "random_io_preference": {
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": "array"
+                },
+                "replication_factor": {
+                    "format": "int32",
+                    "type": "integer"
+                },
+                "seq_io_preference": {
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": "array"
+                },
+                "stats": {
+                    "$ref": "java.util.Map&lt;java.lang.String, java.lang.String&gt;"
+                },
+                "storage_container_uuid": {
+                    "type": "string"
+                },
+                "total_explicit_reserved_capacity": {
+                    "format": "int64",
+                    "type": "integer"
+                },
+                "total_implicit_reserved_capacity": {
+                    "format": "int64",
+                    "type": "integer"
+                },
+                "usage_stats": {
+                    "$ref": "java.util.Map&lt;java.lang.String, java.lang.String&gt;"
+                },
+                "vstore_name_list": {
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": "array"
+                }
+            }
+        },
+        "update.dto.health.check.EntityTypeHealthCheckSummaryDTO": {
+            "id": "update.dto.health.check.EntityTypeHealthCheckSummaryDTO",
+            "required": [],
+            "properties": {
+                "checks_in_error": {
+                    "$ref": "java.util.Map&lt;java.lang.String, update.dto.health.check.HealthCheckErrorsDTO&gt;"
+                },
+                "detailed_check_summary": {
+                    "$ref": "java.util.Map&lt;java.lang.String, java.util.Map&lt;update.dto.health.check.HealthStatus, java.lang.Integer&gt;&gt;"
+                },
+                "entity_type": {
+                    "enum": [
+                        "CLUSTER",
+                        "HARDWARE",
+                        "STORAGE",
+                        "BACKUP",
+                        "DR",
+                        "LICENSE",
+                        "DISK",
+                        "STORAGE_TIER",
+                        "HOST",
+                        "NODE",
+                        "MANAGEMENT_SERVER",
+                        "MANAGEMENT_SERVER_INFO",
+                        "VM",
+                        "SERVICE_VM",
+                        "VDISK",
+                        "VIRTUAL_DISK",
+                        "STORAGE_POOL",
+                        "CONTAINER",
+                        "STORAGE_CONTAINER",
+                        "VZONE",
+                        "SNAPSHOT",
+                        "FAST_CLONE",
+                        "RSYSLOG_SERVER",
+                        "KEY_MANAGEMENT_SERVER",
+                        "CERTIFICATE",
+                        "HTTP_PROXY",
+                        "SNMP_TRAP",
+                        "SNMP_USER",
+                        "REMOTE_SITE",
+                        "CLOUD_CREDENTIALS",
+                        "PROTECTION_DOMAIN",
+                        "CONSISTENCY_GROUP",
+                        "REPLICATION",
+                        "REPLICATION_LINK",
+                        "SYNC_REPLICATION",
+                        "VSTORE",
+                        "NETWORK_SWITCH_INTERFACE",
+                        "NETWORK_SWITCH",
+                        "VIRTUAL_NIC",
+                        "VMKERNEL_NIC",
+                        "HOST_NIC",
+                        "NIC_TEAM",
+                        "VIRTUAL_NETWORK",
+                        "VIRTUAL_SWITCH",
+                        "HOST_GPU",
+                        "VIRTUAL_GPU",
+                        "TAG",
+                        "COMMENT",
+                        "TASK",
+                        "IMAGE",
+                        "IMAGE_INFO",
+                        "ISCSI_CLIENT",
+                        "VOLUME_GROUP",
+                        "VOLUME_DISK",
+                        "VM_DISK",
+                        "FILE_SERVER",
+                        "FS_PARTNER_SERVER",
+                        "CVM",
+                        "NVM",
+                        "FILE_SERVER_SHARE",
+                        "ALERT_CAUSE",
+                        "ALERT_CHECK_SCHEMA",
+                        "ALERT_CHECK_SCHEMA_OVERRIDE",
+                        "INTER_CLUSTER_DATA_TRANSFER_INDICATOR",
+                        "RACKABLE_UNIT",
+                        "DIRECTORY_CONFIG",
+                        "HEALTH_CHECK",
+                        "NETWORK_SNMP_PROFILE",
+                        "ALERT",
+                        "SCHEDULE",
+                        "BANDWIDTH_POLICY",
+                        "FILE_GROUP",
+                        "NETWORK_MAPPING",
+                        "PROGRESS_MONITOR",
+                        "LCM_ENTITY",
+                        "LCM_AVAILABLE_VERSION",
+                        "CAPACITY_SCENARIO",
+                        "NCC_ERROR_CODES",
+                        "RESOURCE_CONSUMPTION",
+                        "REPORT_CONFIG",
+                        "REPORT_INSTANCE",
+                        "COMMON_REPORT_CONFIG",
+                        "REMOTE_CONNECTION"
+                    ],
+                    "type": "string"
+                },
+                "filter_criteria": {
+                    "type": "string"
+                },
+                "health_summary": {
+                    "$ref": "java.util.Map&lt;update.dto.health.check.HealthStatus, java.lang.Integer&gt;"
+                }
+            }
+        },
+        "update.dto.health.check.HealthSummaryDTO": {
+            "id": "update.dto.health.check.HealthSummaryDTO",
+            "required": [],
+            "properties": {
+                "entity_type_summaries": {
+                    "items": {
+                        "$ref": "update.dto.health.check.EntityTypeHealthCheckSummaryDTO"
+                    },
+                    "type": "array"
+                },
+                "health_check_summaries": {
+                    "$ref": "java.util.Map&lt;java.lang.String, update.dto.health.check.HealthCheckSummaryDTO&gt;"
+                },
+                "health_status": {
+                    "enum": [
+                        "Critical",
+                        "Warning",
+                        "Good",
+                        "Unknown",
+                        "Error"
+                    ],
+                    "type": "string"
+                }
+            }
+        }
+    }
+}

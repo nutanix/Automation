@@ -1,0 +1,384 @@
+swagger: '2.0'
+info:
+  version: 'v2.0'
+  title: Swagger API
+host: any_cvm_ip:9440
+basePath: /PrismGateway/services/rest/v2.0
+schemes:
+- https
+consumes:
+- application/json
+produces:
+- application/json
+paths:
+  /http_proxies/:
+    get:
+      description: Get the list of HTTP Proxies.
+      summary: getHttpProxies
+      operationId: HttpProxiesGet
+      produces:
+      - application/json
+      parameters: []
+      responses:
+        200:
+          description: ''
+          schema:
+            $ref: '#/definitions/Get.base.entitycollection&lt;get.dto.appliance.configuration.httpproxydto&gt;'
+          examples: {}
+      x-unitTests: []
+      x-operation-settings:
+        CollectParameters: false
+        AllowDynamicQueryParameters: false
+        AllowDynamicFormParameters: false
+        IsMultiContentStreaming: false
+    put:
+      description: Update an HTTP Proxy.
+      summary: editHttpProxy
+      operationId: HttpProxiesPut
+      produces:
+      - application/json
+      parameters:
+      - name: body
+        in: body
+        required: true
+        description: An HTTP Proxy instance
+        schema:
+          $ref: '#/definitions/Update.dto.appliance.configuration.httpproxydto'
+      responses:
+        200:
+          description: ''
+          schema:
+            $ref: '#/definitions/Update.dto.primitivedto&lt;java.lang.boolean&gt;'
+          examples: {}
+      x-unitTests: []
+      x-operation-settings:
+        CollectParameters: false
+        AllowDynamicQueryParameters: false
+        AllowDynamicFormParameters: false
+        IsMultiContentStreaming: false
+    post:
+      description: Add an HTTP Proxy.
+      summary: addHttpProxy
+      operationId: HttpProxiesPost
+      produces:
+      - application/json
+      parameters:
+      - name: body
+        in: body
+        required: true
+        description: An HTTP Proxy instance
+        schema:
+          $ref: '#/definitions/Create.dto.appliance.configuration.httpproxydto'
+      responses:
+        200:
+          description: ''
+          schema:
+            $ref: '#/definitions/Create.dto.primitivedto&lt;java.lang.boolean&gt;'
+          examples: {}
+      x-unitTests: []
+      x-operation-settings:
+        CollectParameters: false
+        AllowDynamicQueryParameters: false
+        AllowDynamicFormParameters: false
+        IsMultiContentStreaming: false
+    patch:
+      description: Modify an HTTP Proxy.
+      summary: patchHttpProxy
+      operationId: HttpProxiesPatch
+      produces:
+      - application/json
+      parameters:
+      - name: body
+        in: body
+        required: true
+        description: An HTTP Proxy instance
+        schema:
+          $ref: '#/definitions/Patch.dto.requestdto&lt;patch.dto.appliance.configuration.httpproxydto&gt;'
+      responses:
+        200:
+          description: ''
+          schema:
+            $ref: '#/definitions/Patch.dto.primitivedto&lt;java.lang.boolean&gt;'
+          examples: {}
+      x-unitTests: []
+      x-operation-settings:
+        CollectParameters: false
+        AllowDynamicQueryParameters: false
+        AllowDynamicFormParameters: false
+        IsMultiContentStreaming: false
+  /http_proxies/{name}:
+    get:
+      description: Get an HTTP Proxy.
+      summary: getHttpProxy
+      operationId: HttpProxiesByNameGet
+      produces:
+      - application/json
+      parameters:
+      - name: name
+        in: path
+        required: true
+        type: string
+        description: Name of an HTTP Proxy
+      responses:
+        200:
+          description: ''
+          schema:
+            $ref: '#/definitions/Get.dto.appliance.configuration.httpproxydto'
+          examples: {}
+      x-unitTests: []
+      x-operation-settings:
+        CollectParameters: false
+        AllowDynamicQueryParameters: false
+        AllowDynamicFormParameters: false
+        IsMultiContentStreaming: false
+    delete:
+      description: Delete an HTTP Proxy.
+      summary: deleteHttpProxy
+      operationId: HttpProxiesByNameDelete
+      produces:
+      - application/json
+      parameters:
+      - name: name
+        in: path
+        required: true
+        type: string
+        description: Name of an HTTP Proxy
+      responses:
+        200:
+          description: ''
+          schema:
+            $ref: '#/definitions/Delete.dto.primitivedto&lt;java.lang.boolean&gt;'
+          examples: {}
+      x-unitTests: []
+      x-operation-settings:
+        CollectParameters: false
+        AllowDynamicQueryParameters: false
+        AllowDynamicFormParameters: false
+        IsMultiContentStreaming: false
+definitions:
+  Create.dto.primitivedto&lt;java.lang.boolean&gt;:
+    title: create.dto.PrimitiveDTO&lt;java.lang.Boolean&gt;
+    type: object
+    properties:
+      value:
+        description: ''
+        type: boolean
+  Create.dto.appliance.configuration.httpproxydto:
+    title: create.dto.appliance.configuration.HttpProxyDTO
+    description: http-proxy
+    type: object
+    properties:
+      address:
+        description: Address of the proxy
+        type: string
+      name:
+        description: Proxy name.
+        type: string
+      port:
+        description: Port on which proxy is binding
+        type: integer
+        format: int32
+      password:
+        description: Password for proxy authentication
+        type: string
+      proxy_types:
+        description: Proxy types to send applicable traffic
+        type: array
+        items:
+          type: string
+      username:
+        description: Username for proxy authentication
+        type: string
+    required:
+    - address
+    - name
+    - port
+  Delete.dto.primitivedto&lt;java.lang.boolean&gt;:
+    title: delete.dto.PrimitiveDTO&lt;java.lang.Boolean&gt;
+    type: object
+    properties:
+      value:
+        description: ''
+        type: boolean
+  Get.base.entitycollection&lt;get.dto.appliance.configuration.httpproxydto&gt;:
+    title: get.base.EntityCollection&lt;get.dto.appliance.configuration.HttpProxyDTO&gt;
+    type: object
+    properties:
+      entities:
+        description: ''
+        type: array
+        items:
+          $ref: '#/definitions/Get.dto.appliance.configuration.httpproxydto'
+      error_info:
+        $ref: '#/definitions/Get.base.errorinfo'
+      metadata:
+        $ref: '#/definitions/Get.base.metadata'
+  Get.base.errorinfo:
+    title: get.base.ErrorInfo
+    type: object
+    properties:
+      count:
+        description: ''
+        type: integer
+        format: int64
+      entity_list:
+        description: ''
+        type: array
+        items:
+          type: string
+      message:
+        description: ''
+        type: string
+  Get.base.metadata:
+    title: get.base.Metadata
+    type: object
+    properties:
+      count:
+        description: ''
+        type: integer
+        format: int32
+      end_index:
+        description: ''
+        type: integer
+        format: int32
+      filter_criteria:
+        description: ''
+        type: string
+      grand_total_entities:
+        description: ''
+        type: integer
+        format: int32
+      next_cursor:
+        description: ''
+        type: string
+      page:
+        description: ''
+        type: integer
+        format: int32
+      previous_cursor:
+        description: ''
+        type: string
+      search_string:
+        description: ''
+        type: string
+      sort_criteria:
+        description: ''
+        type: string
+      start_index:
+        description: ''
+        type: integer
+        format: int32
+      total_entities:
+        description: ''
+        type: integer
+        format: int32
+  Get.dto.appliance.configuration.httpproxydto:
+    title: get.dto.appliance.configuration.HttpProxyDTO
+    description: http-proxy
+    type: object
+    properties:
+      address:
+        description: Address of the proxy
+        type: string
+      name:
+        description: Proxy name.
+        type: string
+      password:
+        description: Password for proxy authentication
+        type: string
+      port:
+        description: Port on which proxy is binding
+        type: integer
+        format: int32
+      proxy_types:
+        description: Proxy types to send applicable traffic
+        type: array
+        items:
+          type: string
+      username:
+        description: Username for proxy authentication
+        type: string
+  Patch.dto.primitivedto&lt;java.lang.boolean&gt;:
+    title: patch.dto.PrimitiveDTO&lt;java.lang.Boolean&gt;
+    type: object
+    properties:
+      value:
+        description: ''
+        type: boolean
+  Patch.dto.requestdto&lt;patch.dto.appliance.configuration.httpproxydto&gt;:
+    title: patch.dto.RequestDTO&lt;patch.dto.appliance.configuration.HttpProxyDTO&gt;
+    type: object
+    properties:
+      cluster_uuid:
+        description: ''
+        type: string
+      generic_d_t_o:
+        $ref: '#/definitions/Patch.dto.appliance.configuration.httpproxydto'
+      operation:
+        description: ''
+        type: string
+  Patch.dto.appliance.configuration.httpproxydto:
+    title: patch.dto.appliance.configuration.HttpProxyDTO
+    description: http-proxy
+    type: object
+    properties:
+      name:
+        description: Proxy name.
+        type: string
+      address:
+        description: Address of the proxy
+        type: string
+      password:
+        description: Password for proxy authentication
+        type: string
+      port:
+        description: Port on which proxy is binding
+        type: integer
+        format: int32
+      proxy_types:
+        description: Proxy types to send applicable traffic
+        type: array
+        items:
+          type: string
+      username:
+        description: Username for proxy authentication
+        type: string
+    required:
+    - name
+  Update.dto.primitivedto&lt;java.lang.boolean&gt;:
+    title: update.dto.PrimitiveDTO&lt;java.lang.Boolean&gt;
+    type: object
+    properties:
+      value:
+        description: ''
+        type: boolean
+  Update.dto.appliance.configuration.httpproxydto:
+    title: update.dto.appliance.configuration.HttpProxyDTO
+    description: http-proxy
+    type: object
+    properties:
+      address:
+        description: Address of the proxy
+        type: string
+      name:
+        description: Proxy name.
+        type: string
+      port:
+        description: Port on which proxy is binding
+        type: integer
+        format: int32
+      password:
+        description: Password for proxy authentication
+        type: string
+      proxy_types:
+        description: Proxy types to send applicable traffic
+        type: array
+        items:
+          type: string
+      username:
+        description: Username for proxy authentication
+        type: string
+    required:
+    - address
+    - name
+    - port
