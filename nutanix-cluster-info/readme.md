@@ -66,7 +66,7 @@ pip3 install urllib3
 pip3 install weasyprint
 ```
 
-Note: During testing, combining the 3 libraries above into a single install command seemed to product strange results.  For this reason, I have listed the installation of each library as a separate command.
+Note: During testing, combining the 3 libraries above into a single install command seemed to produce strange results.  For this reason, I have listed the installation of each library as a separate command.
 
 - If there is a message in the output specifying a directory to add to your PATH, make sure that's done before continuing
 - Install [GTK for Windows](https://github.com/tschoonj/GTK-for-Windows-Runtime-Environment-Installer/releases) to C:\gtk.  My installation filename was gtk3-runtime-3.22.28-2018-03-12-ts-win64.exe.
