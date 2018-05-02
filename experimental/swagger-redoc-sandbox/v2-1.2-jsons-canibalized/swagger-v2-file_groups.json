@@ -1,0 +1,240 @@
+{
+    "apiVersion": "v2.0",
+    "swaggerVersion": "1.2",
+    "basePath": "https://any_cvm_ip:9440/PrismGateway/services/rest/v2.0",
+    "resourcePath": "/file_groups",
+    "produces": [
+        "application/json"
+    ],
+    "consumes": [
+        "application/json"
+    ],
+    "apis": [
+        {
+            "internal": false,
+            "path": "/file_groups/",
+            "operations": [
+                {
+                    "deprecated": "false",
+                    "internal": false,
+                    "method": "GET",
+                    "summary": "List file groups.",
+                    "notes": "List file groups.",
+                    "type": "get.base.EntityCollection&lt;get.dto.dr.FileGroupDTO&gt;",
+                    "nickname": "listFileGroups",
+                    "parameters": [
+                        {
+                            "name": "uuid",
+                            "description": "UUID of file group",
+                            "required": false,
+                            "allowMultiple": false,
+                            "paramType": "query",
+                            "type": "string"
+                        }
+                    ],
+                    "responseMessages": []
+                }
+            ]
+        },
+        {
+            "internal": false,
+            "path": "/file_groups/{uuid}/delete_files",
+            "operations": [
+                {
+                    "deprecated": "false",
+                    "internal": false,
+                    "method": "POST",
+                    "summary": "Remove files for a specific file group.",
+                    "notes": "Remove files for a specific file group.",
+                    "type": "create.dto.PrimitiveDTO&lt;java.lang.Boolean&gt;",
+                    "nickname": "deleteFiles",
+                    "parameters": [
+                        {
+                            "name": "uuid",
+                            "description": "UUID of file group",
+                            "required": true,
+                            "allowMultiple": false,
+                            "paramType": "path",
+                            "type": "string"
+                        }
+                    ],
+                    "responseMessages": []
+                }
+            ]
+        }
+    ],
+    "models": {
+        "create.dto.PrimitiveDTO&lt;java.lang.Boolean&gt;": {
+            "id": "create.dto.PrimitiveDTO&lt;java.lang.Boolean&gt;",
+            "required": [],
+            "properties": {
+                "value": {
+                    "type": "boolean"
+                }
+            }
+        },
+        "get.base.EntityCollection&lt;get.dto.dr.FileGroupDTO&gt;": {
+            "id": "get.base.EntityCollection&lt;get.dto.dr.FileGroupDTO&gt;",
+            "required": [],
+            "properties": {
+                "entities": {
+                    "items": {
+                        "$ref": "get.dto.dr.FileGroupDTO"
+                    },
+                    "type": "array"
+                },
+                "error_info": {
+                    "$ref": "get.base.ErrorInfo"
+                },
+                "metadata": {
+                    "$ref": "get.base.Metadata"
+                }
+            }
+        },
+        "get.base.ErrorInfo": {
+            "id": "get.base.ErrorInfo",
+            "required": [],
+            "properties": {
+                "count": {
+                    "format": "int64",
+                    "type": "integer"
+                },
+                "entity_list": {
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": "array"
+                },
+                "message": {
+                    "type": "string"
+                }
+            }
+        },
+        "get.base.Metadata": {
+            "id": "get.base.Metadata",
+            "required": [],
+            "properties": {
+                "count": {
+                    "format": "int32",
+                    "type": "integer"
+                },
+                "end_index": {
+                    "format": "int32",
+                    "type": "integer"
+                },
+                "filter_criteria": {
+                    "type": "string"
+                },
+                "grand_total_entities": {
+                    "format": "int32",
+                    "type": "integer"
+                },
+                "next_cursor": {
+                    "type": "string"
+                },
+                "page": {
+                    "format": "int32",
+                    "type": "integer"
+                },
+                "previous_cursor": {
+                    "type": "string"
+                },
+                "search_string": {
+                    "type": "string"
+                },
+                "sort_criteria": {
+                    "type": "string"
+                },
+                "start_index": {
+                    "format": "int32",
+                    "type": "integer"
+                },
+                "total_entities": {
+                    "format": "int32",
+                    "type": "integer"
+                }
+            }
+        },
+        "get.dto.ErrorDetails": {
+            "id": "get.dto.ErrorDetails",
+            "required": [],
+            "properties": {
+                "entity_id": {
+                    "type": "string"
+                },
+                "error_code": {
+                    "format": "int32",
+                    "type": "integer"
+                },
+                "error_message": {
+                    "type": "string"
+                }
+            }
+        },
+        "get.dto.dr.FileGroupDTO": {
+            "id": "get.dto.dr.FileGroupDTO",
+            "required": [],
+            "properties": {
+                "error_details": {
+                    "$ref": "get.dto.ErrorDetails",
+                    "description": "Error details.",
+                    "typeName": "DEFAULT"
+                },
+                "file_clone_paths": {
+                    "description": "Cloned file in this file group.",
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": "array",
+                    "typeName": "DEFAULT"
+                },
+                "file_group_uuid": {
+                    "description": "UUID of the file group.",
+                    "type": "string",
+                    "typeName": "DEFAULT"
+                },
+                "protection_domain_name": {
+                    "description": "Name of the protection domain the file group cloned from.",
+                    "type": "string",
+                    "typeName": "DEFAULT"
+                },
+                "snapshot_id": {
+                    "description": "Id of the snapshot the file group cloned from.",
+                    "type": "string",
+                    "typeName": "DEFAULT"
+                },
+                "snapshot_uuid": {
+                    "description": "UUID of the snapshot the file group cloned from.",
+                    "type": "string",
+                    "typeName": "DEFAULT"
+                },
+                "state": {
+                    "description": "Deployment state of this file group.",
+                    "enum": [
+                        "NOT_STARTED",
+                        "IN_PROGRESS",
+                        "COMPLETED"
+                    ],
+                    "type": "string",
+                    "typeName": "DEFAULT"
+                },
+                "v_store_path_prefixes": {
+                    "description": "Path prefixes of vStores in this file group.",
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": "array",
+                    "typeName": "DEFAULT"
+                },
+                "vm_ids": {
+                    "description": "Ids of vms in this file group.",
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": "array",
+                    "typeName": "DEFAULT"
+                }
+            }
+        }
+    }
+}

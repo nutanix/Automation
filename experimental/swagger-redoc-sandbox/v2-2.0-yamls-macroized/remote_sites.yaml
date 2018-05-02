@@ -1,0 +1,2730 @@
+swagger: '2.0'
+info:
+  version: 'v2.0'
+  title: Swagger API
+host: any_cvm_ip:9440
+basePath: /PrismGateway/services/rest/v2.0
+schemes:
+- https
+consumes:
+- application/json
+produces:
+- application/json
+paths:
+  /remote_sites/:
+    get:
+      description: Get the list of Remote Sites.
+      summary: getAllRemoteSites
+      operationId: RemoteSitesGet
+      produces:
+      - application/json
+      parameters:
+      - name: names
+        in: query
+        required: false
+        type: array
+        uniqueItems: false
+        items:
+          type: string
+        description: Remote Site names
+      - name: metro_compatible
+        in: query
+        required: false
+        type: boolean
+        description: Remote Site stretchable
+      - name: full_details
+        in: query
+        required: false
+        type: boolean
+        description: Remote cluster detail
+      - name: remoteVStores
+        in: query
+        required: false
+        type: array
+        uniqueItems: false
+        items:
+          type: string
+        description: Remote container to fetch
+      - name: include_deleted
+        in: query
+        required: false
+        type: boolean
+        description: Include deleted
+      - name: projection
+        in: query
+        required: false
+        type: string
+        description: Projections on the attributes
+      responses:
+        200:
+          description: ''
+          schema:
+            $ref: '#/definitions/Get.base.entitycollection&lt;get.dto.dr.remotesitedto&gt;'
+          examples: {}
+      x-unitTests: []
+      x-operation-settings:
+        CollectParameters: false
+        AllowDynamicQueryParameters: false
+        AllowDynamicFormParameters: false
+        IsMultiContentStreaming: false
+    put:
+      description: Update a Remote Site.
+      summary: updateRemoteSite
+      operationId: RemoteSitesPut
+      produces:
+      - application/json
+      parameters:
+      - name: body
+        in: body
+        required: true
+        description: A Remote Site instance
+        schema:
+          $ref: '#/definitions/Update.dto.dr.remotesitedto'
+      responses:
+        200:
+          description: ''
+          schema:
+            $ref: '#/definitions/Update.dto.dr.remotesitedto'
+          examples: {}
+      x-unitTests: []
+      x-operation-settings:
+        CollectParameters: false
+        AllowDynamicQueryParameters: false
+        AllowDynamicFormParameters: false
+        IsMultiContentStreaming: false
+    post:
+      description: Add a Remote Site.
+      summary: addRemoteSite
+      operationId: RemoteSitesPost
+      produces:
+      - application/json
+      parameters:
+      - name: body
+        in: body
+        required: true
+        description: A Remote Site instance
+        schema:
+          $ref: '#/definitions/Create.dto.dr.remotesitedto'
+      responses:
+        200:
+          description: ''
+          schema:
+            $ref: '#/definitions/Create.dto.dr.remotesitedto'
+          examples: {}
+      x-unitTests: []
+      x-operation-settings:
+        CollectParameters: false
+        AllowDynamicQueryParameters: false
+        AllowDynamicFormParameters: false
+        IsMultiContentStreaming: false
+    patch:
+      description: Modify a Remote Site.
+      summary: patchRemoteSite
+      operationId: RemoteSitesPatch
+      produces:
+      - application/json
+      parameters:
+      - name: body
+        in: body
+        required: true
+        description: A Remote Site instance
+        schema:
+          $ref: '#/definitions/Patch.dto.requestdto&lt;patch.dto.dr.remotesitedto&gt;'
+      responses:
+        200:
+          description: ''
+          schema:
+            $ref: '#/definitions/Patch.dto.dr.remotesitedto'
+          examples: {}
+      x-unitTests: []
+      x-operation-settings:
+        CollectParameters: false
+        AllowDynamicQueryParameters: false
+        AllowDynamicFormParameters: false
+        IsMultiContentStreaming: false
+  /remote_sites/alerts:
+    get:
+      description: Get the list of alerts generated on any Remote Site.
+      summary: getRemoteSiteAlerts
+      operationId: RemoteSitesAlertsGet
+      produces:
+      - application/json
+      parameters:
+      - name: start_time_in_usecs
+        in: query
+        required: false
+        type: integer
+        format: int32
+        description: Start time in microseconds
+      - name: end_time_in_usecs
+        in: query
+        required: false
+        type: integer
+        format: int32
+        description: End time in microseconds
+      - name: count
+        in: query
+        required: false
+        type: integer
+        format: int32
+        description: Maximum number of alerts
+      - name: resolved
+        in: query
+        required: false
+        type: boolean
+        description: Alerts which have been resolved
+      - name: acknowledged
+        in: query
+        required: false
+        type: boolean
+        description: Alerts which have been acknowledged
+      - name: severity
+        in: query
+        required: false
+        type: string
+        description: Alert severities
+      - name: alert_type_uuid
+        in: query
+        required: false
+        type: string
+        description: Alert type ids
+      - name: page
+        in: query
+        required: false
+        type: integer
+        format: int32
+        description: Page number
+      responses:
+        200:
+          description: ''
+          schema:
+            $ref: '#/definitions/Get.base.entitycollection&lt;get.dto.alerts.alertdto&gt;'
+          examples: {}
+      x-unitTests: []
+      x-operation-settings:
+        CollectParameters: false
+        AllowDynamicQueryParameters: false
+        AllowDynamicFormParameters: false
+        IsMultiContentStreaming: false
+  /remote_sites/dr_snapshots/:
+    get:
+      description: Get the list of Snapshots.
+      summary: getAllRemoteSiteSnapshots
+      operationId: RemoteSitesDrSnapshotsGet
+      produces:
+      - application/json
+      parameters:
+      - name: count
+        in: query
+        required: false
+        type: integer
+        format: int32
+        description: Maximum number of DR Snapshots to retrieve
+      - name: filter_criteria
+        in: query
+        required: false
+        type: string
+        description: Filter criteria
+      - name: sort_criteria
+        in: query
+        required: false
+        type: string
+        description: Sort criteria
+      - name: full_details
+        in: query
+        required: false
+        type: boolean
+        description: Whether to include consistency group / vm details
+      responses:
+        200:
+          description: ''
+          schema:
+            $ref: '#/definitions/Get.base.entitycollection&lt;get.dto.dr.snapshotdto&gt;'
+          examples: {}
+      x-unitTests: []
+      x-operation-settings:
+        CollectParameters: false
+        AllowDynamicQueryParameters: false
+        AllowDynamicFormParameters: false
+        IsMultiContentStreaming: false
+  /remote_sites/events:
+    get:
+      description: Get the list of events generated on any Remote Site.
+      summary: getRemoteSiteEvents
+      operationId: RemoteSitesEventsGet
+      produces:
+      - application/json
+      parameters:
+      - name: start_time_in_usecs
+        in: query
+        required: false
+        type: integer
+        format: int32
+        description: Start time in microseconds
+      - name: end_time_in_usecs
+        in: query
+        required: false
+        type: integer
+        format: int32
+        description: End time in microseconds
+      - name: count
+        in: query
+        required: false
+        type: integer
+        format: int32
+        description: Maximum number of events
+      - name: acknowledged
+        in: query
+        required: false
+        type: boolean
+        description: Events which have been acknowledged
+      - name: page
+        in: query
+        required: false
+        type: integer
+        format: int32
+        description: Page number
+      responses:
+        200:
+          description: ''
+          schema:
+            $ref: '#/definitions/Get.base.entitycollection&lt;get.dto.alerts.alertdto&gt;'
+          examples: {}
+      x-unitTests: []
+      x-operation-settings:
+        CollectParameters: false
+        AllowDynamicQueryParameters: false
+        AllowDynamicFormParameters: false
+        IsMultiContentStreaming: false
+  /remote_sites/pending_replications/:
+    get:
+      description: Get all pending replications.
+      summary: getPendingReplications
+      operationId: RemoteSitesPendingReplicationsGet
+      produces:
+      - application/json
+      parameters:
+      - name: protection_domain_names
+        in: query
+        required: false
+        type: array
+        uniqueItems: false
+        items:
+          type: string
+        description: Protection Domain Names
+      - name: remote_site_names
+        in: query
+        required: false
+        type: array
+        uniqueItems: false
+        items:
+          type: string
+        description: Remote Site Names
+      responses:
+        200:
+          description: ''
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/Get.dto.dr.pendingreplicationdto'
+          examples: {}
+      x-unitTests: []
+      x-operation-settings:
+        CollectParameters: false
+        AllowDynamicQueryParameters: false
+        AllowDynamicFormParameters: false
+        IsMultiContentStreaming: false
+  /remote_sites/{name}:
+    get:
+      description: Get a Remote Site.
+      summary: getRemoteSite
+      operationId: RemoteSitesByNameGet
+      produces:
+      - application/json
+      parameters:
+      - name: name
+        in: path
+        required: true
+        type: string
+        description: Name of the Remote Site
+      - name: projection
+        in: query
+        required: false
+        type: string
+        description: Projections on the attributes
+      responses:
+        200:
+          description: ''
+          schema:
+            $ref: '#/definitions/Get.dto.dr.remotesitedto'
+          examples: {}
+      x-unitTests: []
+      x-operation-settings:
+        CollectParameters: false
+        AllowDynamicQueryParameters: false
+        AllowDynamicFormParameters: false
+        IsMultiContentStreaming: false
+    delete:
+      description: Delete a Remote Site.
+      summary: markRemoteSiteForRemoval
+      operationId: RemoteSitesByNameDelete
+      produces:
+      - application/json
+      parameters:
+      - name: name
+        in: path
+        required: true
+        type: string
+        description: Name of the Remote Site
+      responses:
+        200:
+          description: ''
+          schema:
+            $ref: '#/definitions/Delete.dto.primitivedto&lt;java.lang.boolean&gt;'
+          examples: {}
+      x-unitTests: []
+      x-operation-settings:
+        CollectParameters: false
+        AllowDynamicQueryParameters: false
+        AllowDynamicFormParameters: false
+        IsMultiContentStreaming: false
+  /remote_sites/{name}/alerts:
+    get:
+      description: Get the list of alerts generated on a specified Remote Site.
+      summary: getAlertsForRemoteSite
+      operationId: RemoteSitesAlertsByNameGet
+      produces:
+      - application/json
+      parameters:
+      - name: name
+        in: path
+        required: true
+        type: string
+        description: Name of the Remote Site
+      - name: start_time_in_usecs
+        in: query
+        required: false
+        type: integer
+        format: int32
+        description: Start time in microseconds
+      - name: end_time_in_usecs
+        in: query
+        required: false
+        type: integer
+        format: int32
+        description: End time in microseconds
+      - name: count
+        in: query
+        required: false
+        type: integer
+        format: int32
+        description: Maximum number of alerts
+      - name: resolved
+        in: query
+        required: false
+        type: boolean
+        description: Alerts which have been resolved
+      - name: acknowledged
+        in: query
+        required: false
+        type: boolean
+        description: Alerts which have been acknowledged
+      - name: severity
+        in: query
+        required: false
+        type: string
+        description: Alert severities
+      - name: alert_type_uuid
+        in: query
+        required: false
+        type: string
+        description: Alert type ids
+      - name: page
+        in: query
+        required: false
+        type: integer
+        format: int32
+        description: Page number
+      responses:
+        200:
+          description: ''
+          schema:
+            $ref: '#/definitions/Get.base.entitycollection&lt;get.dto.alerts.alertdto&gt;'
+          examples: {}
+      x-unitTests: []
+      x-operation-settings:
+        CollectParameters: false
+        AllowDynamicQueryParameters: false
+        AllowDynamicFormParameters: false
+        IsMultiContentStreaming: false
+  /remote_sites/{name}/dr_snapshots/:
+    get:
+      description: Get the list of Snapshots.
+      summary: getSnapshotsForRemoteSite
+      operationId: RemoteSitesDrSnapshotsByNameGet
+      produces:
+      - application/json
+      parameters:
+      - name: name
+        in: path
+        required: true
+        type: string
+        description: Name of the Remote Site
+      - name: count
+        in: query
+        required: false
+        type: integer
+        format: int32
+        description: Maximum number of DR Snapshots to retrieve
+      - name: filter_criteria
+        in: query
+        required: false
+        type: string
+        description: Filter criteria
+      - name: sort_criteria
+        in: query
+        required: false
+        type: string
+        description: Sort criteria
+      - name: full_Details
+        in: query
+        required: false
+        type: boolean
+        description: Whether to include consistency group / vm details
+      responses:
+        200:
+          description: ''
+          schema:
+            $ref: '#/definitions/Get.base.entitycollection&lt;get.dto.dr.snapshotdto&gt;'
+          examples: {}
+      x-unitTests: []
+      x-operation-settings:
+        CollectParameters: false
+        AllowDynamicQueryParameters: false
+        AllowDynamicFormParameters: false
+        IsMultiContentStreaming: false
+  /remote_sites/{name}/events:
+    get:
+      description: Get the list of events generated on a specified Remote Site.
+      summary: getEventsForRemoteSite
+      operationId: RemoteSitesEventsByNameGet
+      produces:
+      - application/json
+      parameters:
+      - name: name
+        in: path
+        required: true
+        type: string
+        description: Name of the Remote Site
+      - name: start_time_in_usecs
+        in: query
+        required: false
+        type: integer
+        format: int32
+        description: Start time in microseconds
+      - name: end_time_in_usecs
+        in: query
+        required: false
+        type: integer
+        format: int32
+        description: End time in microseconds
+      - name: count
+        in: query
+        required: false
+        type: integer
+        format: int32
+        description: Maximum number of events
+      - name: acknowledged
+        in: query
+        required: false
+        type: boolean
+        description: Events which have been acknowledged
+      - name: page
+        in: query
+        required: false
+        type: integer
+        format: int32
+        description: Page number
+      responses:
+        200:
+          description: ''
+          schema:
+            $ref: '#/definitions/Get.base.entitycollection&lt;get.dto.alerts.alertdto&gt;'
+          examples: {}
+      x-unitTests: []
+      x-operation-settings:
+        CollectParameters: false
+        AllowDynamicQueryParameters: false
+        AllowDynamicFormParameters: false
+        IsMultiContentStreaming: false
+  /remote_sites/{name}/pending_replications/:
+    get:
+      description: Get all pending replications for the specified Remote Site.
+      summary: getPendingReplicationsInRemote
+      operationId: RemoteSitesPendingReplicationsByNameGet
+      produces:
+      - application/json
+      parameters:
+      - name: name
+        in: path
+        required: true
+        type: string
+        description: Name of the Remote Site
+      - name: protection_domain_names
+        in: query
+        required: false
+        type: array
+        uniqueItems: false
+        items:
+          type: string
+        description: Names of Protection Domains
+      responses:
+        200:
+          description: ''
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/Get.dto.dr.pendingreplicationdto'
+          examples: {}
+      x-unitTests: []
+      x-operation-settings:
+        CollectParameters: false
+        AllowDynamicQueryParameters: false
+        AllowDynamicFormParameters: false
+        IsMultiContentStreaming: false
+  /remote_sites/{name}/stats/:
+    get:
+      description: Get the stats for a specified Remote Site.
+      summary: getRemoteSiteStats
+      operationId: RemoteSitesStatsByNameGet
+      produces:
+      - application/json
+      parameters:
+      - name: name
+        in: path
+        required: true
+        type: string
+        description: Name of the Remote Site
+      - name: metrics
+        in: query
+        required: true
+        type: array
+        uniqueItems: false
+        items:
+          type: string
+        description: List of metrics
+      - name: start_time_in_usecs
+        in: query
+        required: false
+        type: integer
+        format: int32
+        description: Start time in microseconds
+      - name: end_time_in_usecs
+        in: query
+        required: false
+        type: integer
+        format: int32
+        description: End time in microseconds
+      - name: interval_in_secs
+        in: query
+        required: false
+        type: integer
+        format: int32
+        description: Sampling interval of stats
+      responses:
+        200:
+          description: ''
+          schema:
+            $ref: '#/definitions/Get.base.statsresponse'
+          examples: {}
+      x-unitTests: []
+      x-operation-settings:
+        CollectParameters: false
+        AllowDynamicQueryParameters: false
+        AllowDynamicFormParameters: false
+        IsMultiContentStreaming: false
+definitions:
+  Create.dto.alerts.alertsummarydto:
+    title: create.dto.alerts.AlertSummaryDTO
+    type: object
+    properties:
+      alert_summaries:
+        $ref: '#/definitions/Java.util.map&lt;create.dto.alerts.alertdto$alertseverity,Create.base.entitycollection&lt;create.dto.alerts.alertdto&gt;&gt;'
+      count:
+        description: ''
+        type: integer
+        format: int64
+  Create.dto.dr.bandwidthpolicydto:
+    title: create.dto.dr.BandwidthPolicyDTO
+    description: This DTO describes bandwidth throttling policies for different time schedules
+    type: object
+    properties:
+      policy_name:
+        description: Name of the bandwidth Throttling policy.
+        type: string
+      bandwidth_configurations:
+        description: List of the policy configurations.
+        type: array
+        items:
+          $ref: '#/definitions/Create.dto.dr.bandwidthpolicydto$bandwidthscheduleconfiguration'
+      default_bandwidth_limit:
+        description: Default bandwidth limit
+        type: integer
+        format: int32
+    required:
+    - policy_name
+  Create.dto.dr.bandwidthpolicydto$bandwidthscheduleconfiguration:
+    title: create.dto.dr.BandwidthPolicyDTO$BandwidthScheduleConfiguration
+    type: object
+    properties:
+      bandwidth_limit:
+        description: Bandwidth limit for the policy.
+        type: integer
+        format: int32
+      days_selected:
+        description: Days selected in a week.
+        type: integer
+        format: int32
+      end_time:
+        description: End time of the policy
+        type: integer
+        format: int64
+      start_time:
+        description: Start time of the policy
+        type: integer
+        format: int64
+  Create.dto.dr.l2networkmappingdto:
+    title: create.dto.dr.L2NetworkMappingDTO
+    type: object
+    properties:
+      dest_hypervisor_type:
+        description: ''
+        type: string
+      dest_network_name:
+        description: ''
+        type: string
+      src_hypervisor_type:
+        description: ''
+        type: string
+      src_network_name:
+        description: ''
+        type: string
+  Create.dto.dr.networkmappingdto:
+    title: create.dto.dr.NetworkMappingDTO
+    description: 'This DTO describes network mapping from source to destination cluster based on network uuids '
+    type: object
+    properties:
+      l2_network_mappings:
+        description: List of L2NetworkMappingDTOs which contains name and hypervisor type of the mapped networks
+        type: array
+        items:
+          $ref: '#/definitions/Create.dto.dr.l2networkmappingdto'
+      uuid:
+        description: Network mapping identifier for this remote site
+        type: string
+  CloudType:
+    title: cloud_type
+    example: AWS
+    x-enum-elements:
+    - name: AWS
+      description: ''
+    - name: AZURE
+      description: ''
+    type: string
+    enum:
+    - AWS
+    - AZURE
+  Status:
+    title: status
+    example: HANDSHAKING
+    x-enum-elements:
+    - name: HANDSHAKING
+      description: ''
+    - name: UNREACHABLE
+      description: ''
+    - name: STRETCH_UNHEALTHY
+      description: ''
+    - name: RELATIONSHIP_NOT_ESTABLISHED
+      description: ''
+    - name: RELATIONSHIP_ESTABLISHED
+      description: ''
+    - name: DEPLOYING
+      description: ''
+    type: string
+    enum:
+    - HANDSHAKING
+    - UNREACHABLE
+    - STRETCH_UNHEALTHY
+    - RELATIONSHIP_NOT_ESTABLISHED
+    - RELATIONSHIP_ESTABLISHED
+    - DEPLOYING
+  Create.dto.dr.remotesitedto:
+    title: create.dto.dr.RemoteSiteDTO
+    description: remote-site
+    type: object
+    properties:
+      alert_summary:
+        $ref: '#/definitions/Create.dto.alerts.alertsummarydto'
+      bandwidth_policy:
+        $ref: '#/definitions/Create.dto.dr.bandwidthpolicydto'
+      bandwidth_policy_enabled:
+        description: ''
+        type: boolean
+      capabilities:
+        description: ''
+        type: array
+        items:
+          type: string
+      cloud_type:
+        $ref: '#/definitions/CloudType'
+      cluster_external_data_services_i_p_address:
+        description: ''
+        type: string
+      cluster_id:
+        description: ''
+        type: integer
+        format: int64
+      cluster_incarnation_id:
+        description: ''
+        type: integer
+        format: int64
+      compression_enabled:
+        description: ''
+        type: boolean
+      credential_name:
+        description: Credential Name
+        type: string
+      cvm_name:
+        description: CVM Name
+        type: string
+      health_summary:
+        $ref: '#/definitions/Create.dto.health.check.healthsummarydto'
+      latency_in_usecs:
+        description: ''
+        type: integer
+        format: int64
+      marked_for_removal:
+        description: ''
+        type: boolean
+      max_bps:
+        description: ''
+        type: integer
+        format: int32
+      metro_ready:
+        description: ''
+        type: boolean
+      name:
+        description: Name of the remote site.
+        type: string
+      network_mapping:
+        $ref: '#/definitions/Create.dto.dr.networkmappingdto'
+      proxy_enabled:
+        description: ''
+        type: boolean
+      region:
+        description: Region
+        type: string
+      remote_ip_ports:
+        $ref: '#/definitions/Java.util.map&lt;java.lang.string,Java.lang.integer&gt;'
+      remote_v_store_info:
+        $ref: '#/definitions/Java.util.map&lt;java.lang.string,Create.dto.dr.remotesitedto$vstoreinfo&gt;'
+      replication_links:
+        description: ''
+        type: array
+        items:
+          $ref: '#/definitions/Create.dto.dr.replicationlinkdto'
+      ssh_enabled:
+        description: ''
+        type: boolean
+      stats:
+        $ref: '#/definitions/Java.util.map&lt;java.lang.string,Java.lang.string&gt;'
+      status:
+        $ref: '#/definitions/Status'
+      usage_stats:
+        $ref: '#/definitions/Java.util.map&lt;java.lang.string,Java.lang.string&gt;'
+      uuid:
+        description: Uuid of the remote site.
+        type: string
+      vstore_name_map:
+        $ref: '#/definitions/Java.util.map&lt;java.lang.string,Java.lang.string&gt;'
+  Create.dto.dr.replicationlinkdto:
+    title: create.dto.dr.ReplicationLinkDTO
+    type: object
+    properties:
+      current_replicating_snapshot_id:
+        description: ''
+        type: string
+      current_replicating_snapshot_total_bytes:
+        description: ''
+        type: integer
+        format: int64
+      current_replicating_snapshot_transmitted_bytes:
+        description: ''
+        type: integer
+        format: int64
+      id:
+        description: ''
+        type: string
+      last_replication_end_time_in_usecs:
+        description: ''
+        type: integer
+        format: int64
+      last_replication_start_time_in_usecs:
+        description: ''
+        type: integer
+        format: int64
+      last_successful_replication_snapshot_id:
+        description: ''
+        type: string
+      protection_domain_name:
+        description: ''
+        type: string
+      remote_site_name:
+        description: ''
+        type: string
+      stats:
+        $ref: '#/definitions/Java.util.map&lt;java.lang.string,Java.lang.string&gt;'
+  EntityType:
+    title: entity_type
+    example: CLUSTER
+    x-enum-elements:
+    - name: CLUSTER
+      description: ''
+    - name: HARDWARE
+      description: ''
+    - name: STORAGE
+      description: ''
+    - name: BACKUP
+      description: ''
+    - name: DR
+      description: ''
+    - name: LICENSE
+      description: ''
+    - name: DISK
+      description: ''
+    - name: STORAGE_TIER
+      description: ''
+    - name: HOST
+      description: ''
+    - name: NODE
+      description: ''
+    - name: MANAGEMENT_SERVER
+      description: ''
+    - name: MANAGEMENT_SERVER_INFO
+      description: ''
+    - name: VM
+      description: ''
+    - name: SERVICE_VM
+      description: ''
+    - name: VDISK
+      description: ''
+    - name: VIRTUAL_DISK
+      description: ''
+    - name: STORAGE_POOL
+      description: ''
+    - name: CONTAINER
+      description: ''
+    - name: STORAGE_CONTAINER
+      description: ''
+    - name: VZONE
+      description: ''
+    - name: SNAPSHOT
+      description: ''
+    - name: FAST_CLONE
+      description: ''
+    - name: RSYSLOG_SERVER
+      description: ''
+    - name: KEY_MANAGEMENT_SERVER
+      description: ''
+    - name: CERTIFICATE
+      description: ''
+    - name: HTTP_PROXY
+      description: ''
+    - name: SNMP_TRAP
+      description: ''
+    - name: SNMP_USER
+      description: ''
+    - name: REMOTE_SITE
+      description: ''
+    - name: CLOUD_CREDENTIALS
+      description: ''
+    - name: PROTECTION_DOMAIN
+      description: ''
+    - name: CONSISTENCY_GROUP
+      description: ''
+    - name: REPLICATION
+      description: ''
+    - name: REPLICATION_LINK
+      description: ''
+    - name: SYNC_REPLICATION
+      description: ''
+    - name: VSTORE
+      description: ''
+    - name: NETWORK_SWITCH_INTERFACE
+      description: ''
+    - name: NETWORK_SWITCH
+      description: ''
+    - name: VIRTUAL_NIC
+      description: ''
+    - name: VMKERNEL_NIC
+      description: ''
+    - name: HOST_NIC
+      description: ''
+    - name: NIC_TEAM
+      description: ''
+    - name: VIRTUAL_NETWORK
+      description: ''
+    - name: VIRTUAL_SWITCH
+      description: ''
+    - name: HOST_GPU
+      description: ''
+    - name: VIRTUAL_GPU
+      description: ''
+    - name: TAG
+      description: ''
+    - name: COMMENT
+      description: ''
+    - name: TASK
+      description: ''
+    - name: IMAGE
+      description: ''
+    - name: IMAGE_INFO
+      description: ''
+    - name: ISCSI_CLIENT
+      description: ''
+    - name: VOLUME_GROUP
+      description: ''
+    - name: VOLUME_DISK
+      description: ''
+    - name: VM_DISK
+      description: ''
+    - name: FILE_SERVER
+      description: ''
+    - name: FS_PARTNER_SERVER
+      description: ''
+    - name: CVM
+      description: ''
+    - name: NVM
+      description: ''
+    - name: FILE_SERVER_SHARE
+      description: ''
+    - name: ALERT_CAUSE
+      description: ''
+    - name: ALERT_CHECK_SCHEMA
+      description: ''
+    - name: ALERT_CHECK_SCHEMA_OVERRIDE
+      description: ''
+    - name: INTER_CLUSTER_DATA_TRANSFER_INDICATOR
+      description: ''
+    - name: RACKABLE_UNIT
+      description: ''
+    - name: DIRECTORY_CONFIG
+      description: ''
+    - name: HEALTH_CHECK
+      description: ''
+    - name: NETWORK_SNMP_PROFILE
+      description: ''
+    - name: ALERT
+      description: ''
+    - name: SCHEDULE
+      description: ''
+    - name: BANDWIDTH_POLICY
+      description: ''
+    - name: FILE_GROUP
+      description: ''
+    - name: NETWORK_MAPPING
+      description: ''
+    - name: PROGRESS_MONITOR
+      description: ''
+    - name: LCM_ENTITY
+      description: ''
+    - name: LCM_AVAILABLE_VERSION
+      description: ''
+    - name: CAPACITY_SCENARIO
+      description: ''
+    - name: NCC_ERROR_CODES
+      description: ''
+    - name: RESOURCE_CONSUMPTION
+      description: ''
+    - name: REPORT_CONFIG
+      description: ''
+    - name: REPORT_INSTANCE
+      description: ''
+    - name: COMMON_REPORT_CONFIG
+      description: ''
+    - name: REMOTE_CONNECTION
+      description: ''
+    type: string
+    enum:
+    - CLUSTER
+    - HARDWARE
+    - STORAGE
+    - BACKUP
+    - DR
+    - LICENSE
+    - DISK
+    - STORAGE_TIER
+    - HOST
+    - NODE
+    - MANAGEMENT_SERVER
+    - MANAGEMENT_SERVER_INFO
+    - VM
+    - SERVICE_VM
+    - VDISK
+    - VIRTUAL_DISK
+    - STORAGE_POOL
+    - CONTAINER
+    - STORAGE_CONTAINER
+    - VZONE
+    - SNAPSHOT
+    - FAST_CLONE
+    - RSYSLOG_SERVER
+    - KEY_MANAGEMENT_SERVER
+    - CERTIFICATE
+    - HTTP_PROXY
+    - SNMP_TRAP
+    - SNMP_USER
+    - REMOTE_SITE
+    - CLOUD_CREDENTIALS
+    - PROTECTION_DOMAIN
+    - CONSISTENCY_GROUP
+    - REPLICATION
+    - REPLICATION_LINK
+    - SYNC_REPLICATION
+    - VSTORE
+    - NETWORK_SWITCH_INTERFACE
+    - NETWORK_SWITCH
+    - VIRTUAL_NIC
+    - VMKERNEL_NIC
+    - HOST_NIC
+    - NIC_TEAM
+    - VIRTUAL_NETWORK
+    - VIRTUAL_SWITCH
+    - HOST_GPU
+    - VIRTUAL_GPU
+    - TAG
+    - COMMENT
+    - TASK
+    - IMAGE
+    - IMAGE_INFO
+    - ISCSI_CLIENT
+    - VOLUME_GROUP
+    - VOLUME_DISK
+    - VM_DISK
+    - FILE_SERVER
+    - FS_PARTNER_SERVER
+    - CVM
+    - NVM
+    - FILE_SERVER_SHARE
+    - ALERT_CAUSE
+    - ALERT_CHECK_SCHEMA
+    - ALERT_CHECK_SCHEMA_OVERRIDE
+    - INTER_CLUSTER_DATA_TRANSFER_INDICATOR
+    - RACKABLE_UNIT
+    - DIRECTORY_CONFIG
+    - HEALTH_CHECK
+    - NETWORK_SNMP_PROFILE
+    - ALERT
+    - SCHEDULE
+    - BANDWIDTH_POLICY
+    - FILE_GROUP
+    - NETWORK_MAPPING
+    - PROGRESS_MONITOR
+    - LCM_ENTITY
+    - LCM_AVAILABLE_VERSION
+    - CAPACITY_SCENARIO
+    - NCC_ERROR_CODES
+    - RESOURCE_CONSUMPTION
+    - REPORT_CONFIG
+    - REPORT_INSTANCE
+    - COMMON_REPORT_CONFIG
+    - REMOTE_CONNECTION
+  Create.dto.health.check.entitytypehealthchecksummarydto:
+    title: create.dto.health.check.EntityTypeHealthCheckSummaryDTO
+    type: object
+    properties:
+      checks_in_error:
+        $ref: '#/definitions/Java.util.map&lt;java.lang.string,Create.dto.health.check.healthcheckerrorsdto&gt;'
+      detailed_check_summary:
+        $ref: '#/definitions/Java.util.map&lt;java.lang.string,Java.util.map&lt;create.dto.health.check.healthstatus,Java.lang.integer&gt;&gt;'
+      entity_type:
+        $ref: '#/definitions/EntityType'
+      filter_criteria:
+        description: ''
+        type: string
+      health_summary:
+        $ref: '#/definitions/Java.util.map&lt;create.dto.health.check.healthstatus,Java.lang.integer&gt;'
+  HealthStatus:
+    title: health_status
+    example: Critical
+    x-enum-elements:
+    - name: Critical
+      description: ''
+    - name: Warning
+      description: ''
+    - name: Good
+      description: ''
+    - name: Unknown
+      description: ''
+    - name: Error
+      description: ''
+    type: string
+    enum:
+    - Critical
+    - Warning
+    - Good
+    - Unknown
+    - Error
+  Create.dto.health.check.healthsummarydto:
+    title: create.dto.health.check.HealthSummaryDTO
+    type: object
+    properties:
+      entity_type_summaries:
+        description: ''
+        type: array
+        items:
+          $ref: '#/definitions/Create.dto.health.check.entitytypehealthchecksummarydto'
+      health_check_summaries:
+        $ref: '#/definitions/Java.util.map&lt;java.lang.string,Create.dto.health.check.healthchecksummarydto&gt;'
+      health_status:
+        $ref: '#/definitions/HealthStatus'
+  Delete.dto.primitivedto&lt;java.lang.boolean&gt;:
+    title: delete.dto.PrimitiveDTO&lt;java.lang.Boolean&gt;
+    type: object
+    properties:
+      value:
+        description: ''
+        type: boolean
+  Get.base.entitycollection&lt;get.dto.resultcontentdescriptor&gt;:
+    title: get.base.EntityCollection&lt;get.dto.ResultContentDescriptor&gt;
+    type: object
+    properties:
+      entities:
+        description: ''
+        type: array
+        items:
+          $ref: '#/definitions/Get.dto.resultcontentdescriptor'
+      error_info:
+        $ref: '#/definitions/Get.base.errorinfo'
+      metadata:
+        $ref: '#/definitions/Get.base.metadata'
+  Get.base.entitycollection&lt;get.dto.alerts.alertdto&gt;:
+    title: get.base.EntityCollection&lt;get.dto.alerts.AlertDTO&gt;
+    type: object
+    properties:
+      entities:
+        description: ''
+        type: array
+        items:
+          $ref: '#/definitions/Get.dto.alerts.alertdto'
+      error_info:
+        $ref: '#/definitions/Get.base.errorinfo'
+      metadata:
+        $ref: '#/definitions/Get.base.metadata'
+  Get.base.entitycollection&lt;get.dto.dr.remotesitedto&gt;:
+    title: get.base.EntityCollection&lt;get.dto.dr.RemoteSiteDTO&gt;
+    type: object
+    properties:
+      entities:
+        description: ''
+        type: array
+        items:
+          $ref: '#/definitions/Get.dto.dr.remotesitedto'
+      error_info:
+        $ref: '#/definitions/Get.base.errorinfo'
+      metadata:
+        $ref: '#/definitions/Get.base.metadata'
+  Get.base.entitycollection&lt;get.dto.dr.snapshotdto&gt;:
+    title: get.base.EntityCollection&lt;get.dto.dr.SnapshotDTO&gt;
+    type: object
+    properties:
+      entities:
+        description: ''
+        type: array
+        items:
+          $ref: '#/definitions/Get.dto.dr.snapshotdto'
+      error_info:
+        $ref: '#/definitions/Get.base.errorinfo'
+      metadata:
+        $ref: '#/definitions/Get.base.metadata'
+  Get.base.errorinfo:
+    title: get.base.ErrorInfo
+    type: object
+    properties:
+      count:
+        description: ''
+        type: integer
+        format: int64
+      entity_list:
+        description: ''
+        type: array
+        items:
+          type: string
+      message:
+        description: ''
+        type: string
+  Get.base.metadata:
+    title: get.base.Metadata
+    type: object
+    properties:
+      count:
+        description: ''
+        type: integer
+        format: int32
+      end_index:
+        description: ''
+        type: integer
+        format: int32
+      filter_criteria:
+        description: ''
+        type: string
+      grand_total_entities:
+        description: ''
+        type: integer
+        format: int32
+      next_cursor:
+        description: ''
+        type: string
+      page:
+        description: ''
+        type: integer
+        format: int32
+      previous_cursor:
+        description: ''
+        type: string
+      search_string:
+        description: ''
+        type: string
+      sort_criteria:
+        description: ''
+        type: string
+      start_index:
+        description: ''
+        type: integer
+        format: int32
+      total_entities:
+        description: ''
+        type: integer
+        format: int32
+  Get.base.statsresponse:
+    title: get.base.StatsResponse
+    type: object
+    properties:
+      stats_specific_responses:
+        description: ''
+        type: array
+        items:
+          $ref: '#/definitions/Get.base.statsresponse$statsspecificresponse'
+  Get.base.statsresponse$statsspecificresponse:
+    title: get.base.StatsResponse$StatsSpecificResponse
+    type: object
+    properties:
+      interval_in_secs:
+        description: ''
+        type: integer
+        format: int64
+      message:
+        description: ''
+        type: string
+      metric:
+        description: ''
+        type: string
+      start_time_in_usecs:
+        description: ''
+        type: integer
+        format: int64
+      successful:
+        description: ''
+        type: boolean
+      values:
+        description: ''
+        type: array
+        items:
+          type: integer
+          format: int32
+  Get.dto.entitymetadata:
+    title: get.dto.EntityMetadata
+    type: object
+    properties:
+      additional_fields:
+        $ref: '#/definitions/Java.util.map&lt;java.lang.string,Java.lang.string&gt;'
+      cluster_uuid:
+        description: ''
+        type: string
+      context_hint_field:
+        description: ''
+        type: string
+      context_hint_value:
+        description: ''
+        type: string
+      entity_id:
+        description: ''
+        type: string
+      entity_name:
+        description: ''
+        type: string
+      entity_type:
+        $ref: '#/definitions/EntityType'
+  Get.dto.resultcontentdescriptor:
+    title: get.dto.ResultContentDescriptor
+    type: object
+    properties:
+      metadata:
+        $ref: '#/definitions/Get.dto.resultmetadata'
+      perspectives:
+        description: ''
+        type: array
+        items:
+          $ref: '#/definitions/Get.dto.resultcontentdescriptor$perspective'
+  Format:
+    title: format
+    example: TABLE
+    x-enum-elements:
+    - name: TABLE
+      description: ''
+    - name: BAR_CHART
+      description: ''
+    - name: PIE_CHART
+      description: ''
+    - name: TIME_SERIES
+      description: ''
+    - name: KEY_VALUE
+      description: ''
+    - name: COUNT
+      description: ''
+    - name: HEALTH_SUMMARY
+      description: ''
+    - name: ALERT_INFO
+      description: ''
+    - name: CAPACITY
+      description: ''
+    - name: OTHER
+      description: ''
+    type: string
+    enum:
+    - TABLE
+    - BAR_CHART
+    - PIE_CHART
+    - TIME_SERIES
+    - KEY_VALUE
+    - COUNT
+    - HEALTH_SUMMARY
+    - ALERT_INFO
+    - CAPACITY
+    - OTHER
+  Get.dto.resultcontentdescriptor$perspective:
+    title: get.dto.ResultContentDescriptor$Perspective
+    type: object
+    properties:
+      format:
+        $ref: '#/definitions/Format'
+      metadata:
+        $ref: '#/definitions/Get.dto.resultmetadata'
+      query:
+        description: ''
+        type: string
+      result:
+        description: ''
+        type: string
+      type:
+        description: ''
+        type: string
+  Get.dto.resultmetadata:
+    title: get.dto.ResultMetadata
+    type: object
+    properties:
+      entity_type:
+        $ref: '#/definitions/EntityType'
+      filters:
+        description: ''
+        type: array
+        items:
+          $ref: '#/definitions/Get.dto.resultmetadata$filter'
+      instances:
+        description: ''
+        type: array
+        items:
+          $ref: '#/definitions/Get.dto.entitymetadata'
+      title:
+        description: ''
+        type: string
+  Get.dto.resultmetadata$filter:
+    title: get.dto.ResultMetadata$Filter
+    type: object
+    properties:
+      display_for_rhs:
+        description: ''
+        type: string
+      lhs:
+        description: ''
+        type: string
+      operator:
+        description: Operator for the filter.
+        type: string
+      rhs:
+        description: ''
+        type: string
+  Get.dto.alerts.alertcausedto:
+    title: get.dto.alerts.AlertCauseDTO
+    type: object
+    properties:
+      actions:
+        description: Possible actions to resolve this alert
+        type: string
+      additional_links:
+        description: Additional links
+        type: string
+      alert_namespace:
+        description: Namespace this alert belongs to
+        type: string
+      cause:
+        description: Detailed description
+        type: string
+      chart_queries:
+        $ref: '#/definitions/Get.base.entitycollection&lt;get.dto.resultcontentdescriptor&gt;'
+      details:
+        description: Symptoms for this cause
+        type: string
+      has_global_details:
+        description: Whether the alert has global details or not
+        type: boolean
+      id:
+        description: Cause Id
+        type: string
+      num_resolved_count:
+        description: Number of times this cause has resolved the alert
+        type: integer
+        format: int64
+      parent_cause_id:
+        description: Id of the alert/cause this is a possible cause for
+        type: string
+      title:
+        description: Short description
+        type: string
+      troubleshooting_steps:
+        description: Steps to determine whether this is the cause.
+        type: string
+  Get.dto.alerts.alertdto:
+    title: get.dto.alerts.AlertDTO
+    type: object
+    properties:
+      acknowledged:
+        description: ''
+        type: boolean
+      acknowledged_by_username:
+        description: ''
+        type: string
+      acknowledged_time_stamp_in_usecs:
+        description: ''
+        type: integer
+        format: int64
+      affected_entities:
+        description: ''
+        type: array
+        items:
+          $ref: '#/definitions/Get.dto.alerts.alertdto$affectedentity'
+      alert_details:
+        $ref: '#/definitions/Get.dto.alerts.alertdto$alertdetailsdto'
+      alert_title:
+        description: ''
+        type: string
+      alert_type_uuid:
+        description: ''
+        type: string
+      auto_resolved:
+        description: ''
+        type: boolean
+      check_id:
+        description: ''
+        type: string
+      classifications:
+        description: ''
+        type: array
+        items:
+          type: string
+      cluster_uuid:
+        description: ''
+        type: string
+      context_types:
+        description: ''
+        type: array
+        items:
+          type: string
+      context_values:
+        description: ''
+        type: array
+        items:
+          type: string
+      created_time_stamp_in_usecs:
+        description: ''
+        type: integer
+        format: int64
+      detailed_message:
+        description: ''
+        type: string
+      id:
+        description: ''
+        type: string
+      impact_types:
+        description: ''
+        type: array
+        items:
+          type: string
+      last_occurrence_time_stamp_in_usecs:
+        description: ''
+        type: integer
+        format: int64
+      message:
+        description: ''
+        type: string
+      node_uuid:
+        description: ''
+        type: string
+      originating_cluster_uuid:
+        description: ''
+        type: string
+      possible_causes:
+        description: ''
+        type: array
+        items:
+          $ref: '#/definitions/Get.dto.alerts.alertcausedto'
+      resolved:
+        description: ''
+        type: boolean
+      resolved_by_username:
+        description: ''
+        type: string
+      resolved_time_stamp_in_usecs:
+        description: ''
+        type: integer
+        format: int64
+      service_v_m_id:
+        description: ''
+        type: string
+      severity:
+        description: This field describes the severity of the alert.
+        type: string
+      user_defined:
+        description: ''
+        type: boolean
+  Get.dto.alerts.alertdto$affectedentity:
+    title: get.dto.alerts.AlertDTO$AffectedEntity
+    type: object
+    properties:
+      entity_name:
+        description: ''
+        type: string
+      entity_type:
+        description: ''
+        type: string
+      entity_type_display_name:
+        description: ''
+        type: string
+      id:
+        description: ''
+        type: string
+      uuid:
+        description: ''
+        type: string
+  Get.dto.alerts.alertdto$alertdetailsdto:
+    title: get.dto.alerts.AlertDTO$AlertDetailsDTO
+    type: object
+    properties:
+      metric_details:
+        description: List of metric details associated with the alert
+        type: array
+        items:
+          $ref: '#/definitions/Get.dto.alerts.alertdto$metricdetails'
+      severity_trails:
+        description: List that contains severity level change details
+        type: array
+        items:
+          $ref: '#/definitions/Get.dto.alerts.alertdto$severitytrail'
+  ConditionType:
+    title: condition_type
+    example: STATIC_THRESHOLD
+    x-enum-elements:
+    - name: STATIC_THRESHOLD
+      description: ''
+    - name: ANOMALY
+      description: ''
+    - name: SAFETY_ZONE
+      description: ''
+    type: string
+    enum:
+    - STATIC_THRESHOLD
+    - ANOMALY
+    - SAFETY_ZONE
+  DataType:
+    title: data_type
+    example: LONG
+    x-enum-elements:
+    - name: LONG
+      description: ''
+    - name: DOUBLE
+      description: ''
+    - name: BOOLEAN
+      description: ''
+    - name: STRING
+      description: ''
+    type: string
+    enum:
+    - LONG
+    - DOUBLE
+    - BOOLEAN
+    - STRING
+  Get.dto.alerts.alertdto$metricdetails:
+    title: get.dto.alerts.AlertDTO$MetricDetails
+    type: object
+    properties:
+      comparison_operator:
+        description: Comparison Operator to be applied for teh values.
+        type: string
+      condition_type:
+        $ref: '#/definitions/ConditionType'
+      data_type:
+        $ref: '#/definitions/DataType'
+      entity_id:
+        description: UUID of the entity
+        type: string
+      entity_type:
+        description: Entity Type
+        type: string
+      metric_display_name:
+        description: Display name of the metric
+        type: string
+      metric_name:
+        description: Name of the metric
+        type: string
+      metric_value_details:
+        description: List of metric values at different instances of time in the alert lifecycle
+        type: array
+        items:
+          $ref: '#/definitions/Get.dto.alerts.alertdto$metricvaluedetails'
+      unit:
+        description: Unit of the metric value.
+        type: string
+  Get.dto.alerts.alertdto$metricvaluedetails:
+    title: get.dto.alerts.AlertDTO$MetricValueDetails
+    type: object
+    properties:
+      metric_threshold_value:
+        description: Threshold value of the metric that was specified in the policy at that given time.
+        type: string
+      metric_value:
+        description: Actual value of the metric at that given time.
+        type: string
+      state_change_time_stamp_in_usecs:
+        description: Time at which the alert's state change occurred.
+        type: integer
+        format: int64
+  Get.dto.alerts.alertdto$severitytrail:
+    title: get.dto.alerts.AlertDTO$SeverityTrail
+    type: object
+    properties:
+      severity:
+        description: Severity level of the alert. Can be INFO, WARNING or CRITICAL
+        type: string
+      severity_change_timestamp_in_usecs:
+        description: Time at which the severity level change occurred
+        type: integer
+        format: int64
+  Get.dto.alerts.alertsummarydto:
+    title: get.dto.alerts.AlertSummaryDTO
+    type: object
+    properties:
+      alert_summaries:
+        $ref: '#/definitions/Java.util.map&lt;get.dto.alerts.alertdto$alertseverity,Get.base.entitycollection&lt;get.dto.alerts.alertdto&gt;&gt;'
+      count:
+        description: ''
+        type: integer
+        format: int64
+  Get.dto.dr.bandwidthpolicydto:
+    title: get.dto.dr.BandwidthPolicyDTO
+    description: This DTO describes bandwidth throttling policies for different time schedules
+    type: object
+    properties:
+      bandwidth_configurations:
+        description: List of the policy configurations.
+        type: array
+        items:
+          $ref: '#/definitions/Get.dto.dr.bandwidthpolicydto$bandwidthscheduleconfiguration'
+      default_bandwidth_limit:
+        description: Default bandwidth limit
+        type: integer
+        format: int32
+      policy_name:
+        description: Name of the bandwidth Throttling policy.
+        type: string
+      policy_uuid:
+        description: Uuid of the bandwidth Throttling policy.
+        type: string
+  Get.dto.dr.bandwidthpolicydto$bandwidthscheduleconfiguration:
+    title: get.dto.dr.BandwidthPolicyDTO$BandwidthScheduleConfiguration
+    type: object
+    properties:
+      bandwidth_limit:
+        description: Bandwidth limit for the policy.
+        type: integer
+        format: int32
+      days_selected:
+        description: Days selected in a week.
+        type: integer
+        format: int32
+      end_time:
+        description: End time of the policy
+        type: integer
+        format: int64
+      schedule_uuid:
+        description: Uuid of the bandwidth schedule configuration.
+        type: string
+      start_time:
+        description: Start time of the policy
+        type: integer
+        format: int64
+  Get.dto.dr.l2networkmappingdto:
+    title: get.dto.dr.L2NetworkMappingDTO
+    type: object
+    properties:
+      dest_hypervisor_type:
+        description: ''
+        type: string
+      dest_network_name:
+        description: ''
+        type: string
+      src_hypervisor_type:
+        description: ''
+        type: string
+      src_network_name:
+        description: ''
+        type: string
+  Get.dto.dr.networkmappingdto:
+    title: get.dto.dr.NetworkMappingDTO
+    description: 'This DTO describes network mapping from source to destination cluster based on network uuids '
+    type: object
+    properties:
+      l2_network_mappings:
+        description: List of L2NetworkMappingDTOs which contains name and hypervisor type of the mapped networks
+        type: array
+        items:
+          $ref: '#/definitions/Get.dto.dr.l2networkmappingdto'
+      uuid:
+        description: Network mapping identifier for this remote site
+        type: string
+  Get.dto.dr.nfsfile:
+    title: get.dto.dr.NfsFile
+    type: object
+    properties:
+      consistency_group:
+        description: ''
+        type: string
+      nfs_file_path:
+        description: ''
+        type: string
+      nfs_handle:
+        description: ''
+        type: integer
+        format: int64
+  Get.dto.dr.pendingreplicationdto:
+    title: get.dto.dr.PendingReplicationDTO
+    type: object
+    properties:
+      protection_domain_name:
+        description: ''
+        type: string
+      remote_site_name:
+        description: ''
+        type: string
+      snapshot:
+        $ref: '#/definitions/Get.dto.dr.snapshotdto'
+  Get.dto.dr.remotesitedto:
+    title: get.dto.dr.RemoteSiteDTO
+    description: remote-site
+    type: object
+    properties:
+      alert_summary:
+        $ref: '#/definitions/Get.dto.alerts.alertsummarydto'
+      bandwidth_policy:
+        $ref: '#/definitions/Get.dto.dr.bandwidthpolicydto'
+      bandwidth_policy_enabled:
+        description: ''
+        type: boolean
+      capabilities:
+        description: ''
+        type: array
+        items:
+          type: string
+      cloud_type:
+        $ref: '#/definitions/CloudType'
+      cluster_arch:
+        description: 'The remote site architecture type. e.g: x86_64, ppc64le.'
+        type: string
+      cluster_external_data_services_i_p_address:
+        description: ''
+        type: string
+      cluster_id:
+        description: ''
+        type: integer
+        format: int64
+      cluster_incarnation_id:
+        description: ''
+        type: integer
+        format: int64
+      cluster_type:
+        description: 'Nature of the remote site e.g: light compute, SNB.'
+        type: array
+        items:
+          type: string
+      compression_enabled:
+        description: ''
+        type: boolean
+      credential_name:
+        description: Credential Name
+        type: string
+      cvm_name:
+        description: CVM Name
+        type: string
+      health_summary:
+        $ref: '#/definitions/Get.dto.health.check.healthsummarydto'
+      latency_in_usecs:
+        description: ''
+        type: integer
+        format: int64
+      marked_for_removal:
+        description: ''
+        type: boolean
+      max_bps:
+        description: ''
+        type: integer
+        format: int32
+      metro_ready:
+        description: ''
+        type: boolean
+      name:
+        description: Name of the remote site.
+        type: string
+      network_mapping:
+        $ref: '#/definitions/Get.dto.dr.networkmappingdto'
+      proxy_enabled:
+        description: ''
+        type: boolean
+      region:
+        description: Region
+        type: string
+      remote_ip_ports:
+        $ref: '#/definitions/Java.util.map&lt;java.lang.string,Java.lang.integer&gt;'
+      remote_v_store_info:
+        $ref: '#/definitions/Java.util.map&lt;java.lang.string,Get.dto.dr.remotesitedto$vstoreinfo&gt;'
+      replication_links:
+        description: ''
+        type: array
+        items:
+          $ref: '#/definitions/Get.dto.dr.replicationlinkdto'
+      ssh_enabled:
+        description: ''
+        type: boolean
+      stats:
+        $ref: '#/definitions/Java.util.map&lt;java.lang.string,Java.lang.string&gt;'
+      status:
+        $ref: '#/definitions/Status'
+      usage_stats:
+        $ref: '#/definitions/Java.util.map&lt;java.lang.string,Java.lang.string&gt;'
+      uuid:
+        description: Uuid of the remote site.
+        type: string
+      vstore_name_map:
+        $ref: '#/definitions/Java.util.map&lt;java.lang.string,Java.lang.string&gt;'
+  Get.dto.dr.replicationlinkdto:
+    title: get.dto.dr.ReplicationLinkDTO
+    type: object
+    properties:
+      current_replicating_snapshot_id:
+        description: ''
+        type: string
+      current_replicating_snapshot_total_bytes:
+        description: ''
+        type: integer
+        format: int64
+      current_replicating_snapshot_transmitted_bytes:
+        description: ''
+        type: integer
+        format: int64
+      id:
+        description: ''
+        type: string
+      last_replication_end_time_in_usecs:
+        description: ''
+        type: integer
+        format: int64
+      last_replication_start_time_in_usecs:
+        description: ''
+        type: integer
+        format: int64
+      last_successful_replication_snapshot_id:
+        description: ''
+        type: string
+      protection_domain_name:
+        description: ''
+        type: string
+      remote_site_name:
+        description: ''
+        type: string
+      stats:
+        $ref: '#/definitions/Java.util.map&lt;java.lang.string,Java.lang.string&gt;'
+  State:
+    title: state
+    example: EXPIRED
+    x-enum-elements:
+    - name: EXPIRED
+      description: ''
+    - name: RETAIN_FOREVER
+      description: ''
+    - name: AVAILABLE
+      description: ''
+    - name: SCHEDULED
+      description: ''
+    type: string
+    enum:
+    - EXPIRED
+    - RETAIN_FOREVER
+    - AVAILABLE
+    - SCHEDULED
+  Get.dto.dr.snapshotdto:
+    title: get.dto.dr.SnapshotDTO
+    type: object
+    properties:
+      consistency_groups:
+        description: ''
+        type: array
+        items:
+          type: string
+      exclusive_usage_in_bytes:
+        description: ''
+        type: integer
+        format: int64
+      located_remote_site_name:
+        description: ''
+        type: string
+      nfs_files:
+        description: ''
+        type: array
+        items:
+          $ref: '#/definitions/Get.dto.dr.nfsfile'
+      oob_schedule_ids:
+        description: ''
+        type: array
+        items:
+          type: integer
+          format: int32
+      protection_domain_name:
+        description: ''
+        type: string
+      remote_site_names:
+        description: ''
+        type: array
+        items:
+          type: string
+      size_in_bytes:
+        description: ''
+        type: integer
+        format: int64
+      snapshot_create_time_usecs:
+        description: ''
+        type: integer
+        format: int64
+      snapshot_expiry_time_usecs:
+        description: ''
+        type: integer
+        format: int64
+      snapshot_id:
+        description: ''
+        type: string
+      snapshot_uuid:
+        description: ''
+        type: string
+      state:
+        $ref: '#/definitions/State'
+      vms:
+        description: ''
+        type: array
+        items:
+          $ref: '#/definitions/Get.dto.dr.virtualmachine'
+      volume_groups:
+        description: ''
+        type: array
+        items:
+          $ref: '#/definitions/Get.dto.dr.volumegroup'
+  Get.dto.dr.virtualmachine:
+    title: get.dto.dr.VirtualMachine
+    type: object
+    properties:
+      app_consistent_snapshots:
+        description: Whether consistency group performs app consistent snapshots
+        type: boolean
+      consistency_group:
+        description: Consistency group of a vm
+        type: string
+      related_entity_uuids:
+        description: List of UUIDs of entities related to this VM e.g. the attached volume groups
+        type: array
+        items:
+          type: string
+      vm_files:
+        description: Files composing the VM
+        type: array
+        items:
+          type: string
+      vm_handle:
+        description: Internal data-structure used by Cerebro to uniquely identify a vm Should it be displayed to user?
+        type: integer
+        format: int64
+      vm_id:
+        description: Unique identifier of a virtual machine within a Hypervisor.
+        type: string
+      vm_name:
+        description: Display name of a virtual machine
+        type: string
+      vm_power_state_on_recovery:
+        description: 'Power state after vm recovery. Default power state is POWEREDOFF. (Acceptable values are: "Powered Off", "Powered On", "Power state at time of snapshot")'
+        example: Powered Off
+        type: string
+        default: Powered Off
+      vm_recoverability:
+        description: Describes this VM's recovery capabilities
+        type: array
+        items:
+          $ref: '#/definitions/Get.dto.dr.vmrecoverabilitydto'
+  Get.dto.dr.vmrecoverabilitydto:
+    title: get.dto.dr.VmRecoverabilityDTO
+    type: object
+    properties:
+      cerebro_error:
+        description: Cerebro error code for why VM can't be recovered/migrated
+        type: string
+      reason:
+        description: Human-readable string why VM can't be recovered/migrated
+        type: string
+      remote_site:
+        description: Name of the remote site where this VM can't be recovered (Optional)
+        type: string
+  Get.dto.dr.volumegroup:
+    title: get.dto.dr.VolumeGroup
+    type: object
+    properties:
+      consistency_group:
+        description: ''
+        type: string
+      name:
+        description: ''
+        type: string
+      nfs_file_paths:
+        description: ''
+        type: array
+        items:
+          type: string
+      related_entity_uuids:
+        description: ''
+        type: array
+        items:
+          type: string
+      volume_group_uuid:
+        description: ''
+        type: string
+  Get.dto.health.check.entitytypehealthchecksummarydto:
+    title: get.dto.health.check.EntityTypeHealthCheckSummaryDTO
+    type: object
+    properties:
+      checks_in_error:
+        $ref: '#/definitions/Java.util.map&lt;java.lang.string,Get.dto.health.check.healthcheckerrorsdto&gt;'
+      detailed_check_summary:
+        $ref: '#/definitions/Java.util.map&lt;java.lang.string,Java.util.map&lt;get.dto.health.check.healthstatus,Java.lang.integer&gt;&gt;'
+      entity_type:
+        $ref: '#/definitions/EntityType'
+      filter_criteria:
+        description: ''
+        type: string
+      health_summary:
+        $ref: '#/definitions/Java.util.map&lt;get.dto.health.check.healthstatus,Java.lang.integer&gt;'
+  Get.dto.health.check.healthsummarydto:
+    title: get.dto.health.check.HealthSummaryDTO
+    type: object
+    properties:
+      entity_type_summaries:
+        description: ''
+        type: array
+        items:
+          $ref: '#/definitions/Get.dto.health.check.entitytypehealthchecksummarydto'
+      health_check_summaries:
+        $ref: '#/definitions/Java.util.map&lt;java.lang.string,Get.dto.health.check.healthchecksummarydto&gt;'
+      health_status:
+        $ref: '#/definitions/HealthStatus'
+  Java.util.map&lt;create.dto.alerts.alertdto$alertseverity,Create.base.entitycollection&lt;create.dto.alerts.alertdto&gt;&gt;:
+    title: java.util.Map&lt;create.dto.alerts.AlertDTO$AlertSeverity, create.base.EntityCollection&lt;create.dto.alerts.AlertDTO&gt;&gt;
+    type: object
+  Java.util.map&lt;create.dto.health.check.healthstatus,Java.lang.integer&gt;:
+    title: java.util.Map&lt;create.dto.health.check.HealthStatus, java.lang.Integer&gt;
+    type: object
+  Java.util.map&lt;get.dto.alerts.alertdto$alertseverity,Get.base.entitycollection&lt;get.dto.alerts.alertdto&gt;&gt;:
+    title: java.util.Map&lt;get.dto.alerts.AlertDTO$AlertSeverity, get.base.EntityCollection&lt;get.dto.alerts.AlertDTO&gt;&gt;
+    type: object
+  Java.util.map&lt;get.dto.health.check.healthstatus,Java.lang.integer&gt;:
+    title: java.util.Map&lt;get.dto.health.check.HealthStatus, java.lang.Integer&gt;
+    type: object
+  Java.util.map&lt;java.lang.string,Create.dto.dr.remotesitedto$vstoreinfo&gt;:
+    title: java.util.Map&lt;java.lang.String, create.dto.dr.RemoteSiteDTO$VStoreInfo&gt;
+    type: object
+  Java.util.map&lt;java.lang.string,Create.dto.health.check.healthcheckerrorsdto&gt;:
+    title: java.util.Map&lt;java.lang.String, create.dto.health.check.HealthCheckErrorsDTO&gt;
+    type: object
+  Java.util.map&lt;java.lang.string,Create.dto.health.check.healthchecksummarydto&gt;:
+    title: java.util.Map&lt;java.lang.String, create.dto.health.check.HealthCheckSummaryDTO&gt;
+    type: object
+  Java.util.map&lt;java.lang.string,Get.dto.dr.remotesitedto$vstoreinfo&gt;:
+    title: java.util.Map&lt;java.lang.String, get.dto.dr.RemoteSiteDTO$VStoreInfo&gt;
+    type: object
+  Java.util.map&lt;java.lang.string,Get.dto.health.check.healthcheckerrorsdto&gt;:
+    title: java.util.Map&lt;java.lang.String, get.dto.health.check.HealthCheckErrorsDTO&gt;
+    type: object
+  Java.util.map&lt;java.lang.string,Get.dto.health.check.healthchecksummarydto&gt;:
+    title: java.util.Map&lt;java.lang.String, get.dto.health.check.HealthCheckSummaryDTO&gt;
+    type: object
+  Java.util.map&lt;java.lang.string,Java.lang.integer&gt;:
+    title: java.util.Map&lt;java.lang.String, java.lang.Integer&gt;
+    type: object
+  Java.util.map&lt;java.lang.string,Java.lang.string&gt;:
+    title: java.util.Map&lt;java.lang.String, java.lang.String&gt;
+    type: object
+  Java.util.map&lt;java.lang.string,Java.util.map&lt;create.dto.health.check.healthstatus,Java.lang.integer&gt;&gt;:
+    title: java.util.Map&lt;java.lang.String, java.util.Map&lt;create.dto.health.check.HealthStatus, java.lang.Integer&gt;&gt;
+    type: object
+  Java.util.map&lt;java.lang.string,Java.util.map&lt;get.dto.health.check.healthstatus,Java.lang.integer&gt;&gt;:
+    title: java.util.Map&lt;java.lang.String, java.util.Map&lt;get.dto.health.check.HealthStatus, java.lang.Integer&gt;&gt;
+    type: object
+  Java.util.map&lt;java.lang.string,Java.util.map&lt;patch.dto.health.check.healthstatus,Java.lang.integer&gt;&gt;:
+    title: java.util.Map&lt;java.lang.String, java.util.Map&lt;patch.dto.health.check.HealthStatus, java.lang.Integer&gt;&gt;
+    type: object
+  Java.util.map&lt;java.lang.string,Java.util.map&lt;update.dto.health.check.healthstatus,Java.lang.integer&gt;&gt;:
+    title: java.util.Map&lt;java.lang.String, java.util.Map&lt;update.dto.health.check.HealthStatus, java.lang.Integer&gt;&gt;
+    type: object
+  Java.util.map&lt;java.lang.string,Patch.dto.dr.remotesitedto$vstoreinfo&gt;:
+    title: java.util.Map&lt;java.lang.String, patch.dto.dr.RemoteSiteDTO$VStoreInfo&gt;
+    type: object
+  Java.util.map&lt;java.lang.string,Patch.dto.health.check.healthcheckerrorsdto&gt;:
+    title: java.util.Map&lt;java.lang.String, patch.dto.health.check.HealthCheckErrorsDTO&gt;
+    type: object
+  Java.util.map&lt;java.lang.string,Patch.dto.health.check.healthchecksummarydto&gt;:
+    title: java.util.Map&lt;java.lang.String, patch.dto.health.check.HealthCheckSummaryDTO&gt;
+    type: object
+  Java.util.map&lt;java.lang.string,Update.dto.dr.remotesitedto$vstoreinfo&gt;:
+    title: java.util.Map&lt;java.lang.String, update.dto.dr.RemoteSiteDTO$VStoreInfo&gt;
+    type: object
+  Java.util.map&lt;java.lang.string,Update.dto.health.check.healthcheckerrorsdto&gt;:
+    title: java.util.Map&lt;java.lang.String, update.dto.health.check.HealthCheckErrorsDTO&gt;
+    type: object
+  Java.util.map&lt;java.lang.string,Update.dto.health.check.healthchecksummarydto&gt;:
+    title: java.util.Map&lt;java.lang.String, update.dto.health.check.HealthCheckSummaryDTO&gt;
+    type: object
+  Java.util.map&lt;patch.dto.alerts.alertdto$alertseverity,Patch.base.entitycollection&lt;patch.dto.alerts.alertdto&gt;&gt;:
+    title: java.util.Map&lt;patch.dto.alerts.AlertDTO$AlertSeverity, patch.base.EntityCollection&lt;patch.dto.alerts.AlertDTO&gt;&gt;
+    type: object
+  Java.util.map&lt;patch.dto.health.check.healthstatus,Java.lang.integer&gt;:
+    title: java.util.Map&lt;patch.dto.health.check.HealthStatus, java.lang.Integer&gt;
+    type: object
+  Java.util.map&lt;update.dto.alerts.alertdto$alertseverity,Update.base.entitycollection&lt;update.dto.alerts.alertdto&gt;&gt;:
+    title: java.util.Map&lt;update.dto.alerts.AlertDTO$AlertSeverity, update.base.EntityCollection&lt;update.dto.alerts.AlertDTO&gt;&gt;
+    type: object
+  Java.util.map&lt;update.dto.health.check.healthstatus,Java.lang.integer&gt;:
+    title: java.util.Map&lt;update.dto.health.check.HealthStatus, java.lang.Integer&gt;
+    type: object
+  Patch.dto.requestdto&lt;patch.dto.dr.remotesitedto&gt;:
+    title: patch.dto.RequestDTO&lt;patch.dto.dr.RemoteSiteDTO&gt;
+    type: object
+    properties:
+      cluster_uuid:
+        description: ''
+        type: string
+      generic_d_t_o:
+        $ref: '#/definitions/Patch.dto.dr.remotesitedto'
+      operation:
+        description: ''
+        type: string
+  Patch.dto.alerts.alertsummarydto:
+    title: patch.dto.alerts.AlertSummaryDTO
+    type: object
+    properties:
+      alert_summaries:
+        $ref: '#/definitions/Java.util.map&lt;patch.dto.alerts.alertdto$alertseverity,Patch.base.entitycollection&lt;patch.dto.alerts.alertdto&gt;&gt;'
+      count:
+        description: ''
+        type: integer
+        format: int64
+  Patch.dto.dr.bandwidthpolicydto:
+    title: patch.dto.dr.BandwidthPolicyDTO
+    description: This DTO describes bandwidth throttling policies for different time schedules
+    type: object
+    properties:
+      policy_uuid:
+        description: Uuid of the bandwidth Throttling policy.
+        type: string
+      bandwidth_configurations:
+        description: List of the policy configurations.
+        type: array
+        items:
+          $ref: '#/definitions/Patch.dto.dr.bandwidthpolicydto$bandwidthscheduleconfiguration'
+      default_bandwidth_limit:
+        description: Default bandwidth limit
+        type: integer
+        format: int32
+      policy_name:
+        description: Name of the bandwidth Throttling policy.
+        type: string
+    required:
+    - policy_uuid
+  Patch.dto.dr.bandwidthpolicydto$bandwidthscheduleconfiguration:
+    title: patch.dto.dr.BandwidthPolicyDTO$BandwidthScheduleConfiguration
+    type: object
+    properties:
+      schedule_uuid:
+        description: Uuid of the bandwidth schedule configuration.
+        type: string
+      bandwidth_limit:
+        description: Bandwidth limit for the policy.
+        type: integer
+        format: int32
+      days_selected:
+        description: Days selected in a week.
+        type: integer
+        format: int32
+      end_time:
+        description: End time of the policy
+        type: integer
+        format: int64
+      start_time:
+        description: Start time of the policy
+        type: integer
+        format: int64
+    required:
+    - schedule_uuid
+  Patch.dto.dr.l2networkmappingdto:
+    title: patch.dto.dr.L2NetworkMappingDTO
+    type: object
+    properties:
+      dest_hypervisor_type:
+        description: ''
+        type: string
+      dest_network_name:
+        description: ''
+        type: string
+      src_hypervisor_type:
+        description: ''
+        type: string
+      src_network_name:
+        description: ''
+        type: string
+  Patch.dto.dr.networkmappingdto:
+    title: patch.dto.dr.NetworkMappingDTO
+    description: 'This DTO describes network mapping from source to destination cluster based on network uuids '
+    type: object
+    properties:
+      l2_network_mappings:
+        description: List of L2NetworkMappingDTOs which contains name and hypervisor type of the mapped networks
+        type: array
+        items:
+          $ref: '#/definitions/Patch.dto.dr.l2networkmappingdto'
+      uuid:
+        description: Network mapping identifier for this remote site
+        type: string
+  Patch.dto.dr.remotesitedto:
+    title: patch.dto.dr.RemoteSiteDTO
+    description: remote-site
+    type: object
+    properties:
+      alert_summary:
+        $ref: '#/definitions/Patch.dto.alerts.alertsummarydto'
+      bandwidth_policy:
+        $ref: '#/definitions/Patch.dto.dr.bandwidthpolicydto'
+      bandwidth_policy_enabled:
+        description: ''
+        type: boolean
+      capabilities:
+        description: ''
+        type: array
+        items:
+          type: string
+      cloud_type:
+        $ref: '#/definitions/CloudType'
+      cluster_external_data_services_i_p_address:
+        description: ''
+        type: string
+      cluster_id:
+        description: ''
+        type: integer
+        format: int64
+      cluster_incarnation_id:
+        description: ''
+        type: integer
+        format: int64
+      compression_enabled:
+        description: ''
+        type: boolean
+      credential_name:
+        description: Credential Name
+        type: string
+      cvm_name:
+        description: CVM Name
+        type: string
+      health_summary:
+        $ref: '#/definitions/Patch.dto.health.check.healthsummarydto'
+      latency_in_usecs:
+        description: ''
+        type: integer
+        format: int64
+      marked_for_removal:
+        description: ''
+        type: boolean
+      max_bps:
+        description: ''
+        type: integer
+        format: int32
+      metro_ready:
+        description: ''
+        type: boolean
+      name:
+        description: Name of the remote site.
+        type: string
+      network_mapping:
+        $ref: '#/definitions/Patch.dto.dr.networkmappingdto'
+      proxy_enabled:
+        description: ''
+        type: boolean
+      region:
+        description: Region
+        type: string
+      remote_ip_ports:
+        $ref: '#/definitions/Java.util.map&lt;java.lang.string,Java.lang.integer&gt;'
+      remote_v_store_info:
+        $ref: '#/definitions/Java.util.map&lt;java.lang.string,Patch.dto.dr.remotesitedto$vstoreinfo&gt;'
+      replication_links:
+        description: ''
+        type: array
+        items:
+          $ref: '#/definitions/Patch.dto.dr.replicationlinkdto'
+      ssh_enabled:
+        description: ''
+        type: boolean
+      stats:
+        $ref: '#/definitions/Java.util.map&lt;java.lang.string,Java.lang.string&gt;'
+      status:
+        $ref: '#/definitions/Status'
+      usage_stats:
+        $ref: '#/definitions/Java.util.map&lt;java.lang.string,Java.lang.string&gt;'
+      uuid:
+        description: Uuid of the remote site.
+        type: string
+      vstore_name_map:
+        $ref: '#/definitions/Java.util.map&lt;java.lang.string,Java.lang.string&gt;'
+  Patch.dto.dr.replicationlinkdto:
+    title: patch.dto.dr.ReplicationLinkDTO
+    type: object
+    properties:
+      current_replicating_snapshot_id:
+        description: ''
+        type: string
+      current_replicating_snapshot_total_bytes:
+        description: ''
+        type: integer
+        format: int64
+      current_replicating_snapshot_transmitted_bytes:
+        description: ''
+        type: integer
+        format: int64
+      id:
+        description: ''
+        type: string
+      last_replication_end_time_in_usecs:
+        description: ''
+        type: integer
+        format: int64
+      last_replication_start_time_in_usecs:
+        description: ''
+        type: integer
+        format: int64
+      last_successful_replication_snapshot_id:
+        description: ''
+        type: string
+      protection_domain_name:
+        description: ''
+        type: string
+      remote_site_name:
+        description: ''
+        type: string
+      stats:
+        $ref: '#/definitions/Java.util.map&lt;java.lang.string,Java.lang.string&gt;'
+  Patch.dto.health.check.entitytypehealthchecksummarydto:
+    title: patch.dto.health.check.EntityTypeHealthCheckSummaryDTO
+    type: object
+    properties:
+      checks_in_error:
+        $ref: '#/definitions/Java.util.map&lt;java.lang.string,Patch.dto.health.check.healthcheckerrorsdto&gt;'
+      detailed_check_summary:
+        $ref: '#/definitions/Java.util.map&lt;java.lang.string,Java.util.map&lt;patch.dto.health.check.healthstatus,Java.lang.integer&gt;&gt;'
+      entity_type:
+        $ref: '#/definitions/EntityType'
+      filter_criteria:
+        description: ''
+        type: string
+      health_summary:
+        $ref: '#/definitions/Java.util.map&lt;patch.dto.health.check.healthstatus,Java.lang.integer&gt;'
+  Patch.dto.health.check.healthsummarydto:
+    title: patch.dto.health.check.HealthSummaryDTO
+    type: object
+    properties:
+      entity_type_summaries:
+        description: ''
+        type: array
+        items:
+          $ref: '#/definitions/Patch.dto.health.check.entitytypehealthchecksummarydto'
+      health_check_summaries:
+        $ref: '#/definitions/Java.util.map&lt;java.lang.string,Patch.dto.health.check.healthchecksummarydto&gt;'
+      health_status:
+        $ref: '#/definitions/HealthStatus'
+  Update.dto.alerts.alertsummarydto:
+    title: update.dto.alerts.AlertSummaryDTO
+    type: object
+    properties:
+      alert_summaries:
+        $ref: '#/definitions/Java.util.map&lt;update.dto.alerts.alertdto$alertseverity,Update.base.entitycollection&lt;update.dto.alerts.alertdto&gt;&gt;'
+      count:
+        description: ''
+        type: integer
+        format: int64
+  Update.dto.dr.bandwidthpolicydto:
+    title: update.dto.dr.BandwidthPolicyDTO
+    description: This DTO describes bandwidth throttling policies for different time schedules
+    type: object
+    properties:
+      policy_uuid:
+        description: Uuid of the bandwidth Throttling policy.
+        type: string
+      bandwidth_configurations:
+        description: List of the policy configurations.
+        type: array
+        items:
+          $ref: '#/definitions/Update.dto.dr.bandwidthpolicydto$bandwidthscheduleconfiguration'
+      default_bandwidth_limit:
+        description: Default bandwidth limit
+        type: integer
+        format: int32
+      policy_name:
+        description: Name of the bandwidth Throttling policy.
+        type: string
+    required:
+    - policy_uuid
+  Update.dto.dr.bandwidthpolicydto$bandwidthscheduleconfiguration:
+    title: update.dto.dr.BandwidthPolicyDTO$BandwidthScheduleConfiguration
+    type: object
+    properties:
+      schedule_uuid:
+        description: Uuid of the bandwidth schedule configuration.
+        type: string
+      bandwidth_limit:
+        description: Bandwidth limit for the policy.
+        type: integer
+        format: int32
+      days_selected:
+        description: Days selected in a week.
+        type: integer
+        format: int32
+      end_time:
+        description: End time of the policy
+        type: integer
+        format: int64
+      start_time:
+        description: Start time of the policy
+        type: integer
+        format: int64
+    required:
+    - schedule_uuid
+  Update.dto.dr.l2networkmappingdto:
+    title: update.dto.dr.L2NetworkMappingDTO
+    type: object
+    properties:
+      dest_hypervisor_type:
+        description: ''
+        type: string
+      dest_network_name:
+        description: ''
+        type: string
+      src_hypervisor_type:
+        description: ''
+        type: string
+      src_network_name:
+        description: ''
+        type: string
+  Update.dto.dr.networkmappingdto:
+    title: update.dto.dr.NetworkMappingDTO
+    description: 'This DTO describes network mapping from source to destination cluster based on network uuids '
+    type: object
+    properties:
+      l2_network_mappings:
+        description: List of L2NetworkMappingDTOs which contains name and hypervisor type of the mapped networks
+        type: array
+        items:
+          $ref: '#/definitions/Update.dto.dr.l2networkmappingdto'
+      uuid:
+        description: Network mapping identifier for this remote site
+        type: string
+  Update.dto.dr.remotesitedto:
+    title: update.dto.dr.RemoteSiteDTO
+    description: remote-site
+    type: object
+    properties:
+      alert_summary:
+        $ref: '#/definitions/Update.dto.alerts.alertsummarydto'
+      bandwidth_policy:
+        $ref: '#/definitions/Update.dto.dr.bandwidthpolicydto'
+      bandwidth_policy_enabled:
+        description: ''
+        type: boolean
+      capabilities:
+        description: ''
+        type: array
+        items:
+          type: string
+      cloud_type:
+        $ref: '#/definitions/CloudType'
+      cluster_external_data_services_i_p_address:
+        description: ''
+        type: string
+      cluster_id:
+        description: ''
+        type: integer
+        format: int64
+      cluster_incarnation_id:
+        description: ''
+        type: integer
+        format: int64
+      compression_enabled:
+        description: ''
+        type: boolean
+      credential_name:
+        description: Credential Name
+        type: string
+      cvm_name:
+        description: CVM Name
+        type: string
+      health_summary:
+        $ref: '#/definitions/Update.dto.health.check.healthsummarydto'
+      latency_in_usecs:
+        description: ''
+        type: integer
+        format: int64
+      marked_for_removal:
+        description: ''
+        type: boolean
+      max_bps:
+        description: ''
+        type: integer
+        format: int32
+      metro_ready:
+        description: ''
+        type: boolean
+      name:
+        description: Name of the remote site.
+        type: string
+      network_mapping:
+        $ref: '#/definitions/Update.dto.dr.networkmappingdto'
+      proxy_enabled:
+        description: ''
+        type: boolean
+      region:
+        description: Region
+        type: string
+      remote_ip_ports:
+        $ref: '#/definitions/Java.util.map&lt;java.lang.string,Java.lang.integer&gt;'
+      remote_v_store_info:
+        $ref: '#/definitions/Java.util.map&lt;java.lang.string,Update.dto.dr.remotesitedto$vstoreinfo&gt;'
+      replication_links:
+        description: ''
+        type: array
+        items:
+          $ref: '#/definitions/Update.dto.dr.replicationlinkdto'
+      ssh_enabled:
+        description: ''
+        type: boolean
+      stats:
+        $ref: '#/definitions/Java.util.map&lt;java.lang.string,Java.lang.string&gt;'
+      status:
+        $ref: '#/definitions/Status'
+      usage_stats:
+        $ref: '#/definitions/Java.util.map&lt;java.lang.string,Java.lang.string&gt;'
+      uuid:
+        description: Uuid of the remote site.
+        type: string
+      vstore_name_map:
+        $ref: '#/definitions/Java.util.map&lt;java.lang.string,Java.lang.string&gt;'
+  Update.dto.dr.replicationlinkdto:
+    title: update.dto.dr.ReplicationLinkDTO
+    type: object
+    properties:
+      current_replicating_snapshot_id:
+        description: ''
+        type: string
+      current_replicating_snapshot_total_bytes:
+        description: ''
+        type: integer
+        format: int64
+      current_replicating_snapshot_transmitted_bytes:
+        description: ''
+        type: integer
+        format: int64
+      id:
+        description: ''
+        type: string
+      last_replication_end_time_in_usecs:
+        description: ''
+        type: integer
+        format: int64
+      last_replication_start_time_in_usecs:
+        description: ''
+        type: integer
+        format: int64
+      last_successful_replication_snapshot_id:
+        description: ''
+        type: string
+      protection_domain_name:
+        description: ''
+        type: string
+      remote_site_name:
+        description: ''
+        type: string
+      stats:
+        $ref: '#/definitions/Java.util.map&lt;java.lang.string,Java.lang.string&gt;'
+  Update.dto.health.check.entitytypehealthchecksummarydto:
+    title: update.dto.health.check.EntityTypeHealthCheckSummaryDTO
+    type: object
+    properties:
+      checks_in_error:
+        $ref: '#/definitions/Java.util.map&lt;java.lang.string,Update.dto.health.check.healthcheckerrorsdto&gt;'
+      detailed_check_summary:
+        $ref: '#/definitions/Java.util.map&lt;java.lang.string,Java.util.map&lt;update.dto.health.check.healthstatus,Java.lang.integer&gt;&gt;'
+      entity_type:
+        $ref: '#/definitions/EntityType'
+      filter_criteria:
+        description: ''
+        type: string
+      health_summary:
+        $ref: '#/definitions/Java.util.map&lt;update.dto.health.check.healthstatus,Java.lang.integer&gt;'
+  Update.dto.health.check.healthsummarydto:
+    title: update.dto.health.check.HealthSummaryDTO
+    type: object
+    properties:
+      entity_type_summaries:
+        description: ''
+        type: array
+        items:
+          $ref: '#/definitions/Update.dto.health.check.entitytypehealthchecksummarydto'
+      health_check_summaries:
+        $ref: '#/definitions/Java.util.map&lt;java.lang.string,Update.dto.health.check.healthchecksummarydto&gt;'
+      health_status:
+        $ref: '#/definitions/HealthStatus'

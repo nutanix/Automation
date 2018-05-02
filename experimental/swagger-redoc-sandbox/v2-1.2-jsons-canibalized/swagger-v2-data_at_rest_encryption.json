@@ -1,0 +1,317 @@
+{
+    "apiVersion": "v2.0",
+    "swaggerVersion": "1.2",
+    "basePath": "https://any_cvm_ip:9440/PrismGateway/services/rest/v2.0",
+    "resourcePath": "/data_at_rest_encryption",
+    "produces": [
+        "application/json"
+    ],
+    "consumes": [
+        "application/json"
+    ],
+    "apis": [
+        {
+            "internal": false,
+            "path": "/data_at_rest_encryption/",
+            "operations": [
+                {
+                    "deprecated": "false",
+                    "internal": false,
+                    "method": "GET",
+                    "summary": "Get encryption status.",
+                    "notes": "Get encryption status of the cluster.",
+                    "type": "get.dto.encryption.ClusterEncryptionStatusDTO",
+                    "nickname": "getEncryptionStatus",
+                    "parameters": [],
+                    "responseMessages": []
+                }
+            ]
+        },
+        {
+            "internal": false,
+            "path": "/data_at_rest_encryption/enable",
+            "operations": [
+                {
+                    "deprecated": "false",
+                    "internal": false,
+                    "method": "POST",
+                    "summary": "Enable encryption.",
+                    "notes": "Enable encryption on the cluster.",
+                    "type": "create.dto.PrimitiveDTO&lt;java.lang.Boolean&gt;",
+                    "nickname": "enableEncryption",
+                    "parameters": [
+                        {
+                            "description": "Desired cluster protection status",
+                            "required": true,
+                            "allowMultiple": false,
+                            "paramType": "body",
+                            "type": "create.dto.encryption.EnableEncryptionDTO"
+                        }
+                    ],
+                    "responseMessages": []
+                }
+            ]
+        },
+        {
+            "internal": false,
+            "path": "/data_at_rest_encryption/recent_certificate_test_results",
+            "operations": [
+                {
+                    "deprecated": "false",
+                    "internal": false,
+                    "method": "GET",
+                    "summary": "Get recent certificate test results.",
+                    "notes": "Get recent certificate test results.",
+                    "type": "array",
+                    "items": {
+                        "$ref": "get.dto.encryption.KMSTestResultsDTO"
+                    },
+                    "nickname": "getRecentCertificateTestResults",
+                    "parameters": [
+                        {
+                            "name": "host_uuids",
+                            "description": "List of Host uuids",
+                            "required": false,
+                            "allowMultiple": false,
+                            "paramType": "query",
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        {
+                            "name": "kms_server_names",
+                            "description": "List of Key Management Server names",
+                            "required": false,
+                            "allowMultiple": false,
+                            "paramType": "query",
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        }
+                    ],
+                    "responseMessages": []
+                }
+            ]
+        },
+        {
+            "internal": false,
+            "path": "/data_at_rest_encryption/rekey",
+            "operations": [
+                {
+                    "deprecated": "false",
+                    "internal": false,
+                    "method": "POST",
+                    "summary": "Sets new passwords for encryption capable disks.",
+                    "notes": "Sets new passwords for encryption capable disks",
+                    "type": "create.dto.PrimitiveDTO&lt;java.lang.Boolean&gt;",
+                    "nickname": "rekey",
+                    "parameters": [
+                        {
+                            "description": "List of disk uuids on which rekey needs to be performed",
+                            "required": true,
+                            "allowMultiple": false,
+                            "paramType": "body",
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        }
+                    ],
+                    "responseMessages": []
+                }
+            ]
+        },
+        {
+            "internal": false,
+            "path": "/data_at_rest_encryption/test",
+            "operations": [
+                {
+                    "deprecated": "false",
+                    "internal": false,
+                    "method": "POST",
+                    "summary": "Test encryption configuration.",
+                    "notes": "Test encryption configuration of the cluster.",
+                    "type": "create.dto.encryption.TestEncryptionConfigurationResponseDTO",
+                    "nickname": "testEncryptionConfiguration",
+                    "parameters": [
+                        {
+                            "description": "List of host ids and key management server names on which test to be performed",
+                            "required": true,
+                            "allowMultiple": false,
+                            "paramType": "body",
+                            "type": "create.dto.encryption.TestEncryptionConfigurationRequestDTO"
+                        }
+                    ],
+                    "responseMessages": []
+                }
+            ]
+        }
+    ],
+    "models": {
+        "create.dto.PrimitiveDTO&lt;java.lang.Boolean&gt;": {
+            "id": "create.dto.PrimitiveDTO&lt;java.lang.Boolean&gt;",
+            "required": [],
+            "properties": {
+                "value": {
+                    "type": "boolean"
+                }
+            }
+        },
+        "create.dto.encryption.EnableEncryptionDTO": {
+            "id": "create.dto.encryption.EnableEncryptionDTO",
+            "required": [],
+            "properties": {
+                "software_encryption_scope": {
+                    "enum": [
+                        "CLUSTER",
+                        "STORAGE_CONTAINER"
+                    ],
+                    "type": "string"
+                },
+                "value": {
+                    "type": "boolean"
+                }
+            }
+        },
+        "create.dto.encryption.TestEncryptionConfigurationRequestDTO": {
+            "id": "create.dto.encryption.TestEncryptionConfigurationRequestDTO",
+            "required": [],
+            "properties": {
+                "node_id_list": {
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": "array"
+                },
+                "node_uuid_list": {
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": "array"
+                },
+                "server_list": {
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": "array"
+                }
+            }
+        },
+        "create.dto.encryption.TestEncryptionConfigurationResponseDTO": {
+            "id": "create.dto.encryption.TestEncryptionConfigurationResponseDTO",
+            "required": [],
+            "properties": {
+                "has_failures": {
+                    "type": "boolean"
+                }
+            }
+        },
+        "get.dto.encryption.ClusterEncryptionStatusDTO": {
+            "id": "get.dto.encryption.ClusterEncryptionStatusDTO",
+            "required": [],
+            "properties": {
+                "desired_password_protection": {
+                    "type": "boolean"
+                },
+                "disk_encryption_status": {
+                    "$ref": "java.util.Map&lt;java.lang.String, java.lang.Boolean&gt;",
+                    "description": "The disk encryption status",
+                    "typeName": "DEFAULT"
+                },
+                "is_cluster_empty": {
+                    "type": "boolean"
+                },
+                "is_ready_for_password_protection": {
+                    "type": "boolean"
+                },
+                "is_ready_for_software_encryption": {
+                    "type": "boolean"
+                },
+                "software_encryption_scope": {
+                    "enum": [
+                        "CLUSTER",
+                        "STORAGE_CONTAINER"
+                    ],
+                    "type": "string"
+                },
+                "storage_container_encryption_status": {
+                    "$ref": "java.util.Map&lt;java.lang.String, java.lang.Boolean&gt;"
+                }
+            }
+        },
+        "get.dto.encryption.KMSStatusPerIpAddressDTO": {
+            "id": "get.dto.encryption.KMSStatusPerIpAddressDTO",
+            "required": [],
+            "properties": {
+                "ip_address": {
+                    "description": "Ip address of the Key Management Server.",
+                    "notes": "Ip address of the Key Management Server.",
+                    "type": "string",
+                    "typeName": "DEFAULT"
+                },
+                "message": {
+                    "description": "Message",
+                    "notes": "Message.",
+                    "type": "string",
+                    "typeName": "DEFAULT"
+                },
+                "port": {
+                    "description": "Port of the Key Management Server.",
+                    "format": "int64",
+                    "notes": "Port of the Key Management Server.",
+                    "type": "integer",
+                    "typeName": "DEFAULT"
+                },
+                "test_status": {
+                    "description": "Test status.",
+                    "notes": "Test status.",
+                    "type": "string",
+                    "typeName": "DEFAULT"
+                }
+            }
+        },
+        "get.dto.encryption.KMSTestResultsDTO": {
+            "id": "get.dto.encryption.KMSTestResultsDTO",
+            "required": [],
+            "properties": {
+                "key_management_server_name": {
+                    "description": "Name of the Key Management Server.",
+                    "notes": "Name of the Key Management Server.",
+                    "type": "string",
+                    "typeName": "DEFAULT"
+                },
+                "key_management_server_uuid": {
+                    "description": "Uuid of the Key Management Server.",
+                    "notes": "Uuid of the Key Management Server.",
+                    "type": "string",
+                    "typeName": "DEFAULT"
+                },
+                "node_id": {
+                    "description": "Service VM uuid of the node.",
+                    "notes": "Service VM uuid of the node.",
+                    "type": "string",
+                    "typeName": "DEFAULT"
+                },
+                "node_uuid": {
+                    "type": "string"
+                },
+                "result_list": {
+                    "description": "List of test results, per ip address.",
+                    "items": {
+                        "$ref": "get.dto.encryption.KMSStatusPerIpAddressDTO"
+                    },
+                    "notes": "List of test results, per ip address.",
+                    "type": "array",
+                    "typeName": "DEFAULT"
+                }
+            }
+        },
+        "java.util.Map&lt;java.lang.String, java.lang.Boolean&gt;": {
+            "id": "java.util.Map&lt;java.lang.String, java.lang.Boolean&gt;",
+            "required": [],
+            "properties": {}
+        }
+    }
+}

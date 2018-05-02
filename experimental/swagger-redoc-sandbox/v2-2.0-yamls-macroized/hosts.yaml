@@ -1,0 +1,2030 @@
+swagger: '2.0'
+info:
+  version: 'v2.0'
+  title: Swagger API
+host: any_cvm_ip:9440
+basePath: /PrismGateway/services/rest/v2.0
+schemes:
+- https
+consumes:
+- application/json
+produces:
+- application/json
+paths:
+  /hosts/:
+    get:
+      description: Get the list of Physical Hosts.
+      summary: getHosts
+      operationId: HostsGet
+      produces:
+      - application/json
+      parameters:
+      - name: count
+        in: query
+        required: false
+        type: integer
+        format: int32
+        description: Number of Physical Hosts to retrieve
+      - name: filter_criteria
+        in: query
+        required: false
+        type: string
+        description: Filter criteria
+      - name: sort_criteria
+        in: query
+        required: false
+        type: string
+        description: Sort criteria
+      - name: search_string
+        in: query
+        required: false
+        type: string
+        description: Search string
+      - name: search_attribute_list
+        in: query
+        required: false
+        type: array
+        uniqueItems: false
+        items:
+          type: string
+        description: Search attribute list
+      - name: page
+        in: query
+        required: false
+        type: integer
+        format: int32
+        description: Page number
+      - name: projection
+        in: query
+        required: false
+        type: string
+        description: Projections on the attributes
+      responses:
+        200:
+          description: ''
+          schema:
+            $ref: '#/definitions/Get.base.entitycollection&lt;get.dto.appliance.configuration.nodedto&gt;'
+          examples: {}
+      x-unitTests: []
+      x-operation-settings:
+        CollectParameters: false
+        AllowDynamicQueryParameters: false
+        AllowDynamicFormParameters: false
+        IsMultiContentStreaming: false
+  /hosts/alerts:
+    get:
+      description: Get the list of alerts generated on any Host.
+      summary: getHostAlerts
+      operationId: HostsAlertsGet
+      produces:
+      - application/json
+      parameters:
+      - name: start_time_in_usecs
+        in: query
+        required: false
+        type: integer
+        format: int32
+        description: Start time in microseconds
+      - name: end_time_in_usecs
+        in: query
+        required: false
+        type: integer
+        format: int32
+        description: End time in microseconds
+      - name: count
+        in: query
+        required: false
+        type: integer
+        format: int32
+        description: Maximum number of alerts
+      - name: resolved
+        in: query
+        required: false
+        type: boolean
+        description: Alerts which have been resolved
+      - name: acknowledged
+        in: query
+        required: false
+        type: boolean
+        description: Alerts which have been acknowledged
+      - name: severity
+        in: query
+        required: false
+        type: string
+        description: Alert severities
+      - name: alert_type_uuid
+        in: query
+        required: false
+        type: string
+        description: Alert type ids
+      - name: page
+        in: query
+        required: false
+        type: integer
+        format: int32
+        description: Page number
+      responses:
+        200:
+          description: ''
+          schema:
+            $ref: '#/definitions/Get.base.entitycollection&lt;get.dto.alerts.alertdto&gt;'
+          examples: {}
+      x-unitTests: []
+      x-operation-settings:
+        CollectParameters: false
+        AllowDynamicQueryParameters: false
+        AllowDynamicFormParameters: false
+        IsMultiContentStreaming: false
+  /hosts/events:
+    get:
+      description: Get the list of events generated on any Host.
+      summary: getHostEvents
+      operationId: HostsEventsGet
+      produces:
+      - application/json
+      parameters:
+      - name: start_time_in_usecs
+        in: query
+        required: false
+        type: integer
+        format: int32
+        description: Start time in microseconds
+      - name: end_time_in_usecs
+        in: query
+        required: false
+        type: integer
+        format: int32
+        description: End time in microseconds
+      - name: count
+        in: query
+        required: false
+        type: integer
+        format: int32
+        description: Maximum number of events
+      - name: acknowledged
+        in: query
+        required: false
+        type: boolean
+        description: Events which have been acknowledged
+      - name: page
+        in: query
+        required: false
+        type: integer
+        format: int32
+        description: Page number
+      responses:
+        200:
+          description: ''
+          schema:
+            $ref: '#/definitions/Get.base.entitycollection&lt;get.dto.alerts.alertdto&gt;'
+          examples: {}
+      x-unitTests: []
+      x-operation-settings:
+        CollectParameters: false
+        AllowDynamicQueryParameters: false
+        AllowDynamicFormParameters: false
+        IsMultiContentStreaming: false
+  /hosts/gpu_profiles:
+    get:
+      description: Get the list of virtual GPU profiles for all physical Hosts.
+      summary: getVirtualGpuProfiles
+      operationId: HostsGpuProfilesGet
+      produces:
+      - application/json
+      parameters: []
+      responses:
+        200:
+          description: ''
+          schema:
+            $ref: '#/definitions/Get.base.entitycollection&lt;get.dto.uhura.virtualgpuprofiledto&gt;'
+          examples: {}
+      x-unitTests: []
+      x-operation-settings:
+        CollectParameters: false
+        AllowDynamicQueryParameters: false
+        AllowDynamicFormParameters: false
+        IsMultiContentStreaming: false
+  /hosts/host_gpus:
+    get:
+      description: Get the list of GPUs for all physical Host.
+      summary: getHostGpus
+      operationId: HostsHostGpusGet
+      produces:
+      - application/json
+      parameters:
+      - name: count
+        in: query
+        required: false
+        type: integer
+        format: int32
+        description: Number of host GPUs to retrieve
+      - name: filter_criteria
+        in: query
+        required: false
+        type: string
+        description: Filter criteria
+      - name: sort_criteria
+        in: query
+        required: false
+        type: string
+        description: Sort criteria
+      - name: search_string
+        in: query
+        required: false
+        type: string
+        description: Search string
+      responses:
+        200:
+          description: ''
+          schema:
+            $ref: '#/definitions/Get.base.entitycollection&lt;get.dto.uhura.hostgpudto&gt;'
+          examples: {}
+      x-unitTests: []
+      x-operation-settings:
+        CollectParameters: false
+        AllowDynamicQueryParameters: false
+        AllowDynamicFormParameters: false
+        IsMultiContentStreaming: false
+  /hosts/{uuid}:
+    get:
+      description: Get a Physical Host.
+      summary: getHost
+      operationId: HostsByUuidGet
+      produces:
+      - application/json
+      parameters:
+      - name: uuid
+        in: path
+        required: true
+        type: string
+        description: Uuid of a Physical Host
+      - name: projection
+        in: query
+        required: false
+        type: string
+        description: Projections on the attributes
+      responses:
+        200:
+          description: ''
+          schema:
+            $ref: '#/definitions/Get.dto.appliance.configuration.nodedto'
+          examples: {}
+      x-unitTests: []
+      x-operation-settings:
+        CollectParameters: false
+        AllowDynamicQueryParameters: false
+        AllowDynamicFormParameters: false
+        IsMultiContentStreaming: false
+  /hosts/{uuid}/alerts:
+    get:
+      description: Get the list of alerts generated on a specified Host.
+      summary: getAlertsForHost
+      operationId: HostsAlertsByUuidGet
+      produces:
+      - application/json
+      parameters:
+      - name: uuid
+        in: path
+        required: true
+        type: string
+        description: Uuid of a Host
+      - name: start_time_in_usecs
+        in: query
+        required: false
+        type: integer
+        format: int32
+        description: Start time in microseconds
+      - name: end_time_in_usecs
+        in: query
+        required: false
+        type: integer
+        format: int32
+        description: End time in microseconds
+      - name: count
+        in: query
+        required: false
+        type: integer
+        format: int32
+        description: Maximum number of alerts
+      - name: resolved
+        in: query
+        required: false
+        type: boolean
+        description: Alerts which have been resolved
+      - name: acknowledged
+        in: query
+        required: false
+        type: boolean
+        description: Alerts which have been acknowledged
+      - name: severity
+        in: query
+        required: false
+        type: string
+        description: Alert severities
+      - name: alert_type_uuid
+        in: query
+        required: false
+        type: string
+        description: Alert type ids
+      - name: page
+        in: query
+        required: false
+        type: integer
+        format: int32
+        description: Page number
+      responses:
+        200:
+          description: ''
+          schema:
+            $ref: '#/definitions/Get.base.entitycollection&lt;get.dto.alerts.alertdto&gt;'
+          examples: {}
+      x-unitTests: []
+      x-operation-settings:
+        CollectParameters: false
+        AllowDynamicQueryParameters: false
+        AllowDynamicFormParameters: false
+        IsMultiContentStreaming: false
+  /hosts/{uuid}/enter_maintenance_mode:
+    post:
+      description: Put a host in maintenance mode.
+      summary: enterMaintenanceMode
+      operationId: HostsEnterMaintenanceModeByUuidPost
+      produces:
+      - application/json
+      parameters:
+      - name: uuid
+        in: path
+        required: true
+        type: string
+        description: UUID of host to put in maintenance mode
+      - name: body
+        in: body
+        required: true
+        description: Maintenance mode options
+        schema:
+          $ref: '#/definitions/Create.dto.acropolis.maintenancemodedto'
+      responses:
+        200:
+          description: ''
+          schema:
+            $ref: '#/definitions/Create.dto.acropolis.returnvaluedto$taskiddto'
+          examples: {}
+      x-unitTests: []
+      x-operation-settings:
+        CollectParameters: false
+        AllowDynamicQueryParameters: false
+        AllowDynamicFormParameters: false
+        IsMultiContentStreaming: false
+  /hosts/{uuid}/events:
+    get:
+      description: Get the list of events generated on a specified Host.
+      summary: getEventsForHost
+      operationId: HostsEventsByUuidGet
+      produces:
+      - application/json
+      parameters:
+      - name: uuid
+        in: path
+        required: true
+        type: string
+        description: Uuid of a Host
+      - name: start_time_in_usecs
+        in: query
+        required: false
+        type: integer
+        format: int32
+        description: Start time in microseconds
+      - name: end_time_in_usecs
+        in: query
+        required: false
+        type: integer
+        format: int32
+        description: End time in microseconds
+      - name: count
+        in: query
+        required: false
+        type: integer
+        format: int32
+        description: Maximum number of events
+      - name: acknowledged
+        in: query
+        required: false
+        type: boolean
+        description: Events which have been acknowledged
+      - name: page
+        in: query
+        required: false
+        type: integer
+        format: int32
+        description: Page number
+      responses:
+        200:
+          description: ''
+          schema:
+            $ref: '#/definitions/Get.base.entitycollection&lt;get.dto.alerts.alertdto&gt;'
+          examples: {}
+      x-unitTests: []
+      x-operation-settings:
+        CollectParameters: false
+        AllowDynamicQueryParameters: false
+        AllowDynamicFormParameters: false
+        IsMultiContentStreaming: false
+  /hosts/{uuid}/exit_maintenance_mode:
+    post:
+      description: Pull a host out of maintenance mode or abort a prior attempt.
+      summary: exitMaintenanceMode
+      operationId: HostsExitMaintenanceModeByUuidPost
+      produces:
+      - application/json
+      parameters:
+      - name: uuid
+        in: path
+        required: true
+        type: string
+        description: UUID of host to pull out of maintenance mode
+      - name: body
+        in: body
+        required: false
+        description: Logical timestamp associated with host object
+        schema:
+          $ref: '#/definitions/Create.dto.acropolis.requestvaluedto$logicaltimestampdto'
+      responses:
+        200:
+          description: ''
+          schema:
+            $ref: '#/definitions/Create.dto.primitivedto&lt;java.lang.boolean&gt;'
+          examples: {}
+      x-unitTests: []
+      x-operation-settings:
+        CollectParameters: false
+        AllowDynamicQueryParameters: false
+        AllowDynamicFormParameters: false
+        IsMultiContentStreaming: false
+  /hosts/{uuid}/host_gpus:
+    get:
+      description: Get the list of GPUs for a physical Host.
+      summary: getGpusforHost
+      operationId: HostsHostGpusByUuidGet
+      produces:
+      - application/json
+      parameters:
+      - name: uuid
+        in: path
+        required: true
+        type: string
+        description: Uuid of the Host
+      - name: count
+        in: query
+        required: false
+        type: integer
+        format: int32
+        description: Number of host GPUs to retrieve
+      - name: filter_criteria
+        in: query
+        required: false
+        type: string
+        description: Filter criteria
+      - name: sort_criteria
+        in: query
+        required: false
+        type: string
+        description: Sort criteria
+      - name: search_string
+        in: query
+        required: false
+        type: string
+        description: Search string
+      responses:
+        200:
+          description: ''
+          schema:
+            $ref: '#/definitions/Get.base.entitycollection&lt;get.dto.uhura.hostgpudto&gt;'
+          examples: {}
+      x-unitTests: []
+      x-operation-settings:
+        CollectParameters: false
+        AllowDynamicQueryParameters: false
+        AllowDynamicFormParameters: false
+        IsMultiContentStreaming: false
+  /hosts/{uuid}/host_gpus/{gpu_uuid}:
+    get:
+      description: Get a particular GPU for a physical Host.
+      summary: getGpuforHost
+      operationId: HostsHostGpusByUuidAndGpuUuidGet
+      produces:
+      - application/json
+      parameters:
+      - name: gpu_uuid
+        in: path
+        required: true
+        type: string
+        description: UUID of the Host GPU
+      - name: uuid
+        in: path
+        required: true
+        type: string
+        description: Uuid of the Host
+      responses:
+        200:
+          description: ''
+          schema:
+            $ref: '#/definitions/Get.dto.uhura.hostgpudto'
+          examples: {}
+      x-unitTests: []
+      x-operation-settings:
+        CollectParameters: false
+        AllowDynamicQueryParameters: false
+        AllowDynamicFormParameters: false
+        IsMultiContentStreaming: false
+  /hosts/{uuid}/host_gpus/{gpu_uuid}/stats/:
+    get:
+      description: Get stats for a particular GPU for a physical Host.
+      summary: getHostGpuStats
+      operationId: HostsHostGpusStatsByUuidAndGpuUuidGet
+      produces:
+      - application/json
+      parameters:
+      - name: gpu_uuid
+        in: path
+        required: true
+        type: string
+        description: UUID of the Host GPU
+      - name: metrics
+        in: query
+        required: true
+        type: array
+        uniqueItems: false
+        items:
+          type: string
+        description: List of metrics
+      - name: uuid
+        in: path
+        required: true
+        type: string
+        description: Uuid of the Host
+      - name: start_time_in_usecs
+        in: query
+        required: false
+        type: integer
+        format: int32
+        description: Start time in microseconds
+      - name: end_time_in_usecs
+        in: query
+        required: false
+        type: integer
+        format: int32
+        description: End time in microseconds
+      - name: interval_in_secs
+        in: query
+        required: false
+        type: integer
+        format: int32
+        description: Sampling interval of stats
+      responses:
+        200:
+          description: ''
+          schema:
+            $ref: '#/definitions/Get.base.statsresponse'
+          examples: {}
+      x-unitTests: []
+      x-operation-settings:
+        CollectParameters: false
+        AllowDynamicQueryParameters: false
+        AllowDynamicFormParameters: false
+        IsMultiContentStreaming: false
+  /hosts/{uuid}/stats/:
+    get:
+      description: Get the stats for a specified Physical Host.
+      summary: getHostStats
+      operationId: HostsStatsByUuidGet
+      produces:
+      - application/json
+      parameters:
+      - name: uuid
+        in: path
+        required: true
+        type: string
+        description: Uuid of a Physical Host
+      - name: metrics
+        in: query
+        required: true
+        type: array
+        uniqueItems: false
+        items:
+          type: string
+        description: List of metrics
+      - name: start_time_in_usecs
+        in: query
+        required: false
+        type: integer
+        format: int32
+        description: Start time in microseconds
+      - name: end_time_in_usecs
+        in: query
+        required: false
+        type: integer
+        format: int32
+        description: End time in microseconds
+      - name: interval_in_secs
+        in: query
+        required: false
+        type: integer
+        format: int32
+        description: Sampling interval of stats
+      responses:
+        200:
+          description: ''
+          schema:
+            $ref: '#/definitions/Get.base.statsresponse'
+          examples: {}
+      x-unitTests: []
+      x-operation-settings:
+        CollectParameters: false
+        AllowDynamicQueryParameters: false
+        AllowDynamicFormParameters: false
+        IsMultiContentStreaming: false
+definitions:
+  Create.dto.primitivedto&lt;java.lang.boolean&gt;:
+    title: create.dto.PrimitiveDTO&lt;java.lang.Boolean&gt;
+    type: object
+    properties:
+      value:
+        description: ''
+        type: boolean
+  EvacuationOption:
+    title: evacuation_option
+    example: POWER_OFF
+    x-enum-elements:
+    - name: POWER_OFF
+      description: ''
+    - name: COLD_MIGRATE
+      description: ''
+    - name: LIVE_MIGRATE
+      description: ''
+    type: string
+    enum:
+    - POWER_OFF
+    - COLD_MIGRATE
+    - LIVE_MIGRATE
+  NonMigratableVmOption:
+    title: non_migratable_vm_option
+    example: BLOCK
+    x-enum-elements:
+    - name: BLOCK
+      description: ''
+    - name: ACPI_SHUTDOWN_AND_POWER_OFF
+      description: ''
+    type: string
+    enum:
+    - BLOCK
+    - ACPI_SHUTDOWN_AND_POWER_OFF
+  Create.dto.acropolis.maintenancemodedto:
+    title: create.dto.acropolis.MaintenanceModeDTO
+    type: object
+    properties:
+      evacuation_option:
+        $ref: '#/definitions/EvacuationOption'
+      logical_timestamp:
+        description: Logical timestamp that may be provided for consistency. This is an optional field. The current value for the logical timestamp can be obtained from the host object.
+        type: integer
+        format: int64
+      non_migratable_vm_option:
+        $ref: '#/definitions/NonMigratableVmOption'
+  Create.dto.acropolis.requestvaluedto$logicaltimestampdto:
+    title: create.dto.acropolis.RequestValueDTO$LogicalTimestampDTO
+    type: object
+    properties:
+      logical_timestamp:
+        description: Logical timestamp that may be provided for consistency.
+        type: integer
+        format: int64
+  Create.dto.acropolis.returnvaluedto$taskiddto:
+    title: create.dto.acropolis.ReturnValueDTO$TaskIdDTO
+    type: object
+    properties:
+      task_uuid:
+        description: UUID of the task.
+        type: string
+  Get.base.entitycollection&lt;get.dto.resultcontentdescriptor&gt;:
+    title: get.base.EntityCollection&lt;get.dto.ResultContentDescriptor&gt;
+    type: object
+    properties:
+      entities:
+        description: ''
+        type: array
+        items:
+          $ref: '#/definitions/Get.dto.resultcontentdescriptor'
+      error_info:
+        $ref: '#/definitions/Get.base.errorinfo'
+      metadata:
+        $ref: '#/definitions/Get.base.metadata'
+  Get.base.entitycollection&lt;get.dto.alerts.alertdto&gt;:
+    title: get.base.EntityCollection&lt;get.dto.alerts.AlertDTO&gt;
+    type: object
+    properties:
+      entities:
+        description: ''
+        type: array
+        items:
+          $ref: '#/definitions/Get.dto.alerts.alertdto'
+      error_info:
+        $ref: '#/definitions/Get.base.errorinfo'
+      metadata:
+        $ref: '#/definitions/Get.base.metadata'
+  Get.base.entitycollection&lt;get.dto.appliance.configuration.nodedto&gt;:
+    title: get.base.EntityCollection&lt;get.dto.appliance.configuration.NodeDTO&gt;
+    type: object
+    properties:
+      entities:
+        description: ''
+        type: array
+        items:
+          $ref: '#/definitions/Get.dto.appliance.configuration.nodedto'
+      error_info:
+        $ref: '#/definitions/Get.base.errorinfo'
+      metadata:
+        $ref: '#/definitions/Get.base.metadata'
+  Get.base.entitycollection&lt;get.dto.uhura.hostgpudto&gt;:
+    title: get.base.EntityCollection&lt;get.dto.uhura.HostGPUDTO&gt;
+    type: object
+    properties:
+      entities:
+        description: ''
+        type: array
+        items:
+          $ref: '#/definitions/Get.dto.uhura.hostgpudto'
+      error_info:
+        $ref: '#/definitions/Get.base.errorinfo'
+      metadata:
+        $ref: '#/definitions/Get.base.metadata'
+  Get.base.entitycollection&lt;get.dto.uhura.virtualgpuprofiledto&gt;:
+    title: get.base.EntityCollection&lt;get.dto.uhura.VirtualGPUProfileDTO&gt;
+    type: object
+    properties:
+      entities:
+        description: ''
+        type: array
+        items:
+          $ref: '#/definitions/Get.dto.uhura.virtualgpuprofiledto'
+      error_info:
+        $ref: '#/definitions/Get.base.errorinfo'
+      metadata:
+        $ref: '#/definitions/Get.base.metadata'
+  Get.base.errorinfo:
+    title: get.base.ErrorInfo
+    type: object
+    properties:
+      count:
+        description: ''
+        type: integer
+        format: int64
+      entity_list:
+        description: ''
+        type: array
+        items:
+          type: string
+      message:
+        description: ''
+        type: string
+  Get.base.metadata:
+    title: get.base.Metadata
+    type: object
+    properties:
+      count:
+        description: ''
+        type: integer
+        format: int32
+      end_index:
+        description: ''
+        type: integer
+        format: int32
+      filter_criteria:
+        description: ''
+        type: string
+      grand_total_entities:
+        description: ''
+        type: integer
+        format: int32
+      next_cursor:
+        description: ''
+        type: string
+      page:
+        description: ''
+        type: integer
+        format: int32
+      previous_cursor:
+        description: ''
+        type: string
+      search_string:
+        description: ''
+        type: string
+      sort_criteria:
+        description: ''
+        type: string
+      start_index:
+        description: ''
+        type: integer
+        format: int32
+      total_entities:
+        description: ''
+        type: integer
+        format: int32
+  Get.base.statsresponse:
+    title: get.base.StatsResponse
+    type: object
+    properties:
+      stats_specific_responses:
+        description: ''
+        type: array
+        items:
+          $ref: '#/definitions/Get.base.statsresponse$statsspecificresponse'
+  Get.base.statsresponse$statsspecificresponse:
+    title: get.base.StatsResponse$StatsSpecificResponse
+    type: object
+    properties:
+      interval_in_secs:
+        description: ''
+        type: integer
+        format: int64
+      message:
+        description: ''
+        type: string
+      metric:
+        description: ''
+        type: string
+      start_time_in_usecs:
+        description: ''
+        type: integer
+        format: int64
+      successful:
+        description: ''
+        type: boolean
+      values:
+        description: ''
+        type: array
+        items:
+          type: integer
+          format: int32
+  EntityType:
+    title: entity_type
+    example: CLUSTER
+    x-enum-elements:
+    - name: CLUSTER
+      description: ''
+    - name: HARDWARE
+      description: ''
+    - name: STORAGE
+      description: ''
+    - name: BACKUP
+      description: ''
+    - name: DR
+      description: ''
+    - name: LICENSE
+      description: ''
+    - name: DISK
+      description: ''
+    - name: STORAGE_TIER
+      description: ''
+    - name: HOST
+      description: ''
+    - name: NODE
+      description: ''
+    - name: MANAGEMENT_SERVER
+      description: ''
+    - name: MANAGEMENT_SERVER_INFO
+      description: ''
+    - name: VM
+      description: ''
+    - name: SERVICE_VM
+      description: ''
+    - name: VDISK
+      description: ''
+    - name: VIRTUAL_DISK
+      description: ''
+    - name: STORAGE_POOL
+      description: ''
+    - name: CONTAINER
+      description: ''
+    - name: STORAGE_CONTAINER
+      description: ''
+    - name: VZONE
+      description: ''
+    - name: SNAPSHOT
+      description: ''
+    - name: FAST_CLONE
+      description: ''
+    - name: RSYSLOG_SERVER
+      description: ''
+    - name: KEY_MANAGEMENT_SERVER
+      description: ''
+    - name: CERTIFICATE
+      description: ''
+    - name: HTTP_PROXY
+      description: ''
+    - name: SNMP_TRAP
+      description: ''
+    - name: SNMP_USER
+      description: ''
+    - name: REMOTE_SITE
+      description: ''
+    - name: CLOUD_CREDENTIALS
+      description: ''
+    - name: PROTECTION_DOMAIN
+      description: ''
+    - name: CONSISTENCY_GROUP
+      description: ''
+    - name: REPLICATION
+      description: ''
+    - name: REPLICATION_LINK
+      description: ''
+    - name: SYNC_REPLICATION
+      description: ''
+    - name: VSTORE
+      description: ''
+    - name: NETWORK_SWITCH_INTERFACE
+      description: ''
+    - name: NETWORK_SWITCH
+      description: ''
+    - name: VIRTUAL_NIC
+      description: ''
+    - name: VMKERNEL_NIC
+      description: ''
+    - name: HOST_NIC
+      description: ''
+    - name: NIC_TEAM
+      description: ''
+    - name: VIRTUAL_NETWORK
+      description: ''
+    - name: VIRTUAL_SWITCH
+      description: ''
+    - name: HOST_GPU
+      description: ''
+    - name: VIRTUAL_GPU
+      description: ''
+    - name: TAG
+      description: ''
+    - name: COMMENT
+      description: ''
+    - name: TASK
+      description: ''
+    - name: IMAGE
+      description: ''
+    - name: IMAGE_INFO
+      description: ''
+    - name: ISCSI_CLIENT
+      description: ''
+    - name: VOLUME_GROUP
+      description: ''
+    - name: VOLUME_DISK
+      description: ''
+    - name: VM_DISK
+      description: ''
+    - name: FILE_SERVER
+      description: ''
+    - name: FS_PARTNER_SERVER
+      description: ''
+    - name: CVM
+      description: ''
+    - name: NVM
+      description: ''
+    - name: FILE_SERVER_SHARE
+      description: ''
+    - name: ALERT_CAUSE
+      description: ''
+    - name: ALERT_CHECK_SCHEMA
+      description: ''
+    - name: ALERT_CHECK_SCHEMA_OVERRIDE
+      description: ''
+    - name: INTER_CLUSTER_DATA_TRANSFER_INDICATOR
+      description: ''
+    - name: RACKABLE_UNIT
+      description: ''
+    - name: DIRECTORY_CONFIG
+      description: ''
+    - name: HEALTH_CHECK
+      description: ''
+    - name: NETWORK_SNMP_PROFILE
+      description: ''
+    - name: ALERT
+      description: ''
+    - name: SCHEDULE
+      description: ''
+    - name: BANDWIDTH_POLICY
+      description: ''
+    - name: FILE_GROUP
+      description: ''
+    - name: NETWORK_MAPPING
+      description: ''
+    - name: PROGRESS_MONITOR
+      description: ''
+    - name: LCM_ENTITY
+      description: ''
+    - name: LCM_AVAILABLE_VERSION
+      description: ''
+    - name: CAPACITY_SCENARIO
+      description: ''
+    - name: NCC_ERROR_CODES
+      description: ''
+    - name: RESOURCE_CONSUMPTION
+      description: ''
+    - name: REPORT_CONFIG
+      description: ''
+    - name: REPORT_INSTANCE
+      description: ''
+    - name: COMMON_REPORT_CONFIG
+      description: ''
+    - name: REMOTE_CONNECTION
+      description: ''
+    type: string
+    enum:
+    - CLUSTER
+    - HARDWARE
+    - STORAGE
+    - BACKUP
+    - DR
+    - LICENSE
+    - DISK
+    - STORAGE_TIER
+    - HOST
+    - NODE
+    - MANAGEMENT_SERVER
+    - MANAGEMENT_SERVER_INFO
+    - VM
+    - SERVICE_VM
+    - VDISK
+    - VIRTUAL_DISK
+    - STORAGE_POOL
+    - CONTAINER
+    - STORAGE_CONTAINER
+    - VZONE
+    - SNAPSHOT
+    - FAST_CLONE
+    - RSYSLOG_SERVER
+    - KEY_MANAGEMENT_SERVER
+    - CERTIFICATE
+    - HTTP_PROXY
+    - SNMP_TRAP
+    - SNMP_USER
+    - REMOTE_SITE
+    - CLOUD_CREDENTIALS
+    - PROTECTION_DOMAIN
+    - CONSISTENCY_GROUP
+    - REPLICATION
+    - REPLICATION_LINK
+    - SYNC_REPLICATION
+    - VSTORE
+    - NETWORK_SWITCH_INTERFACE
+    - NETWORK_SWITCH
+    - VIRTUAL_NIC
+    - VMKERNEL_NIC
+    - HOST_NIC
+    - NIC_TEAM
+    - VIRTUAL_NETWORK
+    - VIRTUAL_SWITCH
+    - HOST_GPU
+    - VIRTUAL_GPU
+    - TAG
+    - COMMENT
+    - TASK
+    - IMAGE
+    - IMAGE_INFO
+    - ISCSI_CLIENT
+    - VOLUME_GROUP
+    - VOLUME_DISK
+    - VM_DISK
+    - FILE_SERVER
+    - FS_PARTNER_SERVER
+    - CVM
+    - NVM
+    - FILE_SERVER_SHARE
+    - ALERT_CAUSE
+    - ALERT_CHECK_SCHEMA
+    - ALERT_CHECK_SCHEMA_OVERRIDE
+    - INTER_CLUSTER_DATA_TRANSFER_INDICATOR
+    - RACKABLE_UNIT
+    - DIRECTORY_CONFIG
+    - HEALTH_CHECK
+    - NETWORK_SNMP_PROFILE
+    - ALERT
+    - SCHEDULE
+    - BANDWIDTH_POLICY
+    - FILE_GROUP
+    - NETWORK_MAPPING
+    - PROGRESS_MONITOR
+    - LCM_ENTITY
+    - LCM_AVAILABLE_VERSION
+    - CAPACITY_SCENARIO
+    - NCC_ERROR_CODES
+    - RESOURCE_CONSUMPTION
+    - REPORT_CONFIG
+    - REPORT_INSTANCE
+    - COMMON_REPORT_CONFIG
+    - REMOTE_CONNECTION
+  Get.dto.entitymetadata:
+    title: get.dto.EntityMetadata
+    type: object
+    properties:
+      additional_fields:
+        $ref: '#/definitions/Java.util.map&lt;java.lang.string,Java.lang.string&gt;'
+      cluster_uuid:
+        description: ''
+        type: string
+      context_hint_field:
+        description: ''
+        type: string
+      context_hint_value:
+        description: ''
+        type: string
+      entity_id:
+        description: ''
+        type: string
+      entity_name:
+        description: ''
+        type: string
+      entity_type:
+        $ref: '#/definitions/EntityType'
+  Get.dto.resultcontentdescriptor:
+    title: get.dto.ResultContentDescriptor
+    type: object
+    properties:
+      metadata:
+        $ref: '#/definitions/Get.dto.resultmetadata'
+      perspectives:
+        description: ''
+        type: array
+        items:
+          $ref: '#/definitions/Get.dto.resultcontentdescriptor$perspective'
+  Format:
+    title: format
+    example: TABLE
+    x-enum-elements:
+    - name: TABLE
+      description: ''
+    - name: BAR_CHART
+      description: ''
+    - name: PIE_CHART
+      description: ''
+    - name: TIME_SERIES
+      description: ''
+    - name: KEY_VALUE
+      description: ''
+    - name: COUNT
+      description: ''
+    - name: HEALTH_SUMMARY
+      description: ''
+    - name: ALERT_INFO
+      description: ''
+    - name: CAPACITY
+      description: ''
+    - name: OTHER
+      description: ''
+    type: string
+    enum:
+    - TABLE
+    - BAR_CHART
+    - PIE_CHART
+    - TIME_SERIES
+    - KEY_VALUE
+    - COUNT
+    - HEALTH_SUMMARY
+    - ALERT_INFO
+    - CAPACITY
+    - OTHER
+  Get.dto.resultcontentdescriptor$perspective:
+    title: get.dto.ResultContentDescriptor$Perspective
+    type: object
+    properties:
+      format:
+        $ref: '#/definitions/Format'
+      metadata:
+        $ref: '#/definitions/Get.dto.resultmetadata'
+      query:
+        description: ''
+        type: string
+      result:
+        description: ''
+        type: string
+      type:
+        description: ''
+        type: string
+  Get.dto.resultmetadata:
+    title: get.dto.ResultMetadata
+    type: object
+    properties:
+      entity_type:
+        $ref: '#/definitions/EntityType'
+      filters:
+        description: ''
+        type: array
+        items:
+          $ref: '#/definitions/Get.dto.resultmetadata$filter'
+      instances:
+        description: ''
+        type: array
+        items:
+          $ref: '#/definitions/Get.dto.entitymetadata'
+      title:
+        description: ''
+        type: string
+  Get.dto.resultmetadata$filter:
+    title: get.dto.ResultMetadata$Filter
+    type: object
+    properties:
+      display_for_rhs:
+        description: ''
+        type: string
+      lhs:
+        description: ''
+        type: string
+      operator:
+        description: Operator for the filter.
+        type: string
+      rhs:
+        description: ''
+        type: string
+  Get.dto.alerts.alertcausedto:
+    title: get.dto.alerts.AlertCauseDTO
+    type: object
+    properties:
+      actions:
+        description: Possible actions to resolve this alert
+        type: string
+      additional_links:
+        description: Additional links
+        type: string
+      alert_namespace:
+        description: Namespace this alert belongs to
+        type: string
+      cause:
+        description: Detailed description
+        type: string
+      chart_queries:
+        $ref: '#/definitions/Get.base.entitycollection&lt;get.dto.resultcontentdescriptor&gt;'
+      details:
+        description: Symptoms for this cause
+        type: string
+      has_global_details:
+        description: Whether the alert has global details or not
+        type: boolean
+      id:
+        description: Cause Id
+        type: string
+      num_resolved_count:
+        description: Number of times this cause has resolved the alert
+        type: integer
+        format: int64
+      parent_cause_id:
+        description: Id of the alert/cause this is a possible cause for
+        type: string
+      title:
+        description: Short description
+        type: string
+      troubleshooting_steps:
+        description: Steps to determine whether this is the cause.
+        type: string
+  Get.dto.alerts.alertdto:
+    title: get.dto.alerts.AlertDTO
+    type: object
+    properties:
+      acknowledged:
+        description: ''
+        type: boolean
+      acknowledged_by_username:
+        description: ''
+        type: string
+      acknowledged_time_stamp_in_usecs:
+        description: ''
+        type: integer
+        format: int64
+      affected_entities:
+        description: ''
+        type: array
+        items:
+          $ref: '#/definitions/Get.dto.alerts.alertdto$affectedentity'
+      alert_details:
+        $ref: '#/definitions/Get.dto.alerts.alertdto$alertdetailsdto'
+      alert_title:
+        description: ''
+        type: string
+      alert_type_uuid:
+        description: ''
+        type: string
+      auto_resolved:
+        description: ''
+        type: boolean
+      check_id:
+        description: ''
+        type: string
+      classifications:
+        description: ''
+        type: array
+        items:
+          type: string
+      cluster_uuid:
+        description: ''
+        type: string
+      context_types:
+        description: ''
+        type: array
+        items:
+          type: string
+      context_values:
+        description: ''
+        type: array
+        items:
+          type: string
+      created_time_stamp_in_usecs:
+        description: ''
+        type: integer
+        format: int64
+      detailed_message:
+        description: ''
+        type: string
+      id:
+        description: ''
+        type: string
+      impact_types:
+        description: ''
+        type: array
+        items:
+          type: string
+      last_occurrence_time_stamp_in_usecs:
+        description: ''
+        type: integer
+        format: int64
+      message:
+        description: ''
+        type: string
+      node_uuid:
+        description: ''
+        type: string
+      originating_cluster_uuid:
+        description: ''
+        type: string
+      possible_causes:
+        description: ''
+        type: array
+        items:
+          $ref: '#/definitions/Get.dto.alerts.alertcausedto'
+      resolved:
+        description: ''
+        type: boolean
+      resolved_by_username:
+        description: ''
+        type: string
+      resolved_time_stamp_in_usecs:
+        description: ''
+        type: integer
+        format: int64
+      service_v_m_id:
+        description: ''
+        type: string
+      severity:
+        description: This field describes the severity of the alert.
+        type: string
+      user_defined:
+        description: ''
+        type: boolean
+  Get.dto.alerts.alertdto$affectedentity:
+    title: get.dto.alerts.AlertDTO$AffectedEntity
+    type: object
+    properties:
+      entity_name:
+        description: ''
+        type: string
+      entity_type:
+        description: ''
+        type: string
+      entity_type_display_name:
+        description: ''
+        type: string
+      id:
+        description: ''
+        type: string
+      uuid:
+        description: ''
+        type: string
+  Get.dto.alerts.alertdto$alertdetailsdto:
+    title: get.dto.alerts.AlertDTO$AlertDetailsDTO
+    type: object
+    properties:
+      metric_details:
+        description: List of metric details associated with the alert
+        type: array
+        items:
+          $ref: '#/definitions/Get.dto.alerts.alertdto$metricdetails'
+      severity_trails:
+        description: List that contains severity level change details
+        type: array
+        items:
+          $ref: '#/definitions/Get.dto.alerts.alertdto$severitytrail'
+  ConditionType:
+    title: condition_type
+    example: STATIC_THRESHOLD
+    x-enum-elements:
+    - name: STATIC_THRESHOLD
+      description: ''
+    - name: ANOMALY
+      description: ''
+    - name: SAFETY_ZONE
+      description: ''
+    type: string
+    enum:
+    - STATIC_THRESHOLD
+    - ANOMALY
+    - SAFETY_ZONE
+  DataType:
+    title: data_type
+    example: LONG
+    x-enum-elements:
+    - name: LONG
+      description: ''
+    - name: DOUBLE
+      description: ''
+    - name: BOOLEAN
+      description: ''
+    - name: STRING
+      description: ''
+    type: string
+    enum:
+    - LONG
+    - DOUBLE
+    - BOOLEAN
+    - STRING
+  Get.dto.alerts.alertdto$metricdetails:
+    title: get.dto.alerts.AlertDTO$MetricDetails
+    type: object
+    properties:
+      comparison_operator:
+        description: Comparison Operator to be applied for teh values.
+        type: string
+      condition_type:
+        $ref: '#/definitions/ConditionType'
+      data_type:
+        $ref: '#/definitions/DataType'
+      entity_id:
+        description: UUID of the entity
+        type: string
+      entity_type:
+        description: Entity Type
+        type: string
+      metric_display_name:
+        description: Display name of the metric
+        type: string
+      metric_name:
+        description: Name of the metric
+        type: string
+      metric_value_details:
+        description: List of metric values at different instances of time in the alert lifecycle
+        type: array
+        items:
+          $ref: '#/definitions/Get.dto.alerts.alertdto$metricvaluedetails'
+      unit:
+        description: Unit of the metric value.
+        type: string
+  Get.dto.alerts.alertdto$metricvaluedetails:
+    title: get.dto.alerts.AlertDTO$MetricValueDetails
+    type: object
+    properties:
+      metric_threshold_value:
+        description: Threshold value of the metric that was specified in the policy at that given time.
+        type: string
+      metric_value:
+        description: Actual value of the metric at that given time.
+        type: string
+      state_change_time_stamp_in_usecs:
+        description: Time at which the alert's state change occurred.
+        type: integer
+        format: int64
+  Get.dto.alerts.alertdto$severitytrail:
+    title: get.dto.alerts.AlertDTO$SeverityTrail
+    type: object
+    properties:
+      severity:
+        description: Severity level of the alert. Can be INFO, WARNING or CRITICAL
+        type: string
+      severity_change_timestamp_in_usecs:
+        description: Time at which the severity level change occurred
+        type: integer
+        format: int64
+  Get.dto.alerts.alertsummarydto:
+    title: get.dto.alerts.AlertSummaryDTO
+    type: object
+    properties:
+      alert_summaries:
+        $ref: '#/definitions/Java.util.map&lt;get.dto.alerts.alertdto$alertseverity,Get.base.entitycollection&lt;get.dto.alerts.alertdto&gt;&gt;'
+      count:
+        description: ''
+        type: integer
+        format: int64
+  State:
+    title: state
+    example: NEW
+    x-enum-elements:
+    - name: NEW
+      description: ''
+    - name: NORMAL
+      description: ''
+    - name: MARKED_FOR_REMOVAL_BUT_NOT_DETACHABLE
+      description: ''
+    - name: DETACHABLE
+      description: ''
+    type: string
+    enum:
+    - NEW
+    - NORMAL
+    - MARKED_FOR_REMOVAL_BUT_NOT_DETACHABLE
+    - DETACHABLE
+  Get.dto.appliance.configuration.nodedto:
+    title: get.dto.appliance.configuration.NodeDTO
+    type: object
+    properties:
+      alert_summary:
+        $ref: '#/definitions/Get.dto.alerts.alertsummarydto'
+      backplane_ip:
+        description: ''
+        type: string
+      bios_model:
+        description: Specifies the model of bios, present on the node
+        type: string
+      bios_version:
+        description: Specifies the version of bios, present on the node
+        type: string
+      block_location:
+        description: ''
+        type: string
+      block_model:
+        description: ''
+        type: string
+      block_model_name:
+        description: ''
+        type: string
+      block_serial:
+        description: ''
+        type: string
+      bmc_model:
+        description: Specifies the model of bmc, present on the node
+        type: string
+      bmc_version:
+        description: Specifies the version of bmc, present on the node
+        type: string
+      boot_time_in_usecs:
+        description: ''
+        type: integer
+        format: int64
+      cluster_uuid:
+        description: ''
+        type: string
+      controller_vm_backplane_ip:
+        description: ''
+        type: string
+      cpu_capacity_in_hz:
+        description: ''
+        type: integer
+        format: int64
+      cpu_frequency_in_hz:
+        description: ''
+        type: integer
+        format: int64
+      cpu_model:
+        description: ''
+        type: string
+      default_vhd_location:
+        description: The default location configured on the Hyper-V node for storing virtual hard disk files.
+        type: string
+      default_vhd_storage_container_id:
+        description: Specifies the ID of the Nutanix container if the default location for storing virtual hard disk files on the Hyper-V node happens to be a Nutanix container.
+        type: string
+      default_vhd_storage_container_uuid:
+        description: Specifies the UUID of the Nutanix container if the default location for storing virtual hard disk files on the Hyper-V node happens to be a Nutanix container.
+        type: string
+      default_vm_location:
+        description: The default location configured on the Hyper-V node for storing virtual machine configuration files.
+        type: string
+      default_vm_storage_container_id:
+        description: Specifies the Id of the Nutanix container if the default location for storing virtual machine configuration files on the Hyper-V node happens to be a Nutanix storage container.
+        type: string
+      default_vm_storage_container_uuid:
+        description: Specifies the UUID of the Nutanix container if the default location for storing virtual machine configuration files on the Hyper-V node happens to be a Nutanix storage container.
+        type: string
+      disk_hardware_configs:
+        $ref: '#/definitions/Java.util.map&lt;java.lang.integer,Get.dto.appliance.configuration.diskhardwareconfigdto&gt;'
+      dynamic_ring_changing_node:
+        $ref: '#/definitions/Get.dto.appliance.configuration.nodedto'
+      failover_cluster_fqdn:
+        description: The name of the Hyper-V failover cluster that this node is a part of. Applies only if the node runs Hyper-V
+        type: string
+      failover_cluster_node_state:
+        description: If this node runs Hyper-V and is part of a failovercluster, this property specifies the state of the nodein the failover cluster.
+        type: string
+      gpu_driver_version:
+        description: Host driver version of the GPUs.
+        type: string
+      has_csr:
+        description: ''
+        type: boolean
+      hba_firmwares_list:
+        description: Specifies the version and model info of the hba, present on the node
+        type: array
+        items:
+          $ref: '#/definitions/Get.dto.appliance.configuration.nodedto$hbafirmware'
+      health_summary:
+        $ref: '#/definitions/Get.dto.health.check.healthsummarydto'
+      host_gpus:
+        description: The host GPUs.
+        type: array
+        items:
+          type: string
+      host_in_maintenance_mode:
+        description: ''
+        type: boolean
+      host_maintenance_mode_reason:
+        description: ''
+        type: string
+      host_nic_ids:
+        description: The host nic ids
+        type: array
+        items:
+          type: string
+      hypervisor_address:
+        description: ''
+        type: string
+      hypervisor_full_name:
+        description: ''
+        type: string
+      hypervisor_key:
+        description: ''
+        type: string
+      hypervisor_password:
+        description: ''
+        type: string
+      hypervisor_state:
+        description: ''
+        type: string
+      hypervisor_type:
+        description: ''
+        type: string
+      hypervisor_username:
+        description: ''
+        type: string
+      ipmi_address:
+        description: ''
+        type: string
+      ipmi_password:
+        description: ''
+        type: string
+      ipmi_username:
+        description: ''
+        type: string
+      is_degraded:
+        description: ''
+        type: boolean
+      key_management_device_to_certificate_status:
+        $ref: '#/definitions/Java.util.map&lt;java.lang.string,Java.lang.boolean&gt;'
+      management_server_name:
+        description: ''
+        type: string
+      memory_capacity_in_bytes:
+        description: ''
+        type: integer
+        format: int64
+      metadata_store_status:
+        description: ''
+        type: string
+      metadata_store_status_message:
+        description: ''
+        type: string
+      monitored:
+        description: ''
+        type: boolean
+      name:
+        description: ''
+        type: string
+      num_cpu_cores:
+        description: ''
+        type: integer
+        format: int64
+      num_cpu_sockets:
+        description: ''
+        type: integer
+        format: int64
+      num_cpu_threads:
+        description: ''
+        type: integer
+        format: int64
+      num_v_ms:
+        description: ''
+        type: integer
+        format: int64
+      oplog_disk_pct:
+        description: ''
+        type: number
+        format: double
+      oplog_disk_size:
+        description: ''
+        type: integer
+        format: int64
+      position:
+        $ref: '#/definitions/Get.dto.appliance.configuration.nodepositiondto'
+      rdma_backplane_ips:
+        description: ''
+        type: array
+        items:
+          type: string
+      reboot_pending:
+        description: If this node runs Hyper-V, this property indicates that a reboot is pending for the earlier initiated domain joining to be complete.
+        type: boolean
+      removal_status:
+        description: ''
+        type: array
+        items:
+          type: string
+      serial:
+        description: ''
+        type: string
+      service_v_m_external_i_p:
+        description: ''
+        type: string
+      service_v_m_id:
+        description: ''
+        type: string
+      state:
+        $ref: '#/definitions/State'
+      stats:
+        $ref: '#/definitions/Java.util.map&lt;java.lang.string,Java.lang.string&gt;'
+      usage_stats:
+        $ref: '#/definitions/Java.util.map&lt;java.lang.string,Java.lang.string&gt;'
+      uuid:
+        description: ''
+        type: string
+      vzone_name:
+        description: ''
+        type: string
+  Get.dto.appliance.configuration.nodedto$hbafirmware:
+    title: get.dto.appliance.configuration.NodeDTO$HbaFirmware
+    type: object
+    properties:
+      hba_model:
+        description: Specifies the model of hba, present on the node
+        type: string
+      hba_version:
+        description: Specifies the version of hba, present on the node
+        type: string
+  PhysicalPosition:
+    title: physical_position
+    example: C
+    x-enum-elements:
+    - name: C
+      description: ''
+    - name: L
+      description: ''
+    - name: R
+      description: ''
+    - name: TL
+      description: ''
+    - name: TR
+      description: ''
+    - name: BL
+      description: ''
+    - name: BR
+      description: ''
+    type: string
+    enum:
+    - C
+    - L
+    - R
+    - TL
+    - TR
+    - BL
+    - BR
+  Get.dto.appliance.configuration.nodepositiondto:
+    title: get.dto.appliance.configuration.NodePositionDTO
+    type: object
+    properties:
+      name:
+        description: ''
+        type: string
+      ordinal:
+        description: ''
+        type: integer
+        format: int32
+      physical_position:
+        $ref: '#/definitions/PhysicalPosition'
+  Get.dto.health.check.entitytypehealthchecksummarydto:
+    title: get.dto.health.check.EntityTypeHealthCheckSummaryDTO
+    type: object
+    properties:
+      checks_in_error:
+        $ref: '#/definitions/Java.util.map&lt;java.lang.string,Get.dto.health.check.healthcheckerrorsdto&gt;'
+      detailed_check_summary:
+        $ref: '#/definitions/Java.util.map&lt;java.lang.string,Java.util.map&lt;get.dto.health.check.healthstatus,Java.lang.integer&gt;&gt;'
+      entity_type:
+        $ref: '#/definitions/EntityType'
+      filter_criteria:
+        description: ''
+        type: string
+      health_summary:
+        $ref: '#/definitions/Java.util.map&lt;get.dto.health.check.healthstatus,Java.lang.integer&gt;'
+  HealthStatus:
+    title: health_status
+    example: Critical
+    x-enum-elements:
+    - name: Critical
+      description: ''
+    - name: Warning
+      description: ''
+    - name: Good
+      description: ''
+    - name: Unknown
+      description: ''
+    - name: Error
+      description: ''
+    type: string
+    enum:
+    - Critical
+    - Warning
+    - Good
+    - Unknown
+    - Error
+  Get.dto.health.check.healthsummarydto:
+    title: get.dto.health.check.HealthSummaryDTO
+    type: object
+    properties:
+      entity_type_summaries:
+        description: ''
+        type: array
+        items:
+          $ref: '#/definitions/Get.dto.health.check.entitytypehealthchecksummarydto'
+      health_check_summaries:
+        $ref: '#/definitions/Java.util.map&lt;java.lang.string,Get.dto.health.check.healthchecksummarydto&gt;'
+      health_status:
+        $ref: '#/definitions/HealthStatus'
+  GpuMode:
+    title: gpu_mode
+    example: UNUSED
+    x-enum-elements:
+    - name: UNUSED
+      description: ''
+    - name: USED_FOR_PASSTHROUGH
+      description: ''
+    - name: USED_FOR_VIRTUAL
+      description: ''
+    type: string
+    enum:
+    - UNUSED
+    - USED_FOR_PASSTHROUGH
+    - USED_FOR_VIRTUAL
+  GpuType:
+    title: gpu_type
+    example: PASS_THROUGH_GRAPHICS
+    x-enum-elements:
+    - name: PASS_THROUGH_GRAPHICS
+      description: ''
+    - name: PASS_THROUGH_COMPUTE
+      description: ''
+    - name: VIRTUAL
+      description: ''
+    type: string
+    enum:
+    - PASS_THROUGH_GRAPHICS
+    - PASS_THROUGH_COMPUTE
+    - VIRTUAL
+  GpuVendor:
+    title: gpu_vendor
+    example: NVIDIA
+    x-enum-elements:
+    - name: NVIDIA
+      description: ''
+    - name: INTEL
+      description: ''
+    - name: AMD
+      description: ''
+    type: string
+    enum:
+    - NVIDIA
+    - INTEL
+    - AMD
+  Get.dto.uhura.gpuconfigdto:
+    title: get.dto.uhura.GPUConfigDTO
+    type: object
+    properties:
+      assignable:
+        description: Whether the GPU can be assigned to a Virtual Machine.
+        type: boolean
+      device_id:
+        description: Device ID of the GPU resource.
+        type: integer
+        format: int32
+      device_name:
+        description: Vendor device name of the GPU resource.
+        type: string
+      fraction:
+        description: Fraction of the physical GPU. Only applicable for a vGPU instance.
+        type: integer
+        format: int32
+      frame_buffer_size_bytes:
+        description: GPU framebuffer size in bytes.
+        type: integer
+        format: int64
+      gpu_mode:
+        $ref: '#/definitions/GpuMode'
+      gpu_profile:
+        description: Profile of the GPU.
+        type: string
+      gpu_type:
+        $ref: '#/definitions/GpuType'
+      gpu_vendor:
+        $ref: '#/definitions/GpuVendor'
+      guest_driver_version:
+        description: Last determined guest driver version.
+        type: string
+      in_use:
+        description: Whether the GPU resource is in use or not.
+        type: boolean
+      licenses:
+        description: List of license types associated with this GPU.
+        type: array
+        items:
+          type: string
+      max_resolution:
+        description: Maximum resolution per display heads.
+        type: string
+      num_virtual_display_heads:
+        description: Number of supported virtual display heads.
+        type: integer
+        format: int32
+      numa_node:
+        description: The NUMA node where the GPU belongs to.
+        type: integer
+        format: int32
+      sbdf:
+        description: Unique device information for the GPU resource.
+        type: string
+      vm_uuids:
+        description: List of UUIDs of the Virtual Machines where the GPU resource is assigned.
+        type: array
+        items:
+          type: string
+  Get.dto.uhura.hostgpudto:
+    title: get.dto.uhura.HostGPUDTO
+    type: object
+    properties:
+      cluster_name:
+        description: Name of the cluster where the GPU resource is present.
+        type: string
+      cluster_uuid:
+        description: UUID of the cluster where the GPU resource is present.
+        type: string
+      gpu_config:
+        $ref: '#/definitions/Get.dto.uhura.gpuconfigdto'
+      id:
+        description: ID of the GPU resource.
+        type: string
+      node_id:
+        description: Id of the node where the GPU resource is present.
+        type: string
+      node_uuid:
+        description: UUID of the node where the GPU resource is present.
+        type: string
+      num_vgpus_allocated:
+        description: Number of vGPUs allocated.
+        type: integer
+        format: int32
+      uuid:
+        description: UUID of the GPU resource.
+        type: string
+  Get.dto.uhura.virtualgpuprofiledto:
+    title: get.dto.uhura.VirtualGPUProfileDTO
+    type: object
+    properties:
+      allocated_vm_uuids:
+        description: List of UUIDs of virtual machines that have been allocated a GPU belonging to this profile.
+        type: array
+        items:
+          type: string
+      gpu_config:
+        $ref: '#/definitions/Get.dto.uhura.gpuconfigdto'
+  Java.util.map&lt;get.dto.alerts.alertdto$alertseverity,Get.base.entitycollection&lt;get.dto.alerts.alertdto&gt;&gt;:
+    title: java.util.Map&lt;get.dto.alerts.AlertDTO$AlertSeverity, get.base.EntityCollection&lt;get.dto.alerts.AlertDTO&gt;&gt;
+    type: object
+  Java.util.map&lt;get.dto.health.check.healthstatus,Java.lang.integer&gt;:
+    title: java.util.Map&lt;get.dto.health.check.HealthStatus, java.lang.Integer&gt;
+    type: object
+  Java.util.map&lt;java.lang.integer,Get.dto.appliance.configuration.diskhardwareconfigdto&gt;:
+    title: java.util.Map&lt;java.lang.Integer, get.dto.appliance.configuration.DiskHardwareConfigDTO&gt;
+    type: object
+  Java.util.map&lt;java.lang.string,Get.dto.health.check.healthcheckerrorsdto&gt;:
+    title: java.util.Map&lt;java.lang.String, get.dto.health.check.HealthCheckErrorsDTO&gt;
+    type: object
+  Java.util.map&lt;java.lang.string,Get.dto.health.check.healthchecksummarydto&gt;:
+    title: java.util.Map&lt;java.lang.String, get.dto.health.check.HealthCheckSummaryDTO&gt;
+    type: object
+  Java.util.map&lt;java.lang.string,Java.lang.boolean&gt;:
+    title: java.util.Map&lt;java.lang.String, java.lang.Boolean&gt;
+    type: object
+  Java.util.map&lt;java.lang.string,Java.lang.string&gt;:
+    title: java.util.Map&lt;java.lang.String, java.lang.String&gt;
+    type: object
+  Java.util.map&lt;java.lang.string,Java.util.map&lt;get.dto.health.check.healthstatus,Java.lang.integer&gt;&gt;:
+    title: java.util.Map&lt;java.lang.String, java.util.Map&lt;get.dto.health.check.HealthStatus, java.lang.Integer&gt;&gt;
+    type: object

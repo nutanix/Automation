@@ -1,0 +1,350 @@
+swagger: '2.0'
+info:
+  version: 'v2.0'
+  title: Swagger API
+host: any_cvm_ip:9440
+basePath: /PrismGateway/services/rest/v2.0
+schemes:
+- https
+consumes:
+- application/json
+produces:
+- application/json
+paths:
+  /vstores/:
+    get:
+      description: Get the list of VStores.
+      summary: getVStores
+      operationId: VstoresGet
+      produces:
+      - application/json
+      parameters:
+      - name: uuids
+        in: query
+        required: false
+        type: array
+        uniqueItems: false
+        items:
+          type: string
+        description: VStore uuids
+      - name: names
+        in: query
+        required: false
+        type: array
+        uniqueItems: false
+        items:
+          type: string
+        description: VStore names
+      - name: include_deleted
+        in: query
+        required: false
+        type: boolean
+        description: Include deleted
+      responses:
+        200:
+          description: ''
+          schema:
+            $ref: '#/definitions/Get.base.entitycollection&lt;get.dto.vstore.vstoredto&gt;'
+          examples: {}
+      x-unitTests: []
+      x-operation-settings:
+        CollectParameters: false
+        AllowDynamicQueryParameters: false
+        AllowDynamicFormParameters: false
+        IsMultiContentStreaming: false
+  /vstores/{uuid}:
+    get:
+      description: Get a VStore.
+      summary: getVStoreByUuid
+      operationId: VstoresByUuidGet
+      produces:
+      - application/json
+      parameters:
+      - name: uuid
+        in: path
+        required: true
+        type: string
+        description: Uuid of the VStore
+      responses:
+        200:
+          description: ''
+          schema:
+            $ref: '#/definitions/Get.dto.vstore.vstoredto'
+          examples: {}
+      x-unitTests: []
+      x-operation-settings:
+        CollectParameters: false
+        AllowDynamicQueryParameters: false
+        AllowDynamicFormParameters: false
+        IsMultiContentStreaming: false
+  /vstores/{uuid}/protect:
+    post:
+      description: Protect a VStore.
+      summary: protectVStore
+      operationId: VstoresProtectByUuidPost
+      produces:
+      - application/json
+      parameters:
+      - name: uuid
+        in: path
+        required: true
+        type: string
+        description: Uuid of the VStore
+      - name: vm_level_consistency
+        in: query
+        required: false
+        type: boolean
+        description: Create vm level consistent snapshots for the vStore
+      responses:
+        200:
+          description: ''
+          schema:
+            $ref: '#/definitions/Create.dto.vstore.vstoredto'
+          examples: {}
+      x-unitTests: []
+      x-operation-settings:
+        CollectParameters: false
+        AllowDynamicQueryParameters: false
+        AllowDynamicFormParameters: false
+        IsMultiContentStreaming: false
+  /vstores/{uuid}/unprotect:
+    post:
+      description: Unprotect a VStore.
+      summary: unProtectVStore
+      operationId: VstoresUnprotectByUuidPost
+      produces:
+      - application/json
+      parameters:
+      - name: uuid
+        in: path
+        required: true
+        type: string
+        description: Uuid of the VStore
+      responses:
+        200:
+          description: ''
+          schema:
+            $ref: '#/definitions/Create.dto.vstore.vstoredto'
+          examples: {}
+      x-unitTests: []
+      x-operation-settings:
+        CollectParameters: false
+        AllowDynamicQueryParameters: false
+        AllowDynamicFormParameters: false
+        IsMultiContentStreaming: false
+  /vstores/{uuid}/update_protection_mode:
+    put:
+      description: Protect a VStore.
+      summary: updateProtection
+      operationId: VstoresUpdateProtectionModeByUuidPut
+      produces:
+      - application/json
+      parameters:
+      - name: uuid
+        in: path
+        required: true
+        type: string
+        description: Uuid of the VStore
+      - name: vm_level_consistency
+        in: query
+        required: true
+        type: boolean
+        description: Create vm level consistent snapshots for the vStore
+      responses:
+        200:
+          description: ''
+          schema:
+            $ref: '#/definitions/Update.dto.vstore.vstoredto'
+          examples: {}
+      x-unitTests: []
+      x-operation-settings:
+        CollectParameters: false
+        AllowDynamicQueryParameters: false
+        AllowDynamicFormParameters: false
+        IsMultiContentStreaming: false
+definitions:
+  Create.dto.vstore.vstoredto:
+    title: create.dto.vstore.VStoreDTO
+    description: vStore
+    type: object
+    properties:
+      id:
+        description: Vstore id.
+        type: integer
+        format: int64
+      name:
+        description: Vstore name
+        type: string
+      storage_container_id:
+        description: Storage Container with which vstore is associated with.
+        type: integer
+        format: int64
+      backedup:
+        description: ''
+        type: boolean
+      is_backup:
+        description: ''
+        type: boolean
+      marked_for_removal:
+        description: ''
+        type: boolean
+      protection_domain:
+        description: ''
+        type: string
+      storage_container_uuid:
+        description: ''
+        type: string
+      uuid:
+        description: ''
+        type: string
+    required:
+    - id
+    - name
+    - storage_container_id
+  Get.base.entitycollection&lt;get.dto.vstore.vstoredto&gt;:
+    title: get.base.EntityCollection&lt;get.dto.vstore.VStoreDTO&gt;
+    type: object
+    properties:
+      entities:
+        description: ''
+        type: array
+        items:
+          $ref: '#/definitions/Get.dto.vstore.vstoredto'
+      error_info:
+        $ref: '#/definitions/Get.base.errorinfo'
+      metadata:
+        $ref: '#/definitions/Get.base.metadata'
+  Get.base.errorinfo:
+    title: get.base.ErrorInfo
+    type: object
+    properties:
+      count:
+        description: ''
+        type: integer
+        format: int64
+      entity_list:
+        description: ''
+        type: array
+        items:
+          type: string
+      message:
+        description: ''
+        type: string
+  Get.base.metadata:
+    title: get.base.Metadata
+    type: object
+    properties:
+      count:
+        description: ''
+        type: integer
+        format: int32
+      end_index:
+        description: ''
+        type: integer
+        format: int32
+      filter_criteria:
+        description: ''
+        type: string
+      grand_total_entities:
+        description: ''
+        type: integer
+        format: int32
+      next_cursor:
+        description: ''
+        type: string
+      page:
+        description: ''
+        type: integer
+        format: int32
+      previous_cursor:
+        description: ''
+        type: string
+      search_string:
+        description: ''
+        type: string
+      sort_criteria:
+        description: ''
+        type: string
+      start_index:
+        description: ''
+        type: integer
+        format: int32
+      total_entities:
+        description: ''
+        type: integer
+        format: int32
+  Get.dto.vstore.vstoredto:
+    title: get.dto.vstore.VStoreDTO
+    description: vStore
+    type: object
+    properties:
+      backedup:
+        description: ''
+        type: boolean
+      id:
+        description: Vstore id.
+        type: integer
+        format: int64
+      is_backup:
+        description: ''
+        type: boolean
+      marked_for_removal:
+        description: ''
+        type: boolean
+      name:
+        description: Vstore name
+        type: string
+      protection_domain:
+        description: ''
+        type: string
+      storage_container_id:
+        description: Storage Container with which vstore is associated with.
+        type: integer
+        format: int64
+      storage_container_uuid:
+        description: ''
+        type: string
+      uuid:
+        description: ''
+        type: string
+      vm_level_consistent:
+        description: Vm level consistent snapshots for the vStore
+        type: boolean
+  Update.dto.vstore.vstoredto:
+    title: update.dto.vstore.VStoreDTO
+    description: vStore
+    type: object
+    properties:
+      id:
+        description: Vstore id.
+        type: integer
+        format: int64
+      name:
+        description: Vstore name
+        type: string
+      storage_container_id:
+        description: Storage Container with which vstore is associated with.
+        type: integer
+        format: int64
+      backedup:
+        description: ''
+        type: boolean
+      is_backup:
+        description: ''
+        type: boolean
+      marked_for_removal:
+        description: ''
+        type: boolean
+      protection_domain:
+        description: ''
+        type: string
+      storage_container_uuid:
+        description: ''
+        type: string
+      uuid:
+        description: ''
+        type: string
+    required:
+    - id
+    - name
+    - storage_container_id

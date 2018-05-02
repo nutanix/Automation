@@ -1,0 +1,1123 @@
+{
+    "apiVersion": "v2.0",
+    "swaggerVersion": "1.2",
+    "basePath": "https://any_cvm_ip:9440/PrismGateway/services/rest/v2.0",
+    "resourcePath": "/health_checks",
+    "produces": [
+        "application/json"
+    ],
+    "consumes": [
+        "application/json"
+    ],
+    "apis": [
+        {
+            "internal": false,
+            "path": "/health_checks/",
+            "operations": [
+                {
+                    "deprecated": "false",
+                    "internal": false,
+                    "method": "GET",
+                    "summary": "Get the list of Health Checks.",
+                    "notes": "Get the list of Health Checks configured in the cluster.",
+                    "type": "get.base.EntityCollection&lt;get.dto.health.check.HealthCheckDTO&gt;",
+                    "nickname": "getHealthChecks",
+                    "parameters": [
+                        {
+                            "name": "check_ids",
+                            "description": "Check Ids",
+                            "required": false,
+                            "allowMultiple": false,
+                            "paramType": "query",
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        {
+                            "name": "global_config",
+                            "description": "Whether to get the global config list or not.",
+                            "required": false,
+                            "allowMultiple": false,
+                            "paramType": "query",
+                            "type": "boolean"
+                        },
+                        {
+                            "name": "include_internal_checks",
+                            "description": "Whether to include internal checks or not.",
+                            "required": false,
+                            "allowMultiple": false,
+                            "paramType": "query",
+                            "type": "boolean"
+                        },
+                        {
+                            "name": "category_types",
+                            "description": "Categories of the Health Check.",
+                            "required": false,
+                            "allowMultiple": false,
+                            "paramType": "query",
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        }
+                    ],
+                    "responseMessages": []
+                },
+                {
+                    "deprecated": "false",
+                    "internal": false,
+                    "method": "PATCH",
+                    "summary": "Modify Health Check details.",
+                    "notes": "Modify the specified health check details.",
+                    "type": "patch.dto.health.check.HealthCheckDTO",
+                    "nickname": "patchHealthCheck",
+                    "parameters": [
+                        {
+                            "description": "An Health Check instance",
+                            "required": true,
+                            "allowMultiple": false,
+                            "paramType": "body",
+                            "type": "patch.dto.RequestDTO&lt;patch.dto.health.check.HealthCheckDTO&gt;"
+                        }
+                    ],
+                    "responseMessages": []
+                },
+                {
+                    "deprecated": "false",
+                    "internal": false,
+                    "method": "PUT",
+                    "summary": "Update Health Check details.",
+                    "notes": "Update the specified health check details.",
+                    "type": "update.dto.health.check.HealthCheckDTO",
+                    "nickname": "updateHealthCheck",
+                    "parameters": [
+                        {
+                            "description": "An Health Check instance",
+                            "required": true,
+                            "allowMultiple": false,
+                            "paramType": "body",
+                            "type": "update.dto.health.check.HealthCheckDTO"
+                        }
+                    ],
+                    "responseMessages": []
+                }
+            ]
+        },
+        {
+            "internal": false,
+            "path": "/health_checks/{id}",
+            "operations": [
+                {
+                    "deprecated": "false",
+                    "internal": false,
+                    "method": "GET",
+                    "summary": "Get Health Check details.",
+                    "notes": "Get the health check with the specified id.",
+                    "type": "get.dto.health.check.HealthCheckDTO",
+                    "nickname": "getHealthCheck",
+                    "parameters": [
+                        {
+                            "name": "id",
+                            "description": "Id of the health check",
+                            "required": true,
+                            "allowMultiple": false,
+                            "paramType": "path",
+                            "type": "string"
+                        },
+                        {
+                            "name": "global_config",
+                            "description": "Whether to get the global config list or not.",
+                            "required": false,
+                            "allowMultiple": false,
+                            "paramType": "query",
+                            "type": "boolean"
+                        }
+                    ],
+                    "responseMessages": []
+                }
+            ]
+        }
+    ],
+    "models": {
+        "get.base.EntityCollection&lt;get.dto.health.check.HealthCheckDTO&gt;": {
+            "id": "get.base.EntityCollection&lt;get.dto.health.check.HealthCheckDTO&gt;",
+            "required": [],
+            "properties": {
+                "entities": {
+                    "items": {
+                        "$ref": "get.dto.health.check.HealthCheckDTO"
+                    },
+                    "type": "array"
+                },
+                "error_info": {
+                    "$ref": "get.base.ErrorInfo"
+                },
+                "metadata": {
+                    "$ref": "get.base.Metadata"
+                }
+            }
+        },
+        "get.base.ErrorInfo": {
+            "id": "get.base.ErrorInfo",
+            "required": [],
+            "properties": {
+                "count": {
+                    "format": "int64",
+                    "type": "integer"
+                },
+                "entity_list": {
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": "array"
+                },
+                "message": {
+                    "type": "string"
+                }
+            }
+        },
+        "get.base.Metadata": {
+            "id": "get.base.Metadata",
+            "required": [],
+            "properties": {
+                "count": {
+                    "format": "int32",
+                    "type": "integer"
+                },
+                "end_index": {
+                    "format": "int32",
+                    "type": "integer"
+                },
+                "filter_criteria": {
+                    "type": "string"
+                },
+                "grand_total_entities": {
+                    "format": "int32",
+                    "type": "integer"
+                },
+                "next_cursor": {
+                    "type": "string"
+                },
+                "page": {
+                    "format": "int32",
+                    "type": "integer"
+                },
+                "previous_cursor": {
+                    "type": "string"
+                },
+                "search_string": {
+                    "type": "string"
+                },
+                "sort_criteria": {
+                    "type": "string"
+                },
+                "start_index": {
+                    "format": "int32",
+                    "type": "integer"
+                },
+                "total_entities": {
+                    "format": "int32",
+                    "type": "integer"
+                }
+            }
+        },
+        "get.dto.health.check.HealthCheckDTO": {
+            "id": "get.dto.health.check.HealthCheckDTO",
+            "description": "health-check",
+            "required": [],
+            "properties": {
+                "affected_entity_types": {
+                    "description": "Affected entity types.",
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": "array",
+                    "typeName": "DEFAULT"
+                },
+                "alert_config_exception_groups": {
+                    "description": "Those clusters that have their Alert configurable params that are different from that in PC",
+                    "items": {
+                        "$ref": "get.dto.health.check.HealthCheckDTO$AlertConfigExceptionGroup"
+                    },
+                    "type": "array",
+                    "typeName": "DEFAULT"
+                },
+                "alert_configurable_parameters": {
+                    "description": "Configurable Parameters for the Alert Type.",
+                    "items": {
+                        "$ref": "get.dto.health.check.HealthCheckDTO$AlertConfigParamDTO"
+                    },
+                    "type": "array",
+                    "typeName": "DEFAULT"
+                },
+                "alert_type_id": {
+                    "description": "Id of an alert type.",
+                    "type": "string",
+                    "typeName": "DEFAULT"
+                },
+                "applicable_for_multi_cluster": {
+                    "description": "Whether the check is applicable for Prism Central or not.",
+                    "type": "boolean",
+                    "typeName": "DEFAULT"
+                },
+                "applicable_for_single_cluster": {
+                    "description": "Whether the check is applicable for Prism Element or not.",
+                    "type": "boolean",
+                    "typeName": "DEFAULT"
+                },
+                "auto_resolve": {
+                    "description": "Auto Resolve status for this check.",
+                    "enum": [
+                        "ENABLED",
+                        "DISABLED",
+                        "NOT_SUPPORTED"
+                    ],
+                    "type": "string",
+                    "typeName": "DEFAULT"
+                },
+                "causes": {
+                    "description": "Causes.",
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": "array",
+                    "typeName": "DEFAULT"
+                },
+                "check_type": {
+                    "description": "Whether the health check is scheduled or event driven.",
+                    "enum": [
+                        "SCHEDULED",
+                        "NOT_SCHEDULED",
+                        "EVENT_DRIVEN"
+                    ],
+                    "type": "string",
+                    "typeName": "DEFAULT"
+                },
+                "classifications": {
+                    "description": "Classification of the Health Check. Ex: DR, Hardware, etc",
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": "array",
+                    "typeName": "DEFAULT"
+                },
+                "description": {
+                    "description": "Description of a health check.",
+                    "type": "string",
+                    "typeName": "DEFAULT"
+                },
+                "enabled": {
+                    "description": "Whether health check is enabled.",
+                    "type": "boolean",
+                    "typeName": "DEFAULT"
+                },
+                "exception_count": {
+                    "description": "Numbers of clusters having exceptions w.r.t Alert config.",
+                    "format": "int64",
+                    "type": "integer",
+                    "typeName": "DEFAULT"
+                },
+                "id": {
+                    "description": "Id of a health check.",
+                    "type": "string",
+                    "typeName": "DEFAULT"
+                },
+                "impact_types": {
+                    "description": "Impact type on affected entities.",
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": "array",
+                    "typeName": "DEFAULT"
+                },
+                "is_global_config": {
+                    "description": "Whether the check is a default one or not",
+                    "type": "boolean",
+                    "typeName": "DEFAULT"
+                },
+                "is_user_defined": {
+                    "description": "Whether the health check is user defined or not.",
+                    "type": "boolean",
+                    "typeName": "DEFAULT"
+                },
+                "kb_list": {
+                    "description": "List of kb article numbers.",
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": "array",
+                    "typeName": "DEFAULT"
+                },
+                "message": {
+                    "description": "Message for an alert type.",
+                    "type": "string",
+                    "typeName": "DEFAULT"
+                },
+                "metrics": {
+                    "description": "Metrics.",
+                    "items": {
+                        "$ref": "get.dto.health.check.HealthCheckDTO$HealthCheckMetricDTO"
+                    },
+                    "type": "array",
+                    "typeName": "DEFAULT"
+                },
+                "modified_by_username": {
+                    "type": "string",
+                    "typeName": "DEFAULT"
+                },
+                "modified_time_stamp_in_usecs": {
+                    "format": "int64",
+                    "type": "integer",
+                    "typeName": "DEFAULT"
+                },
+                "name": {
+                    "description": "Name of a health check.",
+                    "type": "string",
+                    "typeName": "DEFAULT"
+                },
+                "parameters": {
+                    "$ref": "java.util.Map&lt;java.lang.String, get.dto.health.check.HealthCheckDTO$HealthCheckParameterDTO&gt;",
+                    "description": "Parameters.",
+                    "typeName": "DEFAULT"
+                },
+                "policy_uuid": {
+                    "description": "Policy Uuid of the health check. Will be set only for user defined policies.",
+                    "type": "string",
+                    "typeName": "DEFAULT"
+                },
+                "resolutions": {
+                    "description": "Resolutions.",
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": "array",
+                    "typeName": "DEFAULT"
+                },
+                "schedule_interval_in_secs": {
+                    "description": "Interval between checks in seconds.",
+                    "format": "int32",
+                    "type": "integer",
+                    "typeName": "DEFAULT"
+                },
+                "scope": {
+                    "description": "Scope of health check.",
+                    "type": "string",
+                    "typeName": "DEFAULT"
+                },
+                "severity_threshold_infos": {
+                    "description": "Enable/Disable info for each Severity.",
+                    "items": {
+                        "$ref": "get.dto.health.check.HealthCheckDTO$SeverityThresholdInfoDTO"
+                    },
+                    "type": "array",
+                    "typeName": "DEFAULT"
+                },
+                "title": {
+                    "description": "Title of an alert type.",
+                    "type": "string",
+                    "typeName": "DEFAULT"
+                }
+            }
+        },
+        "get.dto.health.check.HealthCheckDTO$AlertConfigExceptionGroup": {
+            "id": "get.dto.health.check.HealthCheckDTO$AlertConfigExceptionGroup",
+            "required": [],
+            "properties": {
+                "auto_resolve": {
+                    "enum": [
+                        "ENABLED",
+                        "DISABLED",
+                        "NOT_SUPPORTED"
+                    ],
+                    "type": "string"
+                },
+                "cluster_uuids": {
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": "array"
+                },
+                "configurable_parameters": {
+                    "items": {
+                        "$ref": "get.dto.health.check.HealthCheckDTO$AlertConfigParamDTO"
+                    },
+                    "type": "array"
+                },
+                "severity_threshold_infos": {
+                    "items": {
+                        "$ref": "get.dto.health.check.HealthCheckDTO$SeverityThresholdInfoDTO"
+                    },
+                    "type": "array"
+                }
+            }
+        },
+        "get.dto.health.check.HealthCheckDTO$AlertConfigParamDTO": {
+            "id": "get.dto.health.check.HealthCheckDTO$AlertConfigParamDTO",
+            "description": "DTO representing the configurable parameters for an alert type",
+            "required": [],
+            "properties": {
+                "parameter_boolean_value": {
+                    "description": "If the parameter value is a Boolean, its value.",
+                    "type": "boolean",
+                    "typeName": "DEFAULT"
+                },
+                "parameter_default_boolean_value": {
+                    "description": "If the parameter value is a Boolean, its default value.",
+                    "type": "boolean",
+                    "typeName": "DEFAULT"
+                },
+                "parameter_default_long_value": {
+                    "description": "If the parameter value is Long, its default value.",
+                    "format": "int64",
+                    "type": "integer",
+                    "typeName": "DEFAULT"
+                },
+                "parameter_default_string_value": {
+                    "description": "If the parameter value is a String, its default value.",
+                    "type": "string",
+                    "typeName": "DEFAULT"
+                },
+                "parameter_display_name": {
+                    "description": "Display name of the parameter.",
+                    "type": "string",
+                    "typeName": "DEFAULT"
+                },
+                "parameter_long_value": {
+                    "description": "If the parameter value is Long, its value.",
+                    "format": "int64",
+                    "type": "integer",
+                    "typeName": "DEFAULT"
+                },
+                "parameter_name": {
+                    "description": "Name of the parameter.",
+                    "type": "string",
+                    "typeName": "DEFAULT"
+                },
+                "parameter_string_value": {
+                    "description": "If the parameter value is a String, its value.",
+                    "type": "string",
+                    "typeName": "DEFAULT"
+                },
+                "parameter_unit": {
+                    "description": "Unit of the parameter value.",
+                    "type": "string",
+                    "typeName": "DEFAULT"
+                },
+                "parameter_valid_values": {
+                    "description": "Valid values for a parameter",
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": "array",
+                    "typeName": "DEFAULT"
+                },
+                "severity": {
+                    "description": "Severity for which this parameter value applies.",
+                    "type": "string",
+                    "typeName": "DEFAULT"
+                }
+            }
+        },
+        "get.dto.health.check.HealthCheckDTO$HealthCheckMetricDTO": {
+            "id": "get.dto.health.check.HealthCheckDTO$HealthCheckMetricDTO",
+            "required": [],
+            "properties": {
+                "display_name": {
+                    "type": "string"
+                },
+                "name": {
+                    "type": "string"
+                }
+            }
+        },
+        "get.dto.health.check.HealthCheckDTO$SeverityThresholdInfoDTO": {
+            "id": "get.dto.health.check.HealthCheckDTO$SeverityThresholdInfoDTO",
+            "required": [],
+            "properties": {
+                "enabled": {
+                    "type": "boolean"
+                },
+                "severity": {
+                    "type": "string"
+                }
+            }
+        },
+        "java.util.Map&lt;java.lang.String, get.dto.health.check.HealthCheckDTO$HealthCheckParameterDTO&gt;": {
+            "id": "java.util.Map&lt;java.lang.String, get.dto.health.check.HealthCheckDTO$HealthCheckParameterDTO&gt;",
+            "required": [],
+            "properties": {}
+        },
+        "java.util.Map&lt;java.lang.String, patch.dto.health.check.HealthCheckDTO$HealthCheckParameterDTO&gt;": {
+            "id": "java.util.Map&lt;java.lang.String, patch.dto.health.check.HealthCheckDTO$HealthCheckParameterDTO&gt;",
+            "required": [],
+            "properties": {}
+        },
+        "java.util.Map&lt;java.lang.String, update.dto.health.check.HealthCheckDTO$HealthCheckParameterDTO&gt;": {
+            "id": "java.util.Map&lt;java.lang.String, update.dto.health.check.HealthCheckDTO$HealthCheckParameterDTO&gt;",
+            "required": [],
+            "properties": {}
+        },
+        "patch.dto.RequestDTO&lt;patch.dto.health.check.HealthCheckDTO&gt;": {
+            "id": "patch.dto.RequestDTO&lt;patch.dto.health.check.HealthCheckDTO&gt;",
+            "required": [],
+            "properties": {
+                "cluster_uuid": {
+                    "type": "string"
+                },
+                "generic_d_t_o": {
+                    "$ref": "patch.dto.health.check.HealthCheckDTO"
+                },
+                "operation": {
+                    "type": "string"
+                }
+            }
+        },
+        "patch.dto.health.check.HealthCheckDTO": {
+            "id": "patch.dto.health.check.HealthCheckDTO",
+            "description": "health-check",
+            "required": [],
+            "properties": {
+                "affected_entity_types": {
+                    "description": "Affected entity types.",
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": "array",
+                    "typeName": "DEFAULT"
+                },
+                "alert_configurable_parameters": {
+                    "description": "Configurable Parameters for the Alert Type.",
+                    "items": {
+                        "$ref": "patch.dto.health.check.HealthCheckDTO$AlertConfigParamDTO"
+                    },
+                    "type": "array",
+                    "typeName": "DEFAULT"
+                },
+                "alert_type_id": {
+                    "description": "Id of an alert type.",
+                    "type": "string",
+                    "typeName": "DEFAULT"
+                },
+                "applicable_for_multi_cluster": {
+                    "description": "Whether the check is applicable for Prism Central or not.",
+                    "type": "boolean",
+                    "typeName": "DEFAULT"
+                },
+                "applicable_for_single_cluster": {
+                    "description": "Whether the check is applicable for Prism Element or not.",
+                    "type": "boolean",
+                    "typeName": "DEFAULT"
+                },
+                "auto_resolve": {
+                    "description": "Auto Resolve status for this check.",
+                    "enum": [
+                        "ENABLED",
+                        "DISABLED",
+                        "NOT_SUPPORTED"
+                    ],
+                    "type": "string",
+                    "typeName": "DEFAULT"
+                },
+                "causes": {
+                    "description": "Causes.",
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": "array",
+                    "typeName": "DEFAULT"
+                },
+                "check_type": {
+                    "description": "Whether the health check is scheduled or event driven.",
+                    "enum": [
+                        "SCHEDULED",
+                        "NOT_SCHEDULED",
+                        "EVENT_DRIVEN"
+                    ],
+                    "type": "string",
+                    "typeName": "DEFAULT"
+                },
+                "classifications": {
+                    "description": "Classification of the Health Check. Ex: DR, Hardware, etc",
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": "array",
+                    "typeName": "DEFAULT"
+                },
+                "description": {
+                    "description": "Description of a health check.",
+                    "type": "string",
+                    "typeName": "DEFAULT"
+                },
+                "enabled": {
+                    "description": "Whether health check is enabled.",
+                    "type": "boolean",
+                    "typeName": "DEFAULT"
+                },
+                "id": {
+                    "description": "Id of a health check.",
+                    "type": "string",
+                    "typeName": "DEFAULT"
+                },
+                "impact_types": {
+                    "description": "Impact type on affected entities.",
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": "array",
+                    "typeName": "DEFAULT"
+                },
+                "is_global_config": {
+                    "description": "Whether the check is a default one or not",
+                    "type": "boolean",
+                    "typeName": "DEFAULT"
+                },
+                "is_user_defined": {
+                    "description": "Whether the health check is user defined or not.",
+                    "type": "boolean",
+                    "typeName": "DEFAULT"
+                },
+                "kb_list": {
+                    "description": "List of kb article numbers.",
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": "array",
+                    "typeName": "DEFAULT"
+                },
+                "message": {
+                    "description": "Message for an alert type.",
+                    "type": "string",
+                    "typeName": "DEFAULT"
+                },
+                "metrics": {
+                    "description": "Metrics.",
+                    "items": {
+                        "$ref": "patch.dto.health.check.HealthCheckDTO$HealthCheckMetricDTO"
+                    },
+                    "type": "array",
+                    "typeName": "DEFAULT"
+                },
+                "modified_by_username": {
+                    "type": "string",
+                    "typeName": "DEFAULT"
+                },
+                "modified_time_stamp_in_usecs": {
+                    "format": "int64",
+                    "type": "integer",
+                    "typeName": "DEFAULT"
+                },
+                "name": {
+                    "description": "Name of a health check.",
+                    "type": "string",
+                    "typeName": "DEFAULT"
+                },
+                "parameters": {
+                    "$ref": "java.util.Map&lt;java.lang.String, patch.dto.health.check.HealthCheckDTO$HealthCheckParameterDTO&gt;",
+                    "description": "Parameters.",
+                    "typeName": "DEFAULT"
+                },
+                "policy_uuid": {
+                    "description": "Policy Uuid of the health check. Will be set only for user defined policies.",
+                    "type": "string",
+                    "typeName": "DEFAULT"
+                },
+                "resolutions": {
+                    "description": "Resolutions.",
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": "array",
+                    "typeName": "DEFAULT"
+                },
+                "schedule_interval_in_secs": {
+                    "description": "Interval between checks in seconds.",
+                    "format": "int32",
+                    "type": "integer",
+                    "typeName": "DEFAULT"
+                },
+                "scope": {
+                    "description": "Scope of health check.",
+                    "type": "string",
+                    "typeName": "DEFAULT"
+                },
+                "severity_threshold_infos": {
+                    "description": "Enable/Disable info for each Severity.",
+                    "items": {
+                        "$ref": "patch.dto.health.check.HealthCheckDTO$SeverityThresholdInfoDTO"
+                    },
+                    "type": "array",
+                    "typeName": "DEFAULT"
+                }
+            }
+        },
+        "patch.dto.health.check.HealthCheckDTO$AlertConfigParamDTO": {
+            "id": "patch.dto.health.check.HealthCheckDTO$AlertConfigParamDTO",
+            "description": "DTO representing the configurable parameters for an alert type",
+            "required": [
+                "parameter_name",
+                "severity"
+            ],
+            "properties": {
+                "parameter_boolean_value": {
+                    "description": "If the parameter value is a Boolean, its value.",
+                    "type": "boolean",
+                    "typeName": "DEFAULT"
+                },
+                "parameter_default_boolean_value": {
+                    "description": "If the parameter value is a Boolean, its default value.",
+                    "type": "boolean",
+                    "typeName": "DEFAULT"
+                },
+                "parameter_default_long_value": {
+                    "description": "If the parameter value is Long, its default value.",
+                    "format": "int64",
+                    "type": "integer",
+                    "typeName": "DEFAULT"
+                },
+                "parameter_default_string_value": {
+                    "description": "If the parameter value is a String, its default value.",
+                    "type": "string",
+                    "typeName": "DEFAULT"
+                },
+                "parameter_display_name": {
+                    "description": "Display name of the parameter.",
+                    "type": "string",
+                    "typeName": "DEFAULT"
+                },
+                "parameter_long_value": {
+                    "description": "If the parameter value is Long, its value.",
+                    "format": "int64",
+                    "type": "integer",
+                    "typeName": "DEFAULT"
+                },
+                "parameter_name": {
+                    "description": "Name of the parameter.",
+                    "type": "string",
+                    "typeName": "DEFAULT"
+                },
+                "parameter_string_value": {
+                    "description": "If the parameter value is a String, its value.",
+                    "type": "string",
+                    "typeName": "DEFAULT"
+                },
+                "parameter_unit": {
+                    "description": "Unit of the parameter value.",
+                    "type": "string",
+                    "typeName": "DEFAULT"
+                },
+                "parameter_valid_values": {
+                    "description": "Valid values for a parameter",
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": "array",
+                    "typeName": "DEFAULT"
+                },
+                "severity": {
+                    "description": "Severity for which this parameter value applies.",
+                    "type": "string",
+                    "typeName": "DEFAULT"
+                }
+            }
+        },
+        "patch.dto.health.check.HealthCheckDTO$HealthCheckMetricDTO": {
+            "id": "patch.dto.health.check.HealthCheckDTO$HealthCheckMetricDTO",
+            "required": [],
+            "properties": {
+                "display_name": {
+                    "type": "string"
+                },
+                "name": {
+                    "type": "string"
+                }
+            }
+        },
+        "patch.dto.health.check.HealthCheckDTO$SeverityThresholdInfoDTO": {
+            "id": "patch.dto.health.check.HealthCheckDTO$SeverityThresholdInfoDTO",
+            "required": [],
+            "properties": {
+                "enabled": {
+                    "type": "boolean"
+                },
+                "severity": {
+                    "type": "string"
+                }
+            }
+        },
+        "update.dto.health.check.HealthCheckDTO": {
+            "id": "update.dto.health.check.HealthCheckDTO",
+            "description": "health-check",
+            "required": [],
+            "properties": {
+                "affected_entity_types": {
+                    "description": "Affected entity types.",
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": "array",
+                    "typeName": "DEFAULT"
+                },
+                "alert_configurable_parameters": {
+                    "description": "Configurable Parameters for the Alert Type.",
+                    "items": {
+                        "$ref": "update.dto.health.check.HealthCheckDTO$AlertConfigParamDTO"
+                    },
+                    "type": "array",
+                    "typeName": "DEFAULT"
+                },
+                "alert_type_id": {
+                    "description": "Id of an alert type.",
+                    "type": "string",
+                    "typeName": "DEFAULT"
+                },
+                "applicable_for_multi_cluster": {
+                    "description": "Whether the check is applicable for Prism Central or not.",
+                    "type": "boolean",
+                    "typeName": "DEFAULT"
+                },
+                "applicable_for_single_cluster": {
+                    "description": "Whether the check is applicable for Prism Element or not.",
+                    "type": "boolean",
+                    "typeName": "DEFAULT"
+                },
+                "auto_resolve": {
+                    "description": "Auto Resolve status for this check.",
+                    "enum": [
+                        "ENABLED",
+                        "DISABLED",
+                        "NOT_SUPPORTED"
+                    ],
+                    "type": "string",
+                    "typeName": "DEFAULT"
+                },
+                "causes": {
+                    "description": "Causes.",
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": "array",
+                    "typeName": "DEFAULT"
+                },
+                "check_type": {
+                    "description": "Whether the health check is scheduled or event driven.",
+                    "enum": [
+                        "SCHEDULED",
+                        "NOT_SCHEDULED",
+                        "EVENT_DRIVEN"
+                    ],
+                    "type": "string",
+                    "typeName": "DEFAULT"
+                },
+                "classifications": {
+                    "description": "Classification of the Health Check. Ex: DR, Hardware, etc",
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": "array",
+                    "typeName": "DEFAULT"
+                },
+                "description": {
+                    "description": "Description of a health check.",
+                    "type": "string",
+                    "typeName": "DEFAULT"
+                },
+                "enabled": {
+                    "description": "Whether health check is enabled.",
+                    "type": "boolean",
+                    "typeName": "DEFAULT"
+                },
+                "id": {
+                    "description": "Id of a health check.",
+                    "type": "string",
+                    "typeName": "DEFAULT"
+                },
+                "impact_types": {
+                    "description": "Impact type on affected entities.",
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": "array",
+                    "typeName": "DEFAULT"
+                },
+                "is_global_config": {
+                    "description": "Whether the check is a default one or not",
+                    "type": "boolean",
+                    "typeName": "DEFAULT"
+                },
+                "is_user_defined": {
+                    "description": "Whether the health check is user defined or not.",
+                    "type": "boolean",
+                    "typeName": "DEFAULT"
+                },
+                "kb_list": {
+                    "description": "List of kb article numbers.",
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": "array",
+                    "typeName": "DEFAULT"
+                },
+                "message": {
+                    "description": "Message for an alert type.",
+                    "type": "string",
+                    "typeName": "DEFAULT"
+                },
+                "metrics": {
+                    "description": "Metrics.",
+                    "items": {
+                        "$ref": "update.dto.health.check.HealthCheckDTO$HealthCheckMetricDTO"
+                    },
+                    "type": "array",
+                    "typeName": "DEFAULT"
+                },
+                "modified_by_username": {
+                    "type": "string",
+                    "typeName": "DEFAULT"
+                },
+                "modified_time_stamp_in_usecs": {
+                    "format": "int64",
+                    "type": "integer",
+                    "typeName": "DEFAULT"
+                },
+                "name": {
+                    "description": "Name of a health check.",
+                    "type": "string",
+                    "typeName": "DEFAULT"
+                },
+                "parameters": {
+                    "$ref": "java.util.Map&lt;java.lang.String, update.dto.health.check.HealthCheckDTO$HealthCheckParameterDTO&gt;",
+                    "description": "Parameters.",
+                    "typeName": "DEFAULT"
+                },
+                "policy_uuid": {
+                    "description": "Policy Uuid of the health check. Will be set only for user defined policies.",
+                    "type": "string",
+                    "typeName": "DEFAULT"
+                },
+                "resolutions": {
+                    "description": "Resolutions.",
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": "array",
+                    "typeName": "DEFAULT"
+                },
+                "schedule_interval_in_secs": {
+                    "description": "Interval between checks in seconds.",
+                    "format": "int32",
+                    "type": "integer",
+                    "typeName": "DEFAULT"
+                },
+                "scope": {
+                    "description": "Scope of health check.",
+                    "type": "string",
+                    "typeName": "DEFAULT"
+                },
+                "severity_threshold_infos": {
+                    "description": "Enable/Disable info for each Severity.",
+                    "items": {
+                        "$ref": "update.dto.health.check.HealthCheckDTO$SeverityThresholdInfoDTO"
+                    },
+                    "type": "array",
+                    "typeName": "DEFAULT"
+                }
+            }
+        },
+        "update.dto.health.check.HealthCheckDTO$AlertConfigParamDTO": {
+            "id": "update.dto.health.check.HealthCheckDTO$AlertConfigParamDTO",
+            "description": "DTO representing the configurable parameters for an alert type",
+            "required": [
+                "parameter_name",
+                "severity"
+            ],
+            "properties": {
+                "parameter_boolean_value": {
+                    "description": "If the parameter value is a Boolean, its value.",
+                    "type": "boolean",
+                    "typeName": "DEFAULT"
+                },
+                "parameter_default_boolean_value": {
+                    "description": "If the parameter value is a Boolean, its default value.",
+                    "type": "boolean",
+                    "typeName": "DEFAULT"
+                },
+                "parameter_default_long_value": {
+                    "description": "If the parameter value is Long, its default value.",
+                    "format": "int64",
+                    "type": "integer",
+                    "typeName": "DEFAULT"
+                },
+                "parameter_default_string_value": {
+                    "description": "If the parameter value is a String, its default value.",
+                    "type": "string",
+                    "typeName": "DEFAULT"
+                },
+                "parameter_display_name": {
+                    "description": "Display name of the parameter.",
+                    "type": "string",
+                    "typeName": "DEFAULT"
+                },
+                "parameter_long_value": {
+                    "description": "If the parameter value is Long, its value.",
+                    "format": "int64",
+                    "type": "integer",
+                    "typeName": "DEFAULT"
+                },
+                "parameter_name": {
+                    "description": "Name of the parameter.",
+                    "type": "string",
+                    "typeName": "DEFAULT"
+                },
+                "parameter_string_value": {
+                    "description": "If the parameter value is a String, its value.",
+                    "type": "string",
+                    "typeName": "DEFAULT"
+                },
+                "parameter_unit": {
+                    "description": "Unit of the parameter value.",
+                    "type": "string",
+                    "typeName": "DEFAULT"
+                },
+                "parameter_valid_values": {
+                    "description": "Valid values for a parameter",
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": "array",
+                    "typeName": "DEFAULT"
+                },
+                "severity": {
+                    "description": "Severity for which this parameter value applies.",
+                    "type": "string",
+                    "typeName": "DEFAULT"
+                }
+            }
+        },
+        "update.dto.health.check.HealthCheckDTO$HealthCheckMetricDTO": {
+            "id": "update.dto.health.check.HealthCheckDTO$HealthCheckMetricDTO",
+            "required": [],
+            "properties": {
+                "display_name": {
+                    "type": "string"
+                },
+                "name": {
+                    "type": "string"
+                }
+            }
+        },
+        "update.dto.health.check.HealthCheckDTO$SeverityThresholdInfoDTO": {
+            "id": "update.dto.health.check.HealthCheckDTO$SeverityThresholdInfoDTO",
+            "required": [],
+            "properties": {
+                "enabled": {
+                    "type": "boolean"
+                },
+                "severity": {
+                    "type": "string"
+                }
+            }
+        }
+    }
+}

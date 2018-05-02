@@ -1,0 +1,74 @@
+#
+# Copyright (c) 2018 Nutanix Inc. All rights reserved.
+#
+# Author: jon@nutanix.com
+#
+#############################################################################
+# APIs: common responses                                                    #
+# Used for templatizing response objects that are global                    #
+#                                                                           #
+# TODO: Add more meat here                                                  #
+#############################################################################
+
+# Common Imports
+{% import "schemas/common/common.jinja" as common %}
+
+# Start API 2.0 Responses
+{% macro api20_responses() -%}
+  response_500:
+    description: Error 500
+    schema:
+      $ref: '#/definitions/response_500'
+    headers:
+      content-type: 
+        type: string
+        default: 'application/json'
+      server:
+        description: Should always return Nutanix Prism
+        type: string
+        default: 'Nutanix Prism'
+      x-ntnx-env:
+        description: The Nutanix Prism environment
+        type: string
+        enum:
+          - PE
+          - PC
+      exception:
+        description: Describes the error hit in an error or exception condition
+        type: string
+    examples:
+      application/json:
+        message: "Error occurred while getting VM list"
+        detailed_message: "com.nutanix.prism.exception.vmmanagement.VMAdministrationException: ..."
+        error_code: 
+          code: 1202
+          help_url: "http://my.nutanix.com"
+{%- endmacro %}
+
+# Start API 2.0 definitions for common responses
+{% macro api20_definitions_responses() -%}
+  api_20_response_500:
+    title: response_500
+    type: object
+    properties: 
+      message: 
+        description: high level / general response message
+        type: string
+      detailed_message: 
+        description: detailed response, usually a java dump
+        type: string      
+      error_code: 
+        type: array
+        items:
+          $ref: '#/definitions/error_code'
+  api_20_error_code: 
+    title: error code
+    type: object
+    properties: 
+      code: 
+        description: look me up! (no idea where this comes from)
+        type: integer
+      help_url: 
+        description: link to http://my.nutanix.com ... should this change?
+        type: string  
+{%- endmacro %}

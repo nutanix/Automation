@@ -1,0 +1,162 @@
+swagger: '2.0'
+info:
+  version: 'v2.0'
+  title: Swagger API
+host: any_cvm_ip:9440
+basePath: /api/nutanix/v2.0
+schemes:
+- https
+consumes:
+- application/json
+produces:
+- application/json
+paths:
+  /ha/:
+    get:
+      description: Get current HA configuration.
+      summary: getHaConfig
+      operationId: HaGet
+      produces:
+      - application/json
+      parameters: []
+      responses:
+        200:
+          description: ''
+          schema:
+            $ref: '#/definitions/Get.dto.acropolis.haconfigdto'
+          examples: {}
+      x-unitTests: []
+      x-operation-settings:
+        CollectParameters: false
+        AllowDynamicQueryParameters: false
+        AllowDynamicFormParameters: false
+        IsMultiContentStreaming: false
+    put:
+      description: Enable, disable or modify HA configuration.
+      summary: updateHaConfig
+      operationId: HaPut
+      produces:
+      - application/json
+      parameters:
+      - name: body
+        in: body
+        required: true
+        description: HA configuration
+        schema:
+          $ref: '#/definitions/Update.dto.acropolis.haupdatedto'
+      responses:
+        200:
+          description: ''
+          schema:
+            $ref: '#/definitions/Update.dto.acropolis.returnvaluedto$taskiddto'
+          examples: {}
+      x-unitTests: []
+      x-operation-settings:
+        CollectParameters: false
+        AllowDynamicQueryParameters: false
+        AllowDynamicFormParameters: false
+        IsMultiContentStreaming: false
+definitions:
+  HaState:
+    title: ha_state
+    example: HIGHLY_AVAILABLE
+    x-enum-elements:
+    - name: HIGHLY_AVAILABLE
+      description: ''
+    - name: HEALING
+      description: ''
+    - name: BEST_EFFORT
+      description: ''
+    - name: DISABLED
+      description: ''
+    type: string
+    enum:
+    - HIGHLY_AVAILABLE
+    - HEALING
+    - BEST_EFFORT
+    - DISABLED
+  ReservationType:
+    title: reservation_type
+    example: RESERVE_HOSTS
+    x-enum-elements:
+    - name: RESERVE_HOSTS
+      description: ''
+    - name: RESERVE_SEGMENTS
+      description: ''
+    - name: NO_RESERVATIONS
+      description: ''
+    type: string
+    enum:
+    - RESERVE_HOSTS
+    - RESERVE_SEGMENTS
+    - NO_RESERVATIONS
+  Get.dto.acropolis.haconfigdto:
+    title: get.dto.acropolis.HaConfigDTO
+    type: object
+    properties:
+      failover_enabled:
+        description: Whether HA should be invoked upon host failure.
+        type: boolean
+      failover_in_progress_host_uuids:
+        description: UUIDs of hosts that are part of in-progress failover
+        type: array
+        items:
+          type: string
+      ha_state:
+        $ref: '#/definitions/HaState'
+      logical_timestamp:
+        description: Logical timestamp of the configuration.
+        type: integer
+        format: int64
+      num_host_failures_to_tolerate:
+        description: Number of host failures tolerated.
+        type: integer
+        format: int64
+      reservation_type:
+        $ref: '#/definitions/ReservationType'
+      reserved_host_uuids:
+        description: UUIDs of hosts reserved for failover.
+        type: array
+        items:
+          type: string
+  EvacuationOption:
+    title: evacuation_option
+    example: POWER_OFF
+    x-enum-elements:
+    - name: POWER_OFF
+      description: ''
+    - name: COLD_MIGRATE
+      description: ''
+    - name: LIVE_MIGRATE
+      description: ''
+    type: string
+    enum:
+    - POWER_OFF
+    - COLD_MIGRATE
+    - LIVE_MIGRATE
+  Update.dto.acropolis.haupdatedto:
+    title: update.dto.acropolis.HaUpdateDTO
+    type: object
+    properties:
+      enable_failover:
+        description: Whether HA should be invoked upon host failure.
+        type: boolean
+      evacuation_option:
+        $ref: '#/definitions/EvacuationOption'
+      logical_timestamp:
+        description: Logical timestamp for HA configuration.
+        type: integer
+        format: int64
+      num_host_failures_to_tolerate:
+        description: Number of host failures tolerated.
+        type: integer
+        format: int64
+      reservation_type:
+        $ref: '#/definitions/ReservationType'
+  Update.dto.acropolis.returnvaluedto$taskiddto:
+    title: update.dto.acropolis.ReturnValueDTO$TaskIdDTO
+    type: object
+    properties:
+      task_uuid:
+        description: UUID of the task.
+        type: string

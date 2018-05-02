@@ -1,0 +1,2340 @@
+swagger: '2.0'
+info:
+  version: 'v2.0'
+  title: Swagger API
+host: any_cvm_ip:9440
+basePath: /PrismGateway/services/rest/v2.0
+schemes:
+- https
+consumes:
+- application/json
+produces:
+- application/json
+paths:
+  /storage_containers/:
+    get:
+      description: Get the list of Storage Containers.
+      summary: getContainers
+      operationId: StorageContainersGet
+      produces:
+      - application/json
+      parameters:
+      - name: count
+        in: query
+        required: false
+        type: integer
+        format: int32
+        description: Number of Storage Containers to retrieve
+      - name: filter_criteria
+        in: query
+        required: false
+        type: string
+        description: Filter criteria
+      - name: sort_criteria
+        in: query
+        required: false
+        type: string
+        description: Sort criteria
+      - name: search_string
+        in: query
+        required: false
+        type: string
+        description: Search string
+      - name: search_attribute_list
+        in: query
+        required: false
+        type: array
+        uniqueItems: false
+        items:
+          type: string
+        description: Search attribute list
+      - name: page
+        in: query
+        required: false
+        type: integer
+        format: int32
+        description: Page number
+      - name: projection
+        in: query
+        required: false
+        type: string
+        description: Projections on the attributes
+      responses:
+        200:
+          description: ''
+          schema:
+            $ref: '#/definitions/Get.base.entitycollection&lt;get.dto.appliance.configuration.containerdto&gt;'
+          examples: {}
+      x-unitTests: []
+      x-operation-settings:
+        CollectParameters: false
+        AllowDynamicQueryParameters: false
+        AllowDynamicFormParameters: false
+        IsMultiContentStreaming: false
+    put:
+      description: Update a Storage Container.
+      summary: editContainer
+      operationId: StorageContainersPut
+      produces:
+      - application/json
+      parameters:
+      - name: body
+        in: body
+        required: true
+        description: A Storage Container instance
+        schema:
+          $ref: '#/definitions/Update.dto.appliance.configuration.containerdto'
+      responses:
+        200:
+          description: ''
+          schema:
+            $ref: '#/definitions/Update.dto.primitivedto&lt;java.lang.boolean&gt;'
+          examples: {}
+      x-unitTests: []
+      x-operation-settings:
+        CollectParameters: false
+        AllowDynamicQueryParameters: false
+        AllowDynamicFormParameters: false
+        IsMultiContentStreaming: false
+    post:
+      description: Add a Storage Container.
+      summary: addContainer
+      operationId: StorageContainersPost
+      produces:
+      - application/json
+      parameters:
+      - name: body
+        in: body
+        required: true
+        description: A Storage Container instance
+        schema:
+          $ref: '#/definitions/Create.dto.appliance.configuration.containerdto'
+      responses:
+        200:
+          description: ''
+          schema:
+            $ref: '#/definitions/Create.dto.primitivedto&lt;java.lang.boolean&gt;'
+          examples: {}
+      x-unitTests: []
+      x-operation-settings:
+        CollectParameters: false
+        AllowDynamicQueryParameters: false
+        AllowDynamicFormParameters: false
+        IsMultiContentStreaming: false
+    patch:
+      description: Modify a Storage Container.
+      summary: patchContainer
+      operationId: StorageContainersPatch
+      produces:
+      - application/json
+      parameters:
+      - name: body
+        in: body
+        required: true
+        description: A Storage Container instance
+        schema:
+          $ref: '#/definitions/Patch.dto.requestdto&lt;patch.dto.appliance.configuration.containerdto&gt;'
+      responses:
+        200:
+          description: ''
+          schema:
+            $ref: '#/definitions/Patch.dto.primitivedto&lt;java.lang.boolean&gt;'
+          examples: {}
+      x-unitTests: []
+      x-operation-settings:
+        CollectParameters: false
+        AllowDynamicQueryParameters: false
+        AllowDynamicFormParameters: false
+        IsMultiContentStreaming: false
+  /storage_containers/alerts:
+    get:
+      description: Get the list of alerts generated on any Storage Container.
+      summary: getContainerAlerts
+      operationId: StorageContainersAlertsGet
+      produces:
+      - application/json
+      parameters:
+      - name: start_time_in_usecs
+        in: query
+        required: false
+        type: integer
+        format: int32
+        description: Start time in microseconds
+      - name: end_time_in_usecs
+        in: query
+        required: false
+        type: integer
+        format: int32
+        description: End time in microseconds
+      - name: count
+        in: query
+        required: false
+        type: integer
+        format: int32
+        description: Maximum number of alerts
+      - name: resolved
+        in: query
+        required: false
+        type: boolean
+        description: Alerts which have been resolved
+      - name: acknowledged
+        in: query
+        required: false
+        type: boolean
+        description: Alerts which have been acknowledged
+      - name: severity
+        in: query
+        required: false
+        type: string
+        description: Alert severities
+      - name: alert_type_uuid
+        in: query
+        required: false
+        type: string
+        description: Alert type ids
+      - name: page
+        in: query
+        required: false
+        type: integer
+        format: int32
+        description: Page number
+      responses:
+        200:
+          description: ''
+          schema:
+            $ref: '#/definitions/Get.base.entitycollection&lt;get.dto.alerts.alertdto&gt;'
+          examples: {}
+      x-unitTests: []
+      x-operation-settings:
+        CollectParameters: false
+        AllowDynamicQueryParameters: false
+        AllowDynamicFormParameters: false
+        IsMultiContentStreaming: false
+  /storage_containers/datastores:
+    get:
+      description: Get the list of NFS Datastores.
+      summary: getNfsDatastores
+      operationId: StorageContainersDatastoresGet
+      produces:
+      - application/json
+      parameters: []
+      responses:
+        200:
+          description: ''
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/Get.dto.esx.nfsdatastoreinfodto'
+          examples: {}
+      x-unitTests: []
+      x-operation-settings:
+        CollectParameters: false
+        AllowDynamicQueryParameters: false
+        AllowDynamicFormParameters: false
+        IsMultiContentStreaming: false
+  /storage_containers/datastores/add_datastore:
+    post:
+      description: Add an NFS Datastore.
+      summary: createNfsDatastores
+      operationId: StorageContainersDatastoresAddDatastorePost
+      produces:
+      - application/json
+      parameters:
+      - name: body
+        in: body
+        required: true
+        description: Add request
+        schema:
+          $ref: '#/definitions/Create.dto.esx.createnfsdatastorerequestdto'
+      responses:
+        200:
+          description: ''
+          schema:
+            $ref: '#/definitions/Create.dto.esx.createnfsdatastorestatusdto'
+          examples: {}
+      x-unitTests: []
+      x-operation-settings:
+        CollectParameters: false
+        AllowDynamicQueryParameters: false
+        AllowDynamicFormParameters: false
+        IsMultiContentStreaming: false
+  /storage_containers/datastores/remove_datastore:
+    post:
+      description: Remove an NFS Datastore.
+      summary: deleteNfsDatastores
+      operationId: StorageContainersDatastoresRemoveDatastorePost
+      produces:
+      - application/json
+      parameters:
+      - name: body
+        in: body
+        required: true
+        description: Remove request
+        schema:
+          $ref: '#/definitions/Create.dto.esx.deletenfsdatastorerequestdto'
+      responses:
+        200:
+          description: ''
+          schema:
+            $ref: '#/definitions/Create.dto.esx.deletenfsdatastorestatusdto'
+          examples: {}
+      x-unitTests: []
+      x-operation-settings:
+        CollectParameters: false
+        AllowDynamicQueryParameters: false
+        AllowDynamicFormParameters: false
+        IsMultiContentStreaming: false
+  /storage_containers/events:
+    get:
+      description: Get the list of events generated on any Storage Container.
+      summary: getContainerEvents
+      operationId: StorageContainersEventsGet
+      produces:
+      - application/json
+      parameters:
+      - name: start_time_in_usecs
+        in: query
+        required: false
+        type: integer
+        format: int32
+        description: Start time in microseconds
+      - name: end_time_in_usecs
+        in: query
+        required: false
+        type: integer
+        format: int32
+        description: End time in microseconds
+      - name: count
+        in: query
+        required: false
+        type: integer
+        format: int32
+        description: Maximum number of events
+      - name: acknowledged
+        in: query
+        required: false
+        type: boolean
+        description: Events which have been acknowledged
+      - name: page
+        in: query
+        required: false
+        type: integer
+        format: int32
+        description: Page number
+      responses:
+        200:
+          description: ''
+          schema:
+            $ref: '#/definitions/Get.base.entitycollection&lt;get.dto.alerts.alertdto&gt;'
+          examples: {}
+      x-unitTests: []
+      x-operation-settings:
+        CollectParameters: false
+        AllowDynamicQueryParameters: false
+        AllowDynamicFormParameters: false
+        IsMultiContentStreaming: false
+  /storage_containers/{uuid}:
+    get:
+      description: Get a Storage Container.
+      summary: getContainer
+      operationId: StorageContainersByUuidGet
+      produces:
+      - application/json
+      parameters:
+      - name: uuid
+        in: path
+        required: true
+        type: string
+        description: Uuid of the Storage Container
+      - name: projection
+        in: query
+        required: false
+        type: string
+        description: Projections on the attributes
+      responses:
+        200:
+          description: ''
+          schema:
+            $ref: '#/definitions/Get.dto.appliance.configuration.containerdto'
+          examples: {}
+      x-unitTests: []
+      x-operation-settings:
+        CollectParameters: false
+        AllowDynamicQueryParameters: false
+        AllowDynamicFormParameters: false
+        IsMultiContentStreaming: false
+    delete:
+      description: Delete a Storage Container.
+      summary: deleteContainer
+      operationId: StorageContainersByUuidDelete
+      produces:
+      - application/json
+      parameters:
+      - name: uuid
+        in: path
+        required: true
+        type: string
+        description: Uuid of the Storage Container
+      - name: ignore_small_files
+        in: query
+        required: false
+        type: boolean
+        description: Ignore small file
+      responses:
+        200:
+          description: ''
+          schema:
+            $ref: '#/definitions/Delete.dto.primitivedto&lt;java.lang.boolean&gt;'
+          examples: {}
+      x-unitTests: []
+      x-operation-settings:
+        CollectParameters: false
+        AllowDynamicQueryParameters: false
+        AllowDynamicFormParameters: false
+        IsMultiContentStreaming: false
+  /storage_containers/{uuid}/alerts:
+    get:
+      description: Get the list of alerts generated on a specified Storage Container.
+      summary: getAlertsForContainer
+      operationId: StorageContainersAlertsByUuidGet
+      produces:
+      - application/json
+      parameters:
+      - name: uuid
+        in: path
+        required: true
+        type: string
+        description: Uuid of a Storage Container
+      - name: start_time_in_usecs
+        in: query
+        required: false
+        type: integer
+        format: int32
+        description: Start time in microseconds
+      - name: end_time_in_usecs
+        in: query
+        required: false
+        type: integer
+        format: int32
+        description: End time in microseconds
+      - name: count
+        in: query
+        required: false
+        type: integer
+        format: int32
+        description: Maximum number of alerts
+      - name: resolved
+        in: query
+        required: false
+        type: boolean
+        description: Alerts which have been resolved
+      - name: acknowledged
+        in: query
+        required: false
+        type: boolean
+        description: Alerts which have been acknowledged
+      - name: severity
+        in: query
+        required: false
+        type: string
+        description: Alert severities
+      - name: alert_type_uuid
+        in: query
+        required: false
+        type: string
+        description: Alert type ids
+      - name: page
+        in: query
+        required: false
+        type: integer
+        format: int32
+        description: Page number
+      responses:
+        200:
+          description: ''
+          schema:
+            $ref: '#/definitions/Get.base.entitycollection&lt;get.dto.alerts.alertdto&gt;'
+          examples: {}
+      x-unitTests: []
+      x-operation-settings:
+        CollectParameters: false
+        AllowDynamicQueryParameters: false
+        AllowDynamicFormParameters: false
+        IsMultiContentStreaming: false
+  /storage_containers/{uuid}/events:
+    get:
+      description: Get the list of events generated on a specified Container.
+      summary: getEventsForContainer
+      operationId: StorageContainersEventsByUuidGet
+      produces:
+      - application/json
+      parameters:
+      - name: uuid
+        in: path
+        required: true
+        type: string
+        description: Uuid of a Storage Container
+      - name: start_time_in_usecs
+        in: query
+        required: false
+        type: integer
+        format: int32
+        description: Start time in microseconds
+      - name: end_time_in_usecs
+        in: query
+        required: false
+        type: integer
+        format: int32
+        description: End time in microseconds
+      - name: count
+        in: query
+        required: false
+        type: integer
+        format: int32
+        description: Maximum number of events
+      - name: acknowledged
+        in: query
+        required: false
+        type: boolean
+        description: Events which have been acknowledged
+      - name: page
+        in: query
+        required: false
+        type: integer
+        format: int32
+        description: Page number
+      responses:
+        200:
+          description: ''
+          schema:
+            $ref: '#/definitions/Get.base.entitycollection&lt;get.dto.alerts.alertdto&gt;'
+          examples: {}
+      x-unitTests: []
+      x-operation-settings:
+        CollectParameters: false
+        AllowDynamicQueryParameters: false
+        AllowDynamicFormParameters: false
+        IsMultiContentStreaming: false
+  /storage_containers/{uuid}/stats/:
+    get:
+      description: Get the stats for a specified Storage Container.
+      summary: getContainerStats
+      operationId: StorageContainersStatsByUuidGet
+      produces:
+      - application/json
+      parameters:
+      - name: uuid
+        in: path
+        required: true
+        type: string
+        description: Uuid of a Storage Container
+      - name: metrics
+        in: query
+        required: true
+        type: array
+        uniqueItems: false
+        items:
+          type: string
+        description: List of metrics
+      - name: start_time_in_usecs
+        in: query
+        required: false
+        type: integer
+        format: int32
+        description: Start time in microseconds
+      - name: end_time_in_usecs
+        in: query
+        required: false
+        type: integer
+        format: int32
+        description: End time in microseconds
+      - name: interval_in_secs
+        in: query
+        required: false
+        type: integer
+        format: int32
+        description: Sampling interval of stats
+      responses:
+        200:
+          description: ''
+          schema:
+            $ref: '#/definitions/Get.base.statsresponse'
+          examples: {}
+      x-unitTests: []
+      x-operation-settings:
+        CollectParameters: false
+        AllowDynamicQueryParameters: false
+        AllowDynamicFormParameters: false
+        IsMultiContentStreaming: false
+  /storage_containers/{uuid}/vdisks:
+    get:
+      description: Get the list of VDisks.
+      summary: getVDisksInContainer
+      operationId: StorageContainersVdisksByUuidGet
+      produces:
+      - application/json
+      parameters:
+      - name: uuid
+        in: path
+        required: true
+        type: string
+        description: Uuid of a Storage Container
+      responses:
+        200:
+          description: ''
+          schema:
+            $ref: '#/definitions/Get.base.entitycollection&lt;get.dto.appliance.configuration.vdiskdto&gt;'
+          examples: {}
+      x-unitTests: []
+      x-operation-settings:
+        CollectParameters: false
+        AllowDynamicQueryParameters: false
+        AllowDynamicFormParameters: false
+        IsMultiContentStreaming: false
+definitions:
+  Create.dto.primitivedto&lt;java.lang.boolean&gt;:
+    title: create.dto.PrimitiveDTO&lt;java.lang.Boolean&gt;
+    type: object
+    properties:
+      value:
+        description: ''
+        type: boolean
+  Create.dto.alerts.alertsummarydto:
+    title: create.dto.alerts.AlertSummaryDTO
+    type: object
+    properties:
+      alert_summaries:
+        $ref: '#/definitions/Java.util.map&lt;create.dto.alerts.alertdto$alertseverity,Create.base.entitycollection&lt;create.dto.alerts.alertdto&gt;&gt;'
+      count:
+        description: ''
+        type: integer
+        format: int64
+  FingerPrintOnWrite:
+    title: finger_print_on_write
+    example: NONE
+    x-enum-elements:
+    - name: NONE
+      description: ''
+    - name: OFF
+      description: ''
+    - name: ON
+      description: ''
+    type: string
+    enum:
+    - NONE
+    - OFF
+    - ON
+  OnDiskDedup:
+    title: on_disk_dedup
+    example: NONE
+    x-enum-elements:
+    - name: NONE
+      description: ''
+    - name: OFF
+      description: ''
+    - name: POST_PROCESS
+      description: ''
+    type: string
+    enum:
+    - NONE
+    - OFF
+    - POST_PROCESS
+  Create.dto.appliance.configuration.containerdto:
+    title: create.dto.appliance.configuration.ContainerDTO
+    type: object
+    properties:
+      advertised_capacity:
+        description: ''
+        type: integer
+        format: int64
+      alert_summary:
+        $ref: '#/definitions/Create.dto.alerts.alertsummarydto'
+      compression_delay_in_secs:
+        description: ''
+        type: integer
+        format: int32
+      compression_enabled:
+        description: ''
+        type: boolean
+      down_migrate_times_in_secs:
+        $ref: '#/definitions/Java.util.map&lt;java.lang.string,Java.lang.integer&gt;'
+      enable_software_encryption:
+        description: ''
+        type: boolean
+      erasure_code:
+        description: ''
+        type: string
+      erasure_code_delay_secs:
+        description: ''
+        type: integer
+        format: int32
+      finger_print_on_write:
+        $ref: '#/definitions/FingerPrintOnWrite'
+      health_summary:
+        $ref: '#/definitions/Create.dto.health.check.healthsummarydto'
+      id:
+        description: ''
+        type: string
+      ilm_policy:
+        description: ''
+        type: string
+      is_nutanix_managed:
+        description: ''
+        type: boolean
+      mapped_remote_containers:
+        $ref: '#/definitions/Java.util.map&lt;java.lang.string,Java.lang.string&gt;'
+      marked_for_removal:
+        description: ''
+        type: boolean
+      max_capacity:
+        description: ''
+        type: integer
+        format: int64
+      name:
+        description: ''
+        type: string
+      nfs_whitelist:
+        description: ''
+        type: array
+        items:
+          type: string
+      nfs_whitelist_inherited:
+        description: ''
+        type: boolean
+      on_disk_dedup:
+        $ref: '#/definitions/OnDiskDedup'
+      oplog_replication_factor:
+        description: ''
+        type: integer
+        format: int32
+      random_io_preference:
+        description: ''
+        type: array
+        items:
+          type: string
+      replication_factor:
+        description: ''
+        type: integer
+        format: int32
+      seq_io_preference:
+        description: ''
+        type: array
+        items:
+          type: string
+      stats:
+        $ref: '#/definitions/Java.util.map&lt;java.lang.string,Java.lang.string&gt;'
+      storage_container_uuid:
+        description: ''
+        type: string
+      total_explicit_reserved_capacity:
+        description: ''
+        type: integer
+        format: int64
+      total_implicit_reserved_capacity:
+        description: ''
+        type: integer
+        format: int64
+      usage_stats:
+        $ref: '#/definitions/Java.util.map&lt;java.lang.string,Java.lang.string&gt;'
+      vstore_name_list:
+        description: ''
+        type: array
+        items:
+          type: string
+  Create.dto.esx.createnfsdatastorerequestdto:
+    title: create.dto.esx.CreateNfsDatastoreRequestDTO
+    type: object
+    properties:
+      datastore_name:
+        description: ''
+        type: string
+      node_ids:
+        description: ''
+        type: array
+        items:
+          type: string
+      node_uuids:
+        description: ''
+        type: array
+        items:
+          type: string
+      read_only:
+        description: ''
+        type: boolean
+      storage_container_name:
+        description: ''
+        type: string
+      target_path:
+        description: ''
+        type: string
+  Create.dto.esx.createnfsdatastorestatusdto:
+    title: create.dto.esx.CreateNfsDatastoreStatusDTO
+    type: object
+    properties:
+      node_specific_status:
+        description: ''
+        type: array
+        items:
+          $ref: '#/definitions/Create.dto.esx.createnfsdatastorestatusdto$nodespecificcreatestatus'
+  Create.dto.esx.createnfsdatastorestatusdto$nodespecificcreatestatus:
+    title: create.dto.esx.CreateNfsDatastoreStatusDTO$NodeSpecificCreateStatus
+    type: object
+    properties:
+      capacity:
+        description: ''
+        type: integer
+        format: int64
+      free_space:
+        description: ''
+        type: integer
+        format: int64
+      message:
+        description: ''
+        type: string
+      node_id:
+        description: ''
+        type: string
+      node_ip_address:
+        description: ''
+        type: string
+      node_uuid:
+        description: ''
+        type: string
+      successful:
+        description: ''
+        type: boolean
+  Create.dto.esx.deletenfsdatastorerequestdto:
+    title: create.dto.esx.DeleteNfsDatastoreRequestDTO
+    type: object
+    properties:
+      datastore_name:
+        description: ''
+        type: string
+      node_ids:
+        description: ''
+        type: array
+        items:
+          type: string
+      node_uuids:
+        description: ''
+        type: array
+        items:
+          type: string
+  Create.dto.esx.deletenfsdatastorestatusdto:
+    title: create.dto.esx.DeleteNfsDatastoreStatusDTO
+    type: object
+    properties:
+      node_specific_status:
+        description: ''
+        type: array
+        items:
+          $ref: '#/definitions/Create.dto.esx.deletenfsdatastorestatusdto$nodespecificdeletestatus'
+  Create.dto.esx.deletenfsdatastorestatusdto$nodespecificdeletestatus:
+    title: create.dto.esx.DeleteNfsDatastoreStatusDTO$NodeSpecificDeleteStatus
+    type: object
+    properties:
+      message:
+        description: ''
+        type: string
+      node_id:
+        description: ''
+        type: string
+      node_uuid:
+        description: ''
+        type: string
+      successful:
+        description: ''
+        type: boolean
+  EntityType:
+    title: entity_type
+    example: CLUSTER
+    x-enum-elements:
+    - name: CLUSTER
+      description: ''
+    - name: HARDWARE
+      description: ''
+    - name: STORAGE
+      description: ''
+    - name: BACKUP
+      description: ''
+    - name: DR
+      description: ''
+    - name: LICENSE
+      description: ''
+    - name: DISK
+      description: ''
+    - name: STORAGE_TIER
+      description: ''
+    - name: HOST
+      description: ''
+    - name: NODE
+      description: ''
+    - name: MANAGEMENT_SERVER
+      description: ''
+    - name: MANAGEMENT_SERVER_INFO
+      description: ''
+    - name: VM
+      description: ''
+    - name: SERVICE_VM
+      description: ''
+    - name: VDISK
+      description: ''
+    - name: VIRTUAL_DISK
+      description: ''
+    - name: STORAGE_POOL
+      description: ''
+    - name: CONTAINER
+      description: ''
+    - name: STORAGE_CONTAINER
+      description: ''
+    - name: VZONE
+      description: ''
+    - name: SNAPSHOT
+      description: ''
+    - name: FAST_CLONE
+      description: ''
+    - name: RSYSLOG_SERVER
+      description: ''
+    - name: KEY_MANAGEMENT_SERVER
+      description: ''
+    - name: CERTIFICATE
+      description: ''
+    - name: HTTP_PROXY
+      description: ''
+    - name: SNMP_TRAP
+      description: ''
+    - name: SNMP_USER
+      description: ''
+    - name: REMOTE_SITE
+      description: ''
+    - name: CLOUD_CREDENTIALS
+      description: ''
+    - name: PROTECTION_DOMAIN
+      description: ''
+    - name: CONSISTENCY_GROUP
+      description: ''
+    - name: REPLICATION
+      description: ''
+    - name: REPLICATION_LINK
+      description: ''
+    - name: SYNC_REPLICATION
+      description: ''
+    - name: VSTORE
+      description: ''
+    - name: NETWORK_SWITCH_INTERFACE
+      description: ''
+    - name: NETWORK_SWITCH
+      description: ''
+    - name: VIRTUAL_NIC
+      description: ''
+    - name: VMKERNEL_NIC
+      description: ''
+    - name: HOST_NIC
+      description: ''
+    - name: NIC_TEAM
+      description: ''
+    - name: VIRTUAL_NETWORK
+      description: ''
+    - name: VIRTUAL_SWITCH
+      description: ''
+    - name: HOST_GPU
+      description: ''
+    - name: VIRTUAL_GPU
+      description: ''
+    - name: TAG
+      description: ''
+    - name: COMMENT
+      description: ''
+    - name: TASK
+      description: ''
+    - name: IMAGE
+      description: ''
+    - name: IMAGE_INFO
+      description: ''
+    - name: ISCSI_CLIENT
+      description: ''
+    - name: VOLUME_GROUP
+      description: ''
+    - name: VOLUME_DISK
+      description: ''
+    - name: VM_DISK
+      description: ''
+    - name: FILE_SERVER
+      description: ''
+    - name: FS_PARTNER_SERVER
+      description: ''
+    - name: CVM
+      description: ''
+    - name: NVM
+      description: ''
+    - name: FILE_SERVER_SHARE
+      description: ''
+    - name: ALERT_CAUSE
+      description: ''
+    - name: ALERT_CHECK_SCHEMA
+      description: ''
+    - name: ALERT_CHECK_SCHEMA_OVERRIDE
+      description: ''
+    - name: INTER_CLUSTER_DATA_TRANSFER_INDICATOR
+      description: ''
+    - name: RACKABLE_UNIT
+      description: ''
+    - name: DIRECTORY_CONFIG
+      description: ''
+    - name: HEALTH_CHECK
+      description: ''
+    - name: NETWORK_SNMP_PROFILE
+      description: ''
+    - name: ALERT
+      description: ''
+    - name: SCHEDULE
+      description: ''
+    - name: BANDWIDTH_POLICY
+      description: ''
+    - name: FILE_GROUP
+      description: ''
+    - name: NETWORK_MAPPING
+      description: ''
+    - name: PROGRESS_MONITOR
+      description: ''
+    - name: LCM_ENTITY
+      description: ''
+    - name: LCM_AVAILABLE_VERSION
+      description: ''
+    - name: CAPACITY_SCENARIO
+      description: ''
+    - name: NCC_ERROR_CODES
+      description: ''
+    - name: RESOURCE_CONSUMPTION
+      description: ''
+    - name: REPORT_CONFIG
+      description: ''
+    - name: REPORT_INSTANCE
+      description: ''
+    - name: COMMON_REPORT_CONFIG
+      description: ''
+    - name: REMOTE_CONNECTION
+      description: ''
+    type: string
+    enum:
+    - CLUSTER
+    - HARDWARE
+    - STORAGE
+    - BACKUP
+    - DR
+    - LICENSE
+    - DISK
+    - STORAGE_TIER
+    - HOST
+    - NODE
+    - MANAGEMENT_SERVER
+    - MANAGEMENT_SERVER_INFO
+    - VM
+    - SERVICE_VM
+    - VDISK
+    - VIRTUAL_DISK
+    - STORAGE_POOL
+    - CONTAINER
+    - STORAGE_CONTAINER
+    - VZONE
+    - SNAPSHOT
+    - FAST_CLONE
+    - RSYSLOG_SERVER
+    - KEY_MANAGEMENT_SERVER
+    - CERTIFICATE
+    - HTTP_PROXY
+    - SNMP_TRAP
+    - SNMP_USER
+    - REMOTE_SITE
+    - CLOUD_CREDENTIALS
+    - PROTECTION_DOMAIN
+    - CONSISTENCY_GROUP
+    - REPLICATION
+    - REPLICATION_LINK
+    - SYNC_REPLICATION
+    - VSTORE
+    - NETWORK_SWITCH_INTERFACE
+    - NETWORK_SWITCH
+    - VIRTUAL_NIC
+    - VMKERNEL_NIC
+    - HOST_NIC
+    - NIC_TEAM
+    - VIRTUAL_NETWORK
+    - VIRTUAL_SWITCH
+    - HOST_GPU
+    - VIRTUAL_GPU
+    - TAG
+    - COMMENT
+    - TASK
+    - IMAGE
+    - IMAGE_INFO
+    - ISCSI_CLIENT
+    - VOLUME_GROUP
+    - VOLUME_DISK
+    - VM_DISK
+    - FILE_SERVER
+    - FS_PARTNER_SERVER
+    - CVM
+    - NVM
+    - FILE_SERVER_SHARE
+    - ALERT_CAUSE
+    - ALERT_CHECK_SCHEMA
+    - ALERT_CHECK_SCHEMA_OVERRIDE
+    - INTER_CLUSTER_DATA_TRANSFER_INDICATOR
+    - RACKABLE_UNIT
+    - DIRECTORY_CONFIG
+    - HEALTH_CHECK
+    - NETWORK_SNMP_PROFILE
+    - ALERT
+    - SCHEDULE
+    - BANDWIDTH_POLICY
+    - FILE_GROUP
+    - NETWORK_MAPPING
+    - PROGRESS_MONITOR
+    - LCM_ENTITY
+    - LCM_AVAILABLE_VERSION
+    - CAPACITY_SCENARIO
+    - NCC_ERROR_CODES
+    - RESOURCE_CONSUMPTION
+    - REPORT_CONFIG
+    - REPORT_INSTANCE
+    - COMMON_REPORT_CONFIG
+    - REMOTE_CONNECTION
+  Create.dto.health.check.entitytypehealthchecksummarydto:
+    title: create.dto.health.check.EntityTypeHealthCheckSummaryDTO
+    type: object
+    properties:
+      checks_in_error:
+        $ref: '#/definitions/Java.util.map&lt;java.lang.string,Create.dto.health.check.healthcheckerrorsdto&gt;'
+      detailed_check_summary:
+        $ref: '#/definitions/Java.util.map&lt;java.lang.string,Java.util.map&lt;create.dto.health.check.healthstatus,Java.lang.integer&gt;&gt;'
+      entity_type:
+        $ref: '#/definitions/EntityType'
+      filter_criteria:
+        description: ''
+        type: string
+      health_summary:
+        $ref: '#/definitions/Java.util.map&lt;create.dto.health.check.healthstatus,Java.lang.integer&gt;'
+  HealthStatus:
+    title: health_status
+    example: Critical
+    x-enum-elements:
+    - name: Critical
+      description: ''
+    - name: Warning
+      description: ''
+    - name: Good
+      description: ''
+    - name: Unknown
+      description: ''
+    - name: Error
+      description: ''
+    type: string
+    enum:
+    - Critical
+    - Warning
+    - Good
+    - Unknown
+    - Error
+  Create.dto.health.check.healthsummarydto:
+    title: create.dto.health.check.HealthSummaryDTO
+    type: object
+    properties:
+      entity_type_summaries:
+        description: ''
+        type: array
+        items:
+          $ref: '#/definitions/Create.dto.health.check.entitytypehealthchecksummarydto'
+      health_check_summaries:
+        $ref: '#/definitions/Java.util.map&lt;java.lang.string,Create.dto.health.check.healthchecksummarydto&gt;'
+      health_status:
+        $ref: '#/definitions/HealthStatus'
+  Delete.dto.primitivedto&lt;java.lang.boolean&gt;:
+    title: delete.dto.PrimitiveDTO&lt;java.lang.Boolean&gt;
+    type: object
+    properties:
+      value:
+        description: ''
+        type: boolean
+  Get.base.entitycollection&lt;get.dto.resultcontentdescriptor&gt;:
+    title: get.base.EntityCollection&lt;get.dto.ResultContentDescriptor&gt;
+    type: object
+    properties:
+      entities:
+        description: ''
+        type: array
+        items:
+          $ref: '#/definitions/Get.dto.resultcontentdescriptor'
+      error_info:
+        $ref: '#/definitions/Get.base.errorinfo'
+      metadata:
+        $ref: '#/definitions/Get.base.metadata'
+  Get.base.entitycollection&lt;get.dto.alerts.alertdto&gt;:
+    title: get.base.EntityCollection&lt;get.dto.alerts.AlertDTO&gt;
+    type: object
+    properties:
+      entities:
+        description: ''
+        type: array
+        items:
+          $ref: '#/definitions/Get.dto.alerts.alertdto'
+      error_info:
+        $ref: '#/definitions/Get.base.errorinfo'
+      metadata:
+        $ref: '#/definitions/Get.base.metadata'
+  Get.base.entitycollection&lt;get.dto.appliance.configuration.containerdto&gt;:
+    title: get.base.EntityCollection&lt;get.dto.appliance.configuration.ContainerDTO&gt;
+    type: object
+    properties:
+      entities:
+        description: ''
+        type: array
+        items:
+          $ref: '#/definitions/Get.dto.appliance.configuration.containerdto'
+      error_info:
+        $ref: '#/definitions/Get.base.errorinfo'
+      metadata:
+        $ref: '#/definitions/Get.base.metadata'
+  Get.base.entitycollection&lt;get.dto.appliance.configuration.vdiskdto&gt;:
+    title: get.base.EntityCollection&lt;get.dto.appliance.configuration.VDiskDTO&gt;
+    type: object
+    properties:
+      entities:
+        description: ''
+        type: array
+        items:
+          $ref: '#/definitions/Get.dto.appliance.configuration.vdiskdto'
+      error_info:
+        $ref: '#/definitions/Get.base.errorinfo'
+      metadata:
+        $ref: '#/definitions/Get.base.metadata'
+  Get.base.errorinfo:
+    title: get.base.ErrorInfo
+    type: object
+    properties:
+      count:
+        description: ''
+        type: integer
+        format: int64
+      entity_list:
+        description: ''
+        type: array
+        items:
+          type: string
+      message:
+        description: ''
+        type: string
+  Get.base.metadata:
+    title: get.base.Metadata
+    type: object
+    properties:
+      count:
+        description: ''
+        type: integer
+        format: int32
+      end_index:
+        description: ''
+        type: integer
+        format: int32
+      filter_criteria:
+        description: ''
+        type: string
+      grand_total_entities:
+        description: ''
+        type: integer
+        format: int32
+      next_cursor:
+        description: ''
+        type: string
+      page:
+        description: ''
+        type: integer
+        format: int32
+      previous_cursor:
+        description: ''
+        type: string
+      search_string:
+        description: ''
+        type: string
+      sort_criteria:
+        description: ''
+        type: string
+      start_index:
+        description: ''
+        type: integer
+        format: int32
+      total_entities:
+        description: ''
+        type: integer
+        format: int32
+  Get.base.statsresponse:
+    title: get.base.StatsResponse
+    type: object
+    properties:
+      stats_specific_responses:
+        description: ''
+        type: array
+        items:
+          $ref: '#/definitions/Get.base.statsresponse$statsspecificresponse'
+  Get.base.statsresponse$statsspecificresponse:
+    title: get.base.StatsResponse$StatsSpecificResponse
+    type: object
+    properties:
+      interval_in_secs:
+        description: ''
+        type: integer
+        format: int64
+      message:
+        description: ''
+        type: string
+      metric:
+        description: ''
+        type: string
+      start_time_in_usecs:
+        description: ''
+        type: integer
+        format: int64
+      successful:
+        description: ''
+        type: boolean
+      values:
+        description: ''
+        type: array
+        items:
+          type: integer
+          format: int32
+  Get.dto.entitymetadata:
+    title: get.dto.EntityMetadata
+    type: object
+    properties:
+      additional_fields:
+        $ref: '#/definitions/Java.util.map&lt;java.lang.string,Java.lang.string&gt;'
+      cluster_uuid:
+        description: ''
+        type: string
+      context_hint_field:
+        description: ''
+        type: string
+      context_hint_value:
+        description: ''
+        type: string
+      entity_id:
+        description: ''
+        type: string
+      entity_name:
+        description: ''
+        type: string
+      entity_type:
+        $ref: '#/definitions/EntityType'
+  Get.dto.resultcontentdescriptor:
+    title: get.dto.ResultContentDescriptor
+    type: object
+    properties:
+      metadata:
+        $ref: '#/definitions/Get.dto.resultmetadata'
+      perspectives:
+        description: ''
+        type: array
+        items:
+          $ref: '#/definitions/Get.dto.resultcontentdescriptor$perspective'
+  Format:
+    title: format
+    example: TABLE
+    x-enum-elements:
+    - name: TABLE
+      description: ''
+    - name: BAR_CHART
+      description: ''
+    - name: PIE_CHART
+      description: ''
+    - name: TIME_SERIES
+      description: ''
+    - name: KEY_VALUE
+      description: ''
+    - name: COUNT
+      description: ''
+    - name: HEALTH_SUMMARY
+      description: ''
+    - name: ALERT_INFO
+      description: ''
+    - name: CAPACITY
+      description: ''
+    - name: OTHER
+      description: ''
+    type: string
+    enum:
+    - TABLE
+    - BAR_CHART
+    - PIE_CHART
+    - TIME_SERIES
+    - KEY_VALUE
+    - COUNT
+    - HEALTH_SUMMARY
+    - ALERT_INFO
+    - CAPACITY
+    - OTHER
+  Get.dto.resultcontentdescriptor$perspective:
+    title: get.dto.ResultContentDescriptor$Perspective
+    type: object
+    properties:
+      format:
+        $ref: '#/definitions/Format'
+      metadata:
+        $ref: '#/definitions/Get.dto.resultmetadata'
+      query:
+        description: ''
+        type: string
+      result:
+        description: ''
+        type: string
+      type:
+        description: ''
+        type: string
+  Get.dto.resultmetadata:
+    title: get.dto.ResultMetadata
+    type: object
+    properties:
+      entity_type:
+        $ref: '#/definitions/EntityType'
+      filters:
+        description: ''
+        type: array
+        items:
+          $ref: '#/definitions/Get.dto.resultmetadata$filter'
+      instances:
+        description: ''
+        type: array
+        items:
+          $ref: '#/definitions/Get.dto.entitymetadata'
+      title:
+        description: ''
+        type: string
+  Get.dto.resultmetadata$filter:
+    title: get.dto.ResultMetadata$Filter
+    type: object
+    properties:
+      display_for_rhs:
+        description: ''
+        type: string
+      lhs:
+        description: ''
+        type: string
+      operator:
+        description: Operator for the filter.
+        type: string
+      rhs:
+        description: ''
+        type: string
+  Get.dto.alerts.alertcausedto:
+    title: get.dto.alerts.AlertCauseDTO
+    type: object
+    properties:
+      actions:
+        description: Possible actions to resolve this alert
+        type: string
+      additional_links:
+        description: Additional links
+        type: string
+      alert_namespace:
+        description: Namespace this alert belongs to
+        type: string
+      cause:
+        description: Detailed description
+        type: string
+      chart_queries:
+        $ref: '#/definitions/Get.base.entitycollection&lt;get.dto.resultcontentdescriptor&gt;'
+      details:
+        description: Symptoms for this cause
+        type: string
+      has_global_details:
+        description: Whether the alert has global details or not
+        type: boolean
+      id:
+        description: Cause Id
+        type: string
+      num_resolved_count:
+        description: Number of times this cause has resolved the alert
+        type: integer
+        format: int64
+      parent_cause_id:
+        description: Id of the alert/cause this is a possible cause for
+        type: string
+      title:
+        description: Short description
+        type: string
+      troubleshooting_steps:
+        description: Steps to determine whether this is the cause.
+        type: string
+  Get.dto.alerts.alertdto:
+    title: get.dto.alerts.AlertDTO
+    type: object
+    properties:
+      acknowledged:
+        description: ''
+        type: boolean
+      acknowledged_by_username:
+        description: ''
+        type: string
+      acknowledged_time_stamp_in_usecs:
+        description: ''
+        type: integer
+        format: int64
+      affected_entities:
+        description: ''
+        type: array
+        items:
+          $ref: '#/definitions/Get.dto.alerts.alertdto$affectedentity'
+      alert_details:
+        $ref: '#/definitions/Get.dto.alerts.alertdto$alertdetailsdto'
+      alert_title:
+        description: ''
+        type: string
+      alert_type_uuid:
+        description: ''
+        type: string
+      auto_resolved:
+        description: ''
+        type: boolean
+      check_id:
+        description: ''
+        type: string
+      classifications:
+        description: ''
+        type: array
+        items:
+          type: string
+      cluster_uuid:
+        description: ''
+        type: string
+      context_types:
+        description: ''
+        type: array
+        items:
+          type: string
+      context_values:
+        description: ''
+        type: array
+        items:
+          type: string
+      created_time_stamp_in_usecs:
+        description: ''
+        type: integer
+        format: int64
+      detailed_message:
+        description: ''
+        type: string
+      id:
+        description: ''
+        type: string
+      impact_types:
+        description: ''
+        type: array
+        items:
+          type: string
+      last_occurrence_time_stamp_in_usecs:
+        description: ''
+        type: integer
+        format: int64
+      message:
+        description: ''
+        type: string
+      node_uuid:
+        description: ''
+        type: string
+      originating_cluster_uuid:
+        description: ''
+        type: string
+      possible_causes:
+        description: ''
+        type: array
+        items:
+          $ref: '#/definitions/Get.dto.alerts.alertcausedto'
+      resolved:
+        description: ''
+        type: boolean
+      resolved_by_username:
+        description: ''
+        type: string
+      resolved_time_stamp_in_usecs:
+        description: ''
+        type: integer
+        format: int64
+      service_v_m_id:
+        description: ''
+        type: string
+      severity:
+        description: This field describes the severity of the alert.
+        type: string
+      user_defined:
+        description: ''
+        type: boolean
+  Get.dto.alerts.alertdto$affectedentity:
+    title: get.dto.alerts.AlertDTO$AffectedEntity
+    type: object
+    properties:
+      entity_name:
+        description: ''
+        type: string
+      entity_type:
+        description: ''
+        type: string
+      entity_type_display_name:
+        description: ''
+        type: string
+      id:
+        description: ''
+        type: string
+      uuid:
+        description: ''
+        type: string
+  Get.dto.alerts.alertdto$alertdetailsdto:
+    title: get.dto.alerts.AlertDTO$AlertDetailsDTO
+    type: object
+    properties:
+      metric_details:
+        description: List of metric details associated with the alert
+        type: array
+        items:
+          $ref: '#/definitions/Get.dto.alerts.alertdto$metricdetails'
+      severity_trails:
+        description: List that contains severity level change details
+        type: array
+        items:
+          $ref: '#/definitions/Get.dto.alerts.alertdto$severitytrail'
+  ConditionType:
+    title: condition_type
+    example: STATIC_THRESHOLD
+    x-enum-elements:
+    - name: STATIC_THRESHOLD
+      description: ''
+    - name: ANOMALY
+      description: ''
+    - name: SAFETY_ZONE
+      description: ''
+    type: string
+    enum:
+    - STATIC_THRESHOLD
+    - ANOMALY
+    - SAFETY_ZONE
+  DataType:
+    title: data_type
+    example: LONG
+    x-enum-elements:
+    - name: LONG
+      description: ''
+    - name: DOUBLE
+      description: ''
+    - name: BOOLEAN
+      description: ''
+    - name: STRING
+      description: ''
+    type: string
+    enum:
+    - LONG
+    - DOUBLE
+    - BOOLEAN
+    - STRING
+  Get.dto.alerts.alertdto$metricdetails:
+    title: get.dto.alerts.AlertDTO$MetricDetails
+    type: object
+    properties:
+      comparison_operator:
+        description: Comparison Operator to be applied for teh values.
+        type: string
+      condition_type:
+        $ref: '#/definitions/ConditionType'
+      data_type:
+        $ref: '#/definitions/DataType'
+      entity_id:
+        description: UUID of the entity
+        type: string
+      entity_type:
+        description: Entity Type
+        type: string
+      metric_display_name:
+        description: Display name of the metric
+        type: string
+      metric_name:
+        description: Name of the metric
+        type: string
+      metric_value_details:
+        description: List of metric values at different instances of time in the alert lifecycle
+        type: array
+        items:
+          $ref: '#/definitions/Get.dto.alerts.alertdto$metricvaluedetails'
+      unit:
+        description: Unit of the metric value.
+        type: string
+  Get.dto.alerts.alertdto$metricvaluedetails:
+    title: get.dto.alerts.AlertDTO$MetricValueDetails
+    type: object
+    properties:
+      metric_threshold_value:
+        description: Threshold value of the metric that was specified in the policy at that given time.
+        type: string
+      metric_value:
+        description: Actual value of the metric at that given time.
+        type: string
+      state_change_time_stamp_in_usecs:
+        description: Time at which the alert's state change occurred.
+        type: integer
+        format: int64
+  Get.dto.alerts.alertdto$severitytrail:
+    title: get.dto.alerts.AlertDTO$SeverityTrail
+    type: object
+    properties:
+      severity:
+        description: Severity level of the alert. Can be INFO, WARNING or CRITICAL
+        type: string
+      severity_change_timestamp_in_usecs:
+        description: Time at which the severity level change occurred
+        type: integer
+        format: int64
+  Get.dto.alerts.alertsummarydto:
+    title: get.dto.alerts.AlertSummaryDTO
+    type: object
+    properties:
+      alert_summaries:
+        $ref: '#/definitions/Java.util.map&lt;get.dto.alerts.alertdto$alertseverity,Get.base.entitycollection&lt;get.dto.alerts.alertdto&gt;&gt;'
+      count:
+        description: ''
+        type: integer
+        format: int64
+  Get.dto.appliance.configuration.containerdto:
+    title: get.dto.appliance.configuration.ContainerDTO
+    type: object
+    properties:
+      advertised_capacity:
+        description: ''
+        type: integer
+        format: int64
+      alert_summary:
+        $ref: '#/definitions/Get.dto.alerts.alertsummarydto'
+      cluster_uuid:
+        description: Uuid of the cluster this entity belongs to
+        type: string
+      compression_delay_in_secs:
+        description: ''
+        type: integer
+        format: int32
+      compression_enabled:
+        description: ''
+        type: boolean
+      down_migrate_times_in_secs:
+        $ref: '#/definitions/Java.util.map&lt;java.lang.string,Java.lang.integer&gt;'
+      enable_software_encryption:
+        description: ''
+        type: boolean
+      erasure_code:
+        description: ''
+        type: string
+      erasure_code_delay_secs:
+        description: ''
+        type: integer
+        format: int32
+      finger_print_on_write:
+        $ref: '#/definitions/FingerPrintOnWrite'
+      health_summary:
+        $ref: '#/definitions/Get.dto.health.check.healthsummarydto'
+      id:
+        description: ''
+        type: string
+      ilm_policy:
+        description: ''
+        type: string
+      is_nutanix_managed:
+        description: ''
+        type: boolean
+      mapped_remote_containers:
+        $ref: '#/definitions/Java.util.map&lt;java.lang.string,Java.lang.string&gt;'
+      marked_for_removal:
+        description: ''
+        type: boolean
+      max_capacity:
+        description: ''
+        type: integer
+        format: int64
+      name:
+        description: ''
+        type: string
+      nfs_whitelist:
+        description: ''
+        type: array
+        items:
+          type: string
+      nfs_whitelist_inherited:
+        description: ''
+        type: boolean
+      on_disk_dedup:
+        $ref: '#/definitions/OnDiskDedup'
+      oplog_replication_factor:
+        description: ''
+        type: integer
+        format: int32
+      random_io_preference:
+        description: ''
+        type: array
+        items:
+          type: string
+      replication_factor:
+        description: ''
+        type: integer
+        format: int32
+      seq_io_preference:
+        description: ''
+        type: array
+        items:
+          type: string
+      stats:
+        $ref: '#/definitions/Java.util.map&lt;java.lang.string,Java.lang.string&gt;'
+      storage_container_uuid:
+        description: ''
+        type: string
+      total_explicit_reserved_capacity:
+        description: ''
+        type: integer
+        format: int64
+      total_implicit_reserved_capacity:
+        description: ''
+        type: integer
+        format: int64
+      usage_stats:
+        $ref: '#/definitions/Java.util.map&lt;java.lang.string,Java.lang.string&gt;'
+      vstore_name_list:
+        description: ''
+        type: array
+        items:
+          type: string
+  Get.dto.appliance.configuration.vdiskdto:
+    title: get.dto.appliance.configuration.VDiskDTO
+    type: object
+    properties:
+      alert_summary:
+        $ref: '#/definitions/Get.dto.alerts.alertsummarydto'
+      cluster_uuid:
+        description: Uuid of the cluster this entity belongs to
+        type: string
+      creation_time_in_micros_since_epoch:
+        description: ''
+        type: integer
+        format: int64
+      disabled:
+        description: ''
+        type: boolean
+      erasure_code:
+        description: ''
+        type: string
+      erasure_code_delay_secs:
+        description: ''
+        type: integer
+        format: int32
+      finger_print_on_write:
+        $ref: '#/definitions/FingerPrintOnWrite'
+      health_summary:
+        $ref: '#/definitions/Get.dto.health.check.healthsummarydto'
+      immutable:
+        description: ''
+        type: boolean
+      iscsi_lun:
+        description: ''
+        type: integer
+        format: int32
+      iscsi_target_name:
+        description: ''
+        type: string
+      marked_for_removal:
+        description: ''
+        type: boolean
+      max_capacity_bytes:
+        description: ''
+        type: integer
+        format: int64
+      name:
+        description: ''
+        type: string
+      nfs_file:
+        description: ''
+        type: boolean
+      nfs_file_name:
+        description: ''
+        type: string
+      on_disk_dedup:
+        $ref: '#/definitions/OnDiskDedup'
+      parent_nfs_file_name:
+        description: ''
+        type: string
+      qos_fairshare:
+        description: ''
+        type: string
+      qos_priority:
+        description: ''
+        type: string
+      shared:
+        description: ''
+        type: boolean
+      snapshot:
+        description: ''
+        type: boolean
+      snapshots:
+        description: ''
+        type: array
+        items:
+          type: string
+      stats:
+        $ref: '#/definitions/Java.util.map&lt;java.lang.string,Java.lang.string&gt;'
+      storage_container_id:
+        description: ''
+        type: string
+      storage_container_name:
+        description: ''
+        type: string
+      storage_container_uuid:
+        description: ''
+        type: string
+      total_reserved_capacity_bytes:
+        description: ''
+        type: integer
+        format: int64
+      usage_stats:
+        $ref: '#/definitions/Java.util.map&lt;java.lang.string,Java.lang.string&gt;'
+      vdisk_uuid:
+        description: ''
+        type: string
+  Get.dto.esx.nfsdatastoreinfodto:
+    title: get.dto.esx.NfsDatastoreInfoDTO
+    type: object
+    properties:
+      capacity:
+        description: ''
+        type: integer
+        format: int64
+      datastore_name:
+        description: ''
+        type: string
+      free_space:
+        description: ''
+        type: integer
+        format: int64
+      host_id:
+        description: ''
+        type: string
+      host_ip_address:
+        description: ''
+        type: string
+      host_uuid:
+        description: ''
+        type: string
+      storage_container_id:
+        description: ''
+        type: string
+      storage_container_name:
+        description: ''
+        type: string
+      storage_container_uuid:
+        description: ''
+        type: string
+      vm_names:
+        description: ''
+        type: array
+        items:
+          type: string
+  Get.dto.health.check.entitytypehealthchecksummarydto:
+    title: get.dto.health.check.EntityTypeHealthCheckSummaryDTO
+    type: object
+    properties:
+      checks_in_error:
+        $ref: '#/definitions/Java.util.map&lt;java.lang.string,Get.dto.health.check.healthcheckerrorsdto&gt;'
+      detailed_check_summary:
+        $ref: '#/definitions/Java.util.map&lt;java.lang.string,Java.util.map&lt;get.dto.health.check.healthstatus,Java.lang.integer&gt;&gt;'
+      entity_type:
+        $ref: '#/definitions/EntityType'
+      filter_criteria:
+        description: ''
+        type: string
+      health_summary:
+        $ref: '#/definitions/Java.util.map&lt;get.dto.health.check.healthstatus,Java.lang.integer&gt;'
+  Get.dto.health.check.healthsummarydto:
+    title: get.dto.health.check.HealthSummaryDTO
+    type: object
+    properties:
+      entity_type_summaries:
+        description: ''
+        type: array
+        items:
+          $ref: '#/definitions/Get.dto.health.check.entitytypehealthchecksummarydto'
+      health_check_summaries:
+        $ref: '#/definitions/Java.util.map&lt;java.lang.string,Get.dto.health.check.healthchecksummarydto&gt;'
+      health_status:
+        $ref: '#/definitions/HealthStatus'
+  Java.util.map&lt;create.dto.alerts.alertdto$alertseverity,Create.base.entitycollection&lt;create.dto.alerts.alertdto&gt;&gt;:
+    title: java.util.Map&lt;create.dto.alerts.AlertDTO$AlertSeverity, create.base.EntityCollection&lt;create.dto.alerts.AlertDTO&gt;&gt;
+    type: object
+  Java.util.map&lt;create.dto.health.check.healthstatus,Java.lang.integer&gt;:
+    title: java.util.Map&lt;create.dto.health.check.HealthStatus, java.lang.Integer&gt;
+    type: object
+  Java.util.map&lt;get.dto.alerts.alertdto$alertseverity,Get.base.entitycollection&lt;get.dto.alerts.alertdto&gt;&gt;:
+    title: java.util.Map&lt;get.dto.alerts.AlertDTO$AlertSeverity, get.base.EntityCollection&lt;get.dto.alerts.AlertDTO&gt;&gt;
+    type: object
+  Java.util.map&lt;get.dto.health.check.healthstatus,Java.lang.integer&gt;:
+    title: java.util.Map&lt;get.dto.health.check.HealthStatus, java.lang.Integer&gt;
+    type: object
+  Java.util.map&lt;java.lang.string,Create.dto.health.check.healthcheckerrorsdto&gt;:
+    title: java.util.Map&lt;java.lang.String, create.dto.health.check.HealthCheckErrorsDTO&gt;
+    type: object
+  Java.util.map&lt;java.lang.string,Create.dto.health.check.healthchecksummarydto&gt;:
+    title: java.util.Map&lt;java.lang.String, create.dto.health.check.HealthCheckSummaryDTO&gt;
+    type: object
+  Java.util.map&lt;java.lang.string,Get.dto.health.check.healthcheckerrorsdto&gt;:
+    title: java.util.Map&lt;java.lang.String, get.dto.health.check.HealthCheckErrorsDTO&gt;
+    type: object
+  Java.util.map&lt;java.lang.string,Get.dto.health.check.healthchecksummarydto&gt;:
+    title: java.util.Map&lt;java.lang.String, get.dto.health.check.HealthCheckSummaryDTO&gt;
+    type: object
+  Java.util.map&lt;java.lang.string,Java.lang.integer&gt;:
+    title: java.util.Map&lt;java.lang.String, java.lang.Integer&gt;
+    type: object
+  Java.util.map&lt;java.lang.string,Java.lang.string&gt;:
+    title: java.util.Map&lt;java.lang.String, java.lang.String&gt;
+    type: object
+  Java.util.map&lt;java.lang.string,Java.util.map&lt;create.dto.health.check.healthstatus,Java.lang.integer&gt;&gt;:
+    title: java.util.Map&lt;java.lang.String, java.util.Map&lt;create.dto.health.check.HealthStatus, java.lang.Integer&gt;&gt;
+    type: object
+  Java.util.map&lt;java.lang.string,Java.util.map&lt;get.dto.health.check.healthstatus,Java.lang.integer&gt;&gt;:
+    title: java.util.Map&lt;java.lang.String, java.util.Map&lt;get.dto.health.check.HealthStatus, java.lang.Integer&gt;&gt;
+    type: object
+  Java.util.map&lt;java.lang.string,Java.util.map&lt;patch.dto.health.check.healthstatus,Java.lang.integer&gt;&gt;:
+    title: java.util.Map&lt;java.lang.String, java.util.Map&lt;patch.dto.health.check.HealthStatus, java.lang.Integer&gt;&gt;
+    type: object
+  Java.util.map&lt;java.lang.string,Java.util.map&lt;update.dto.health.check.healthstatus,Java.lang.integer&gt;&gt;:
+    title: java.util.Map&lt;java.lang.String, java.util.Map&lt;update.dto.health.check.HealthStatus, java.lang.Integer&gt;&gt;
+    type: object
+  Java.util.map&lt;java.lang.string,Patch.dto.health.check.healthcheckerrorsdto&gt;:
+    title: java.util.Map&lt;java.lang.String, patch.dto.health.check.HealthCheckErrorsDTO&gt;
+    type: object
+  Java.util.map&lt;java.lang.string,Patch.dto.health.check.healthchecksummarydto&gt;:
+    title: java.util.Map&lt;java.lang.String, patch.dto.health.check.HealthCheckSummaryDTO&gt;
+    type: object
+  Java.util.map&lt;java.lang.string,Update.dto.health.check.healthcheckerrorsdto&gt;:
+    title: java.util.Map&lt;java.lang.String, update.dto.health.check.HealthCheckErrorsDTO&gt;
+    type: object
+  Java.util.map&lt;java.lang.string,Update.dto.health.check.healthchecksummarydto&gt;:
+    title: java.util.Map&lt;java.lang.String, update.dto.health.check.HealthCheckSummaryDTO&gt;
+    type: object
+  Java.util.map&lt;patch.dto.alerts.alertdto$alertseverity,Patch.base.entitycollection&lt;patch.dto.alerts.alertdto&gt;&gt;:
+    title: java.util.Map&lt;patch.dto.alerts.AlertDTO$AlertSeverity, patch.base.EntityCollection&lt;patch.dto.alerts.AlertDTO&gt;&gt;
+    type: object
+  Java.util.map&lt;patch.dto.health.check.healthstatus,Java.lang.integer&gt;:
+    title: java.util.Map&lt;patch.dto.health.check.HealthStatus, java.lang.Integer&gt;
+    type: object
+  Java.util.map&lt;update.dto.alerts.alertdto$alertseverity,Update.base.entitycollection&lt;update.dto.alerts.alertdto&gt;&gt;:
+    title: java.util.Map&lt;update.dto.alerts.AlertDTO$AlertSeverity, update.base.EntityCollection&lt;update.dto.alerts.AlertDTO&gt;&gt;
+    type: object
+  Java.util.map&lt;update.dto.health.check.healthstatus,Java.lang.integer&gt;:
+    title: java.util.Map&lt;update.dto.health.check.HealthStatus, java.lang.Integer&gt;
+    type: object
+  Patch.dto.primitivedto&lt;java.lang.boolean&gt;:
+    title: patch.dto.PrimitiveDTO&lt;java.lang.Boolean&gt;
+    type: object
+    properties:
+      value:
+        description: ''
+        type: boolean
+  Patch.dto.requestdto&lt;patch.dto.appliance.configuration.containerdto&gt;:
+    title: patch.dto.RequestDTO&lt;patch.dto.appliance.configuration.ContainerDTO&gt;
+    type: object
+    properties:
+      cluster_uuid:
+        description: ''
+        type: string
+      generic_d_t_o:
+        $ref: '#/definitions/Patch.dto.appliance.configuration.containerdto'
+      operation:
+        description: ''
+        type: string
+  Patch.dto.alerts.alertsummarydto:
+    title: patch.dto.alerts.AlertSummaryDTO
+    type: object
+    properties:
+      alert_summaries:
+        $ref: '#/definitions/Java.util.map&lt;patch.dto.alerts.alertdto$alertseverity,Patch.base.entitycollection&lt;patch.dto.alerts.alertdto&gt;&gt;'
+      count:
+        description: ''
+        type: integer
+        format: int64
+  Patch.dto.appliance.configuration.containerdto:
+    title: patch.dto.appliance.configuration.ContainerDTO
+    type: object
+    properties:
+      advertised_capacity:
+        description: ''
+        type: integer
+        format: int64
+      alert_summary:
+        $ref: '#/definitions/Patch.dto.alerts.alertsummarydto'
+      compression_delay_in_secs:
+        description: ''
+        type: integer
+        format: int32
+      compression_enabled:
+        description: ''
+        type: boolean
+      down_migrate_times_in_secs:
+        $ref: '#/definitions/Java.util.map&lt;java.lang.string,Java.lang.integer&gt;'
+      enable_software_encryption:
+        description: ''
+        type: boolean
+      erasure_code:
+        description: ''
+        type: string
+      erasure_code_delay_secs:
+        description: ''
+        type: integer
+        format: int32
+      finger_print_on_write:
+        $ref: '#/definitions/FingerPrintOnWrite'
+      health_summary:
+        $ref: '#/definitions/Patch.dto.health.check.healthsummarydto'
+      id:
+        description: ''
+        type: string
+      ilm_policy:
+        description: ''
+        type: string
+      is_nutanix_managed:
+        description: ''
+        type: boolean
+      mapped_remote_containers:
+        $ref: '#/definitions/Java.util.map&lt;java.lang.string,Java.lang.string&gt;'
+      marked_for_removal:
+        description: ''
+        type: boolean
+      max_capacity:
+        description: ''
+        type: integer
+        format: int64
+      name:
+        description: ''
+        type: string
+      nfs_whitelist:
+        description: ''
+        type: array
+        items:
+          type: string
+      nfs_whitelist_inherited:
+        description: ''
+        type: boolean
+      on_disk_dedup:
+        $ref: '#/definitions/OnDiskDedup'
+      oplog_replication_factor:
+        description: ''
+        type: integer
+        format: int32
+      random_io_preference:
+        description: ''
+        type: array
+        items:
+          type: string
+      replication_factor:
+        description: ''
+        type: integer
+        format: int32
+      seq_io_preference:
+        description: ''
+        type: array
+        items:
+          type: string
+      stats:
+        $ref: '#/definitions/Java.util.map&lt;java.lang.string,Java.lang.string&gt;'
+      storage_container_uuid:
+        description: ''
+        type: string
+      total_explicit_reserved_capacity:
+        description: ''
+        type: integer
+        format: int64
+      total_implicit_reserved_capacity:
+        description: ''
+        type: integer
+        format: int64
+      usage_stats:
+        $ref: '#/definitions/Java.util.map&lt;java.lang.string,Java.lang.string&gt;'
+      vstore_name_list:
+        description: ''
+        type: array
+        items:
+          type: string
+  Patch.dto.health.check.entitytypehealthchecksummarydto:
+    title: patch.dto.health.check.EntityTypeHealthCheckSummaryDTO
+    type: object
+    properties:
+      checks_in_error:
+        $ref: '#/definitions/Java.util.map&lt;java.lang.string,Patch.dto.health.check.healthcheckerrorsdto&gt;'
+      detailed_check_summary:
+        $ref: '#/definitions/Java.util.map&lt;java.lang.string,Java.util.map&lt;patch.dto.health.check.healthstatus,Java.lang.integer&gt;&gt;'
+      entity_type:
+        $ref: '#/definitions/EntityType'
+      filter_criteria:
+        description: ''
+        type: string
+      health_summary:
+        $ref: '#/definitions/Java.util.map&lt;patch.dto.health.check.healthstatus,Java.lang.integer&gt;'
+  Patch.dto.health.check.healthsummarydto:
+    title: patch.dto.health.check.HealthSummaryDTO
+    type: object
+    properties:
+      entity_type_summaries:
+        description: ''
+        type: array
+        items:
+          $ref: '#/definitions/Patch.dto.health.check.entitytypehealthchecksummarydto'
+      health_check_summaries:
+        $ref: '#/definitions/Java.util.map&lt;java.lang.string,Patch.dto.health.check.healthchecksummarydto&gt;'
+      health_status:
+        $ref: '#/definitions/HealthStatus'
+  Update.dto.primitivedto&lt;java.lang.boolean&gt;:
+    title: update.dto.PrimitiveDTO&lt;java.lang.Boolean&gt;
+    type: object
+    properties:
+      value:
+        description: ''
+        type: boolean
+  Update.dto.alerts.alertsummarydto:
+    title: update.dto.alerts.AlertSummaryDTO
+    type: object
+    properties:
+      alert_summaries:
+        $ref: '#/definitions/Java.util.map&lt;update.dto.alerts.alertdto$alertseverity,Update.base.entitycollection&lt;update.dto.alerts.alertdto&gt;&gt;'
+      count:
+        description: ''
+        type: integer
+        format: int64
+  Update.dto.appliance.configuration.containerdto:
+    title: update.dto.appliance.configuration.ContainerDTO
+    type: object
+    properties:
+      advertised_capacity:
+        description: ''
+        type: integer
+        format: int64
+      alert_summary:
+        $ref: '#/definitions/Update.dto.alerts.alertsummarydto'
+      compression_delay_in_secs:
+        description: ''
+        type: integer
+        format: int32
+      compression_enabled:
+        description: ''
+        type: boolean
+      down_migrate_times_in_secs:
+        $ref: '#/definitions/Java.util.map&lt;java.lang.string,Java.lang.integer&gt;'
+      enable_software_encryption:
+        description: ''
+        type: boolean
+      erasure_code:
+        description: ''
+        type: string
+      erasure_code_delay_secs:
+        description: ''
+        type: integer
+        format: int32
+      finger_print_on_write:
+        $ref: '#/definitions/FingerPrintOnWrite'
+      health_summary:
+        $ref: '#/definitions/Update.dto.health.check.healthsummarydto'
+      id:
+        description: ''
+        type: string
+      ilm_policy:
+        description: ''
+        type: string
+      is_nutanix_managed:
+        description: ''
+        type: boolean
+      mapped_remote_containers:
+        $ref: '#/definitions/Java.util.map&lt;java.lang.string,Java.lang.string&gt;'
+      marked_for_removal:
+        description: ''
+        type: boolean
+      max_capacity:
+        description: ''
+        type: integer
+        format: int64
+      name:
+        description: ''
+        type: string
+      nfs_whitelist:
+        description: ''
+        type: array
+        items:
+          type: string
+      nfs_whitelist_inherited:
+        description: ''
+        type: boolean
+      on_disk_dedup:
+        $ref: '#/definitions/OnDiskDedup'
+      oplog_replication_factor:
+        description: ''
+        type: integer
+        format: int32
+      random_io_preference:
+        description: ''
+        type: array
+        items:
+          type: string
+      replication_factor:
+        description: ''
+        type: integer
+        format: int32
+      seq_io_preference:
+        description: ''
+        type: array
+        items:
+          type: string
+      stats:
+        $ref: '#/definitions/Java.util.map&lt;java.lang.string,Java.lang.string&gt;'
+      storage_container_uuid:
+        description: ''
+        type: string
+      total_explicit_reserved_capacity:
+        description: ''
+        type: integer
+        format: int64
+      total_implicit_reserved_capacity:
+        description: ''
+        type: integer
+        format: int64
+      usage_stats:
+        $ref: '#/definitions/Java.util.map&lt;java.lang.string,Java.lang.string&gt;'
+      vstore_name_list:
+        description: ''
+        type: array
+        items:
+          type: string
+  Update.dto.health.check.entitytypehealthchecksummarydto:
+    title: update.dto.health.check.EntityTypeHealthCheckSummaryDTO
+    type: object
+    properties:
+      checks_in_error:
+        $ref: '#/definitions/Java.util.map&lt;java.lang.string,Update.dto.health.check.healthcheckerrorsdto&gt;'
+      detailed_check_summary:
+        $ref: '#/definitions/Java.util.map&lt;java.lang.string,Java.util.map&lt;update.dto.health.check.healthstatus,Java.lang.integer&gt;&gt;'
+      entity_type:
+        $ref: '#/definitions/EntityType'
+      filter_criteria:
+        description: ''
+        type: string
+      health_summary:
+        $ref: '#/definitions/Java.util.map&lt;update.dto.health.check.healthstatus,Java.lang.integer&gt;'
+  Update.dto.health.check.healthsummarydto:
+    title: update.dto.health.check.HealthSummaryDTO
+    type: object
+    properties:
+      entity_type_summaries:
+        description: ''
+        type: array
+        items:
+          $ref: '#/definitions/Update.dto.health.check.entitytypehealthchecksummarydto'
+      health_check_summaries:
+        $ref: '#/definitions/Java.util.map&lt;java.lang.string,Update.dto.health.check.healthchecksummarydto&gt;'
+      health_status:
+        $ref: '#/definitions/HealthStatus'
