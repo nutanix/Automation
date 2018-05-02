@@ -50,7 +50,7 @@ pip3 install urllib3 requests weasyprint
 
 - Install [Python3 using the Windows x86-64 executable installer](https://www.python.org/downloads/windows/).  My installation filename was python-3.6.5-amd64.exe.
 - Add the Python binary directories to your PATH and disable the PATH length limit, when prompted.  During my testing, the Python binary path was c:\Users\nutanix\AppData\Local\Programs\Python\Python36\.
-- For each of use, add the pip3 binary directory to your PATH.  During my testing, this directory was C:\Users\nutanix\AppData\Local\Programs\Python\Python36\Scripts.
+- For ease of use, add the pip3 binary directory to your PATH.  During my testing, this directory was C:\Users\nutanix\AppData\Local\Programs\Python\Python36\Scripts.
 - Install [Git using 64-bit Git for Windows Setup](https://git-scm.com/download/win).  My installation filename was Git-2.17.0-64-bit.exe.
 - Upgrade pip, if required:
 
