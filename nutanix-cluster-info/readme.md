@@ -48,8 +48,10 @@ pip3 install urllib3 requests weasyprint
 ```
 ### Windows 10 (64-bit!)
 
-- Install [Python3](https://www.python.org/downloads/windows/) (add the binary directory to your PATH, when prompted)
-- Install [Git](https://git-scm.com/download/win)
+- Install [Python3 using the Windows x86-64 executable installer](https://www.python.org/downloads/windows/).  My installation filename was python-3.6.5-amd64.exe.
+- Add the Python binary directories to your PATH and disable the PATH length limit, when prompted.  During my testing, the Python binary path was c:\Users\nutanix\AppData\Local\Programs\Python\Python36\.
+- For each of use, add the pip3 binary directory to your PATH.  During my testing, this directory was C:\Users\nutanix\AppData\Local\Programs\Python\Python36\Scripts.
+- Install [Git using 64-bit Git for Windows Setup](https://git-scm.com/download/win).  My installation filename was Git-2.17.0-64-bit.exe.
 - Upgrade pip, if required:
 
 ```
@@ -59,23 +61,26 @@ python -m pip install --upgrade pip
 - Install required Python libraries:
 
 ```
-pip3 install requests urllib3 weasyprint
+pip3 install requests
+pip3 install urllib3
+pip3 install weasyprint
 ```
 
-- Look for a message in that output that specifies a directory that must be added to your PATH
-- Add that directory to your PATH
-- Install [GTK for Windows](https://github.com/tschoonj/GTK-for-Windows-Runtime-Environment-Installer/releases) to C:\gtk
+Note: During testing, combining the 3 libraries above into a single install command seemed to product strange results.  For this reason, I have listed the installation of each library as a separate command.
+
+- If there is a message in the output specifying a directory to add to your PATH, make sure that's done before continuing
+- Install [GTK for Windows](https://github.com/tschoonj/GTK-for-Windows-Runtime-Environment-Installer/releases) to C:\gtk.  My installation filename was gtk3-runtime-3.22.28-2018-03-12-ts-win64.exe.
 - Add c:\gtk and c:\gtk\bin to your PATH
-- Install lxml fromhttps://www.lfd.uci.edu/~gohlke/pythonlibs/#lxml (I installed cp36 for amd64):
+- Install [lxml](https://www.lfd.uci.edu/~gohlke/pythonlibs/#lxml).  Make sure you install the correct version for your system.  My installed filename was lxml‑4.2.1‑cp36‑cp36m‑win_amd64.whl (change the filename in the command below, if you use a different version)
 
 ```
-pip install <whl_filename>
+pip install lxml‑4.2.1‑cp36‑cp36m‑win_amd64.whl
 ```
 
-- Install pycairo from https://www.lfd.uci.edu/~gohlke/pythonlibs/#lxml (I installed cp36 for amd64)
+- Install [pycairo](https://www.lfd.uci.edu/~gohlke/pythonlibs/#pycairo).  Make sure you install the correct version for your system.  My installation filename was pycairo‑1.16.3‑cp36‑cp36m‑win_amd64.whl (change the filename in the command below, if you install a different version)
 
 ```
-pip install <whl_filename>
+pip install pycairo‑1.16.3‑cp36‑cp36m‑win_amd64.whl
 ```
 
 *Note you may need to reboot for the PATH changes to take effect*
