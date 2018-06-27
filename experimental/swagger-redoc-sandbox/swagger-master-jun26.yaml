@@ -81,7 +81,7 @@ info:
     name: Nutanix End User License Agreement
     url: 'https://www.nutanix.com/eula'
   version: 3.1.0
-  x-ntnx-build-version: dbg-master-053bee5070bf5a4661b1bf6cb8955df1f90cfcab
+  x-ntnx-build-version: dbg-master-33ddb4592a3e43726b7d2dd8b4b1a6d45e6d19bd
 externalDocs:
   url: 'https://developer.nutanix.com'
 schemes:
@@ -13585,13 +13585,54 @@ definitions:
     type: object
     additionalProperties:
       type: object
+  offset:
+    title: offset
+    type: integer
+    format: int32
+    default: 0
+    minimum: 0
+    description: >
+      Offset from the start of the entity list, used to page through result set.
+      Use this in concert with "lenth" to iterate through large lists of entities
+  length:
+    title: length
+    type: integer
+    format: int32
+    default: 20
+    minimum: 1
+    maximum: 500
+    description: >
+      The number of records to retrieve relative to the offset, used for paging through the result sets.
+      This default 20 per page. Can be narrowed from 20 to 1, or expanded up to 500.
+  total_matches:
+    title: total_matches
+    type: integer
+    minimum: 0
+    description: Total matches found to a given query
+  filter:
+    title: filter
+    type: string
+    description: >
+      The filter in FIQL syntax used for the results.
+      Note - this version does not currently support FIQL for public facing calls, and should be considered internal only until this documentation is updated.
   sort_order:
     title: Sort order
-    description: The sort order in which results are returned
+    description: >
+      The sort order in which results are returned, can be ASCENDING or DESCENDING.
+      To return sorted results, both 'sort_order' and 'sort_attribute' must be specified together.
+      By default, API should return results in ASCENDING order; however, if ordering is important,
+      please specify your required value on request.
     type: string
+    default: ASCENDING
     x-ntnx-enum:
       - ASCENDING
       - DESCENDING
+  sort_attribute:
+    title: Sort atribute
+    description: >
+      The attribute to perform sort on.
+      Note - this version does not currently support this attribute for public facing calls, and should be considered internal only until this documentation is updated.
+    type: string
   credentials:
     title: Credentials to login server
     description: Credentials to login server
@@ -13754,8 +13795,8 @@ definitions:
           type: string
           format: UUID
           pattern: ^[a-fA-F0-9]{8}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{12}$
-  filter:
-    title: Filter.
+  context_filter:
+    title: Context Filter
     description: >
       A filter defines the selection criteria for entities.
       It consists of two lists of filter expressions.
@@ -14526,7 +14567,7 @@ definitions:
               implies global context.
             type: array
             items:
-              $ref: '#/definitions/filter'
+              $ref: '#/definitions/context_filter'
 
   access_control_policy:
     title: Access Control Policy.
@@ -14585,7 +14626,7 @@ definitions:
                   implies global context.
                 type: array
                 items:
-                  $ref: '#/definitions/filter'
+                  $ref: '#/definitions/context_filter'
 
 
   access_control_policy_def_status:
@@ -14639,7 +14680,7 @@ definitions:
                   implies global context.
                 type: array
                 items:
-                  $ref: '#/definitions/filter'
+                  $ref: '#/definitions/context_filter'
       state:
         description: The state of the Access Control Policy entity.
         type: string
@@ -14992,7 +15033,7 @@ definitions:
                   implies global context.
                 type: array
                 items:
-                  $ref: '#/definitions/filter'
+                  $ref: '#/definitions/context_filter'
 
   project_internal_intent_response:
     type: object
@@ -27828,18 +27869,11 @@ definitions:
       All vmware meta api calls  will have this metadata block as input
     properties:
       offset:
-        type: integer
-        format: int32
-        minimum: 0
-        description: Offset from the start of the entity list
+        $ref: "#/definitions/offset"
       length:
-        type: integer
-        format: int32
-        minimum: 1
-        description: The number of records to retrieve relative to the offset
+        $ref: "#/definitions/length"
       filter:
-        type: string
-        description: The filter in FIQL syntax used for the results.
+        $ref: "#/definitions/filter"
   environment_resources:
     type: object
     title: Resources for Environment.
@@ -32416,7 +32450,7 @@ definitions:
           List of entities on which the policy is to be applied.
         type: array
         items:
-          $ref: "#/definitions/filter"
+          $ref: "#/definitions/context_filter"
       report_config:
         description: Report generation inputs for a qos policy.
         $ref: "#/definitions/qos_policy_report_config"
@@ -32445,7 +32479,7 @@ definitions:
         description: List of entities on which the policy is to be applied.
         type: array
         items:
-          $ref: "#/definitions/filter"
+          $ref: "#/definitions/context_filter"
       report_config:
         description: Report configuration output.
         type: object
@@ -32527,7 +32561,7 @@ definitions:
         description: List of entities on which the policy is to be applied.
         type: array
         items:
-          $ref: "#/definitions/filter"
+          $ref: "#/definitions/context_filter"
       parameters:
         description: The parameters based on policy rule to be applied.
         type: object
@@ -32691,23 +32725,15 @@ definitions:
         x-ntnx-enum:
         - permission
       offset:
-        type: integer
-        format: int32
-        minimum: 0
-        description: Offset from the start of the entity list
+        $ref: "#/definitions/offset"
       length:
-        type: integer
-        format: int32
-        minimum: 1
-        description: The number of records to retrieve relative to the offset
+        $ref: "#/definitions/length"
       filter:
-        type: string
-        description: The filter in FIQL syntax used for the results.
+        $ref: "#/definitions/filter"
       sort_order:
         $ref: "#/definitions/sort_order"
       sort_attribute:
-        type: string
-        description: The attribute to perform sort on
+        $ref: "#/definitions/sort_attribute"
   permission_list_metadata_output:
     type: object
     title: Metadata for permission list output
@@ -32721,22 +32747,17 @@ definitions:
         x-ntnx-enum:
         - permission
       offset:
-        type: integer
-        description: Offset from the start of the entity list
+        $ref: "#/definitions/offset"
       length:
-        type: integer
-        description: The number of records retrieved relative to the offset
+        $ref: "#/definitions/length"
       total_matches:
-        type: integer
-        description: Total matches found
+        $ref: "#/definitions/total_matches"
       filter:
-        type: string
-        description: The filter used for the results
+        $ref: "#/definitions/filter"
       sort_order:
         $ref: "#/definitions/sort_order"
       sort_attribute:
-        type: string
-        description: The attribute to perform sort on
+        $ref: "#/definitions/sort_attribute"
   permission_reference:
     title: Reference to a permission
     type: object
@@ -32864,23 +32885,15 @@ definitions:
         x-ntnx-enum:
         - role
       offset:
-        type: integer
-        format: int32
-        minimum: 0
-        description: Offset from the start of the entity list
+        $ref: "#/definitions/offset"
       length:
-        type: integer
-        format: int32
-        minimum: 1
-        description: The number of records to retrieve relative to the offset
+        $ref: "#/definitions/length"
       filter:
-        type: string
-        description: The filter in FIQL syntax used for the results.
+        $ref: "#/definitions/filter"
       sort_order:
         $ref: "#/definitions/sort_order"
       sort_attribute:
-        type: string
-        description: The attribute to perform sort on
+        $ref: "#/definitions/sort_attribute"
   role_list_metadata_output:
     type: object
     title: Metadata for role list output
@@ -32894,22 +32907,17 @@ definitions:
         x-ntnx-enum:
         - role
       offset:
-        type: integer
-        description: Offset from the start of the entity list
+        $ref: "#/definitions/offset"
       length:
-        type: integer
-        description: The number of records retrieved relative to the offset
+        $ref: "#/definitions/length"
       total_matches:
-        type: integer
-        description: Total matches found
+        $ref: "#/definitions/total_matches"
       filter:
-        type: string
-        description: The filter used for the results
+        $ref: "#/definitions/filter"
       sort_order:
         $ref: "#/definitions/sort_order"
       sort_attribute:
-        type: string
-        description: The attribute to perform sort on
+        $ref: "#/definitions/sort_attribute"
   role_reference:
     title: Reference to a role
     type: object
@@ -33037,23 +33045,15 @@ definitions:
         x-ntnx-enum:
         - project
       offset:
-        type: integer
-        format: int32
-        minimum: 0
-        description: Offset from the start of the entity list
+        $ref: "#/definitions/offset"
       length:
-        type: integer
-        format: int32
-        minimum: 1
-        description: The number of records to retrieve relative to the offset
+        $ref: "#/definitions/length"
       filter:
-        type: string
-        description: The filter in FIQL syntax used for the results.
+        $ref: "#/definitions/filter"
       sort_order:
         $ref: "#/definitions/sort_order"
       sort_attribute:
-        type: string
-        description: The attribute to perform sort on
+        $ref: "#/definitions/sort_attribute"
   project_list_metadata_output:
     type: object
     title: Metadata for project list output
@@ -33067,22 +33067,17 @@ definitions:
         x-ntnx-enum:
         - project
       offset:
-        type: integer
-        description: Offset from the start of the entity list
+        $ref: "#/definitions/offset"
       length:
-        type: integer
-        description: The number of records retrieved relative to the offset
+        $ref: "#/definitions/length"
       total_matches:
-        type: integer
-        description: Total matches found
+        $ref: "#/definitions/total_matches"
       filter:
-        type: string
-        description: The filter used for the results
+        $ref: "#/definitions/filter"
       sort_order:
         $ref: "#/definitions/sort_order"
       sort_attribute:
-        type: string
-        description: The attribute to perform sort on
+        $ref: "#/definitions/sort_attribute"
   project_reference:
     title: Reference to a project
     type: object
@@ -33210,23 +33205,15 @@ definitions:
         x-ntnx-enum:
         - ssh_user
       offset:
-        type: integer
-        format: int32
-        minimum: 0
-        description: Offset from the start of the entity list
+        $ref: "#/definitions/offset"
       length:
-        type: integer
-        format: int32
-        minimum: 1
-        description: The number of records to retrieve relative to the offset
+        $ref: "#/definitions/length"
       filter:
-        type: string
-        description: The filter in FIQL syntax used for the results.
+        $ref: "#/definitions/filter"
       sort_order:
         $ref: "#/definitions/sort_order"
       sort_attribute:
-        type: string
-        description: The attribute to perform sort on
+        $ref: "#/definitions/sort_attribute"
   ssh_user_list_metadata_output:
     type: object
     title: Metadata for ssh_user list output
@@ -33240,22 +33227,17 @@ definitions:
         x-ntnx-enum:
         - ssh_user
       offset:
-        type: integer
-        description: Offset from the start of the entity list
+        $ref: "#/definitions/offset"
       length:
-        type: integer
-        description: The number of records retrieved relative to the offset
+        $ref: "#/definitions/length"
       total_matches:
-        type: integer
-        description: Total matches found
+        $ref: "#/definitions/total_matches"
       filter:
-        type: string
-        description: The filter used for the results
+        $ref: "#/definitions/filter"
       sort_order:
         $ref: "#/definitions/sort_order"
       sort_attribute:
-        type: string
-        description: The attribute to perform sort on
+        $ref: "#/definitions/sort_attribute"
   ssh_user_reference:
     title: Reference to a ssh_user
     type: object
@@ -33383,23 +33365,15 @@ definitions:
         x-ntnx-enum:
         - user
       offset:
-        type: integer
-        format: int32
-        minimum: 0
-        description: Offset from the start of the entity list
+        $ref: "#/definitions/offset"
       length:
-        type: integer
-        format: int32
-        minimum: 1
-        description: The number of records to retrieve relative to the offset
+        $ref: "#/definitions/length"
       filter:
-        type: string
-        description: The filter in FIQL syntax used for the results.
+        $ref: "#/definitions/filter"
       sort_order:
         $ref: "#/definitions/sort_order"
       sort_attribute:
-        type: string
-        description: The attribute to perform sort on
+        $ref: "#/definitions/sort_attribute"
   user_list_metadata_output:
     type: object
     title: Metadata for user list output
@@ -33413,22 +33387,17 @@ definitions:
         x-ntnx-enum:
         - user
       offset:
-        type: integer
-        description: Offset from the start of the entity list
+        $ref: "#/definitions/offset"
       length:
-        type: integer
-        description: The number of records retrieved relative to the offset
+        $ref: "#/definitions/length"
       total_matches:
-        type: integer
-        description: Total matches found
+        $ref: "#/definitions/total_matches"
       filter:
-        type: string
-        description: The filter used for the results
+        $ref: "#/definitions/filter"
       sort_order:
         $ref: "#/definitions/sort_order"
       sort_attribute:
-        type: string
-        description: The attribute to perform sort on
+        $ref: "#/definitions/sort_attribute"
   user_reference:
     title: Reference to a user
     type: object
@@ -33556,23 +33525,15 @@ definitions:
         x-ntnx-enum:
         - user_group
       offset:
-        type: integer
-        format: int32
-        minimum: 0
-        description: Offset from the start of the entity list
+        $ref: "#/definitions/offset"
       length:
-        type: integer
-        format: int32
-        minimum: 1
-        description: The number of records to retrieve relative to the offset
+        $ref: "#/definitions/length"
       filter:
-        type: string
-        description: The filter in FIQL syntax used for the results.
+        $ref: "#/definitions/filter"
       sort_order:
         $ref: "#/definitions/sort_order"
       sort_attribute:
-        type: string
-        description: The attribute to perform sort on
+        $ref: "#/definitions/sort_attribute"
   user_group_list_metadata_output:
     type: object
     title: Metadata for user_group list output
@@ -33586,22 +33547,17 @@ definitions:
         x-ntnx-enum:
         - user_group
       offset:
-        type: integer
-        description: Offset from the start of the entity list
+        $ref: "#/definitions/offset"
       length:
-        type: integer
-        description: The number of records retrieved relative to the offset
+        $ref: "#/definitions/length"
       total_matches:
-        type: integer
-        description: Total matches found
+        $ref: "#/definitions/total_matches"
       filter:
-        type: string
-        description: The filter used for the results
+        $ref: "#/definitions/filter"
       sort_order:
         $ref: "#/definitions/sort_order"
       sort_attribute:
-        type: string
-        description: The attribute to perform sort on
+        $ref: "#/definitions/sort_attribute"
   user_group_reference:
     title: Reference to a user_group
     type: object
@@ -33729,23 +33685,15 @@ definitions:
         x-ntnx-enum:
         - access_control_policy
       offset:
-        type: integer
-        format: int32
-        minimum: 0
-        description: Offset from the start of the entity list
+        $ref: "#/definitions/offset"
       length:
-        type: integer
-        format: int32
-        minimum: 1
-        description: The number of records to retrieve relative to the offset
+        $ref: "#/definitions/length"
       filter:
-        type: string
-        description: The filter in FIQL syntax used for the results.
+        $ref: "#/definitions/filter"
       sort_order:
         $ref: "#/definitions/sort_order"
       sort_attribute:
-        type: string
-        description: The attribute to perform sort on
+        $ref: "#/definitions/sort_attribute"
   access_control_policy_list_metadata_output:
     type: object
     title: Metadata for access_control_policy list output
@@ -33759,22 +33707,17 @@ definitions:
         x-ntnx-enum:
         - access_control_policy
       offset:
-        type: integer
-        description: Offset from the start of the entity list
+        $ref: "#/definitions/offset"
       length:
-        type: integer
-        description: The number of records retrieved relative to the offset
+        $ref: "#/definitions/length"
       total_matches:
-        type: integer
-        description: Total matches found
+        $ref: "#/definitions/total_matches"
       filter:
-        type: string
-        description: The filter used for the results
+        $ref: "#/definitions/filter"
       sort_order:
         $ref: "#/definitions/sort_order"
       sort_attribute:
-        type: string
-        description: The attribute to perform sort on
+        $ref: "#/definitions/sort_attribute"
   access_control_policy_reference:
     title: Reference to a access_control_policy
     type: object
@@ -33902,23 +33845,15 @@ definitions:
         x-ntnx-enum:
         - resource_domain
       offset:
-        type: integer
-        format: int32
-        minimum: 0
-        description: Offset from the start of the entity list
+        $ref: "#/definitions/offset"
       length:
-        type: integer
-        format: int32
-        minimum: 1
-        description: The number of records to retrieve relative to the offset
+        $ref: "#/definitions/length"
       filter:
-        type: string
-        description: The filter in FIQL syntax used for the results.
+        $ref: "#/definitions/filter"
       sort_order:
         $ref: "#/definitions/sort_order"
       sort_attribute:
-        type: string
-        description: The attribute to perform sort on
+        $ref: "#/definitions/sort_attribute"
   resource_domain_list_metadata_output:
     type: object
     title: Metadata for resource_domain list output
@@ -33932,22 +33867,17 @@ definitions:
         x-ntnx-enum:
         - resource_domain
       offset:
-        type: integer
-        description: Offset from the start of the entity list
+        $ref: "#/definitions/offset"
       length:
-        type: integer
-        description: The number of records retrieved relative to the offset
+        $ref: "#/definitions/length"
       total_matches:
-        type: integer
-        description: Total matches found
+        $ref: "#/definitions/total_matches"
       filter:
-        type: string
-        description: The filter used for the results
+        $ref: "#/definitions/filter"
       sort_order:
         $ref: "#/definitions/sort_order"
       sort_attribute:
-        type: string
-        description: The attribute to perform sort on
+        $ref: "#/definitions/sort_attribute"
   resource_domain_reference:
     title: Reference to a resource_domain
     type: object
@@ -34075,23 +34005,15 @@ definitions:
         x-ntnx-enum:
         - resource_charge
       offset:
-        type: integer
-        format: int32
-        minimum: 0
-        description: Offset from the start of the entity list
+        $ref: "#/definitions/offset"
       length:
-        type: integer
-        format: int32
-        minimum: 1
-        description: The number of records to retrieve relative to the offset
+        $ref: "#/definitions/length"
       filter:
-        type: string
-        description: The filter in FIQL syntax used for the results.
+        $ref: "#/definitions/filter"
       sort_order:
         $ref: "#/definitions/sort_order"
       sort_attribute:
-        type: string
-        description: The attribute to perform sort on
+        $ref: "#/definitions/sort_attribute"
   resource_charge_list_metadata_output:
     type: object
     title: Metadata for resource_charge list output
@@ -34105,22 +34027,17 @@ definitions:
         x-ntnx-enum:
         - resource_charge
       offset:
-        type: integer
-        description: Offset from the start of the entity list
+        $ref: "#/definitions/offset"
       length:
-        type: integer
-        description: The number of records retrieved relative to the offset
+        $ref: "#/definitions/length"
       total_matches:
-        type: integer
-        description: Total matches found
+        $ref: "#/definitions/total_matches"
       filter:
-        type: string
-        description: The filter used for the results
+        $ref: "#/definitions/filter"
       sort_order:
         $ref: "#/definitions/sort_order"
       sort_attribute:
-        type: string
-        description: The attribute to perform sort on
+        $ref: "#/definitions/sort_attribute"
   resource_charge_reference:
     title: Reference to a resource_charge
     type: object
@@ -34248,23 +34165,15 @@ definitions:
         x-ntnx-enum:
         - vm
       offset:
-        type: integer
-        format: int32
-        minimum: 0
-        description: Offset from the start of the entity list
+        $ref: "#/definitions/offset"
       length:
-        type: integer
-        format: int32
-        minimum: 1
-        description: The number of records to retrieve relative to the offset
+        $ref: "#/definitions/length"
       filter:
-        type: string
-        description: The filter in FIQL syntax used for the results.
+        $ref: "#/definitions/filter"
       sort_order:
         $ref: "#/definitions/sort_order"
       sort_attribute:
-        type: string
-        description: The attribute to perform sort on
+        $ref: "#/definitions/sort_attribute"
   vm_list_metadata_output:
     type: object
     title: Metadata for vm list output
@@ -34278,22 +34187,17 @@ definitions:
         x-ntnx-enum:
         - vm
       offset:
-        type: integer
-        description: Offset from the start of the entity list
+        $ref: "#/definitions/offset"
       length:
-        type: integer
-        description: The number of records retrieved relative to the offset
+        $ref: "#/definitions/length"
       total_matches:
-        type: integer
-        description: Total matches found
+        $ref: "#/definitions/total_matches"
       filter:
-        type: string
-        description: The filter used for the results
+        $ref: "#/definitions/filter"
       sort_order:
         $ref: "#/definitions/sort_order"
       sort_attribute:
-        type: string
-        description: The attribute to perform sort on
+        $ref: "#/definitions/sort_attribute"
   vm_reference:
     title: Reference to a vm
     type: object
@@ -34421,23 +34325,15 @@ definitions:
         x-ntnx-enum:
         - vm_disk
       offset:
-        type: integer
-        format: int32
-        minimum: 0
-        description: Offset from the start of the entity list
+        $ref: "#/definitions/offset"
       length:
-        type: integer
-        format: int32
-        minimum: 1
-        description: The number of records to retrieve relative to the offset
+        $ref: "#/definitions/length"
       filter:
-        type: string
-        description: The filter in FIQL syntax used for the results.
+        $ref: "#/definitions/filter"
       sort_order:
         $ref: "#/definitions/sort_order"
       sort_attribute:
-        type: string
-        description: The attribute to perform sort on
+        $ref: "#/definitions/sort_attribute"
   vm_disk_list_metadata_output:
     type: object
     title: Metadata for vm_disk list output
@@ -34451,22 +34347,17 @@ definitions:
         x-ntnx-enum:
         - vm_disk
       offset:
-        type: integer
-        description: Offset from the start of the entity list
+        $ref: "#/definitions/offset"
       length:
-        type: integer
-        description: The number of records retrieved relative to the offset
+        $ref: "#/definitions/length"
       total_matches:
-        type: integer
-        description: Total matches found
+        $ref: "#/definitions/total_matches"
       filter:
-        type: string
-        description: The filter used for the results
+        $ref: "#/definitions/filter"
       sort_order:
         $ref: "#/definitions/sort_order"
       sort_attribute:
-        type: string
-        description: The attribute to perform sort on
+        $ref: "#/definitions/sort_attribute"
   vm_disk_reference:
     title: Reference to a vm_disk
     type: object
@@ -34594,23 +34485,15 @@ definitions:
         x-ntnx-enum:
         - vm_nic
       offset:
-        type: integer
-        format: int32
-        minimum: 0
-        description: Offset from the start of the entity list
+        $ref: "#/definitions/offset"
       length:
-        type: integer
-        format: int32
-        minimum: 1
-        description: The number of records to retrieve relative to the offset
+        $ref: "#/definitions/length"
       filter:
-        type: string
-        description: The filter in FIQL syntax used for the results.
+        $ref: "#/definitions/filter"
       sort_order:
         $ref: "#/definitions/sort_order"
       sort_attribute:
-        type: string
-        description: The attribute to perform sort on
+        $ref: "#/definitions/sort_attribute"
   vm_nic_list_metadata_output:
     type: object
     title: Metadata for vm_nic list output
@@ -34624,22 +34507,17 @@ definitions:
         x-ntnx-enum:
         - vm_nic
       offset:
-        type: integer
-        description: Offset from the start of the entity list
+        $ref: "#/definitions/offset"
       length:
-        type: integer
-        description: The number of records retrieved relative to the offset
+        $ref: "#/definitions/length"
       total_matches:
-        type: integer
-        description: Total matches found
+        $ref: "#/definitions/total_matches"
       filter:
-        type: string
-        description: The filter used for the results
+        $ref: "#/definitions/filter"
       sort_order:
         $ref: "#/definitions/sort_order"
       sort_attribute:
-        type: string
-        description: The attribute to perform sort on
+        $ref: "#/definitions/sort_attribute"
   vm_nic_reference:
     title: Reference to a vm_nic
     type: object
@@ -34767,23 +34645,15 @@ definitions:
         x-ntnx-enum:
         - vm_gpu
       offset:
-        type: integer
-        format: int32
-        minimum: 0
-        description: Offset from the start of the entity list
+        $ref: "#/definitions/offset"
       length:
-        type: integer
-        format: int32
-        minimum: 1
-        description: The number of records to retrieve relative to the offset
+        $ref: "#/definitions/length"
       filter:
-        type: string
-        description: The filter in FIQL syntax used for the results.
+        $ref: "#/definitions/filter"
       sort_order:
         $ref: "#/definitions/sort_order"
       sort_attribute:
-        type: string
-        description: The attribute to perform sort on
+        $ref: "#/definitions/sort_attribute"
   vm_gpu_list_metadata_output:
     type: object
     title: Metadata for vm_gpu list output
@@ -34797,22 +34667,17 @@ definitions:
         x-ntnx-enum:
         - vm_gpu
       offset:
-        type: integer
-        description: Offset from the start of the entity list
+        $ref: "#/definitions/offset"
       length:
-        type: integer
-        description: The number of records retrieved relative to the offset
+        $ref: "#/definitions/length"
       total_matches:
-        type: integer
-        description: Total matches found
+        $ref: "#/definitions/total_matches"
       filter:
-        type: string
-        description: The filter used for the results
+        $ref: "#/definitions/filter"
       sort_order:
         $ref: "#/definitions/sort_order"
       sort_attribute:
-        type: string
-        description: The attribute to perform sort on
+        $ref: "#/definitions/sort_attribute"
   vm_gpu_reference:
     title: Reference to a vm_gpu
     type: object
@@ -34940,23 +34805,15 @@ definitions:
         x-ntnx-enum:
         - volume_group
       offset:
-        type: integer
-        format: int32
-        minimum: 0
-        description: Offset from the start of the entity list
+        $ref: "#/definitions/offset"
       length:
-        type: integer
-        format: int32
-        minimum: 1
-        description: The number of records to retrieve relative to the offset
+        $ref: "#/definitions/length"
       filter:
-        type: string
-        description: The filter in FIQL syntax used for the results.
+        $ref: "#/definitions/filter"
       sort_order:
         $ref: "#/definitions/sort_order"
       sort_attribute:
-        type: string
-        description: The attribute to perform sort on
+        $ref: "#/definitions/sort_attribute"
   volume_group_list_metadata_output:
     type: object
     title: Metadata for volume_group list output
@@ -34970,22 +34827,17 @@ definitions:
         x-ntnx-enum:
         - volume_group
       offset:
-        type: integer
-        description: Offset from the start of the entity list
+        $ref: "#/definitions/offset"
       length:
-        type: integer
-        description: The number of records retrieved relative to the offset
+        $ref: "#/definitions/length"
       total_matches:
-        type: integer
-        description: Total matches found
+        $ref: "#/definitions/total_matches"
       filter:
-        type: string
-        description: The filter used for the results
+        $ref: "#/definitions/filter"
       sort_order:
         $ref: "#/definitions/sort_order"
       sort_attribute:
-        type: string
-        description: The attribute to perform sort on
+        $ref: "#/definitions/sort_attribute"
   volume_group_reference:
     title: Reference to a volume_group
     type: object
@@ -35113,23 +34965,15 @@ definitions:
         x-ntnx-enum:
         - customization_spec
       offset:
-        type: integer
-        format: int32
-        minimum: 0
-        description: Offset from the start of the entity list
+        $ref: "#/definitions/offset"
       length:
-        type: integer
-        format: int32
-        minimum: 1
-        description: The number of records to retrieve relative to the offset
+        $ref: "#/definitions/length"
       filter:
-        type: string
-        description: The filter in FIQL syntax used for the results.
+        $ref: "#/definitions/filter"
       sort_order:
         $ref: "#/definitions/sort_order"
       sort_attribute:
-        type: string
-        description: The attribute to perform sort on
+        $ref: "#/definitions/sort_attribute"
   customization_spec_list_metadata_output:
     type: object
     title: Metadata for customization_spec list output
@@ -35143,22 +34987,17 @@ definitions:
         x-ntnx-enum:
         - customization_spec
       offset:
-        type: integer
-        description: Offset from the start of the entity list
+        $ref: "#/definitions/offset"
       length:
-        type: integer
-        description: The number of records retrieved relative to the offset
+        $ref: "#/definitions/length"
       total_matches:
-        type: integer
-        description: Total matches found
+        $ref: "#/definitions/total_matches"
       filter:
-        type: string
-        description: The filter used for the results
+        $ref: "#/definitions/filter"
       sort_order:
         $ref: "#/definitions/sort_order"
       sort_attribute:
-        type: string
-        description: The attribute to perform sort on
+        $ref: "#/definitions/sort_attribute"
   customization_spec_reference:
     title: Reference to a customization_spec
     type: object
@@ -35286,23 +35125,15 @@ definitions:
         x-ntnx-enum:
         - image
       offset:
-        type: integer
-        format: int32
-        minimum: 0
-        description: Offset from the start of the entity list
+        $ref: "#/definitions/offset"
       length:
-        type: integer
-        format: int32
-        minimum: 1
-        description: The number of records to retrieve relative to the offset
+        $ref: "#/definitions/length"
       filter:
-        type: string
-        description: The filter in FIQL syntax used for the results.
+        $ref: "#/definitions/filter"
       sort_order:
         $ref: "#/definitions/sort_order"
       sort_attribute:
-        type: string
-        description: The attribute to perform sort on
+        $ref: "#/definitions/sort_attribute"
   image_list_metadata_output:
     type: object
     title: Metadata for image list output
@@ -35316,22 +35147,17 @@ definitions:
         x-ntnx-enum:
         - image
       offset:
-        type: integer
-        description: Offset from the start of the entity list
+        $ref: "#/definitions/offset"
       length:
-        type: integer
-        description: The number of records retrieved relative to the offset
+        $ref: "#/definitions/length"
       total_matches:
-        type: integer
-        description: Total matches found
+        $ref: "#/definitions/total_matches"
       filter:
-        type: string
-        description: The filter used for the results
+        $ref: "#/definitions/filter"
       sort_order:
         $ref: "#/definitions/sort_order"
       sort_attribute:
-        type: string
-        description: The attribute to perform sort on
+        $ref: "#/definitions/sort_attribute"
   image_reference:
     title: Reference to a image
     type: object
@@ -35459,23 +35285,15 @@ definitions:
         x-ntnx-enum:
         - subnet
       offset:
-        type: integer
-        format: int32
-        minimum: 0
-        description: Offset from the start of the entity list
+        $ref: "#/definitions/offset"
       length:
-        type: integer
-        format: int32
-        minimum: 1
-        description: The number of records to retrieve relative to the offset
+        $ref: "#/definitions/length"
       filter:
-        type: string
-        description: The filter in FIQL syntax used for the results.
+        $ref: "#/definitions/filter"
       sort_order:
         $ref: "#/definitions/sort_order"
       sort_attribute:
-        type: string
-        description: The attribute to perform sort on
+        $ref: "#/definitions/sort_attribute"
   subnet_list_metadata_output:
     type: object
     title: Metadata for subnet list output
@@ -35489,22 +35307,17 @@ definitions:
         x-ntnx-enum:
         - subnet
       offset:
-        type: integer
-        description: Offset from the start of the entity list
+        $ref: "#/definitions/offset"
       length:
-        type: integer
-        description: The number of records retrieved relative to the offset
+        $ref: "#/definitions/length"
       total_matches:
-        type: integer
-        description: Total matches found
+        $ref: "#/definitions/total_matches"
       filter:
-        type: string
-        description: The filter used for the results
+        $ref: "#/definitions/filter"
       sort_order:
         $ref: "#/definitions/sort_order"
       sort_attribute:
-        type: string
-        description: The attribute to perform sort on
+        $ref: "#/definitions/sort_attribute"
   subnet_reference:
     title: Reference to a subnet
     type: object
@@ -35632,23 +35445,15 @@ definitions:
         x-ntnx-enum:
         - vpn_connection
       offset:
-        type: integer
-        format: int32
-        minimum: 0
-        description: Offset from the start of the entity list
+        $ref: "#/definitions/offset"
       length:
-        type: integer
-        format: int32
-        minimum: 1
-        description: The number of records to retrieve relative to the offset
+        $ref: "#/definitions/length"
       filter:
-        type: string
-        description: The filter in FIQL syntax used for the results.
+        $ref: "#/definitions/filter"
       sort_order:
         $ref: "#/definitions/sort_order"
       sort_attribute:
-        type: string
-        description: The attribute to perform sort on
+        $ref: "#/definitions/sort_attribute"
   vpn_connection_list_metadata_output:
     type: object
     title: Metadata for vpn_connection list output
@@ -35662,22 +35467,17 @@ definitions:
         x-ntnx-enum:
         - vpn_connection
       offset:
-        type: integer
-        description: Offset from the start of the entity list
+        $ref: "#/definitions/offset"
       length:
-        type: integer
-        description: The number of records retrieved relative to the offset
+        $ref: "#/definitions/length"
       total_matches:
-        type: integer
-        description: Total matches found
+        $ref: "#/definitions/total_matches"
       filter:
-        type: string
-        description: The filter used for the results
+        $ref: "#/definitions/filter"
       sort_order:
         $ref: "#/definitions/sort_order"
       sort_attribute:
-        type: string
-        description: The attribute to perform sort on
+        $ref: "#/definitions/sort_attribute"
   vpn_connection_reference:
     title: Reference to a vpn_connection
     type: object
@@ -35805,23 +35605,15 @@ definitions:
         x-ntnx-enum:
         - vpn_gateway
       offset:
-        type: integer
-        format: int32
-        minimum: 0
-        description: Offset from the start of the entity list
+        $ref: "#/definitions/offset"
       length:
-        type: integer
-        format: int32
-        minimum: 1
-        description: The number of records to retrieve relative to the offset
+        $ref: "#/definitions/length"
       filter:
-        type: string
-        description: The filter in FIQL syntax used for the results.
+        $ref: "#/definitions/filter"
       sort_order:
         $ref: "#/definitions/sort_order"
       sort_attribute:
-        type: string
-        description: The attribute to perform sort on
+        $ref: "#/definitions/sort_attribute"
   vpn_gateway_list_metadata_output:
     type: object
     title: Metadata for vpn_gateway list output
@@ -35835,22 +35627,17 @@ definitions:
         x-ntnx-enum:
         - vpn_gateway
       offset:
-        type: integer
-        description: Offset from the start of the entity list
+        $ref: "#/definitions/offset"
       length:
-        type: integer
-        description: The number of records retrieved relative to the offset
+        $ref: "#/definitions/length"
       total_matches:
-        type: integer
-        description: Total matches found
+        $ref: "#/definitions/total_matches"
       filter:
-        type: string
-        description: The filter used for the results
+        $ref: "#/definitions/filter"
       sort_order:
         $ref: "#/definitions/sort_order"
       sort_attribute:
-        type: string
-        description: The attribute to perform sort on
+        $ref: "#/definitions/sort_attribute"
   vpn_gateway_reference:
     title: Reference to a vpn_gateway
     type: object
@@ -35978,23 +35765,15 @@ definitions:
         x-ntnx-enum:
         - routing_policy
       offset:
-        type: integer
-        format: int32
-        minimum: 0
-        description: Offset from the start of the entity list
+        $ref: "#/definitions/offset"
       length:
-        type: integer
-        format: int32
-        minimum: 1
-        description: The number of records to retrieve relative to the offset
+        $ref: "#/definitions/length"
       filter:
-        type: string
-        description: The filter in FIQL syntax used for the results.
+        $ref: "#/definitions/filter"
       sort_order:
         $ref: "#/definitions/sort_order"
       sort_attribute:
-        type: string
-        description: The attribute to perform sort on
+        $ref: "#/definitions/sort_attribute"
   routing_policy_list_metadata_output:
     type: object
     title: Metadata for routing_policy list output
@@ -36008,22 +35787,17 @@ definitions:
         x-ntnx-enum:
         - routing_policy
       offset:
-        type: integer
-        description: Offset from the start of the entity list
+        $ref: "#/definitions/offset"
       length:
-        type: integer
-        description: The number of records retrieved relative to the offset
+        $ref: "#/definitions/length"
       total_matches:
-        type: integer
-        description: Total matches found
+        $ref: "#/definitions/total_matches"
       filter:
-        type: string
-        description: The filter used for the results
+        $ref: "#/definitions/filter"
       sort_order:
         $ref: "#/definitions/sort_order"
       sort_attribute:
-        type: string
-        description: The attribute to perform sort on
+        $ref: "#/definitions/sort_attribute"
   routing_policy_reference:
     title: Reference to a routing_policy
     type: object
@@ -36151,23 +35925,15 @@ definitions:
         x-ntnx-enum:
         - batch
       offset:
-        type: integer
-        format: int32
-        minimum: 0
-        description: Offset from the start of the entity list
+        $ref: "#/definitions/offset"
       length:
-        type: integer
-        format: int32
-        minimum: 1
-        description: The number of records to retrieve relative to the offset
+        $ref: "#/definitions/length"
       filter:
-        type: string
-        description: The filter in FIQL syntax used for the results.
+        $ref: "#/definitions/filter"
       sort_order:
         $ref: "#/definitions/sort_order"
       sort_attribute:
-        type: string
-        description: The attribute to perform sort on
+        $ref: "#/definitions/sort_attribute"
   batch_list_metadata_output:
     type: object
     title: Metadata for batch list output
@@ -36181,22 +35947,17 @@ definitions:
         x-ntnx-enum:
         - batch
       offset:
-        type: integer
-        description: Offset from the start of the entity list
+        $ref: "#/definitions/offset"
       length:
-        type: integer
-        description: The number of records retrieved relative to the offset
+        $ref: "#/definitions/length"
       total_matches:
-        type: integer
-        description: Total matches found
+        $ref: "#/definitions/total_matches"
       filter:
-        type: string
-        description: The filter used for the results
+        $ref: "#/definitions/filter"
       sort_order:
         $ref: "#/definitions/sort_order"
       sort_attribute:
-        type: string
-        description: The attribute to perform sort on
+        $ref: "#/definitions/sort_attribute"
   batch_reference:
     title: Reference to a batch
     type: object
@@ -36324,23 +36085,15 @@ definitions:
         x-ntnx-enum:
         - cluster
       offset:
-        type: integer
-        format: int32
-        minimum: 0
-        description: Offset from the start of the entity list
+        $ref: "#/definitions/offset"
       length:
-        type: integer
-        format: int32
-        minimum: 1
-        description: The number of records to retrieve relative to the offset
+        $ref: "#/definitions/length"
       filter:
-        type: string
-        description: The filter in FIQL syntax used for the results.
+        $ref: "#/definitions/filter"
       sort_order:
         $ref: "#/definitions/sort_order"
       sort_attribute:
-        type: string
-        description: The attribute to perform sort on
+        $ref: "#/definitions/sort_attribute"
   cluster_list_metadata_output:
     type: object
     title: Metadata for cluster list output
@@ -36354,22 +36107,17 @@ definitions:
         x-ntnx-enum:
         - cluster
       offset:
-        type: integer
-        description: Offset from the start of the entity list
+        $ref: "#/definitions/offset"
       length:
-        type: integer
-        description: The number of records retrieved relative to the offset
+        $ref: "#/definitions/length"
       total_matches:
-        type: integer
-        description: Total matches found
+        $ref: "#/definitions/total_matches"
       filter:
-        type: string
-        description: The filter used for the results
+        $ref: "#/definitions/filter"
       sort_order:
         $ref: "#/definitions/sort_order"
       sort_attribute:
-        type: string
-        description: The attribute to perform sort on
+        $ref: "#/definitions/sort_attribute"
   cluster_reference:
     title: Reference to a cluster
     type: object
@@ -36497,23 +36245,15 @@ definitions:
         x-ntnx-enum:
         - directory_service
       offset:
-        type: integer
-        format: int32
-        minimum: 0
-        description: Offset from the start of the entity list
+        $ref: "#/definitions/offset"
       length:
-        type: integer
-        format: int32
-        minimum: 1
-        description: The number of records to retrieve relative to the offset
+        $ref: "#/definitions/length"
       filter:
-        type: string
-        description: The filter in FIQL syntax used for the results.
+        $ref: "#/definitions/filter"
       sort_order:
         $ref: "#/definitions/sort_order"
       sort_attribute:
-        type: string
-        description: The attribute to perform sort on
+        $ref: "#/definitions/sort_attribute"
   directory_service_list_metadata_output:
     type: object
     title: Metadata for directory_service list output
@@ -36527,22 +36267,17 @@ definitions:
         x-ntnx-enum:
         - directory_service
       offset:
-        type: integer
-        description: Offset from the start of the entity list
+        $ref: "#/definitions/offset"
       length:
-        type: integer
-        description: The number of records retrieved relative to the offset
+        $ref: "#/definitions/length"
       total_matches:
-        type: integer
-        description: Total matches found
+        $ref: "#/definitions/total_matches"
       filter:
-        type: string
-        description: The filter used for the results
+        $ref: "#/definitions/filter"
       sort_order:
         $ref: "#/definitions/sort_order"
       sort_attribute:
-        type: string
-        description: The attribute to perform sort on
+        $ref: "#/definitions/sort_attribute"
   directory_service_reference:
     title: Reference to a directory_service
     type: object
@@ -36670,23 +36405,15 @@ definitions:
         x-ntnx-enum:
         - identity_provider
       offset:
-        type: integer
-        format: int32
-        minimum: 0
-        description: Offset from the start of the entity list
+        $ref: "#/definitions/offset"
       length:
-        type: integer
-        format: int32
-        minimum: 1
-        description: The number of records to retrieve relative to the offset
+        $ref: "#/definitions/length"
       filter:
-        type: string
-        description: The filter in FIQL syntax used for the results.
+        $ref: "#/definitions/filter"
       sort_order:
         $ref: "#/definitions/sort_order"
       sort_attribute:
-        type: string
-        description: The attribute to perform sort on
+        $ref: "#/definitions/sort_attribute"
   identity_provider_list_metadata_output:
     type: object
     title: Metadata for identity_provider list output
@@ -36700,22 +36427,17 @@ definitions:
         x-ntnx-enum:
         - identity_provider
       offset:
-        type: integer
-        description: Offset from the start of the entity list
+        $ref: "#/definitions/offset"
       length:
-        type: integer
-        description: The number of records retrieved relative to the offset
+        $ref: "#/definitions/length"
       total_matches:
-        type: integer
-        description: Total matches found
+        $ref: "#/definitions/total_matches"
       filter:
-        type: string
-        description: The filter used for the results
+        $ref: "#/definitions/filter"
       sort_order:
         $ref: "#/definitions/sort_order"
       sort_attribute:
-        type: string
-        description: The attribute to perform sort on
+        $ref: "#/definitions/sort_attribute"
   identity_provider_reference:
     title: Reference to a identity_provider
     type: object
@@ -36843,23 +36565,15 @@ definitions:
         x-ntnx-enum:
         - container
       offset:
-        type: integer
-        format: int32
-        minimum: 0
-        description: Offset from the start of the entity list
+        $ref: "#/definitions/offset"
       length:
-        type: integer
-        format: int32
-        minimum: 1
-        description: The number of records to retrieve relative to the offset
+        $ref: "#/definitions/length"
       filter:
-        type: string
-        description: The filter in FIQL syntax used for the results.
+        $ref: "#/definitions/filter"
       sort_order:
         $ref: "#/definitions/sort_order"
       sort_attribute:
-        type: string
-        description: The attribute to perform sort on
+        $ref: "#/definitions/sort_attribute"
   container_list_metadata_output:
     type: object
     title: Metadata for container list output
@@ -36873,22 +36587,17 @@ definitions:
         x-ntnx-enum:
         - container
       offset:
-        type: integer
-        description: Offset from the start of the entity list
+        $ref: "#/definitions/offset"
       length:
-        type: integer
-        description: The number of records retrieved relative to the offset
+        $ref: "#/definitions/length"
       total_matches:
-        type: integer
-        description: Total matches found
+        $ref: "#/definitions/total_matches"
       filter:
-        type: string
-        description: The filter used for the results
+        $ref: "#/definitions/filter"
       sort_order:
         $ref: "#/definitions/sort_order"
       sort_attribute:
-        type: string
-        description: The attribute to perform sort on
+        $ref: "#/definitions/sort_attribute"
   container_reference:
     title: Reference to a container
     type: object
@@ -37016,23 +36725,15 @@ definitions:
         x-ntnx-enum:
         - oauth
       offset:
-        type: integer
-        format: int32
-        minimum: 0
-        description: Offset from the start of the entity list
+        $ref: "#/definitions/offset"
       length:
-        type: integer
-        format: int32
-        minimum: 1
-        description: The number of records to retrieve relative to the offset
+        $ref: "#/definitions/length"
       filter:
-        type: string
-        description: The filter in FIQL syntax used for the results.
+        $ref: "#/definitions/filter"
       sort_order:
         $ref: "#/definitions/sort_order"
       sort_attribute:
-        type: string
-        description: The attribute to perform sort on
+        $ref: "#/definitions/sort_attribute"
   oauth_list_metadata_output:
     type: object
     title: Metadata for oauth list output
@@ -37046,22 +36747,17 @@ definitions:
         x-ntnx-enum:
         - oauth
       offset:
-        type: integer
-        description: Offset from the start of the entity list
+        $ref: "#/definitions/offset"
       length:
-        type: integer
-        description: The number of records retrieved relative to the offset
+        $ref: "#/definitions/length"
       total_matches:
-        type: integer
-        description: Total matches found
+        $ref: "#/definitions/total_matches"
       filter:
-        type: string
-        description: The filter used for the results
+        $ref: "#/definitions/filter"
       sort_order:
         $ref: "#/definitions/sort_order"
       sort_attribute:
-        type: string
-        description: The attribute to perform sort on
+        $ref: "#/definitions/sort_attribute"
   oauth_reference:
     title: Reference to a oauth
     type: object
@@ -37189,23 +36885,15 @@ definitions:
         x-ntnx-enum:
         - oauth_client
       offset:
-        type: integer
-        format: int32
-        minimum: 0
-        description: Offset from the start of the entity list
+        $ref: "#/definitions/offset"
       length:
-        type: integer
-        format: int32
-        minimum: 1
-        description: The number of records to retrieve relative to the offset
+        $ref: "#/definitions/length"
       filter:
-        type: string
-        description: The filter in FIQL syntax used for the results.
+        $ref: "#/definitions/filter"
       sort_order:
         $ref: "#/definitions/sort_order"
       sort_attribute:
-        type: string
-        description: The attribute to perform sort on
+        $ref: "#/definitions/sort_attribute"
   oauth_client_list_metadata_output:
     type: object
     title: Metadata for oauth_client list output
@@ -37219,22 +36907,17 @@ definitions:
         x-ntnx-enum:
         - oauth_client
       offset:
-        type: integer
-        description: Offset from the start of the entity list
+        $ref: "#/definitions/offset"
       length:
-        type: integer
-        description: The number of records retrieved relative to the offset
+        $ref: "#/definitions/length"
       total_matches:
-        type: integer
-        description: Total matches found
+        $ref: "#/definitions/total_matches"
       filter:
-        type: string
-        description: The filter used for the results
+        $ref: "#/definitions/filter"
       sort_order:
         $ref: "#/definitions/sort_order"
       sort_attribute:
-        type: string
-        description: The attribute to perform sort on
+        $ref: "#/definitions/sort_attribute"
   oauth_client_reference:
     title: Reference to a oauth_client
     type: object
@@ -37362,23 +37045,15 @@ definitions:
         x-ntnx-enum:
         - cloud_credentials
       offset:
-        type: integer
-        format: int32
-        minimum: 0
-        description: Offset from the start of the entity list
+        $ref: "#/definitions/offset"
       length:
-        type: integer
-        format: int32
-        minimum: 1
-        description: The number of records to retrieve relative to the offset
+        $ref: "#/definitions/length"
       filter:
-        type: string
-        description: The filter in FIQL syntax used for the results.
+        $ref: "#/definitions/filter"
       sort_order:
         $ref: "#/definitions/sort_order"
       sort_attribute:
-        type: string
-        description: The attribute to perform sort on
+        $ref: "#/definitions/sort_attribute"
   cloud_credentials_list_metadata_output:
     type: object
     title: Metadata for cloud_credentials list output
@@ -37392,22 +37067,17 @@ definitions:
         x-ntnx-enum:
         - cloud_credentials
       offset:
-        type: integer
-        description: Offset from the start of the entity list
+        $ref: "#/definitions/offset"
       length:
-        type: integer
-        description: The number of records retrieved relative to the offset
+        $ref: "#/definitions/length"
       total_matches:
-        type: integer
-        description: Total matches found
+        $ref: "#/definitions/total_matches"
       filter:
-        type: string
-        description: The filter used for the results
+        $ref: "#/definitions/filter"
       sort_order:
         $ref: "#/definitions/sort_order"
       sort_attribute:
-        type: string
-        description: The attribute to perform sort on
+        $ref: "#/definitions/sort_attribute"
   cloud_credentials_reference:
     title: Reference to a cloud_credentials
     type: object
@@ -37535,23 +37205,15 @@ definitions:
         x-ntnx-enum:
         - changed_regions
       offset:
-        type: integer
-        format: int32
-        minimum: 0
-        description: Offset from the start of the entity list
+        $ref: "#/definitions/offset"
       length:
-        type: integer
-        format: int32
-        minimum: 1
-        description: The number of records to retrieve relative to the offset
+        $ref: "#/definitions/length"
       filter:
-        type: string
-        description: The filter in FIQL syntax used for the results.
+        $ref: "#/definitions/filter"
       sort_order:
         $ref: "#/definitions/sort_order"
       sort_attribute:
-        type: string
-        description: The attribute to perform sort on
+        $ref: "#/definitions/sort_attribute"
   changed_regions_list_metadata_output:
     type: object
     title: Metadata for changed_regions list output
@@ -37565,22 +37227,17 @@ definitions:
         x-ntnx-enum:
         - changed_regions
       offset:
-        type: integer
-        description: Offset from the start of the entity list
+        $ref: "#/definitions/offset"
       length:
-        type: integer
-        description: The number of records retrieved relative to the offset
+        $ref: "#/definitions/length"
       total_matches:
-        type: integer
-        description: Total matches found
+        $ref: "#/definitions/total_matches"
       filter:
-        type: string
-        description: The filter used for the results
+        $ref: "#/definitions/filter"
       sort_order:
         $ref: "#/definitions/sort_order"
       sort_attribute:
-        type: string
-        description: The attribute to perform sort on
+        $ref: "#/definitions/sort_attribute"
   changed_regions_reference:
     title: Reference to a changed_regions
     type: object
@@ -37708,23 +37365,15 @@ definitions:
         x-ntnx-enum:
         - category
       offset:
-        type: integer
-        format: int32
-        minimum: 0
-        description: Offset from the start of the entity list
+        $ref: "#/definitions/offset"
       length:
-        type: integer
-        format: int32
-        minimum: 1
-        description: The number of records to retrieve relative to the offset
+        $ref: "#/definitions/length"
       filter:
-        type: string
-        description: The filter in FIQL syntax used for the results.
+        $ref: "#/definitions/filter"
       sort_order:
         $ref: "#/definitions/sort_order"
       sort_attribute:
-        type: string
-        description: The attribute to perform sort on
+        $ref: "#/definitions/sort_attribute"
   category_list_metadata_output:
     type: object
     title: Metadata for category list output
@@ -37738,22 +37387,17 @@ definitions:
         x-ntnx-enum:
         - category
       offset:
-        type: integer
-        description: Offset from the start of the entity list
+        $ref: "#/definitions/offset"
       length:
-        type: integer
-        description: The number of records retrieved relative to the offset
+        $ref: "#/definitions/length"
       total_matches:
-        type: integer
-        description: Total matches found
+        $ref: "#/definitions/total_matches"
       filter:
-        type: string
-        description: The filter used for the results
+        $ref: "#/definitions/filter"
       sort_order:
         $ref: "#/definitions/sort_order"
       sort_attribute:
-        type: string
-        description: The attribute to perform sort on
+        $ref: "#/definitions/sort_attribute"
   category_reference:
     title: Reference to a category
     type: object
@@ -37881,23 +37525,15 @@ definitions:
         x-ntnx-enum:
         - idempotence_identifiers
       offset:
-        type: integer
-        format: int32
-        minimum: 0
-        description: Offset from the start of the entity list
+        $ref: "#/definitions/offset"
       length:
-        type: integer
-        format: int32
-        minimum: 1
-        description: The number of records to retrieve relative to the offset
+        $ref: "#/definitions/length"
       filter:
-        type: string
-        description: The filter in FIQL syntax used for the results.
+        $ref: "#/definitions/filter"
       sort_order:
         $ref: "#/definitions/sort_order"
       sort_attribute:
-        type: string
-        description: The attribute to perform sort on
+        $ref: "#/definitions/sort_attribute"
   idempotence_identifiers_list_metadata_output:
     type: object
     title: Metadata for idempotence_identifiers list output
@@ -37911,22 +37547,17 @@ definitions:
         x-ntnx-enum:
         - idempotence_identifiers
       offset:
-        type: integer
-        description: Offset from the start of the entity list
+        $ref: "#/definitions/offset"
       length:
-        type: integer
-        description: The number of records retrieved relative to the offset
+        $ref: "#/definitions/length"
       total_matches:
-        type: integer
-        description: Total matches found
+        $ref: "#/definitions/total_matches"
       filter:
-        type: string
-        description: The filter used for the results
+        $ref: "#/definitions/filter"
       sort_order:
         $ref: "#/definitions/sort_order"
       sort_attribute:
-        type: string
-        description: The attribute to perform sort on
+        $ref: "#/definitions/sort_attribute"
   idempotence_identifiers_reference:
     title: Reference to a idempotence_identifiers
     type: object
@@ -38054,23 +37685,15 @@ definitions:
         x-ntnx-enum:
         - recovery_plan
       offset:
-        type: integer
-        format: int32
-        minimum: 0
-        description: Offset from the start of the entity list
+        $ref: "#/definitions/offset"
       length:
-        type: integer
-        format: int32
-        minimum: 1
-        description: The number of records to retrieve relative to the offset
+        $ref: "#/definitions/length"
       filter:
-        type: string
-        description: The filter in FIQL syntax used for the results.
+        $ref: "#/definitions/filter"
       sort_order:
         $ref: "#/definitions/sort_order"
       sort_attribute:
-        type: string
-        description: The attribute to perform sort on
+        $ref: "#/definitions/sort_attribute"
   recovery_plan_list_metadata_output:
     type: object
     title: Metadata for recovery_plan list output
@@ -38084,22 +37707,17 @@ definitions:
         x-ntnx-enum:
         - recovery_plan
       offset:
-        type: integer
-        description: Offset from the start of the entity list
+        $ref: "#/definitions/offset"
       length:
-        type: integer
-        description: The number of records retrieved relative to the offset
+        $ref: "#/definitions/length"
       total_matches:
-        type: integer
-        description: Total matches found
+        $ref: "#/definitions/total_matches"
       filter:
-        type: string
-        description: The filter used for the results
+        $ref: "#/definitions/filter"
       sort_order:
         $ref: "#/definitions/sort_order"
       sort_attribute:
-        type: string
-        description: The attribute to perform sort on
+        $ref: "#/definitions/sort_attribute"
   recovery_plan_reference:
     title: Reference to a recovery_plan
     type: object
@@ -38227,23 +37845,15 @@ definitions:
         x-ntnx-enum:
         - recovery_plan_job
       offset:
-        type: integer
-        format: int32
-        minimum: 0
-        description: Offset from the start of the entity list
+        $ref: "#/definitions/offset"
       length:
-        type: integer
-        format: int32
-        minimum: 1
-        description: The number of records to retrieve relative to the offset
+        $ref: "#/definitions/length"
       filter:
-        type: string
-        description: The filter in FIQL syntax used for the results.
+        $ref: "#/definitions/filter"
       sort_order:
         $ref: "#/definitions/sort_order"
       sort_attribute:
-        type: string
-        description: The attribute to perform sort on
+        $ref: "#/definitions/sort_attribute"
   recovery_plan_job_list_metadata_output:
     type: object
     title: Metadata for recovery_plan_job list output
@@ -38257,22 +37867,17 @@ definitions:
         x-ntnx-enum:
         - recovery_plan_job
       offset:
-        type: integer
-        description: Offset from the start of the entity list
+        $ref: "#/definitions/offset"
       length:
-        type: integer
-        description: The number of records retrieved relative to the offset
+        $ref: "#/definitions/length"
       total_matches:
-        type: integer
-        description: Total matches found
+        $ref: "#/definitions/total_matches"
       filter:
-        type: string
-        description: The filter used for the results
+        $ref: "#/definitions/filter"
       sort_order:
         $ref: "#/definitions/sort_order"
       sort_attribute:
-        type: string
-        description: The attribute to perform sort on
+        $ref: "#/definitions/sort_attribute"
   recovery_plan_job_reference:
     title: Reference to a recovery_plan_job
     type: object
@@ -38400,23 +38005,15 @@ definitions:
         x-ntnx-enum:
         - docker_registry
       offset:
-        type: integer
-        format: int32
-        minimum: 0
-        description: Offset from the start of the entity list
+        $ref: "#/definitions/offset"
       length:
-        type: integer
-        format: int32
-        minimum: 1
-        description: The number of records to retrieve relative to the offset
+        $ref: "#/definitions/length"
       filter:
-        type: string
-        description: The filter in FIQL syntax used for the results.
+        $ref: "#/definitions/filter"
       sort_order:
         $ref: "#/definitions/sort_order"
       sort_attribute:
-        type: string
-        description: The attribute to perform sort on
+        $ref: "#/definitions/sort_attribute"
   docker_registry_list_metadata_output:
     type: object
     title: Metadata for docker_registry list output
@@ -38430,22 +38027,17 @@ definitions:
         x-ntnx-enum:
         - docker_registry
       offset:
-        type: integer
-        description: Offset from the start of the entity list
+        $ref: "#/definitions/offset"
       length:
-        type: integer
-        description: The number of records retrieved relative to the offset
+        $ref: "#/definitions/length"
       total_matches:
-        type: integer
-        description: Total matches found
+        $ref: "#/definitions/total_matches"
       filter:
-        type: string
-        description: The filter used for the results
+        $ref: "#/definitions/filter"
       sort_order:
         $ref: "#/definitions/sort_order"
       sort_attribute:
-        type: string
-        description: The attribute to perform sort on
+        $ref: "#/definitions/sort_attribute"
   docker_registry_reference:
     title: Reference to a docker_registry
     type: object
@@ -38573,23 +38165,15 @@ definitions:
         x-ntnx-enum:
         - virtual_network
       offset:
-        type: integer
-        format: int32
-        minimum: 0
-        description: Offset from the start of the entity list
+        $ref: "#/definitions/offset"
       length:
-        type: integer
-        format: int32
-        minimum: 1
-        description: The number of records to retrieve relative to the offset
+        $ref: "#/definitions/length"
       filter:
-        type: string
-        description: The filter in FIQL syntax used for the results.
+        $ref: "#/definitions/filter"
       sort_order:
         $ref: "#/definitions/sort_order"
       sort_attribute:
-        type: string
-        description: The attribute to perform sort on
+        $ref: "#/definitions/sort_attribute"
   virtual_network_list_metadata_output:
     type: object
     title: Metadata for virtual_network list output
@@ -38603,22 +38187,17 @@ definitions:
         x-ntnx-enum:
         - virtual_network
       offset:
-        type: integer
-        description: Offset from the start of the entity list
+        $ref: "#/definitions/offset"
       length:
-        type: integer
-        description: The number of records retrieved relative to the offset
+        $ref: "#/definitions/length"
       total_matches:
-        type: integer
-        description: Total matches found
+        $ref: "#/definitions/total_matches"
       filter:
-        type: string
-        description: The filter used for the results
+        $ref: "#/definitions/filter"
       sort_order:
         $ref: "#/definitions/sort_order"
       sort_attribute:
-        type: string
-        description: The attribute to perform sort on
+        $ref: "#/definitions/sort_attribute"
   virtual_network_reference:
     title: Reference to a virtual_network
     type: object
@@ -38746,23 +38325,15 @@ definitions:
         x-ntnx-enum:
         - floating_ip
       offset:
-        type: integer
-        format: int32
-        minimum: 0
-        description: Offset from the start of the entity list
+        $ref: "#/definitions/offset"
       length:
-        type: integer
-        format: int32
-        minimum: 1
-        description: The number of records to retrieve relative to the offset
+        $ref: "#/definitions/length"
       filter:
-        type: string
-        description: The filter in FIQL syntax used for the results.
+        $ref: "#/definitions/filter"
       sort_order:
         $ref: "#/definitions/sort_order"
       sort_attribute:
-        type: string
-        description: The attribute to perform sort on
+        $ref: "#/definitions/sort_attribute"
   floating_ip_list_metadata_output:
     type: object
     title: Metadata for floating_ip list output
@@ -38776,22 +38347,17 @@ definitions:
         x-ntnx-enum:
         - floating_ip
       offset:
-        type: integer
-        description: Offset from the start of the entity list
+        $ref: "#/definitions/offset"
       length:
-        type: integer
-        description: The number of records retrieved relative to the offset
+        $ref: "#/definitions/length"
       total_matches:
-        type: integer
-        description: Total matches found
+        $ref: "#/definitions/total_matches"
       filter:
-        type: string
-        description: The filter used for the results
+        $ref: "#/definitions/filter"
       sort_order:
         $ref: "#/definitions/sort_order"
       sort_attribute:
-        type: string
-        description: The attribute to perform sort on
+        $ref: "#/definitions/sort_attribute"
   floating_ip_reference:
     title: Reference to a floating_ip
     type: object
@@ -38919,23 +38485,15 @@ definitions:
         x-ntnx-enum:
         - network_function
       offset:
-        type: integer
-        format: int32
-        minimum: 0
-        description: Offset from the start of the entity list
+        $ref: "#/definitions/offset"
       length:
-        type: integer
-        format: int32
-        minimum: 1
-        description: The number of records to retrieve relative to the offset
+        $ref: "#/definitions/length"
       filter:
-        type: string
-        description: The filter in FIQL syntax used for the results.
+        $ref: "#/definitions/filter"
       sort_order:
         $ref: "#/definitions/sort_order"
       sort_attribute:
-        type: string
-        description: The attribute to perform sort on
+        $ref: "#/definitions/sort_attribute"
   network_function_list_metadata_output:
     type: object
     title: Metadata for network_function list output
@@ -38949,22 +38507,17 @@ definitions:
         x-ntnx-enum:
         - network_function
       offset:
-        type: integer
-        description: Offset from the start of the entity list
+        $ref: "#/definitions/offset"
       length:
-        type: integer
-        description: The number of records retrieved relative to the offset
+        $ref: "#/definitions/length"
       total_matches:
-        type: integer
-        description: Total matches found
+        $ref: "#/definitions/total_matches"
       filter:
-        type: string
-        description: The filter used for the results
+        $ref: "#/definitions/filter"
       sort_order:
         $ref: "#/definitions/sort_order"
       sort_attribute:
-        type: string
-        description: The attribute to perform sort on
+        $ref: "#/definitions/sort_attribute"
   network_function_reference:
     title: Reference to a network_function
     type: object
@@ -39092,23 +38645,15 @@ definitions:
         x-ntnx-enum:
         - network_function_chain
       offset:
-        type: integer
-        format: int32
-        minimum: 0
-        description: Offset from the start of the entity list
+        $ref: "#/definitions/offset"
       length:
-        type: integer
-        format: int32
-        minimum: 1
-        description: The number of records to retrieve relative to the offset
+        $ref: "#/definitions/length"
       filter:
-        type: string
-        description: The filter in FIQL syntax used for the results.
+        $ref: "#/definitions/filter"
       sort_order:
         $ref: "#/definitions/sort_order"
       sort_attribute:
-        type: string
-        description: The attribute to perform sort on
+        $ref: "#/definitions/sort_attribute"
   network_function_chain_list_metadata_output:
     type: object
     title: Metadata for network_function_chain list output
@@ -39122,22 +38667,17 @@ definitions:
         x-ntnx-enum:
         - network_function_chain
       offset:
-        type: integer
-        description: Offset from the start of the entity list
+        $ref: "#/definitions/offset"
       length:
-        type: integer
-        description: The number of records retrieved relative to the offset
+        $ref: "#/definitions/length"
       total_matches:
-        type: integer
-        description: Total matches found
+        $ref: "#/definitions/total_matches"
       filter:
-        type: string
-        description: The filter used for the results
+        $ref: "#/definitions/filter"
       sort_order:
         $ref: "#/definitions/sort_order"
       sort_attribute:
-        type: string
-        description: The attribute to perform sort on
+        $ref: "#/definitions/sort_attribute"
   network_function_chain_reference:
     title: Reference to a network_function_chain
     type: object
@@ -39265,23 +38805,15 @@ definitions:
         x-ntnx-enum:
         - network_security_rule
       offset:
-        type: integer
-        format: int32
-        minimum: 0
-        description: Offset from the start of the entity list
+        $ref: "#/definitions/offset"
       length:
-        type: integer
-        format: int32
-        minimum: 1
-        description: The number of records to retrieve relative to the offset
+        $ref: "#/definitions/length"
       filter:
-        type: string
-        description: The filter in FIQL syntax used for the results.
+        $ref: "#/definitions/filter"
       sort_order:
         $ref: "#/definitions/sort_order"
       sort_attribute:
-        type: string
-        description: The attribute to perform sort on
+        $ref: "#/definitions/sort_attribute"
   network_security_rule_list_metadata_output:
     type: object
     title: Metadata for network_security_rule list output
@@ -39295,22 +38827,17 @@ definitions:
         x-ntnx-enum:
         - network_security_rule
       offset:
-        type: integer
-        description: Offset from the start of the entity list
+        $ref: "#/definitions/offset"
       length:
-        type: integer
-        description: The number of records retrieved relative to the offset
+        $ref: "#/definitions/length"
       total_matches:
-        type: integer
-        description: Total matches found
+        $ref: "#/definitions/total_matches"
       filter:
-        type: string
-        description: The filter used for the results
+        $ref: "#/definitions/filter"
       sort_order:
         $ref: "#/definitions/sort_order"
       sort_attribute:
-        type: string
-        description: The attribute to perform sort on
+        $ref: "#/definitions/sort_attribute"
   network_security_rule_reference:
     title: Reference to a network_security_rule
     type: object
@@ -39438,23 +38965,15 @@ definitions:
         x-ntnx-enum:
         - software
       offset:
-        type: integer
-        format: int32
-        minimum: 0
-        description: Offset from the start of the entity list
+        $ref: "#/definitions/offset"
       length:
-        type: integer
-        format: int32
-        minimum: 1
-        description: The number of records to retrieve relative to the offset
+        $ref: "#/definitions/length"
       filter:
-        type: string
-        description: The filter in FIQL syntax used for the results.
+        $ref: "#/definitions/filter"
       sort_order:
         $ref: "#/definitions/sort_order"
       sort_attribute:
-        type: string
-        description: The attribute to perform sort on
+        $ref: "#/definitions/sort_attribute"
   software_list_metadata_output:
     type: object
     title: Metadata for software list output
@@ -39468,22 +38987,17 @@ definitions:
         x-ntnx-enum:
         - software
       offset:
-        type: integer
-        description: Offset from the start of the entity list
+        $ref: "#/definitions/offset"
       length:
-        type: integer
-        description: The number of records retrieved relative to the offset
+        $ref: "#/definitions/length"
       total_matches:
-        type: integer
-        description: Total matches found
+        $ref: "#/definitions/total_matches"
       filter:
-        type: string
-        description: The filter used for the results
+        $ref: "#/definitions/filter"
       sort_order:
         $ref: "#/definitions/sort_order"
       sort_attribute:
-        type: string
-        description: The attribute to perform sort on
+        $ref: "#/definitions/sort_attribute"
   software_reference:
     title: Reference to a software
     type: object
@@ -39611,23 +39125,15 @@ definitions:
         x-ntnx-enum:
         - prism_central
       offset:
-        type: integer
-        format: int32
-        minimum: 0
-        description: Offset from the start of the entity list
+        $ref: "#/definitions/offset"
       length:
-        type: integer
-        format: int32
-        minimum: 1
-        description: The number of records to retrieve relative to the offset
+        $ref: "#/definitions/length"
       filter:
-        type: string
-        description: The filter in FIQL syntax used for the results.
+        $ref: "#/definitions/filter"
       sort_order:
         $ref: "#/definitions/sort_order"
       sort_attribute:
-        type: string
-        description: The attribute to perform sort on
+        $ref: "#/definitions/sort_attribute"
   prism_central_list_metadata_output:
     type: object
     title: Metadata for prism_central list output
@@ -39641,22 +39147,17 @@ definitions:
         x-ntnx-enum:
         - prism_central
       offset:
-        type: integer
-        description: Offset from the start of the entity list
+        $ref: "#/definitions/offset"
       length:
-        type: integer
-        description: The number of records retrieved relative to the offset
+        $ref: "#/definitions/length"
       total_matches:
-        type: integer
-        description: Total matches found
+        $ref: "#/definitions/total_matches"
       filter:
-        type: string
-        description: The filter used for the results
+        $ref: "#/definitions/filter"
       sort_order:
         $ref: "#/definitions/sort_order"
       sort_attribute:
-        type: string
-        description: The attribute to perform sort on
+        $ref: "#/definitions/sort_attribute"
   prism_central_reference:
     title: Reference to a prism_central
     type: object
@@ -39784,23 +39285,15 @@ definitions:
         x-ntnx-enum:
         - prism_central_nodes
       offset:
-        type: integer
-        format: int32
-        minimum: 0
-        description: Offset from the start of the entity list
+        $ref: "#/definitions/offset"
       length:
-        type: integer
-        format: int32
-        minimum: 1
-        description: The number of records to retrieve relative to the offset
+        $ref: "#/definitions/length"
       filter:
-        type: string
-        description: The filter in FIQL syntax used for the results.
+        $ref: "#/definitions/filter"
       sort_order:
         $ref: "#/definitions/sort_order"
       sort_attribute:
-        type: string
-        description: The attribute to perform sort on
+        $ref: "#/definitions/sort_attribute"
   prism_central_nodes_list_metadata_output:
     type: object
     title: Metadata for prism_central_nodes list output
@@ -39814,22 +39307,17 @@ definitions:
         x-ntnx-enum:
         - prism_central_nodes
       offset:
-        type: integer
-        description: Offset from the start of the entity list
+        $ref: "#/definitions/offset"
       length:
-        type: integer
-        description: The number of records retrieved relative to the offset
+        $ref: "#/definitions/length"
       total_matches:
-        type: integer
-        description: Total matches found
+        $ref: "#/definitions/total_matches"
       filter:
-        type: string
-        description: The filter used for the results
+        $ref: "#/definitions/filter"
       sort_order:
         $ref: "#/definitions/sort_order"
       sort_attribute:
-        type: string
-        description: The attribute to perform sort on
+        $ref: "#/definitions/sort_attribute"
   prism_central_nodes_reference:
     title: Reference to a prism_central_nodes
     type: object
@@ -39957,23 +39445,15 @@ definitions:
         x-ntnx-enum:
         - rackable_unit
       offset:
-        type: integer
-        format: int32
-        minimum: 0
-        description: Offset from the start of the entity list
+        $ref: "#/definitions/offset"
       length:
-        type: integer
-        format: int32
-        minimum: 1
-        description: The number of records to retrieve relative to the offset
+        $ref: "#/definitions/length"
       filter:
-        type: string
-        description: The filter in FIQL syntax used for the results.
+        $ref: "#/definitions/filter"
       sort_order:
         $ref: "#/definitions/sort_order"
       sort_attribute:
-        type: string
-        description: The attribute to perform sort on
+        $ref: "#/definitions/sort_attribute"
   rackable_unit_list_metadata_output:
     type: object
     title: Metadata for rackable_unit list output
@@ -39987,22 +39467,17 @@ definitions:
         x-ntnx-enum:
         - rackable_unit
       offset:
-        type: integer
-        description: Offset from the start of the entity list
+        $ref: "#/definitions/offset"
       length:
-        type: integer
-        description: The number of records retrieved relative to the offset
+        $ref: "#/definitions/length"
       total_matches:
-        type: integer
-        description: Total matches found
+        $ref: "#/definitions/total_matches"
       filter:
-        type: string
-        description: The filter used for the results
+        $ref: "#/definitions/filter"
       sort_order:
         $ref: "#/definitions/sort_order"
       sort_attribute:
-        type: string
-        description: The attribute to perform sort on
+        $ref: "#/definitions/sort_attribute"
   rackable_unit_reference:
     title: Reference to a rackable_unit
     type: object
@@ -40130,23 +39605,15 @@ definitions:
         x-ntnx-enum:
         - physical_availability_zone
       offset:
-        type: integer
-        format: int32
-        minimum: 0
-        description: Offset from the start of the entity list
+        $ref: "#/definitions/offset"
       length:
-        type: integer
-        format: int32
-        minimum: 1
-        description: The number of records to retrieve relative to the offset
+        $ref: "#/definitions/length"
       filter:
-        type: string
-        description: The filter in FIQL syntax used for the results.
+        $ref: "#/definitions/filter"
       sort_order:
         $ref: "#/definitions/sort_order"
       sort_attribute:
-        type: string
-        description: The attribute to perform sort on
+        $ref: "#/definitions/sort_attribute"
   physical_availability_zone_list_metadata_output:
     type: object
     title: Metadata for physical_availability_zone list output
@@ -40160,22 +39627,17 @@ definitions:
         x-ntnx-enum:
         - physical_availability_zone
       offset:
-        type: integer
-        description: Offset from the start of the entity list
+        $ref: "#/definitions/offset"
       length:
-        type: integer
-        description: The number of records retrieved relative to the offset
+        $ref: "#/definitions/length"
       total_matches:
-        type: integer
-        description: Total matches found
+        $ref: "#/definitions/total_matches"
       filter:
-        type: string
-        description: The filter used for the results
+        $ref: "#/definitions/filter"
       sort_order:
         $ref: "#/definitions/sort_order"
       sort_attribute:
-        type: string
-        description: The attribute to perform sort on
+        $ref: "#/definitions/sort_attribute"
   physical_availability_zone_reference:
     title: Reference to a physical_availability_zone
     type: object
@@ -40303,23 +39765,15 @@ definitions:
         x-ntnx-enum:
         - host
       offset:
-        type: integer
-        format: int32
-        minimum: 0
-        description: Offset from the start of the entity list
+        $ref: "#/definitions/offset"
       length:
-        type: integer
-        format: int32
-        minimum: 1
-        description: The number of records to retrieve relative to the offset
+        $ref: "#/definitions/length"
       filter:
-        type: string
-        description: The filter in FIQL syntax used for the results.
+        $ref: "#/definitions/filter"
       sort_order:
         $ref: "#/definitions/sort_order"
       sort_attribute:
-        type: string
-        description: The attribute to perform sort on
+        $ref: "#/definitions/sort_attribute"
   host_list_metadata_output:
     type: object
     title: Metadata for host list output
@@ -40333,22 +39787,17 @@ definitions:
         x-ntnx-enum:
         - host
       offset:
-        type: integer
-        description: Offset from the start of the entity list
+        $ref: "#/definitions/offset"
       length:
-        type: integer
-        description: The number of records retrieved relative to the offset
+        $ref: "#/definitions/length"
       total_matches:
-        type: integer
-        description: Total matches found
+        $ref: "#/definitions/total_matches"
       filter:
-        type: string
-        description: The filter used for the results
+        $ref: "#/definitions/filter"
       sort_order:
         $ref: "#/definitions/sort_order"
       sort_attribute:
-        type: string
-        description: The attribute to perform sort on
+        $ref: "#/definitions/sort_attribute"
   host_reference:
     title: Reference to a host
     type: object
@@ -40476,23 +39925,15 @@ definitions:
         x-ntnx-enum:
         - disk
       offset:
-        type: integer
-        format: int32
-        minimum: 0
-        description: Offset from the start of the entity list
+        $ref: "#/definitions/offset"
       length:
-        type: integer
-        format: int32
-        minimum: 1
-        description: The number of records to retrieve relative to the offset
+        $ref: "#/definitions/length"
       filter:
-        type: string
-        description: The filter in FIQL syntax used for the results.
+        $ref: "#/definitions/filter"
       sort_order:
         $ref: "#/definitions/sort_order"
       sort_attribute:
-        type: string
-        description: The attribute to perform sort on
+        $ref: "#/definitions/sort_attribute"
   disk_list_metadata_output:
     type: object
     title: Metadata for disk list output
@@ -40506,22 +39947,17 @@ definitions:
         x-ntnx-enum:
         - disk
       offset:
-        type: integer
-        description: Offset from the start of the entity list
+        $ref: "#/definitions/offset"
       length:
-        type: integer
-        description: The number of records retrieved relative to the offset
+        $ref: "#/definitions/length"
       total_matches:
-        type: integer
-        description: Total matches found
+        $ref: "#/definitions/total_matches"
       filter:
-        type: string
-        description: The filter used for the results
+        $ref: "#/definitions/filter"
       sort_order:
         $ref: "#/definitions/sort_order"
       sort_attribute:
-        type: string
-        description: The attribute to perform sort on
+        $ref: "#/definitions/sort_attribute"
   disk_reference:
     title: Reference to a disk
     type: object
@@ -40649,23 +40085,15 @@ definitions:
         x-ntnx-enum:
         - remote_connection
       offset:
-        type: integer
-        format: int32
-        minimum: 0
-        description: Offset from the start of the entity list
+        $ref: "#/definitions/offset"
       length:
-        type: integer
-        format: int32
-        minimum: 1
-        description: The number of records to retrieve relative to the offset
+        $ref: "#/definitions/length"
       filter:
-        type: string
-        description: The filter in FIQL syntax used for the results.
+        $ref: "#/definitions/filter"
       sort_order:
         $ref: "#/definitions/sort_order"
       sort_attribute:
-        type: string
-        description: The attribute to perform sort on
+        $ref: "#/definitions/sort_attribute"
   remote_connection_list_metadata_output:
     type: object
     title: Metadata for remote_connection list output
@@ -40679,22 +40107,17 @@ definitions:
         x-ntnx-enum:
         - remote_connection
       offset:
-        type: integer
-        description: Offset from the start of the entity list
+        $ref: "#/definitions/offset"
       length:
-        type: integer
-        description: The number of records retrieved relative to the offset
+        $ref: "#/definitions/length"
       total_matches:
-        type: integer
-        description: Total matches found
+        $ref: "#/definitions/total_matches"
       filter:
-        type: string
-        description: The filter used for the results
+        $ref: "#/definitions/filter"
       sort_order:
         $ref: "#/definitions/sort_order"
       sort_attribute:
-        type: string
-        description: The attribute to perform sort on
+        $ref: "#/definitions/sort_attribute"
   remote_connection_reference:
     title: Reference to a remote_connection
     type: object
@@ -40822,23 +40245,15 @@ definitions:
         x-ntnx-enum:
         - multicluster_config
       offset:
-        type: integer
-        format: int32
-        minimum: 0
-        description: Offset from the start of the entity list
+        $ref: "#/definitions/offset"
       length:
-        type: integer
-        format: int32
-        minimum: 1
-        description: The number of records to retrieve relative to the offset
+        $ref: "#/definitions/length"
       filter:
-        type: string
-        description: The filter in FIQL syntax used for the results.
+        $ref: "#/definitions/filter"
       sort_order:
         $ref: "#/definitions/sort_order"
       sort_attribute:
-        type: string
-        description: The attribute to perform sort on
+        $ref: "#/definitions/sort_attribute"
   multicluster_config_list_metadata_output:
     type: object
     title: Metadata for multicluster_config list output
@@ -40852,22 +40267,17 @@ definitions:
         x-ntnx-enum:
         - multicluster_config
       offset:
-        type: integer
-        description: Offset from the start of the entity list
+        $ref: "#/definitions/offset"
       length:
-        type: integer
-        description: The number of records retrieved relative to the offset
+        $ref: "#/definitions/length"
       total_matches:
-        type: integer
-        description: Total matches found
+        $ref: "#/definitions/total_matches"
       filter:
-        type: string
-        description: The filter used for the results
+        $ref: "#/definitions/filter"
       sort_order:
         $ref: "#/definitions/sort_order"
       sort_attribute:
-        type: string
-        description: The attribute to perform sort on
+        $ref: "#/definitions/sort_attribute"
   multicluster_config_reference:
     title: Reference to a multicluster_config
     type: object
@@ -40995,23 +40405,15 @@ definitions:
         x-ntnx-enum:
         - availability_zone
       offset:
-        type: integer
-        format: int32
-        minimum: 0
-        description: Offset from the start of the entity list
+        $ref: "#/definitions/offset"
       length:
-        type: integer
-        format: int32
-        minimum: 1
-        description: The number of records to retrieve relative to the offset
+        $ref: "#/definitions/length"
       filter:
-        type: string
-        description: The filter in FIQL syntax used for the results.
+        $ref: "#/definitions/filter"
       sort_order:
         $ref: "#/definitions/sort_order"
       sort_attribute:
-        type: string
-        description: The attribute to perform sort on
+        $ref: "#/definitions/sort_attribute"
   availability_zone_list_metadata_output:
     type: object
     title: Metadata for availability_zone list output
@@ -41025,22 +40427,17 @@ definitions:
         x-ntnx-enum:
         - availability_zone
       offset:
-        type: integer
-        description: Offset from the start of the entity list
+        $ref: "#/definitions/offset"
       length:
-        type: integer
-        description: The number of records retrieved relative to the offset
+        $ref: "#/definitions/length"
       total_matches:
-        type: integer
-        description: Total matches found
+        $ref: "#/definitions/total_matches"
       filter:
-        type: string
-        description: The filter used for the results
+        $ref: "#/definitions/filter"
       sort_order:
         $ref: "#/definitions/sort_order"
       sort_attribute:
-        type: string
-        description: The attribute to perform sort on
+        $ref: "#/definitions/sort_attribute"
   availability_zone_reference:
     title: Reference to a availability_zone
     type: object
@@ -41168,23 +40565,15 @@ definitions:
         x-ntnx-enum:
         - protection_rule
       offset:
-        type: integer
-        format: int32
-        minimum: 0
-        description: Offset from the start of the entity list
+        $ref: "#/definitions/offset"
       length:
-        type: integer
-        format: int32
-        minimum: 1
-        description: The number of records to retrieve relative to the offset
+        $ref: "#/definitions/length"
       filter:
-        type: string
-        description: The filter in FIQL syntax used for the results.
+        $ref: "#/definitions/filter"
       sort_order:
         $ref: "#/definitions/sort_order"
       sort_attribute:
-        type: string
-        description: The attribute to perform sort on
+        $ref: "#/definitions/sort_attribute"
   protection_rule_list_metadata_output:
     type: object
     title: Metadata for protection_rule list output
@@ -41198,22 +40587,17 @@ definitions:
         x-ntnx-enum:
         - protection_rule
       offset:
-        type: integer
-        description: Offset from the start of the entity list
+        $ref: "#/definitions/offset"
       length:
-        type: integer
-        description: The number of records retrieved relative to the offset
+        $ref: "#/definitions/length"
       total_matches:
-        type: integer
-        description: Total matches found
+        $ref: "#/definitions/total_matches"
       filter:
-        type: string
-        description: The filter used for the results
+        $ref: "#/definitions/filter"
       sort_order:
         $ref: "#/definitions/sort_order"
       sort_attribute:
-        type: string
-        description: The attribute to perform sort on
+        $ref: "#/definitions/sort_attribute"
   protection_rule_reference:
     title: Reference to a protection_rule
     type: object
@@ -41341,23 +40725,15 @@ definitions:
         x-ntnx-enum:
         - report_instance
       offset:
-        type: integer
-        format: int32
-        minimum: 0
-        description: Offset from the start of the entity list
+        $ref: "#/definitions/offset"
       length:
-        type: integer
-        format: int32
-        minimum: 1
-        description: The number of records to retrieve relative to the offset
+        $ref: "#/definitions/length"
       filter:
-        type: string
-        description: The filter in FIQL syntax used for the results.
+        $ref: "#/definitions/filter"
       sort_order:
         $ref: "#/definitions/sort_order"
       sort_attribute:
-        type: string
-        description: The attribute to perform sort on
+        $ref: "#/definitions/sort_attribute"
   report_instance_list_metadata_output:
     type: object
     title: Metadata for report_instance list output
@@ -41371,22 +40747,17 @@ definitions:
         x-ntnx-enum:
         - report_instance
       offset:
-        type: integer
-        description: Offset from the start of the entity list
+        $ref: "#/definitions/offset"
       length:
-        type: integer
-        description: The number of records retrieved relative to the offset
+        $ref: "#/definitions/length"
       total_matches:
-        type: integer
-        description: Total matches found
+        $ref: "#/definitions/total_matches"
       filter:
-        type: string
-        description: The filter used for the results
+        $ref: "#/definitions/filter"
       sort_order:
         $ref: "#/definitions/sort_order"
       sort_attribute:
-        type: string
-        description: The attribute to perform sort on
+        $ref: "#/definitions/sort_attribute"
   report_instance_reference:
     title: Reference to a report_instance
     type: object
@@ -41514,23 +40885,15 @@ definitions:
         x-ntnx-enum:
         - report_config
       offset:
-        type: integer
-        format: int32
-        minimum: 0
-        description: Offset from the start of the entity list
+        $ref: "#/definitions/offset"
       length:
-        type: integer
-        format: int32
-        minimum: 1
-        description: The number of records to retrieve relative to the offset
+        $ref: "#/definitions/length"
       filter:
-        type: string
-        description: The filter in FIQL syntax used for the results.
+        $ref: "#/definitions/filter"
       sort_order:
         $ref: "#/definitions/sort_order"
       sort_attribute:
-        type: string
-        description: The attribute to perform sort on
+        $ref: "#/definitions/sort_attribute"
   report_config_list_metadata_output:
     type: object
     title: Metadata for report_config list output
@@ -41544,22 +40907,17 @@ definitions:
         x-ntnx-enum:
         - report_config
       offset:
-        type: integer
-        description: Offset from the start of the entity list
+        $ref: "#/definitions/offset"
       length:
-        type: integer
-        description: The number of records retrieved relative to the offset
+        $ref: "#/definitions/length"
       total_matches:
-        type: integer
-        description: Total matches found
+        $ref: "#/definitions/total_matches"
       filter:
-        type: string
-        description: The filter used for the results
+        $ref: "#/definitions/filter"
       sort_order:
         $ref: "#/definitions/sort_order"
       sort_attribute:
-        type: string
-        description: The attribute to perform sort on
+        $ref: "#/definitions/sort_attribute"
   report_config_reference:
     title: Reference to a report_config
     type: object
@@ -41687,23 +41045,15 @@ definitions:
         x-ntnx-enum:
         - affinity_rule
       offset:
-        type: integer
-        format: int32
-        minimum: 0
-        description: Offset from the start of the entity list
+        $ref: "#/definitions/offset"
       length:
-        type: integer
-        format: int32
-        minimum: 1
-        description: The number of records to retrieve relative to the offset
+        $ref: "#/definitions/length"
       filter:
-        type: string
-        description: The filter in FIQL syntax used for the results.
+        $ref: "#/definitions/filter"
       sort_order:
         $ref: "#/definitions/sort_order"
       sort_attribute:
-        type: string
-        description: The attribute to perform sort on
+        $ref: "#/definitions/sort_attribute"
   affinity_rule_list_metadata_output:
     type: object
     title: Metadata for affinity_rule list output
@@ -41717,22 +41067,17 @@ definitions:
         x-ntnx-enum:
         - affinity_rule
       offset:
-        type: integer
-        description: Offset from the start of the entity list
+        $ref: "#/definitions/offset"
       length:
-        type: integer
-        description: The number of records retrieved relative to the offset
+        $ref: "#/definitions/length"
       total_matches:
-        type: integer
-        description: Total matches found
+        $ref: "#/definitions/total_matches"
       filter:
-        type: string
-        description: The filter used for the results
+        $ref: "#/definitions/filter"
       sort_order:
         $ref: "#/definitions/sort_order"
       sort_attribute:
-        type: string
-        description: The attribute to perform sort on
+        $ref: "#/definitions/sort_attribute"
   affinity_rule_reference:
     title: Reference to a affinity_rule
     type: object
@@ -41860,23 +41205,15 @@ definitions:
         x-ntnx-enum:
         - common_report_config
       offset:
-        type: integer
-        format: int32
-        minimum: 0
-        description: Offset from the start of the entity list
+        $ref: "#/definitions/offset"
       length:
-        type: integer
-        format: int32
-        minimum: 1
-        description: The number of records to retrieve relative to the offset
+        $ref: "#/definitions/length"
       filter:
-        type: string
-        description: The filter in FIQL syntax used for the results.
+        $ref: "#/definitions/filter"
       sort_order:
         $ref: "#/definitions/sort_order"
       sort_attribute:
-        type: string
-        description: The attribute to perform sort on
+        $ref: "#/definitions/sort_attribute"
   common_report_config_list_metadata_output:
     type: object
     title: Metadata for common_report_config list output
@@ -41890,22 +41227,17 @@ definitions:
         x-ntnx-enum:
         - common_report_config
       offset:
-        type: integer
-        description: Offset from the start of the entity list
+        $ref: "#/definitions/offset"
       length:
-        type: integer
-        description: The number of records retrieved relative to the offset
+        $ref: "#/definitions/length"
       total_matches:
-        type: integer
-        description: Total matches found
+        $ref: "#/definitions/total_matches"
       filter:
-        type: string
-        description: The filter used for the results
+        $ref: "#/definitions/filter"
       sort_order:
         $ref: "#/definitions/sort_order"
       sort_attribute:
-        type: string
-        description: The attribute to perform sort on
+        $ref: "#/definitions/sort_attribute"
   common_report_config_reference:
     title: Reference to a common_report_config
     type: object
@@ -42033,23 +41365,15 @@ definitions:
         x-ntnx-enum:
         - marketplace_item
       offset:
-        type: integer
-        format: int32
-        minimum: 0
-        description: Offset from the start of the entity list
+        $ref: "#/definitions/offset"
       length:
-        type: integer
-        format: int32
-        minimum: 1
-        description: The number of records to retrieve relative to the offset
+        $ref: "#/definitions/length"
       filter:
-        type: string
-        description: The filter in FIQL syntax used for the results.
+        $ref: "#/definitions/filter"
       sort_order:
         $ref: "#/definitions/sort_order"
       sort_attribute:
-        type: string
-        description: The attribute to perform sort on
+        $ref: "#/definitions/sort_attribute"
   marketplace_item_list_metadata_output:
     type: object
     title: Metadata for marketplace_item list output
@@ -42063,22 +41387,17 @@ definitions:
         x-ntnx-enum:
         - marketplace_item
       offset:
-        type: integer
-        description: Offset from the start of the entity list
+        $ref: "#/definitions/offset"
       length:
-        type: integer
-        description: The number of records retrieved relative to the offset
+        $ref: "#/definitions/length"
       total_matches:
-        type: integer
-        description: Total matches found
+        $ref: "#/definitions/total_matches"
       filter:
-        type: string
-        description: The filter used for the results
+        $ref: "#/definitions/filter"
       sort_order:
         $ref: "#/definitions/sort_order"
       sort_attribute:
-        type: string
-        description: The attribute to perform sort on
+        $ref: "#/definitions/sort_attribute"
   marketplace_item_reference:
     title: Reference to a marketplace_item
     type: object
@@ -42206,23 +41525,15 @@ definitions:
         x-ntnx-enum:
         - streaming_policy
       offset:
-        type: integer
-        format: int32
-        minimum: 0
-        description: Offset from the start of the entity list
+        $ref: "#/definitions/offset"
       length:
-        type: integer
-        format: int32
-        minimum: 1
-        description: The number of records to retrieve relative to the offset
+        $ref: "#/definitions/length"
       filter:
-        type: string
-        description: The filter in FIQL syntax used for the results.
+        $ref: "#/definitions/filter"
       sort_order:
         $ref: "#/definitions/sort_order"
       sort_attribute:
-        type: string
-        description: The attribute to perform sort on
+        $ref: "#/definitions/sort_attribute"
   streaming_policy_list_metadata_output:
     type: object
     title: Metadata for streaming_policy list output
@@ -42236,22 +41547,17 @@ definitions:
         x-ntnx-enum:
         - streaming_policy
       offset:
-        type: integer
-        description: Offset from the start of the entity list
+        $ref: "#/definitions/offset"
       length:
-        type: integer
-        description: The number of records retrieved relative to the offset
+        $ref: "#/definitions/length"
       total_matches:
-        type: integer
-        description: Total matches found
+        $ref: "#/definitions/total_matches"
       filter:
-        type: string
-        description: The filter used for the results
+        $ref: "#/definitions/filter"
       sort_order:
         $ref: "#/definitions/sort_order"
       sort_attribute:
-        type: string
-        description: The attribute to perform sort on
+        $ref: "#/definitions/sort_attribute"
   streaming_policy_reference:
     title: Reference to a streaming_policy
     type: object
@@ -42379,23 +41685,15 @@ definitions:
         x-ntnx-enum:
         - alert
       offset:
-        type: integer
-        format: int32
-        minimum: 0
-        description: Offset from the start of the entity list
+        $ref: "#/definitions/offset"
       length:
-        type: integer
-        format: int32
-        minimum: 1
-        description: The number of records to retrieve relative to the offset
+        $ref: "#/definitions/length"
       filter:
-        type: string
-        description: The filter in FIQL syntax used for the results.
+        $ref: "#/definitions/filter"
       sort_order:
         $ref: "#/definitions/sort_order"
       sort_attribute:
-        type: string
-        description: The attribute to perform sort on
+        $ref: "#/definitions/sort_attribute"
   alert_list_metadata_output:
     type: object
     title: Metadata for alert list output
@@ -42409,22 +41707,17 @@ definitions:
         x-ntnx-enum:
         - alert
       offset:
-        type: integer
-        description: Offset from the start of the entity list
+        $ref: "#/definitions/offset"
       length:
-        type: integer
-        description: The number of records retrieved relative to the offset
+        $ref: "#/definitions/length"
       total_matches:
-        type: integer
-        description: Total matches found
+        $ref: "#/definitions/total_matches"
       filter:
-        type: string
-        description: The filter used for the results
+        $ref: "#/definitions/filter"
       sort_order:
         $ref: "#/definitions/sort_order"
       sort_attribute:
-        type: string
-        description: The attribute to perform sort on
+        $ref: "#/definitions/sort_attribute"
   alert_reference:
     title: Reference to a alert
     type: object
@@ -42552,23 +41845,15 @@ definitions:
         x-ntnx-enum:
         - action_type
       offset:
-        type: integer
-        format: int32
-        minimum: 0
-        description: Offset from the start of the entity list
+        $ref: "#/definitions/offset"
       length:
-        type: integer
-        format: int32
-        minimum: 1
-        description: The number of records to retrieve relative to the offset
+        $ref: "#/definitions/length"
       filter:
-        type: string
-        description: The filter in FIQL syntax used for the results.
+        $ref: "#/definitions/filter"
       sort_order:
         $ref: "#/definitions/sort_order"
       sort_attribute:
-        type: string
-        description: The attribute to perform sort on
+        $ref: "#/definitions/sort_attribute"
   action_type_list_metadata_output:
     type: object
     title: Metadata for action_type list output
@@ -42582,22 +41867,17 @@ definitions:
         x-ntnx-enum:
         - action_type
       offset:
-        type: integer
-        description: Offset from the start of the entity list
+        $ref: "#/definitions/offset"
       length:
-        type: integer
-        description: The number of records retrieved relative to the offset
+        $ref: "#/definitions/length"
       total_matches:
-        type: integer
-        description: Total matches found
+        $ref: "#/definitions/total_matches"
       filter:
-        type: string
-        description: The filter used for the results
+        $ref: "#/definitions/filter"
       sort_order:
         $ref: "#/definitions/sort_order"
       sort_attribute:
-        type: string
-        description: The attribute to perform sort on
+        $ref: "#/definitions/sort_attribute"
   action_type_reference:
     title: Reference to a action_type
     type: object
@@ -42725,23 +42005,15 @@ definitions:
         x-ntnx-enum:
         - action_instance
       offset:
-        type: integer
-        format: int32
-        minimum: 0
-        description: Offset from the start of the entity list
+        $ref: "#/definitions/offset"
       length:
-        type: integer
-        format: int32
-        minimum: 1
-        description: The number of records to retrieve relative to the offset
+        $ref: "#/definitions/length"
       filter:
-        type: string
-        description: The filter in FIQL syntax used for the results.
+        $ref: "#/definitions/filter"
       sort_order:
         $ref: "#/definitions/sort_order"
       sort_attribute:
-        type: string
-        description: The attribute to perform sort on
+        $ref: "#/definitions/sort_attribute"
   action_instance_list_metadata_output:
     type: object
     title: Metadata for action_instance list output
@@ -42755,22 +42027,17 @@ definitions:
         x-ntnx-enum:
         - action_instance
       offset:
-        type: integer
-        description: Offset from the start of the entity list
+        $ref: "#/definitions/offset"
       length:
-        type: integer
-        description: The number of records retrieved relative to the offset
+        $ref: "#/definitions/length"
       total_matches:
-        type: integer
-        description: Total matches found
+        $ref: "#/definitions/total_matches"
       filter:
-        type: string
-        description: The filter used for the results
+        $ref: "#/definitions/filter"
       sort_order:
         $ref: "#/definitions/sort_order"
       sort_attribute:
-        type: string
-        description: The attribute to perform sort on
+        $ref: "#/definitions/sort_attribute"
   action_instance_reference:
     title: Reference to a action_instance
     type: object
@@ -42898,23 +42165,15 @@ definitions:
         x-ntnx-enum:
         - action_trigger_type
       offset:
-        type: integer
-        format: int32
-        minimum: 0
-        description: Offset from the start of the entity list
+        $ref: "#/definitions/offset"
       length:
-        type: integer
-        format: int32
-        minimum: 1
-        description: The number of records to retrieve relative to the offset
+        $ref: "#/definitions/length"
       filter:
-        type: string
-        description: The filter in FIQL syntax used for the results.
+        $ref: "#/definitions/filter"
       sort_order:
         $ref: "#/definitions/sort_order"
       sort_attribute:
-        type: string
-        description: The attribute to perform sort on
+        $ref: "#/definitions/sort_attribute"
   action_trigger_type_list_metadata_output:
     type: object
     title: Metadata for action_trigger_type list output
@@ -42928,22 +42187,17 @@ definitions:
         x-ntnx-enum:
         - action_trigger_type
       offset:
-        type: integer
-        description: Offset from the start of the entity list
+        $ref: "#/definitions/offset"
       length:
-        type: integer
-        description: The number of records retrieved relative to the offset
+        $ref: "#/definitions/length"
       total_matches:
-        type: integer
-        description: Total matches found
+        $ref: "#/definitions/total_matches"
       filter:
-        type: string
-        description: The filter used for the results
+        $ref: "#/definitions/filter"
       sort_order:
         $ref: "#/definitions/sort_order"
       sort_attribute:
-        type: string
-        description: The attribute to perform sort on
+        $ref: "#/definitions/sort_attribute"
   action_trigger_type_reference:
     title: Reference to a action_trigger_type
     type: object
@@ -43071,23 +42325,15 @@ definitions:
         x-ntnx-enum:
         - action_rule
       offset:
-        type: integer
-        format: int32
-        minimum: 0
-        description: Offset from the start of the entity list
+        $ref: "#/definitions/offset"
       length:
-        type: integer
-        format: int32
-        minimum: 1
-        description: The number of records to retrieve relative to the offset
+        $ref: "#/definitions/length"
       filter:
-        type: string
-        description: The filter in FIQL syntax used for the results.
+        $ref: "#/definitions/filter"
       sort_order:
         $ref: "#/definitions/sort_order"
       sort_attribute:
-        type: string
-        description: The attribute to perform sort on
+        $ref: "#/definitions/sort_attribute"
   action_rule_list_metadata_output:
     type: object
     title: Metadata for action_rule list output
@@ -43101,22 +42347,17 @@ definitions:
         x-ntnx-enum:
         - action_rule
       offset:
-        type: integer
-        description: Offset from the start of the entity list
+        $ref: "#/definitions/offset"
       length:
-        type: integer
-        description: The number of records retrieved relative to the offset
+        $ref: "#/definitions/length"
       total_matches:
-        type: integer
-        description: Total matches found
+        $ref: "#/definitions/total_matches"
       filter:
-        type: string
-        description: The filter used for the results
+        $ref: "#/definitions/filter"
       sort_order:
         $ref: "#/definitions/sort_order"
       sort_attribute:
-        type: string
-        description: The attribute to perform sort on
+        $ref: "#/definitions/sort_attribute"
   action_rule_reference:
     title: Reference to a action_rule
     type: object
@@ -43244,23 +42485,15 @@ definitions:
         x-ntnx-enum:
         - action_rule_result
       offset:
-        type: integer
-        format: int32
-        minimum: 0
-        description: Offset from the start of the entity list
+        $ref: "#/definitions/offset"
       length:
-        type: integer
-        format: int32
-        minimum: 1
-        description: The number of records to retrieve relative to the offset
+        $ref: "#/definitions/length"
       filter:
-        type: string
-        description: The filter in FIQL syntax used for the results.
+        $ref: "#/definitions/filter"
       sort_order:
         $ref: "#/definitions/sort_order"
       sort_attribute:
-        type: string
-        description: The attribute to perform sort on
+        $ref: "#/definitions/sort_attribute"
   action_rule_result_list_metadata_output:
     type: object
     title: Metadata for action_rule_result list output
@@ -43274,22 +42507,17 @@ definitions:
         x-ntnx-enum:
         - action_rule_result
       offset:
-        type: integer
-        description: Offset from the start of the entity list
+        $ref: "#/definitions/offset"
       length:
-        type: integer
-        description: The number of records retrieved relative to the offset
+        $ref: "#/definitions/length"
       total_matches:
-        type: integer
-        description: Total matches found
+        $ref: "#/definitions/total_matches"
       filter:
-        type: string
-        description: The filter used for the results
+        $ref: "#/definitions/filter"
       sort_order:
         $ref: "#/definitions/sort_order"
       sort_attribute:
-        type: string
-        description: The attribute to perform sort on
+        $ref: "#/definitions/sort_attribute"
   action_rule_result_reference:
     title: Reference to a action_rule_result
     type: object
@@ -43417,23 +42645,15 @@ definitions:
         x-ntnx-enum:
         - datacenter
       offset:
-        type: integer
-        format: int32
-        minimum: 0
-        description: Offset from the start of the entity list
+        $ref: "#/definitions/offset"
       length:
-        type: integer
-        format: int32
-        minimum: 1
-        description: The number of records to retrieve relative to the offset
+        $ref: "#/definitions/length"
       filter:
-        type: string
-        description: The filter in FIQL syntax used for the results.
+        $ref: "#/definitions/filter"
       sort_order:
         $ref: "#/definitions/sort_order"
       sort_attribute:
-        type: string
-        description: The attribute to perform sort on
+        $ref: "#/definitions/sort_attribute"
   datacenter_list_metadata_output:
     type: object
     title: Metadata for datacenter list output
@@ -43447,22 +42667,17 @@ definitions:
         x-ntnx-enum:
         - datacenter
       offset:
-        type: integer
-        description: Offset from the start of the entity list
+        $ref: "#/definitions/offset"
       length:
-        type: integer
-        description: The number of records retrieved relative to the offset
+        $ref: "#/definitions/length"
       total_matches:
-        type: integer
-        description: Total matches found
+        $ref: "#/definitions/total_matches"
       filter:
-        type: string
-        description: The filter used for the results
+        $ref: "#/definitions/filter"
       sort_order:
         $ref: "#/definitions/sort_order"
       sort_attribute:
-        type: string
-        description: The attribute to perform sort on
+        $ref: "#/definitions/sort_attribute"
   datacenter_reference:
     title: Reference to a datacenter
     type: object
@@ -43590,23 +42805,15 @@ definitions:
         x-ntnx-enum:
         - cell
       offset:
-        type: integer
-        format: int32
-        minimum: 0
-        description: Offset from the start of the entity list
+        $ref: "#/definitions/offset"
       length:
-        type: integer
-        format: int32
-        minimum: 1
-        description: The number of records to retrieve relative to the offset
+        $ref: "#/definitions/length"
       filter:
-        type: string
-        description: The filter in FIQL syntax used for the results.
+        $ref: "#/definitions/filter"
       sort_order:
         $ref: "#/definitions/sort_order"
       sort_attribute:
-        type: string
-        description: The attribute to perform sort on
+        $ref: "#/definitions/sort_attribute"
   cell_list_metadata_output:
     type: object
     title: Metadata for cell list output
@@ -43620,22 +42827,17 @@ definitions:
         x-ntnx-enum:
         - cell
       offset:
-        type: integer
-        description: Offset from the start of the entity list
+        $ref: "#/definitions/offset"
       length:
-        type: integer
-        description: The number of records retrieved relative to the offset
+        $ref: "#/definitions/length"
       total_matches:
-        type: integer
-        description: Total matches found
+        $ref: "#/definitions/total_matches"
       filter:
-        type: string
-        description: The filter used for the results
+        $ref: "#/definitions/filter"
       sort_order:
         $ref: "#/definitions/sort_order"
       sort_attribute:
-        type: string
-        description: The attribute to perform sort on
+        $ref: "#/definitions/sort_attribute"
   cell_reference:
     title: Reference to a cell
     type: object
@@ -43763,23 +42965,15 @@ definitions:
         x-ntnx-enum:
         - rack
       offset:
-        type: integer
-        format: int32
-        minimum: 0
-        description: Offset from the start of the entity list
+        $ref: "#/definitions/offset"
       length:
-        type: integer
-        format: int32
-        minimum: 1
-        description: The number of records to retrieve relative to the offset
+        $ref: "#/definitions/length"
       filter:
-        type: string
-        description: The filter in FIQL syntax used for the results.
+        $ref: "#/definitions/filter"
       sort_order:
         $ref: "#/definitions/sort_order"
       sort_attribute:
-        type: string
-        description: The attribute to perform sort on
+        $ref: "#/definitions/sort_attribute"
   rack_list_metadata_output:
     type: object
     title: Metadata for rack list output
@@ -43793,22 +42987,17 @@ definitions:
         x-ntnx-enum:
         - rack
       offset:
-        type: integer
-        description: Offset from the start of the entity list
+        $ref: "#/definitions/offset"
       length:
-        type: integer
-        description: The number of records retrieved relative to the offset
+        $ref: "#/definitions/length"
       total_matches:
-        type: integer
-        description: Total matches found
+        $ref: "#/definitions/total_matches"
       filter:
-        type: string
-        description: The filter used for the results
+        $ref: "#/definitions/filter"
       sort_order:
         $ref: "#/definitions/sort_order"
       sort_attribute:
-        type: string
-        description: The attribute to perform sort on
+        $ref: "#/definitions/sort_attribute"
   rack_reference:
     title: Reference to a rack
     type: object
@@ -43936,23 +43125,15 @@ definitions:
         x-ntnx-enum:
         - network_device
       offset:
-        type: integer
-        format: int32
-        minimum: 0
-        description: Offset from the start of the entity list
+        $ref: "#/definitions/offset"
       length:
-        type: integer
-        format: int32
-        minimum: 1
-        description: The number of records to retrieve relative to the offset
+        $ref: "#/definitions/length"
       filter:
-        type: string
-        description: The filter in FIQL syntax used for the results.
+        $ref: "#/definitions/filter"
       sort_order:
         $ref: "#/definitions/sort_order"
       sort_attribute:
-        type: string
-        description: The attribute to perform sort on
+        $ref: "#/definitions/sort_attribute"
   network_device_list_metadata_output:
     type: object
     title: Metadata for network_device list output
@@ -43966,22 +43147,17 @@ definitions:
         x-ntnx-enum:
         - network_device
       offset:
-        type: integer
-        description: Offset from the start of the entity list
+        $ref: "#/definitions/offset"
       length:
-        type: integer
-        description: The number of records retrieved relative to the offset
+        $ref: "#/definitions/length"
       total_matches:
-        type: integer
-        description: Total matches found
+        $ref: "#/definitions/total_matches"
       filter:
-        type: string
-        description: The filter used for the results
+        $ref: "#/definitions/filter"
       sort_order:
         $ref: "#/definitions/sort_order"
       sort_attribute:
-        type: string
-        description: The attribute to perform sort on
+        $ref: "#/definitions/sort_attribute"
   network_device_reference:
     title: Reference to a network_device
     type: object
@@ -44109,23 +43285,15 @@ definitions:
         x-ntnx-enum:
         - underlay_subnet
       offset:
-        type: integer
-        format: int32
-        minimum: 0
-        description: Offset from the start of the entity list
+        $ref: "#/definitions/offset"
       length:
-        type: integer
-        format: int32
-        minimum: 1
-        description: The number of records to retrieve relative to the offset
+        $ref: "#/definitions/length"
       filter:
-        type: string
-        description: The filter in FIQL syntax used for the results.
+        $ref: "#/definitions/filter"
       sort_order:
         $ref: "#/definitions/sort_order"
       sort_attribute:
-        type: string
-        description: The attribute to perform sort on
+        $ref: "#/definitions/sort_attribute"
   underlay_subnet_list_metadata_output:
     type: object
     title: Metadata for underlay_subnet list output
@@ -44139,22 +43307,17 @@ definitions:
         x-ntnx-enum:
         - underlay_subnet
       offset:
-        type: integer
-        description: Offset from the start of the entity list
+        $ref: "#/definitions/offset"
       length:
-        type: integer
-        description: The number of records retrieved relative to the offset
+        $ref: "#/definitions/length"
       total_matches:
-        type: integer
-        description: Total matches found
+        $ref: "#/definitions/total_matches"
       filter:
-        type: string
-        description: The filter used for the results
+        $ref: "#/definitions/filter"
       sort_order:
         $ref: "#/definitions/sort_order"
       sort_attribute:
-        type: string
-        description: The attribute to perform sort on
+        $ref: "#/definitions/sort_attribute"
   underlay_subnet_reference:
     title: Reference to a underlay_subnet
     type: object
@@ -44282,23 +43445,15 @@ definitions:
         x-ntnx-enum:
         - file_item
       offset:
-        type: integer
-        format: int32
-        minimum: 0
-        description: Offset from the start of the entity list
+        $ref: "#/definitions/offset"
       length:
-        type: integer
-        format: int32
-        minimum: 1
-        description: The number of records to retrieve relative to the offset
+        $ref: "#/definitions/length"
       filter:
-        type: string
-        description: The filter in FIQL syntax used for the results.
+        $ref: "#/definitions/filter"
       sort_order:
         $ref: "#/definitions/sort_order"
       sort_attribute:
-        type: string
-        description: The attribute to perform sort on
+        $ref: "#/definitions/sort_attribute"
   file_item_list_metadata_output:
     type: object
     title: Metadata for file_item list output
@@ -44312,22 +43467,17 @@ definitions:
         x-ntnx-enum:
         - file_item
       offset:
-        type: integer
-        description: Offset from the start of the entity list
+        $ref: "#/definitions/offset"
       length:
-        type: integer
-        description: The number of records retrieved relative to the offset
+        $ref: "#/definitions/length"
       total_matches:
-        type: integer
-        description: Total matches found
+        $ref: "#/definitions/total_matches"
       filter:
-        type: string
-        description: The filter used for the results
+        $ref: "#/definitions/filter"
       sort_order:
         $ref: "#/definitions/sort_order"
       sort_attribute:
-        type: string
-        description: The attribute to perform sort on
+        $ref: "#/definitions/sort_attribute"
   file_item_reference:
     title: Reference to a file_item
     type: object
@@ -44455,23 +43605,15 @@ definitions:
         x-ntnx-enum:
         - vm_snapshot
       offset:
-        type: integer
-        format: int32
-        minimum: 0
-        description: Offset from the start of the entity list
+        $ref: "#/definitions/offset"
       length:
-        type: integer
-        format: int32
-        minimum: 1
-        description: The number of records to retrieve relative to the offset
+        $ref: "#/definitions/length"
       filter:
-        type: string
-        description: The filter in FIQL syntax used for the results.
+        $ref: "#/definitions/filter"
       sort_order:
         $ref: "#/definitions/sort_order"
       sort_attribute:
-        type: string
-        description: The attribute to perform sort on
+        $ref: "#/definitions/sort_attribute"
   vm_snapshot_list_metadata_output:
     type: object
     title: Metadata for vm_snapshot list output
@@ -44485,22 +43627,17 @@ definitions:
         x-ntnx-enum:
         - vm_snapshot
       offset:
-        type: integer
-        description: Offset from the start of the entity list
+        $ref: "#/definitions/offset"
       length:
-        type: integer
-        description: The number of records retrieved relative to the offset
+        $ref: "#/definitions/length"
       total_matches:
-        type: integer
-        description: Total matches found
+        $ref: "#/definitions/total_matches"
       filter:
-        type: string
-        description: The filter used for the results
+        $ref: "#/definitions/filter"
       sort_order:
         $ref: "#/definitions/sort_order"
       sort_attribute:
-        type: string
-        description: The attribute to perform sort on
+        $ref: "#/definitions/sort_attribute"
   vm_snapshot_reference:
     title: Reference to a vm_snapshot
     type: object
@@ -44628,23 +43765,15 @@ definitions:
         x-ntnx-enum:
         - support_case
       offset:
-        type: integer
-        format: int32
-        minimum: 0
-        description: Offset from the start of the entity list
+        $ref: "#/definitions/offset"
       length:
-        type: integer
-        format: int32
-        minimum: 1
-        description: The number of records to retrieve relative to the offset
+        $ref: "#/definitions/length"
       filter:
-        type: string
-        description: The filter in FIQL syntax used for the results.
+        $ref: "#/definitions/filter"
       sort_order:
         $ref: "#/definitions/sort_order"
       sort_attribute:
-        type: string
-        description: The attribute to perform sort on
+        $ref: "#/definitions/sort_attribute"
   support_case_list_metadata_output:
     type: object
     title: Metadata for support_case list output
@@ -44658,22 +43787,17 @@ definitions:
         x-ntnx-enum:
         - support_case
       offset:
-        type: integer
-        description: Offset from the start of the entity list
+        $ref: "#/definitions/offset"
       length:
-        type: integer
-        description: The number of records retrieved relative to the offset
+        $ref: "#/definitions/length"
       total_matches:
-        type: integer
-        description: Total matches found
+        $ref: "#/definitions/total_matches"
       filter:
-        type: string
-        description: The filter used for the results
+        $ref: "#/definitions/filter"
       sort_order:
         $ref: "#/definitions/sort_order"
       sort_attribute:
-        type: string
-        description: The attribute to perform sort on
+        $ref: "#/definitions/sort_attribute"
   support_case_reference:
     title: Reference to a support_case
     type: object
@@ -44801,23 +43925,15 @@ definitions:
         x-ntnx-enum:
         - nusights_proxy
       offset:
-        type: integer
-        format: int32
-        minimum: 0
-        description: Offset from the start of the entity list
+        $ref: "#/definitions/offset"
       length:
-        type: integer
-        format: int32
-        minimum: 1
-        description: The number of records to retrieve relative to the offset
+        $ref: "#/definitions/length"
       filter:
-        type: string
-        description: The filter in FIQL syntax used for the results.
+        $ref: "#/definitions/filter"
       sort_order:
         $ref: "#/definitions/sort_order"
       sort_attribute:
-        type: string
-        description: The attribute to perform sort on
+        $ref: "#/definitions/sort_attribute"
   nusights_proxy_list_metadata_output:
     type: object
     title: Metadata for nusights_proxy list output
@@ -44831,22 +43947,17 @@ definitions:
         x-ntnx-enum:
         - nusights_proxy
       offset:
-        type: integer
-        description: Offset from the start of the entity list
+        $ref: "#/definitions/offset"
       length:
-        type: integer
-        description: The number of records retrieved relative to the offset
+        $ref: "#/definitions/length"
       total_matches:
-        type: integer
-        description: Total matches found
+        $ref: "#/definitions/total_matches"
       filter:
-        type: string
-        description: The filter used for the results
+        $ref: "#/definitions/filter"
       sort_order:
         $ref: "#/definitions/sort_order"
       sort_attribute:
-        type: string
-        description: The attribute to perform sort on
+        $ref: "#/definitions/sort_attribute"
   nusights_proxy_reference:
     title: Reference to a nusights_proxy
     type: object
@@ -44974,23 +44085,15 @@ definitions:
         x-ntnx-enum:
         - blackout
       offset:
-        type: integer
-        format: int32
-        minimum: 0
-        description: Offset from the start of the entity list
+        $ref: "#/definitions/offset"
       length:
-        type: integer
-        format: int32
-        minimum: 1
-        description: The number of records to retrieve relative to the offset
+        $ref: "#/definitions/length"
       filter:
-        type: string
-        description: The filter in FIQL syntax used for the results.
+        $ref: "#/definitions/filter"
       sort_order:
         $ref: "#/definitions/sort_order"
       sort_attribute:
-        type: string
-        description: The attribute to perform sort on
+        $ref: "#/definitions/sort_attribute"
   blackout_list_metadata_output:
     type: object
     title: Metadata for blackout list output
@@ -45004,22 +44107,17 @@ definitions:
         x-ntnx-enum:
         - blackout
       offset:
-        type: integer
-        description: Offset from the start of the entity list
+        $ref: "#/definitions/offset"
       length:
-        type: integer
-        description: The number of records retrieved relative to the offset
+        $ref: "#/definitions/length"
       total_matches:
-        type: integer
-        description: Total matches found
+        $ref: "#/definitions/total_matches"
       filter:
-        type: string
-        description: The filter used for the results
+        $ref: "#/definitions/filter"
       sort_order:
         $ref: "#/definitions/sort_order"
       sort_attribute:
-        type: string
-        description: The attribute to perform sort on
+        $ref: "#/definitions/sort_attribute"
   blackout_reference:
     title: Reference to a blackout
     type: object
@@ -45147,23 +44245,15 @@ definitions:
         x-ntnx-enum:
         - direct_connect
       offset:
-        type: integer
-        format: int32
-        minimum: 0
-        description: Offset from the start of the entity list
+        $ref: "#/definitions/offset"
       length:
-        type: integer
-        format: int32
-        minimum: 1
-        description: The number of records to retrieve relative to the offset
+        $ref: "#/definitions/length"
       filter:
-        type: string
-        description: The filter in FIQL syntax used for the results.
+        $ref: "#/definitions/filter"
       sort_order:
         $ref: "#/definitions/sort_order"
       sort_attribute:
-        type: string
-        description: The attribute to perform sort on
+        $ref: "#/definitions/sort_attribute"
   direct_connect_list_metadata_output:
     type: object
     title: Metadata for direct_connect list output
@@ -45177,22 +44267,17 @@ definitions:
         x-ntnx-enum:
         - direct_connect
       offset:
-        type: integer
-        description: Offset from the start of the entity list
+        $ref: "#/definitions/offset"
       length:
-        type: integer
-        description: The number of records retrieved relative to the offset
+        $ref: "#/definitions/length"
       total_matches:
-        type: integer
-        description: Total matches found
+        $ref: "#/definitions/total_matches"
       filter:
-        type: string
-        description: The filter used for the results
+        $ref: "#/definitions/filter"
       sort_order:
         $ref: "#/definitions/sort_order"
       sort_attribute:
-        type: string
-        description: The attribute to perform sort on
+        $ref: "#/definitions/sort_attribute"
   direct_connect_reference:
     title: Reference to a direct_connect
     type: object
@@ -45320,23 +44405,15 @@ definitions:
         x-ntnx-enum:
         - public_cidr
       offset:
-        type: integer
-        format: int32
-        minimum: 0
-        description: Offset from the start of the entity list
+        $ref: "#/definitions/offset"
       length:
-        type: integer
-        format: int32
-        minimum: 1
-        description: The number of records to retrieve relative to the offset
+        $ref: "#/definitions/length"
       filter:
-        type: string
-        description: The filter in FIQL syntax used for the results.
+        $ref: "#/definitions/filter"
       sort_order:
         $ref: "#/definitions/sort_order"
       sort_attribute:
-        type: string
-        description: The attribute to perform sort on
+        $ref: "#/definitions/sort_attribute"
   public_cidr_list_metadata_output:
     type: object
     title: Metadata for public_cidr list output
@@ -45350,22 +44427,17 @@ definitions:
         x-ntnx-enum:
         - public_cidr
       offset:
-        type: integer
-        description: Offset from the start of the entity list
+        $ref: "#/definitions/offset"
       length:
-        type: integer
-        description: The number of records retrieved relative to the offset
+        $ref: "#/definitions/length"
       total_matches:
-        type: integer
-        description: Total matches found
+        $ref: "#/definitions/total_matches"
       filter:
-        type: string
-        description: The filter used for the results
+        $ref: "#/definitions/filter"
       sort_order:
         $ref: "#/definitions/sort_order"
       sort_attribute:
-        type: string
-        description: The attribute to perform sort on
+        $ref: "#/definitions/sort_attribute"
   public_cidr_reference:
     title: Reference to a public_cidr
     type: object
@@ -45493,23 +44565,15 @@ definitions:
         x-ntnx-enum:
         - direct_connect_virtual_interface
       offset:
-        type: integer
-        format: int32
-        minimum: 0
-        description: Offset from the start of the entity list
+        $ref: "#/definitions/offset"
       length:
-        type: integer
-        format: int32
-        minimum: 1
-        description: The number of records to retrieve relative to the offset
+        $ref: "#/definitions/length"
       filter:
-        type: string
-        description: The filter in FIQL syntax used for the results.
+        $ref: "#/definitions/filter"
       sort_order:
         $ref: "#/definitions/sort_order"
       sort_attribute:
-        type: string
-        description: The attribute to perform sort on
+        $ref: "#/definitions/sort_attribute"
   direct_connect_virtual_interface_list_metadata_output:
     type: object
     title: Metadata for direct_connect_virtual_interface list output
@@ -45523,22 +44587,17 @@ definitions:
         x-ntnx-enum:
         - direct_connect_virtual_interface
       offset:
-        type: integer
-        description: Offset from the start of the entity list
+        $ref: "#/definitions/offset"
       length:
-        type: integer
-        description: The number of records retrieved relative to the offset
+        $ref: "#/definitions/length"
       total_matches:
-        type: integer
-        description: Total matches found
+        $ref: "#/definitions/total_matches"
       filter:
-        type: string
-        description: The filter used for the results
+        $ref: "#/definitions/filter"
       sort_order:
         $ref: "#/definitions/sort_order"
       sort_attribute:
-        type: string
-        description: The attribute to perform sort on
+        $ref: "#/definitions/sort_attribute"
   direct_connect_virtual_interface_reference:
     title: Reference to a direct_connect_virtual_interface
     type: object
@@ -45666,23 +44725,15 @@ definitions:
         x-ntnx-enum:
         - app
       offset:
-        type: integer
-        format: int32
-        minimum: 0
-        description: Offset from the start of the entity list
+        $ref: "#/definitions/offset"
       length:
-        type: integer
-        format: int32
-        minimum: 1
-        description: The number of records to retrieve relative to the offset
+        $ref: "#/definitions/length"
       filter:
-        type: string
-        description: The filter in FIQL syntax used for the results.
+        $ref: "#/definitions/filter"
       sort_order:
         $ref: "#/definitions/sort_order"
       sort_attribute:
-        type: string
-        description: The attribute to perform sort on
+        $ref: "#/definitions/sort_attribute"
   app_list_metadata_output:
     type: object
     title: Metadata for app list output
@@ -45696,22 +44747,17 @@ definitions:
         x-ntnx-enum:
         - app
       offset:
-        type: integer
-        description: Offset from the start of the entity list
+        $ref: "#/definitions/offset"
       length:
-        type: integer
-        description: The number of records retrieved relative to the offset
+        $ref: "#/definitions/length"
       total_matches:
-        type: integer
-        description: Total matches found
+        $ref: "#/definitions/total_matches"
       filter:
-        type: string
-        description: The filter used for the results
+        $ref: "#/definitions/filter"
       sort_order:
         $ref: "#/definitions/sort_order"
       sort_attribute:
-        type: string
-        description: The attribute to perform sort on
+        $ref: "#/definitions/sort_attribute"
   app_reference:
     title: Reference to a app
     type: object
@@ -45839,23 +44885,15 @@ definitions:
         x-ntnx-enum:
         - account
       offset:
-        type: integer
-        format: int32
-        minimum: 0
-        description: Offset from the start of the entity list
+        $ref: "#/definitions/offset"
       length:
-        type: integer
-        format: int32
-        minimum: 1
-        description: The number of records to retrieve relative to the offset
+        $ref: "#/definitions/length"
       filter:
-        type: string
-        description: The filter in FIQL syntax used for the results.
+        $ref: "#/definitions/filter"
       sort_order:
         $ref: "#/definitions/sort_order"
       sort_attribute:
-        type: string
-        description: The attribute to perform sort on
+        $ref: "#/definitions/sort_attribute"
   account_list_metadata_output:
     type: object
     title: Metadata for account list output
@@ -45869,22 +44907,17 @@ definitions:
         x-ntnx-enum:
         - account
       offset:
-        type: integer
-        description: Offset from the start of the entity list
+        $ref: "#/definitions/offset"
       length:
-        type: integer
-        description: The number of records retrieved relative to the offset
+        $ref: "#/definitions/length"
       total_matches:
-        type: integer
-        description: Total matches found
+        $ref: "#/definitions/total_matches"
       filter:
-        type: string
-        description: The filter used for the results
+        $ref: "#/definitions/filter"
       sort_order:
         $ref: "#/definitions/sort_order"
       sort_attribute:
-        type: string
-        description: The attribute to perform sort on
+        $ref: "#/definitions/sort_attribute"
   account_reference:
     title: Reference to a account
     type: object
@@ -46012,23 +45045,15 @@ definitions:
         x-ntnx-enum:
         - app_runlog
       offset:
-        type: integer
-        format: int32
-        minimum: 0
-        description: Offset from the start of the entity list
+        $ref: "#/definitions/offset"
       length:
-        type: integer
-        format: int32
-        minimum: 1
-        description: The number of records to retrieve relative to the offset
+        $ref: "#/definitions/length"
       filter:
-        type: string
-        description: The filter in FIQL syntax used for the results.
+        $ref: "#/definitions/filter"
       sort_order:
         $ref: "#/definitions/sort_order"
       sort_attribute:
-        type: string
-        description: The attribute to perform sort on
+        $ref: "#/definitions/sort_attribute"
   app_runlog_list_metadata_output:
     type: object
     title: Metadata for app_runlog list output
@@ -46042,22 +45067,17 @@ definitions:
         x-ntnx-enum:
         - app_runlog
       offset:
-        type: integer
-        description: Offset from the start of the entity list
+        $ref: "#/definitions/offset"
       length:
-        type: integer
-        description: The number of records retrieved relative to the offset
+        $ref: "#/definitions/length"
       total_matches:
-        type: integer
-        description: Total matches found
+        $ref: "#/definitions/total_matches"
       filter:
-        type: string
-        description: The filter used for the results
+        $ref: "#/definitions/filter"
       sort_order:
         $ref: "#/definitions/sort_order"
       sort_attribute:
-        type: string
-        description: The attribute to perform sort on
+        $ref: "#/definitions/sort_attribute"
   app_runlog_reference:
     title: Reference to a app_runlog
     type: object
@@ -46185,23 +45205,15 @@ definitions:
         x-ntnx-enum:
         - environment
       offset:
-        type: integer
-        format: int32
-        minimum: 0
-        description: Offset from the start of the entity list
+        $ref: "#/definitions/offset"
       length:
-        type: integer
-        format: int32
-        minimum: 1
-        description: The number of records to retrieve relative to the offset
+        $ref: "#/definitions/length"
       filter:
-        type: string
-        description: The filter in FIQL syntax used for the results.
+        $ref: "#/definitions/filter"
       sort_order:
         $ref: "#/definitions/sort_order"
       sort_attribute:
-        type: string
-        description: The attribute to perform sort on
+        $ref: "#/definitions/sort_attribute"
   environment_list_metadata_output:
     type: object
     title: Metadata for environment list output
@@ -46215,22 +45227,17 @@ definitions:
         x-ntnx-enum:
         - environment
       offset:
-        type: integer
-        description: Offset from the start of the entity list
+        $ref: "#/definitions/offset"
       length:
-        type: integer
-        description: The number of records retrieved relative to the offset
+        $ref: "#/definitions/length"
       total_matches:
-        type: integer
-        description: Total matches found
+        $ref: "#/definitions/total_matches"
       filter:
-        type: string
-        description: The filter used for the results
+        $ref: "#/definitions/filter"
       sort_order:
         $ref: "#/definitions/sort_order"
       sort_attribute:
-        type: string
-        description: The attribute to perform sort on
+        $ref: "#/definitions/sort_attribute"
   environment_reference:
     title: Reference to a environment
     type: object
@@ -46358,23 +45365,15 @@ definitions:
         x-ntnx-enum:
         - blueprint
       offset:
-        type: integer
-        format: int32
-        minimum: 0
-        description: Offset from the start of the entity list
+        $ref: "#/definitions/offset"
       length:
-        type: integer
-        format: int32
-        minimum: 1
-        description: The number of records to retrieve relative to the offset
+        $ref: "#/definitions/length"
       filter:
-        type: string
-        description: The filter in FIQL syntax used for the results.
+        $ref: "#/definitions/filter"
       sort_order:
         $ref: "#/definitions/sort_order"
       sort_attribute:
-        type: string
-        description: The attribute to perform sort on
+        $ref: "#/definitions/sort_attribute"
   blueprint_list_metadata_output:
     type: object
     title: Metadata for blueprint list output
@@ -46388,22 +45387,17 @@ definitions:
         x-ntnx-enum:
         - blueprint
       offset:
-        type: integer
-        description: Offset from the start of the entity list
+        $ref: "#/definitions/offset"
       length:
-        type: integer
-        description: The number of records retrieved relative to the offset
+        $ref: "#/definitions/length"
       total_matches:
-        type: integer
-        description: Total matches found
+        $ref: "#/definitions/total_matches"
       filter:
-        type: string
-        description: The filter used for the results
+        $ref: "#/definitions/filter"
       sort_order:
         $ref: "#/definitions/sort_order"
       sort_attribute:
-        type: string
-        description: The attribute to perform sort on
+        $ref: "#/definitions/sort_attribute"
   blueprint_reference:
     title: Reference to a blueprint
     type: object
@@ -46531,23 +45525,15 @@ definitions:
         x-ntnx-enum:
         - task
       offset:
-        type: integer
-        format: int32
-        minimum: 0
-        description: Offset from the start of the entity list
+        $ref: "#/definitions/offset"
       length:
-        type: integer
-        format: int32
-        minimum: 1
-        description: The number of records to retrieve relative to the offset
+        $ref: "#/definitions/length"
       filter:
-        type: string
-        description: The filter in FIQL syntax used for the results.
+        $ref: "#/definitions/filter"
       sort_order:
         $ref: "#/definitions/sort_order"
       sort_attribute:
-        type: string
-        description: The attribute to perform sort on
+        $ref: "#/definitions/sort_attribute"
   task_list_metadata_output:
     type: object
     title: Metadata for task list output
@@ -46561,22 +45547,17 @@ definitions:
         x-ntnx-enum:
         - task
       offset:
-        type: integer
-        description: Offset from the start of the entity list
+        $ref: "#/definitions/offset"
       length:
-        type: integer
-        description: The number of records retrieved relative to the offset
+        $ref: "#/definitions/length"
       total_matches:
-        type: integer
-        description: Total matches found
+        $ref: "#/definitions/total_matches"
       filter:
-        type: string
-        description: The filter used for the results
+        $ref: "#/definitions/filter"
       sort_order:
         $ref: "#/definitions/sort_order"
       sort_attribute:
-        type: string
-        description: The attribute to perform sort on
+        $ref: "#/definitions/sort_attribute"
   task_reference:
     title: Reference to a task
     type: object
@@ -46704,23 +45685,15 @@ definitions:
         x-ntnx-enum:
         - cloud_trust
       offset:
-        type: integer
-        format: int32
-        minimum: 0
-        description: Offset from the start of the entity list
+        $ref: "#/definitions/offset"
       length:
-        type: integer
-        format: int32
-        minimum: 1
-        description: The number of records to retrieve relative to the offset
+        $ref: "#/definitions/length"
       filter:
-        type: string
-        description: The filter in FIQL syntax used for the results.
+        $ref: "#/definitions/filter"
       sort_order:
         $ref: "#/definitions/sort_order"
       sort_attribute:
-        type: string
-        description: The attribute to perform sort on
+        $ref: "#/definitions/sort_attribute"
   cloud_trust_list_metadata_output:
     type: object
     title: Metadata for cloud_trust list output
@@ -46734,22 +45707,17 @@ definitions:
         x-ntnx-enum:
         - cloud_trust
       offset:
-        type: integer
-        description: Offset from the start of the entity list
+        $ref: "#/definitions/offset"
       length:
-        type: integer
-        description: The number of records retrieved relative to the offset
+        $ref: "#/definitions/length"
       total_matches:
-        type: integer
-        description: Total matches found
+        $ref: "#/definitions/total_matches"
       filter:
-        type: string
-        description: The filter used for the results
+        $ref: "#/definitions/filter"
       sort_order:
         $ref: "#/definitions/sort_order"
       sort_attribute:
-        type: string
-        description: The attribute to perform sort on
+        $ref: "#/definitions/sort_attribute"
   cloud_trust_reference:
     title: Reference to a cloud_trust
     type: object
@@ -46877,23 +45845,15 @@ definitions:
         x-ntnx-enum:
         - entity_sync_rule
       offset:
-        type: integer
-        format: int32
-        minimum: 0
-        description: Offset from the start of the entity list
+        $ref: "#/definitions/offset"
       length:
-        type: integer
-        format: int32
-        minimum: 1
-        description: The number of records to retrieve relative to the offset
+        $ref: "#/definitions/length"
       filter:
-        type: string
-        description: The filter in FIQL syntax used for the results.
+        $ref: "#/definitions/filter"
       sort_order:
         $ref: "#/definitions/sort_order"
       sort_attribute:
-        type: string
-        description: The attribute to perform sort on
+        $ref: "#/definitions/sort_attribute"
   entity_sync_rule_list_metadata_output:
     type: object
     title: Metadata for entity_sync_rule list output
@@ -46907,22 +45867,17 @@ definitions:
         x-ntnx-enum:
         - entity_sync_rule
       offset:
-        type: integer
-        description: Offset from the start of the entity list
+        $ref: "#/definitions/offset"
       length:
-        type: integer
-        description: The number of records retrieved relative to the offset
+        $ref: "#/definitions/length"
       total_matches:
-        type: integer
-        description: Total matches found
+        $ref: "#/definitions/total_matches"
       filter:
-        type: string
-        description: The filter used for the results
+        $ref: "#/definitions/filter"
       sort_order:
         $ref: "#/definitions/sort_order"
       sort_attribute:
-        type: string
-        description: The attribute to perform sort on
+        $ref: "#/definitions/sort_attribute"
   entity_sync_rule_reference:
     title: Reference to a entity_sync_rule
     type: object
@@ -47050,23 +46005,15 @@ definitions:
         x-ntnx-enum:
         - tenant
       offset:
-        type: integer
-        format: int32
-        minimum: 0
-        description: Offset from the start of the entity list
+        $ref: "#/definitions/offset"
       length:
-        type: integer
-        format: int32
-        minimum: 1
-        description: The number of records to retrieve relative to the offset
+        $ref: "#/definitions/length"
       filter:
-        type: string
-        description: The filter in FIQL syntax used for the results.
+        $ref: "#/definitions/filter"
       sort_order:
         $ref: "#/definitions/sort_order"
       sort_attribute:
-        type: string
-        description: The attribute to perform sort on
+        $ref: "#/definitions/sort_attribute"
   tenant_list_metadata_output:
     type: object
     title: Metadata for tenant list output
@@ -47080,22 +46027,17 @@ definitions:
         x-ntnx-enum:
         - tenant
       offset:
-        type: integer
-        description: Offset from the start of the entity list
+        $ref: "#/definitions/offset"
       length:
-        type: integer
-        description: The number of records retrieved relative to the offset
+        $ref: "#/definitions/length"
       total_matches:
-        type: integer
-        description: Total matches found
+        $ref: "#/definitions/total_matches"
       filter:
-        type: string
-        description: The filter used for the results
+        $ref: "#/definitions/filter"
       sort_order:
         $ref: "#/definitions/sort_order"
       sort_attribute:
-        type: string
-        description: The attribute to perform sort on
+        $ref: "#/definitions/sort_attribute"
   tenant_reference:
     title: Reference to a tenant
     type: object
@@ -47223,23 +46165,15 @@ definitions:
         x-ntnx-enum:
         - qos_policy
       offset:
-        type: integer
-        format: int32
-        minimum: 0
-        description: Offset from the start of the entity list
+        $ref: "#/definitions/offset"
       length:
-        type: integer
-        format: int32
-        minimum: 1
-        description: The number of records to retrieve relative to the offset
+        $ref: "#/definitions/length"
       filter:
-        type: string
-        description: The filter in FIQL syntax used for the results.
+        $ref: "#/definitions/filter"
       sort_order:
         $ref: "#/definitions/sort_order"
       sort_attribute:
-        type: string
-        description: The attribute to perform sort on
+        $ref: "#/definitions/sort_attribute"
   qos_policy_list_metadata_output:
     type: object
     title: Metadata for qos_policy list output
@@ -47253,22 +46187,17 @@ definitions:
         x-ntnx-enum:
         - qos_policy
       offset:
-        type: integer
-        description: Offset from the start of the entity list
+        $ref: "#/definitions/offset"
       length:
-        type: integer
-        description: The number of records retrieved relative to the offset
+        $ref: "#/definitions/length"
       total_matches:
-        type: integer
-        description: Total matches found
+        $ref: "#/definitions/total_matches"
       filter:
-        type: string
-        description: The filter used for the results
+        $ref: "#/definitions/filter"
       sort_order:
         $ref: "#/definitions/sort_order"
       sort_attribute:
-        type: string
-        description: The attribute to perform sort on
+        $ref: "#/definitions/sort_attribute"
   qos_policy_reference:
     title: Reference to a qos_policy
     type: object
@@ -47396,23 +46325,15 @@ definitions:
         x-ntnx-enum:
         - ngt_policy
       offset:
-        type: integer
-        format: int32
-        minimum: 0
-        description: Offset from the start of the entity list
+        $ref: "#/definitions/offset"
       length:
-        type: integer
-        format: int32
-        minimum: 1
-        description: The number of records to retrieve relative to the offset
+        $ref: "#/definitions/length"
       filter:
-        type: string
-        description: The filter in FIQL syntax used for the results.
+        $ref: "#/definitions/filter"
       sort_order:
         $ref: "#/definitions/sort_order"
       sort_attribute:
-        type: string
-        description: The attribute to perform sort on
+        $ref: "#/definitions/sort_attribute"
   ngt_policy_list_metadata_output:
     type: object
     title: Metadata for ngt_policy list output
@@ -47426,22 +46347,17 @@ definitions:
         x-ntnx-enum:
         - ngt_policy
       offset:
-        type: integer
-        description: Offset from the start of the entity list
+        $ref: "#/definitions/offset"
       length:
-        type: integer
-        description: The number of records retrieved relative to the offset
+        $ref: "#/definitions/length"
       total_matches:
-        type: integer
-        description: Total matches found
+        $ref: "#/definitions/total_matches"
       filter:
-        type: string
-        description: The filter used for the results
+        $ref: "#/definitions/filter"
       sort_order:
         $ref: "#/definitions/sort_order"
       sort_attribute:
-        type: string
-        description: The attribute to perform sort on
+        $ref: "#/definitions/sort_attribute"
   ngt_policy_reference:
     title: Reference to a ngt_policy
     type: object
@@ -47569,23 +46485,15 @@ definitions:
         x-ntnx-enum:
         - mh_vm
       offset:
-        type: integer
-        format: int32
-        minimum: 0
-        description: Offset from the start of the entity list
+        $ref: "#/definitions/offset"
       length:
-        type: integer
-        format: int32
-        minimum: 1
-        description: The number of records to retrieve relative to the offset
+        $ref: "#/definitions/length"
       filter:
-        type: string
-        description: The filter in FIQL syntax used for the results.
+        $ref: "#/definitions/filter"
       sort_order:
         $ref: "#/definitions/sort_order"
       sort_attribute:
-        type: string
-        description: The attribute to perform sort on
+        $ref: "#/definitions/sort_attribute"
   mh_vm_list_metadata_output:
     type: object
     title: Metadata for mh_vm list output
@@ -47599,22 +46507,17 @@ definitions:
         x-ntnx-enum:
         - mh_vm
       offset:
-        type: integer
-        description: Offset from the start of the entity list
+        $ref: "#/definitions/offset"
       length:
-        type: integer
-        description: The number of records retrieved relative to the offset
+        $ref: "#/definitions/length"
       total_matches:
-        type: integer
-        description: Total matches found
+        $ref: "#/definitions/total_matches"
       filter:
-        type: string
-        description: The filter used for the results
+        $ref: "#/definitions/filter"
       sort_order:
         $ref: "#/definitions/sort_order"
       sort_attribute:
-        type: string
-        description: The attribute to perform sort on
+        $ref: "#/definitions/sort_attribute"
   mh_vm_reference:
     title: Reference to a mh_vm
     type: object
@@ -53339,23 +52242,15 @@ definitions:
         x-ntnx-enum:
         - vm_recovery_point
       offset:
-        type: integer
-        format: int32
-        minimum: 0
-        description: Offset from the start of the entity list
+        $ref: "#/definitions/offset"
       length:
-        type: integer
-        format: int32
-        minimum: 1
-        description: The number of records to retrieve relative to the offset
+        $ref: "#/definitions/length"
       filter:
-        type: string
-        description: The filter in FIQL syntax used for the results.
+        $ref: "#/definitions/filter"
       sort_order:
         $ref: "#/definitions/sort_order"
       sort_attribute:
-        type: string
-        description: The attribute to perform sort on
+        $ref: "#/definitions/sort_attribute"
   vm_recovery_point_list_metadata_output:
     type: object
     title: Metadata for vm_recovery_point list output
@@ -53369,22 +52264,17 @@ definitions:
         x-ntnx-enum:
         - vm_recovery_point
       offset:
-        type: integer
-        description: Offset from the start of the entity list
+        $ref: "#/definitions/offset"
       length:
-        type: integer
-        description: The number of records retrieved relative to the offset
+        $ref: "#/definitions/length"
       total_matches:
-        type: integer
-        description: Total matches found
+        $ref: "#/definitions/total_matches"
       filter:
-        type: string
-        description: The filter used for the results
+        $ref: "#/definitions/filter"
       sort_order:
         $ref: "#/definitions/sort_order"
       sort_attribute:
-        type: string
-        description: The attribute to perform sort on
+        $ref: "#/definitions/sort_attribute"
   vm_recovery_point_reference:
     title: Reference to a vm_recovery_point
     type: object
@@ -53895,23 +52785,17 @@ definitions:
         x-ntnx-enum:
         - aws_vm
       offset:
-        type: integer
-        format: int32
-        minimum: 0
-        description: Offset from the start of the entity list
+        $ref: "#/definitions/offset"
       length:
-        type: integer
-        format: int32
-        minimum: 1
-        description: The number of records to retrieve relative to the offset
+        $ref: "#/definitions/length"
+      total_matches:
+        $ref: "#/definitions/total_matches"
       filter:
-        type: string
-        description: The filter used for the results
+        $ref: "#/definitions/filter"
       sort_order:
         $ref: "#/definitions/sort_order"
       sort_attribute:
-        type: string
-        description: The attribute to perform sort on
+        $ref: "#/definitions/sort_attribute"
 
   aws_vm_list_metadata_output:
     type: object
@@ -53926,22 +52810,17 @@ definitions:
         x-ntnx-enum:
         - aws_vm
       offset:
-        type: integer
-        description: Offset from the start of the entity list
+        $ref: "#/definitions/offset"
       length:
-        type: integer
-        description: The number of records retrieved relative to the offset
+        $ref: "#/definitions/length"
       total_matches:
-        type: integer
-        description: Total matches found
+        $ref: "#/definitions/total_matches"
       filter:
-        type: string
-        description: The filter used for the results
+        $ref: "#/definitions/filter"
       sort_order:
         $ref: "#/definitions/sort_order"
       sort_attribute:
-        type: string
-        description: The attribute to perform sort on
+        $ref: "#/definitions/sort_attribute"
 
   aws_vm_status:
     type: object
@@ -54068,23 +52947,17 @@ definitions:
         x-ntnx-enum:
         - aws_vpc
       offset:
-        type: integer
-        format: int32
-        minimum: 0
-        description: Offset from the start of the entity list
+        $ref: "#/definitions/offset"
       length:
-        type: integer
-        format: int32
-        minimum: 1
-        description: The number of records to retrieve relative to the offset
+        $ref: "#/definitions/length"
+      total_matches:
+        $ref: "#/definitions/total_matches"
       filter:
-        type: string
-        description: The filter used for the results
+        $ref: "#/definitions/filter"
       sort_order:
         $ref: "#/definitions/sort_order"
       sort_attribute:
-        type: string
-        description: The attribute to perform sort on
+        $ref: "#/definitions/sort_attribute"
 
   aws_vpc_list_metadata_output:
     type: object
@@ -54099,22 +52972,17 @@ definitions:
         x-ntnx-enum:
         - aws_vpc
       offset:
-        type: integer
-        description: Offset from the start of the entity list
+        $ref: "#/definitions/offset"
       length:
-        type: integer
-        description: The number of records retrieved relative to the offset
+        $ref: "#/definitions/length"
       total_matches:
-        type: integer
-        description: Total matches found
+        $ref: "#/definitions/total_matches"
       filter:
-        type: string
-        description: The filter used for the results
+        $ref: "#/definitions/filter"
       sort_order:
         $ref: "#/definitions/sort_order"
       sort_attribute:
-        type: string
-        description: The attribute to perform sort on
+        $ref: "#/definitions/sort_attribute"
 
   aws_vpc_status:
     type: object
@@ -54256,23 +53124,17 @@ definitions:
         x-ntnx-enum:
         - aws_subnet
       offset:
-        type: integer
-        format: int32
-        minimum: 0
-        description: Offset from the start of the entity list
+        $ref: "#/definitions/offset"
       length:
-        type: integer
-        format: int32
-        minimum: 1
-        description: The number of records to retrieve relative to the offset
+        $ref: "#/definitions/length"
+      total_matches:
+        $ref: "#/definitions/total_matches"
       filter:
-        type: string
-        description: The filter used for the results
+        $ref: "#/definitions/filter"
       sort_order:
         $ref: "#/definitions/sort_order"
       sort_attribute:
-        type: string
-        description: The attribute to perform sort on
+        $ref: "#/definitions/sort_attribute"
 
   aws_subnet_list_metadata_output:
     type: object
@@ -54287,22 +53149,17 @@ definitions:
         x-ntnx-enum:
         - aws_subnet
       offset:
-        type: integer
-        description: Offset from the start of the entity list
+        $ref: "#/definitions/offset"
       length:
-        type: integer
-        description: The number of records retrieved relative to the offset
+        $ref: "#/definitions/length"
       total_matches:
-        type: integer
-        description: Total matches found
+        $ref: "#/definitions/total_matches"
       filter:
-        type: string
-        description: The filter used for the results
+        $ref: "#/definitions/filter"
       sort_order:
         $ref: "#/definitions/sort_order"
       sort_attribute:
-        type: string
-        description: The attribute to perform sort on
+        $ref: "#/definitions/sort_attribute"
 
   aws_subnet_status:
     type: object
@@ -54444,23 +53301,17 @@ definitions:
         x-ntnx-enum:
         - aws_security_group
       offset:
-        type: integer
-        format: int32
-        minimum: 0
-        description: Offset from the start of the entity list
+        $ref: "#/definitions/offset"
       length:
-        type: integer
-        format: int32
-        minimum: 1
-        description: The number of records to retrieve relative to the offset
+        $ref: "#/definitions/length"
+      total_matches:
+        $ref: "#/definitions/total_matches"
       filter:
-        type: string
-        description: The filter used for the results
+        $ref: "#/definitions/filter"
       sort_order:
         $ref: "#/definitions/sort_order"
       sort_attribute:
-        type: string
-        description: The attribute to perform sort on
+        $ref: "#/definitions/sort_attribute"
 
   aws_security_group_list_metadata_output:
     type: object
@@ -54475,22 +53326,17 @@ definitions:
         x-ntnx-enum:
         - aws_security_group
       offset:
-        type: integer
-        description: Offset from the start of the entity list
+        $ref: "#/definitions/offset"
       length:
-        type: integer
-        description: The number of records retrieved relative to the offset
+        $ref: "#/definitions/length"
       total_matches:
-        type: integer
-        description: Total matches found
+        $ref: "#/definitions/total_matches"
       filter:
-        type: string
-        description: The filter used for the results
+        $ref: "#/definitions/filter"
       sort_order:
         $ref: "#/definitions/sort_order"
       sort_attribute:
-        type: string
-        description: The attribute to perform sort on
+        $ref: "#/definitions/sort_attribute"
 
   aws_security_group_status:
     type: object
@@ -54632,23 +53478,17 @@ definitions:
         x-ntnx-enum:
         - aws_image
       offset:
-        type: integer
-        format: int32
-        minimum: 0
-        description: Offset from the start of the entity list
+        $ref: "#/definitions/offset"
       length:
-        type: integer
-        format: int32
-        minimum: 1
-        description: The number of records to retrieve relative to the offset
+        $ref: "#/definitions/length"
+      total_matches:
+        $ref: "#/definitions/total_matches"
       filter:
-        type: string
-        description: The filter used for the results
+        $ref: "#/definitions/filter"
       sort_order:
         $ref: "#/definitions/sort_order"
       sort_attribute:
-        type: string
-        description: The attribute to perform sort on
+        $ref: "#/definitions/sort_attribute"
 
   aws_image_list_metadata_output:
     type: object
@@ -54663,22 +53503,17 @@ definitions:
         x-ntnx-enum:
         - aws_image
       offset:
-        type: integer
-        description: Offset from the start of the entity list
+        $ref: "#/definitions/offset"
       length:
-        type: integer
-        description: The number of records retrieved relative to the offset
+        $ref: "#/definitions/length"
       total_matches:
-        type: integer
-        description: Total matches found
+        $ref: "#/definitions/total_matches"
       filter:
-        type: string
-        description: The filter used for the results
+        $ref: "#/definitions/filter"
       sort_order:
         $ref: "#/definitions/sort_order"
       sort_attribute:
-        type: string
-        description: The attribute to perform sort on
+        $ref: "#/definitions/sort_attribute"
 
   aws_image_status:
     type: object
@@ -54820,23 +53655,17 @@ definitions:
         x-ntnx-enum:
         - aws_elastic_ip
       offset:
-        type: integer
-        format: int32
-        minimum: 0
-        description: Offset from the start of the entity list
+        $ref: "#/definitions/offset"
       length:
-        type: integer
-        format: int32
-        minimum: 1
-        description: The number of records to retrieve relative to the offset
+        $ref: "#/definitions/length"
+      total_matches:
+        $ref: "#/definitions/total_matches"
       filter:
-        type: string
-        description: The filter used for the results
+        $ref: "#/definitions/filter"
       sort_order:
         $ref: "#/definitions/sort_order"
       sort_attribute:
-        type: string
-        description: The attribute to perform sort on
+        $ref: "#/definitions/sort_attribute"
 
   aws_elastic_ip_list_metadata_output:
     type: object
@@ -54851,22 +53680,17 @@ definitions:
         x-ntnx-enum:
         - aws_elastic_ip
       offset:
-        type: integer
-        description: Offset from the start of the entity list
+        $ref: "#/definitions/offset"
       length:
-        type: integer
-        description: The number of records retrieved relative to the offset
+        $ref: "#/definitions/length"
       total_matches:
-        type: integer
-        description: Total matches found
+        $ref: "#/definitions/total_matches"
       filter:
-        type: string
-        description: The filter used for the results
+        $ref: "#/definitions/filter"
       sort_order:
         $ref: "#/definitions/sort_order"
       sort_attribute:
-        type: string
-        description: The attribute to perform sort on
+        $ref: "#/definitions/sort_attribute"
 
   aws_elastic_ip_status:
     type: object
@@ -55008,23 +53832,17 @@ definitions:
         x-ntnx-enum:
         - aws_region
       offset:
-        type: integer
-        format: int32
-        minimum: 0
-        description: Offset from the start of the entity list
+        $ref: "#/definitions/offset"
       length:
-        type: integer
-        format: int32
-        minimum: 1
-        description: The number of records to retrieve relative to the offset
+        $ref: "#/definitions/length"
+      total_matches:
+        $ref: "#/definitions/total_matches"
       filter:
-        type: string
-        description: The filter used for the results
+        $ref: "#/definitions/filter"
       sort_order:
         $ref: "#/definitions/sort_order"
       sort_attribute:
-        type: string
-        description: The attribute to perform sort on
+        $ref: "#/definitions/sort_attribute"
 
   aws_region_list_metadata_output:
     type: object
@@ -55039,22 +53857,17 @@ definitions:
         x-ntnx-enum:
         - aws_region
       offset:
-        type: integer
-        description: Offset from the start of the entity list
+        $ref: "#/definitions/offset"
       length:
-        type: integer
-        description: The number of records retrieved relative to the offset
+        $ref: "#/definitions/length"
       total_matches:
-        type: integer
-        description: Total matches found
+        $ref: "#/definitions/total_matches"
       filter:
-        type: string
-        description: The filter used for the results
+        $ref: "#/definitions/filter"
       sort_order:
         $ref: "#/definitions/sort_order"
       sort_attribute:
-        type: string
-        description: The attribute to perform sort on
+        $ref: "#/definitions/sort_attribute"
 
   aws_region_status:
     type: object
@@ -55196,23 +54009,17 @@ definitions:
         x-ntnx-enum:
         - aws_availability_zone
       offset:
-        type: integer
-        format: int32
-        minimum: 0
-        description: Offset from the start of the entity list
+        $ref: "#/definitions/offset"
       length:
-        type: integer
-        format: int32
-        minimum: 1
-        description: The number of records to retrieve relative to the offset
+        $ref: "#/definitions/length"
+      total_matches:
+        $ref: "#/definitions/total_matches"
       filter:
-        type: string
-        description: The filter used for the results
+        $ref: "#/definitions/filter"
       sort_order:
         $ref: "#/definitions/sort_order"
       sort_attribute:
-        type: string
-        description: The attribute to perform sort on
+        $ref: "#/definitions/sort_attribute"
 
   aws_availability_zone_list_metadata_output:
     type: object
@@ -55227,22 +54034,17 @@ definitions:
         x-ntnx-enum:
         - aws_availability_zone
       offset:
-        type: integer
-        description: Offset from the start of the entity list
+        $ref: "#/definitions/offset"
       length:
-        type: integer
-        description: The number of records retrieved relative to the offset
+        $ref: "#/definitions/length"
       total_matches:
-        type: integer
-        description: Total matches found
+        $ref: "#/definitions/total_matches"
       filter:
-        type: string
-        description: The filter used for the results
+        $ref: "#/definitions/filter"
       sort_order:
         $ref: "#/definitions/sort_order"
       sort_attribute:
-        type: string
-        description: The attribute to perform sort on
+        $ref: "#/definitions/sort_attribute"
 
   aws_availability_zone_status:
     type: object
@@ -55384,23 +54186,17 @@ definitions:
         x-ntnx-enum:
         - aws_role
       offset:
-        type: integer
-        format: int32
-        minimum: 0
-        description: Offset from the start of the entity list
+        $ref: "#/definitions/offset"
       length:
-        type: integer
-        format: int32
-        minimum: 1
-        description: The number of records to retrieve relative to the offset
+        $ref: "#/definitions/length"
+      total_matches:
+        $ref: "#/definitions/total_matches"
       filter:
-        type: string
-        description: The filter used for the results
+        $ref: "#/definitions/filter"
       sort_order:
         $ref: "#/definitions/sort_order"
       sort_attribute:
-        type: string
-        description: The attribute to perform sort on
+        $ref: "#/definitions/sort_attribute"
 
   aws_role_list_metadata_output:
     type: object
@@ -55415,22 +54211,17 @@ definitions:
         x-ntnx-enum:
         - aws_role
       offset:
-        type: integer
-        description: Offset from the start of the entity list
+        $ref: "#/definitions/offset"
       length:
-        type: integer
-        description: The number of records retrieved relative to the offset
+        $ref: "#/definitions/length"
       total_matches:
-        type: integer
-        description: Total matches found
+        $ref: "#/definitions/total_matches"
       filter:
-        type: string
-        description: The filter used for the results
+        $ref: "#/definitions/filter"
       sort_order:
         $ref: "#/definitions/sort_order"
       sort_attribute:
-        type: string
-        description: The attribute to perform sort on
+        $ref: "#/definitions/sort_attribute"
 
   aws_role_status:
     type: object
@@ -55572,23 +54363,17 @@ definitions:
         x-ntnx-enum:
         - aws_key_pair
       offset:
-        type: integer
-        format: int32
-        minimum: 0
-        description: Offset from the start of the entity list
+        $ref: "#/definitions/offset"
       length:
-        type: integer
-        format: int32
-        minimum: 1
-        description: The number of records to retrieve relative to the offset
+        $ref: "#/definitions/length"
+      total_matches:
+        $ref: "#/definitions/total_matches"
       filter:
-        type: string
-        description: The filter used for the results
+        $ref: "#/definitions/filter"
       sort_order:
         $ref: "#/definitions/sort_order"
       sort_attribute:
-        type: string
-        description: The attribute to perform sort on
+        $ref: "#/definitions/sort_attribute"
 
   aws_key_pair_list_metadata_output:
     type: object
@@ -55603,22 +54388,17 @@ definitions:
         x-ntnx-enum:
         - aws_key_pair
       offset:
-        type: integer
-        description: Offset from the start of the entity list
+        $ref: "#/definitions/offset"
       length:
-        type: integer
-        description: The number of records retrieved relative to the offset
+        $ref: "#/definitions/length"
       total_matches:
-        type: integer
-        description: Total matches found
+        $ref: "#/definitions/total_matches"
       filter:
-        type: string
-        description: The filter used for the results
+        $ref: "#/definitions/filter"
       sort_order:
         $ref: "#/definitions/sort_order"
       sort_attribute:
-        type: string
-        description: The attribute to perform sort on
+        $ref: "#/definitions/sort_attribute"
 
   aws_key_pair_status:
     type: object
@@ -55760,23 +54540,17 @@ definitions:
         x-ntnx-enum:
         - aws_machine_type
       offset:
-        type: integer
-        format: int32
-        minimum: 0
-        description: Offset from the start of the entity list
+        $ref: "#/definitions/offset"
       length:
-        type: integer
-        format: int32
-        minimum: 1
-        description: The number of records to retrieve relative to the offset
+        $ref: "#/definitions/length"
+      total_matches:
+        $ref: "#/definitions/total_matches"
       filter:
-        type: string
-        description: The filter used for the results
+        $ref: "#/definitions/filter"
       sort_order:
         $ref: "#/definitions/sort_order"
       sort_attribute:
-        type: string
-        description: The attribute to perform sort on
+        $ref: "#/definitions/sort_attribute"
 
   aws_machine_type_list_metadata_output:
     type: object
@@ -55791,22 +54565,17 @@ definitions:
         x-ntnx-enum:
         - aws_machine_type
       offset:
-        type: integer
-        description: Offset from the start of the entity list
+        $ref: "#/definitions/offset"
       length:
-        type: integer
-        description: The number of records retrieved relative to the offset
+        $ref: "#/definitions/length"
       total_matches:
-        type: integer
-        description: Total matches found
+        $ref: "#/definitions/total_matches"
       filter:
-        type: string
-        description: The filter used for the results
+        $ref: "#/definitions/filter"
       sort_order:
         $ref: "#/definitions/sort_order"
       sort_attribute:
-        type: string
-        description: The attribute to perform sort on
+        $ref: "#/definitions/sort_attribute"
 
   aws_machine_type_status:
     type: object
@@ -55948,23 +54717,17 @@ definitions:
         x-ntnx-enum:
         - aws_volume_type
       offset:
-        type: integer
-        format: int32
-        minimum: 0
-        description: Offset from the start of the entity list
+        $ref: "#/definitions/offset"
       length:
-        type: integer
-        format: int32
-        minimum: 1
-        description: The number of records to retrieve relative to the offset
+        $ref: "#/definitions/length"
+      total_matches:
+        $ref: "#/definitions/total_matches"
       filter:
-        type: string
-        description: The filter used for the results
+        $ref: "#/definitions/filter"
       sort_order:
         $ref: "#/definitions/sort_order"
       sort_attribute:
-        type: string
-        description: The attribute to perform sort on
+        $ref: "#/definitions/sort_attribute"
 
   aws_volume_type_list_metadata_output:
     type: object
@@ -55979,22 +54742,17 @@ definitions:
         x-ntnx-enum:
         - aws_volume_type
       offset:
-        type: integer
-        description: Offset from the start of the entity list
+        $ref: "#/definitions/offset"
       length:
-        type: integer
-        description: The number of records retrieved relative to the offset
+        $ref: "#/definitions/length"
       total_matches:
-        type: integer
-        description: Total matches found
+        $ref: "#/definitions/total_matches"
       filter:
-        type: string
-        description: The filter used for the results
+        $ref: "#/definitions/filter"
       sort_order:
         $ref: "#/definitions/sort_order"
       sort_attribute:
-        type: string
-        description: The attribute to perform sort on
+        $ref: "#/definitions/sort_attribute"
 
   aws_volume_type_status:
     type: object
