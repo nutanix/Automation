@@ -1,3 +1,5 @@
+#!/usr/bin/env python3.6
+
 """
 
     nutanix-cluster-info.py
@@ -12,7 +14,7 @@
 """
 
 __author__ = "Chris Rasmussen @ Nutanix"
-__version__ = "2.0"
+__version__ = "3.0"
 __maintainer__ = "Chris Rasmussen @ Nutanix"
 __email__ = "crasmussen@nutanix.com"
 __status__ = "Development/Demo"
@@ -24,6 +26,7 @@ import json
 import os.path
 import socket
 import getpass
+import argparse
 from time import localtime, strftime
 from string import Template
 
@@ -38,8 +41,8 @@ from weasyprint.fonts import FontConfiguration
 def set_options():
     global ENTITY_RESPONSE_LENGTH
     ENTITY_RESPONSE_LENGTH = 50
-    global DISPLAY_OUTPUT
-    DISPLAY_OUTPUT = False
+    #global DISPLAY_OUTPUT
+    #DISPLAY_OUTPUT = False
     global html_rows
     html_rows = {}
     global entity_totals
@@ -49,10 +52,32 @@ def get_options():
     global cluster_ip
     global username
     global password
+    global DISPLAY_OUTPUT
 
-    cluster_ip = input('Prism Central IP address: ')
-    username = input('Prism Central username: ' )
-    password = getpass.getpass()
+    parser = argparse.ArgumentParser('Connect to Prism Central, gather some details and generate PDF documentation')
+    parser.add_argument('pc_ip', help='Prism Central IP address')
+    parser.add_argument('-u', '--username', help='Prism Central username')
+    parser.add_argument('-p', '--password', help='Prism Central password')
+    parser.add_argument('-o', '--output', help='Set to 1 to display cluster info after generating the PDF')
+
+    args = parser.parse_args()
+
+    if args.username:
+        username = args.username
+    else:
+        username = input('Please enter your Prism Central username: ')
+
+    if args.password:
+        password = args.password
+    else:
+        password = getpass.getpass()
+
+    if args.output:
+        DISPLAY_OUTPUT = args.output
+    else:
+        DISPLAY_OUTPUT = 0
+
+    cluster_ip = args.pc_ip
     print("\n")
 
 class ApiClient():
@@ -121,27 +146,12 @@ def generate_pdf_v2( json_results ):
     #
     # the next block parses some of the Prism Central info that currently exists as individual arrays
     #
+
+    for row_label in [ 'vm', 'subnet', 'cluster', 'project', 'network_security_rules', 'image', 'host', 'blueprint', 'app' ]:
+        print(f"{row_label}")
+        html_rows[row_label] = ""
+        entity_totals[row_label] = 0
     
-    html_rows['vm'] = ""
-    html_rows['subnet'] = ""
-    html_rows['cluster'] = ""
-    html_rows['project'] = ""
-    html_rows['network_security_rules'] = ""
-    html_rows['image'] = ""
-    html_rows['host'] = ""
-    html_rows['blueprint'] = ""
-    html_rows['app'] = ""
-    
-    entity_totals['vm'] = 0
-    entity_totals['subnet'] = 0
-    entity_totals['cluster'] = 0
-    entity_totals['project'] = 0
-    entity_totals['network_security_rules'] = 0
-    entity_totals['image'] = 0
-    entity_totals['host'] = 0
-    entity_totals['blueprint'] = 0
-    entity_totals['app'] = 0
-        
     print("\n")
     
     for json_result in json_results:
@@ -181,24 +191,37 @@ def generate_pdf_v2( json_results ):
             memory_total = 0
             html_rows['project'] = ""
             for project in json_result[1]["entities"]:
+
                 if DISPLAY_OUTPUT:
                     display = "Project: %s" % (project["spec"]["name"])
                     print( display )
                 html_rows['project'] = html_rows['project'] + "<tr><td>%s</td>" % project["spec"]["name"]
-                if( len( project["status"]["resources"]["resource_domain"]["resources"] ) > 0 ):
-                    for resource in project["status"]["resources"]["resource_domain"]["resources"]:
-                        if resource["resource_type"] == "VMS":
-                            vm_total = resource["value"]
-                        elif resource["resource_type"] == "VCPUS":
-                            cpu_total = resource["value"]
-                        elif resource["resource_type"] == "STORAGE":
-                            storage_total = resource["value"] /1024/1024/1024
-                        elif resource["resource_type"] == "MEMORY":
-                            memory_total = resource["value"] /1024/1024/1024
-                    html_rows['project'] = html_rows['project'] + "<td>%s</td><td>%s</td><td>%s</td><td>%s</td>" % ( vm_total, cpu_total, storage_total, memory_total )
-                else:
-                    html_rows['project'] = html_rows['project'] + "<td>0</td><td>0</td><td>0</td><td>0</td>"
+
+                try:
+
+                    if( len( project["status"]["resources"]["resource_domain"]["resources"] ) > 0 ):
+                        for resource in project["status"]["resources"]["resource_domain"]["resources"]:
+                            if resource["resource_type"] == "VMS":
+                                vm_total = resource["value"]
+                            elif resource["resource_type"] == "VCPUS":
+                                cpu_total = resource["value"]
+                            elif resource["resource_type"] == "STORAGE":
+                                storage_total = resource["value"] /1024/1024/1024
+                            elif resource["resource_type"] == "MEMORY":
+                                memory_total = resource["value"] /1024/1024/1024
+                        html_rows['project'] = html_rows['project'] + "<td>%s</td><td>%s</td><td>%s</td><td>%s</td>" % ( vm_total, cpu_total, storage_total, memory_total )
+                    else:
+                        html_rows['project'] = html_rows['project'] + "<td>0</td><td>0</td><td>0</td><td>0</td>"
+
+                except KeyError:
+                        html_rows['project'] = html_rows['project'] + "<td>0</td><td>0</td><td>0</td><td>0</td>"
+
                 html_rows['project'] = html_rows['project'] + "</tr>"
+
+
+
+
+
             print("\n")
         #########################
         # NETWORK_SECURITY_RULE #
