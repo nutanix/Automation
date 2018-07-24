@@ -12,6 +12,7 @@ Chris Rasmussen, Solutions Architect, Nutanix (Melbourne, AU)
 
 ## Changelog
 
+- 2018.07.21 - Added better parameter input and options
 - 2018.04.22 - Updated with installation and usage instructions for Windows 10 64-bit
 - 2018.04.04 - Published version based on Prism Central and v3 API
 - 2017.09.06 - Published new version based on Python 3
