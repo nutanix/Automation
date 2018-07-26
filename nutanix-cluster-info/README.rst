@@ -168,7 +168,7 @@ Screenshot
 
 This is what the PDF looks like, once generated.
 
-![Generated PDF screenshot](https://raw.githubusercontent.com/nutanix/Automation/master/nutanix-cluster-info/screenshot-pdf.png)
+.. image:: screenshot-pdf.png
 
 Support
 -------
