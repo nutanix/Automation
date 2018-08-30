@@ -1,0 +1,7 @@
+README.rst
+setup.py
+src/nutanix_cluster_info.egg-info/PKG-INFO
+src/nutanix_cluster_info.egg-info/SOURCES.txt
+src/nutanix_cluster_info.egg-info/dependency_links.txt
+src/nutanix_cluster_info.egg-info/requires.txt
+src/nutanix_cluster_info.egg-info/top_level.txt
