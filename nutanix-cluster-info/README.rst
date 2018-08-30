@@ -30,6 +30,7 @@ The intention is to use this script to generate very high-level and *unofficial*
 
 The other idea is for you, the user, to take this script and modify it to suit your requirements.
 
+<<<<<<< HEAD:nutanix-cluster-info/README.rst
 Requirements - All Operating Systems
 ------------------------------------
 
@@ -52,6 +53,15 @@ Requirements (new/Weasy-based version - Easy)
 
 ::
 
+=======
+Requirements (new/Weasy-based version - Easy)
+---------------------------------------------
+
+**Ubuntu 16.04 (LTS)**
+
+::
+
+>>>>>>> 0340d8ca4e14b06cf7759ef9fe70f8f268a97661:nutanix-cluster-info/README.rst
     sudo apt-get -y update
     sudo apt-get install -y libxml2-dev libxslt-dev libffi-dev libcairo2-dev libpango1.0-dev python3-dev python3-pip
     pip3 install --upgrade pip
@@ -105,11 +115,19 @@ Note: During testing, combining the 3 libraries above into a single install comm
 - Install [pycairo](https://www.lfd.uci.edu/~gohlke/pythonlibs/#pycairo).  Make sure you install the correct version for your system.  My installation filename was pycairo‑1.16.3‑cp36‑cp36m‑win_amd64.whl (change the filename in the command below, if you install a different version)
 
 ::
+<<<<<<< HEAD:nutanix-cluster-info/README.rst
 
     pip install pycairo‑1.16.3‑cp36‑cp36m‑win_amd64.whl
 
 **Note you may need to reboot for the PATH changes to take effect**
 
+=======
+
+    pip install pycairo‑1.16.3‑cp36‑cp36m‑win_amd64.whl
+
+**Note you may need to reboot for the PATH changes to take effect**
+
+>>>>>>> 0340d8ca4e14b06cf7759ef9fe70f8f268a97661:nutanix-cluster-info/README.rst
 Script Usage (General)
 ----------------------
 
@@ -120,6 +138,7 @@ There are a number of global options that can be set in this script.
 
 Script Usage (Ubuntu 16.04 LTS)
 -------------------------------
+<<<<<<< HEAD:nutanix-cluster-info/README.rst
 
 ::
 
@@ -131,6 +150,19 @@ Script Usage (OS X)
 ::
 
     /usr/local/bin/python3 ./src/nutanix-cluster-info.py
+=======
+
+::
+
+    /usr/bin/python3 nutanix-cluster-info.py
+
+Script Usage (OS X)
+-------------------
+
+::
+
+    /usr/local/bin/python3 nutanix-cluster-info.py
+>>>>>>> 0340d8ca4e14b06cf7759ef9fe70f8f268a97661:nutanix-cluster-info/README.rst
 
 Script Usage (Windows 10)
 -------------------------
@@ -140,7 +172,11 @@ Script Usage (Windows 10)
 
 ::
 
+<<<<<<< HEAD:nutanix-cluster-info/README.rst
     ./src/python nutanix-cluster-info.py
+=======
+    python nutanix-cluster-info.py
+>>>>>>> 0340d8ca4e14b06cf7759ef9fe70f8f268a97661:nutanix-cluster-info/README.rst
 
 - Ignore any warnings about @font-face not being supported on Windows for now
 - If you get a prompt asking for the Prism Central IP address, everything is working
@@ -183,7 +219,11 @@ Screenshot
 
 This is what the PDF looks like, once generated.
 
+<<<<<<< HEAD:nutanix-cluster-info/README.rst
 .. image:: images/screenshot-pdf.png
+=======
+.. image:: screenshot-pdf.png
+>>>>>>> 0340d8ca4e14b06cf7759ef9fe70f8f268a97661:nutanix-cluster-info/README.rst
 
 Support
 -------

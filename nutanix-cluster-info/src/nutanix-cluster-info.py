@@ -1,4 +1,8 @@
+<<<<<<< HEAD:nutanix-cluster-info/src/nutanix-cluster-info.py
 #!/usr/bin/env python3.7
+=======
+#!/usr/bin/env python3.6
+>>>>>>> 0340d8ca4e14b06cf7759ef9fe70f8f268a97661:nutanix-cluster-info/nutanix-cluster-info.py
 
 """
 
