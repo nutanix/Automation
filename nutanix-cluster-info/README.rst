@@ -18,7 +18,7 @@ Chris Rasmussen, Solutions Architect, Nutanix (Melbourne, AU)
 Changelog
 ---------
 
-- 2018.08.30 - Committed setup.py and Pipenv usage instructions.  Added some exception handling re PC host vs PE host.
+- 2018.08.30 - Committed setup.py and Pipenv usage suggestions.  Added some exception handling re PC host vs PE host.
 - 2018.07.21 - Added better parameter input and options.
 - 2018.04.22 - Updated with installation and usage instructions for Windows 10 64-bit.
 - 2018.04.04 - Published version based on Prism Central and v3 API.
@@ -33,21 +33,24 @@ The intention is to use this script to generate very high-level and *unofficial*
 
 The other idea is for you, the user, to take this script and modify it to suit your requirements.
 
-Requirements - All Operating Systems
-------------------------------------
+Setup.py
+--------
+
+A setup.py script has been provided for those that are familiar with how to use it.
+
+Please note that setup.py has been provided for convenience only and may require the manual install of some packages, even after running setup.py.
+
+For easy usage, it is recommended that you follow the section below that is relevant for your OS.
+
+Suggested Requirements (All Operating Systems)
+----------------------------------------------
 
 - Python 3.6 is **mandatory** for both the setup and running of this script
+- **pip3** is strongly recommended for the management of Python packages
 - **Pipenv** is strongly recommended for all Python development environments
 - This script has been tested on AOS versions up to 5.8.1.
 
-Starting Python Development Sandbox (Pipenv)
---------------------------------------------
-
-- Run the following command to start an isolated Python development sandbox environment:
-
-::
-
-   pipenv shell
+The installation of specific Python versions, Pip and Pipenv is beyond the scope of this repo.
 
 Requirements (new/Weasy-based version - Easy)
 ---------------------------------------------
@@ -62,7 +65,6 @@ Requirements (new/Weasy-based version - Easy)
     pip3 install requests
     pip3 install urllib3
     sudo pip3 install weasyprint
-
 
 **OS X**
 
@@ -113,6 +115,15 @@ Note: During testing, combining the 3 libraries above into a single install comm
     pip install pycairo‑1.16.3‑cp36‑cp36m‑win_amd64.whl
 
 **Note you may need to reboot for the PATH changes to take effect**
+
+Starting Python Development Sandbox (Pipenv)
+--------------------------------------------
+
+- Run the following command to start an isolated Python development sandbox environment:
+
+::
+
+   pipenv shell
 
 Script Usage (General)
 ----------------------
