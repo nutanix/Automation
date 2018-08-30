@@ -36,7 +36,7 @@ The other idea is for you, the user, to take this script and modify it to suit y
 Requirements - All Operating Systems
 ------------------------------------
 
-- Python 3.7 is **mandatory** for both the setup and running of this script
+- Python 3.6 is **mandatory** for both the setup and running of this script
 - **Pipenv** is strongly recommended for all Python development environments
 - This script has been tested on AOS versions up to 5.8.1.
 
