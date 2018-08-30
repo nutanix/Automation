@@ -1,8 +1,4 @@
-<<<<<<< HEAD:nutanix-cluster-info/src/nutanix-cluster-info.py
 #!/usr/bin/env python3.7
-=======
-#!/usr/bin/env python3.6
->>>>>>> 0340d8ca4e14b06cf7759ef9fe70f8f268a97661:nutanix-cluster-info/nutanix-cluster-info.py
 
 """
 
@@ -100,7 +96,7 @@ class ApiClient():
         print("Requesting '%s' ..." % self.entity_type )        
         headers = {'Content-Type': 'application/json; charset=utf-8'}
         try:
-            r = requests.post(self.request_url, data=self.body, verify=False, headers=headers, auth=HTTPBasicAuth(self.username, self.password), timeout=5)
+            r = requests.post(self.request_url, data=self.body, verify=False, headers=headers, auth=HTTPBasicAuth(self.username, self.password), timeout=10)
         except requests.ConnectTimeout:
             print('Connection timed out while connecting to %s. Please check your connection, then try again.' % self.cluster_ip)
             sys.exit()
@@ -261,7 +257,10 @@ def generate_pdf_v2( json_results ):
                 if DISPLAY_OUTPUT:
                     display = "Host %s, running %s VMs (IP %s, CVM IP %s, S/N %s)" % ( host["status"]["name"], host["status"]["resources"]["hypervisor"]["num_vms"], host["status"]["resources"]["controller_vm"]["ip"], host["status"]["resources"]["hypervisor"]["ip"], host["status"]["resources"]["serial_number"] )
                     print( display )
-                html_rows['host'] = html_rows['host'] + "<tr><td>%s</td><td>%s</td><td>%s</td><td>%s</td><td>%s</td></tr>" % ( host["status"]["name"], host["status"]["resources"]["serial_number"], host["status"]["resources"]["hypervisor"]["ip"], host["status"]["resources"]["controller_vm"]["ip"], host["status"]["resources"]["hypervisor"]["num_vms"] )
+                try:
+                    html_rows['host'] = html_rows['host'] + "<tr><td>%s</td><td>%s</td><td>%s</td><td>%s</td><td>%s</td></tr>" % ( host["status"]["name"], host["status"]["resources"]["serial_number"], host["status"]["resources"]["hypervisor"]["ip"], host["status"]["resources"]["controller_vm"]["ip"], host["status"]["resources"]["hypervisor"]["num_vms"] )
+                except KeyError:
+                    html_rows['host'] = html_rows['host'] + "<tr><td colspan=\"5\">An error occurred while parsing host with IP address %s. Please check your AOS version.</td></tr>" % ( host["status"]["resources"]["controller_vm"]["ip"] )
             print("\n")
         ###########
         # CLUSTER #

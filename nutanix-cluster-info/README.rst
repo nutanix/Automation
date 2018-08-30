@@ -3,10 +3,12 @@ Nutanix Cluster Info
 
 "As-built" documentation script for use with Nutanix Prism Central 5.5.0.6 or later.
 
+High-level testing has been carried out on AOS versions from 5.5.0.6 to 5.8.1.  Later versions may cause unpredictable results.
+
 Disclaimer
 ----------
 
-This is *not* a production-grade script.  Please make sure you add appropriate exception handling and error-checking before running it in production.  See note re versions below, too.
+This is **not** a production-grade script.  Please make sure you add appropriate exception handling and error-checking before running it in production.  See note re versions below, too.
 
 Author
 ------
@@ -16,10 +18,11 @@ Chris Rasmussen, Solutions Architect, Nutanix (Melbourne, AU)
 Changelog
 ---------
 
-- 2018.07.21 - Added better parameter input and options
-- 2018.04.22 - Updated with installation and usage instructions for Windows 10 64-bit
-- 2018.04.04 - Published version based on Prism Central and v3 API
-- 2017.09.06 - Published new version based on Python 3
+- 2018.08.30 - Committed setup.py and Pipenv usage instructions.  Added some exception handling re PC host vs PE host.
+- 2018.07.21 - Added better parameter input and options.
+- 2018.04.22 - Updated with installation and usage instructions for Windows 10 64-bit.
+- 2018.04.04 - Published version based on Prism Central and v3 API.
+- 2017.09.06 - Published new version based on Python 3.
 
 Details
 -------
@@ -30,12 +33,12 @@ The intention is to use this script to generate very high-level and *unofficial*
 
 The other idea is for you, the user, to take this script and modify it to suit your requirements.
 
-<<<<<<< HEAD:nutanix-cluster-info/README.rst
 Requirements - All Operating Systems
 ------------------------------------
 
 - Python 3.7 is **mandatory** for both the setup and running of this script
 - **Pipenv** is strongly recommended for all Python development environments
+- This script has been tested on AOS versions up to 5.8.1.
 
 Starting Python Development Sandbox (Pipenv)
 --------------------------------------------
@@ -53,15 +56,6 @@ Requirements (new/Weasy-based version - Easy)
 
 ::
 
-=======
-Requirements (new/Weasy-based version - Easy)
----------------------------------------------
-
-**Ubuntu 16.04 (LTS)**
-
-::
-
->>>>>>> 0340d8ca4e14b06cf7759ef9fe70f8f268a97661:nutanix-cluster-info/README.rst
     sudo apt-get -y update
     sudo apt-get install -y libxml2-dev libxslt-dev libffi-dev libcairo2-dev libpango1.0-dev python3-dev python3-pip
     pip3 install --upgrade pip
@@ -115,19 +109,11 @@ Note: During testing, combining the 3 libraries above into a single install comm
 - Install [pycairo](https://www.lfd.uci.edu/~gohlke/pythonlibs/#pycairo).  Make sure you install the correct version for your system.  My installation filename was pycairo‑1.16.3‑cp36‑cp36m‑win_amd64.whl (change the filename in the command below, if you install a different version)
 
 ::
-<<<<<<< HEAD:nutanix-cluster-info/README.rst
 
     pip install pycairo‑1.16.3‑cp36‑cp36m‑win_amd64.whl
 
 **Note you may need to reboot for the PATH changes to take effect**
 
-=======
-
-    pip install pycairo‑1.16.3‑cp36‑cp36m‑win_amd64.whl
-
-**Note you may need to reboot for the PATH changes to take effect**
-
->>>>>>> 0340d8ca4e14b06cf7759ef9fe70f8f268a97661:nutanix-cluster-info/README.rst
 Script Usage (General)
 ----------------------
 
@@ -138,45 +124,27 @@ There are a number of global options that can be set in this script.
 
 Script Usage (Ubuntu 16.04 LTS)
 -------------------------------
-<<<<<<< HEAD:nutanix-cluster-info/README.rst
 
 ::
 
-    /usr/bin/python3 ./src/nutanix-cluster-info.py
+    /usr/bin/python3 ./src/nutanix-cluster-info.py <prism_central_ip_address>
 
 Script Usage (OS X)
 -------------------
 
 ::
 
-    /usr/local/bin/python3 ./src/nutanix-cluster-info.py
-=======
-
-::
-
-    /usr/bin/python3 nutanix-cluster-info.py
-
-Script Usage (OS X)
--------------------
-
-::
-
-    /usr/local/bin/python3 nutanix-cluster-info.py
->>>>>>> 0340d8ca4e14b06cf7759ef9fe70f8f268a97661:nutanix-cluster-info/README.rst
+    /usr/local/bin/python3 ./src/nutanix-cluster-info.py <prism_central_ip_address>
 
 Script Usage (Windows 10)
 -------------------------
 
 - Make sure you are in the directory containing `nutanix-cluster-info.py`
-- Run the script:
+- Run the script, passing the Prism Central IP address as the first mandatory parameter
 
 ::
 
-<<<<<<< HEAD:nutanix-cluster-info/README.rst
-    ./src/python nutanix-cluster-info.py
-=======
-    python nutanix-cluster-info.py
->>>>>>> 0340d8ca4e14b06cf7759ef9fe70f8f268a97661:nutanix-cluster-info/README.rst
+    ./src/python nutanix-cluster-info.py <prism_central_ip_address>
 
 - Ignore any warnings about @font-face not being supported on Windows for now
 - If you get a prompt asking for the Prism Central IP address, everything is working
@@ -219,11 +187,7 @@ Screenshot
 
 This is what the PDF looks like, once generated.
 
-<<<<<<< HEAD:nutanix-cluster-info/README.rst
 .. image:: images/screenshot-pdf.png
-=======
-.. image:: screenshot-pdf.png
->>>>>>> 0340d8ca4e14b06cf7759ef9fe70f8f268a97661:nutanix-cluster-info/README.rst
 
 Support
 -------
