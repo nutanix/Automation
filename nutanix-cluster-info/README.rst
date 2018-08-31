@@ -133,32 +133,48 @@ There are a number of global options that can be set in this script.
 - Set DISPLAY_OUTPUT to True to show detailed output for each entity type (only useful when running this script interactively)
 - Set ENTITY_RESPONSE_LENGTH to the number of entities to retrieve for each request.  Use with caution as some entities are hard-limited to 50 results per request.
 
-Script Usage (Ubuntu 16.04 LTS)
--------------------------------
-
-::
-
-    /usr/bin/python3 ./src/nutanix-cluster-info.py <prism_central_ip_address>
-
-Script Usage (OS X)
+Script Command Line
 -------------------
 
 ::
 
-    /usr/local/bin/python3 ./src/nutanix-cluster-info.py <prism_central_ip_address>
+    ./src/nutanix-cluster-info.py:
+    
+    Connect to a Nutanix Prism Central instance, grab some high-level details then generate a PDF from it
+    
+    Intended to generate a very high-level and *unofficial* as-built document for an existing Prism Central instance.
+    
+    This script is GPL and there is *NO WARRANTY* provided with this script ... AT ALL.  You can use and modify this script as you wish, but please make sure the changes are appropriate for the intended environment.
+    
+    Formal documentation should always be generated using best-practice methods that suit your environment.
+    
+    usage: Connect to Prism Central, gather some details and generate PDF documentation
+           [-h] [-u USERNAME] [-p PASSWORD] [-o OUTPUT] pc_ip
 
-Script Usage (Windows 10)
--------------------------
+    positional arguments:
+      pc_ip                 Prism Central IP address
 
-- Make sure you are in the directory containing `nutanix-cluster-info.py`
-- Run the script, passing the Prism Central IP address as the first mandatory parameter
+    optional arguments:
+      -h, --help            show this help message and exit
+      -u USERNAME, --username USERNAME
+                            Prism Central username
+      -p PASSWORD, --password PASSWORD
+                            Prism Central password
+      -o OUTPUT, --output OUTPUT
+                            Set to 1 to display cluster info after generating the
+                            PDF
+
+Script Usage (Ubuntu 16.04 LTS, OS X & Windows 10)
+--------------------------------------------------
 
 ::
 
-    ./src/python nutanix-cluster-info.py <prism_central_ip_address>
+    ./src/nutanix-cluster-info.py <PC_IP> [--username USERNAME] [-password PASSWORD] [--output OUTPUT]
+
+Note re Windows 10
+------------------
 
 - Ignore any warnings about @font-face not being supported on Windows for now
-- If you get a prompt asking for the Prism Central IP address, everything is working
 
 Custom Templates
 ----------------
