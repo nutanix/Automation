@@ -42,13 +42,13 @@ Please note that setup.py has been provided for convenience only and may require
 
 For easy usage, it is recommended that you follow the section below that is relevant for your OS.
 
-Suggested Requirements (All Operating Systems)
-----------------------------------------------
+Requirements (All Operating Systems)
+------------------------------------
 
 - Python 3.6 is **mandatory** for both the setup and running of this script
 - **pip3** is strongly recommended for the management of Python packages
 - **Pipenv** is strongly recommended for all Python development environments
-- This script has been tested on AOS versions up to 5.8.1.
+- High-level testing has been carried out on AOS versions from 5.5.0.6 to 5.8.1.  Later versions may cause unpredictable results.
 
 The installation of specific Python versions, Pip and Pipenv is beyond the scope of this repo.
 
@@ -114,7 +114,7 @@ Note: During testing, combining the 3 libraries above into a single install comm
 
     pip install pycairo‑1.16.3‑cp36‑cp36m‑win_amd64.whl
 
-**Note you may need to reboot for the PATH changes to take effect**
+**Note: You may need to reboot for the PATH changes to take effect**
 
 Starting Python Development Sandbox (Pipenv)
 --------------------------------------------

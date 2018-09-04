@@ -260,7 +260,7 @@ def generate_pdf_v2( json_results ):
                 try:
                     html_rows['host'] = html_rows['host'] + "<tr><td>%s</td><td>%s</td><td>%s</td><td>%s</td><td>%s</td></tr>" % ( host["status"]["name"], host["status"]["resources"]["serial_number"], host["status"]["resources"]["hypervisor"]["ip"], host["status"]["resources"]["controller_vm"]["ip"], host["status"]["resources"]["hypervisor"]["num_vms"] )
                 except KeyError:
-                    html_rows['host'] = html_rows['host'] + "<tr><td colspan=\"5\">An error occurred while parsing host with IP address %s. Please check your AOS version.</td></tr>" % ( host["status"]["resources"]["controller_vm"]["ip"] )
+                    html_rows['host'] = html_rows['host'] + "<tr><td colspan=\"5\">An error occurred while parsing host with IP address %s. This is expected when trying to check hypervisor version on Prism Central 5.9 and later.</td></tr>" % ( host["status"]["resources"]["controller_vm"]["ip"] )
             print("\n")
         ###########
         # CLUSTER #
@@ -325,8 +325,11 @@ def generate_pdf_v2( json_results ):
     
     # specify the HTML page template
     # at this point we have already verified that template.html exists, at least
-    if os.path.isfile( "./templates/nutanixv3.html" ):
-        template_name = "./templates/nutanixv3.html"
+
+    current_path = os.path.dirname(sys.argv[0])
+
+    if os.path.isfile( f"{current_path}/../templates/nutanixv3.html" ):
+        template_name = f"{current_path}/../templates/nutanixv3.html"
     else:
         print("Template not found")
         sys.exit()
@@ -403,7 +406,9 @@ Formal documentation should always be generated using best-practice methods that
 
 def main():
 
-    if os.path.isfile("./templates/nutanixv3.html"):
+    current_path = os.path.dirname(sys.argv[0])
+
+    if os.path.isfile(f"{current_path}/../templates/nutanixv3.html"):
         show_intro()
 
         # first we must make sure the cluster JSON file exists in the currect directory
