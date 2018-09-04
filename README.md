@@ -1,6 +1,8 @@
 # Automation Repository
 
-Community repository for all things Nutanix automation, centralized to help users learn code, leverage existing work, and contribute back.
+Community repository for misc things Nutanix automation, centralized to help users learn code, leverage existing work, and contribute back.
+
+In addition, we do have a dedicated repo for Nutanix Calm blueprints, which is here: https://github.com/nutanix/blueprints
 
 ## Disclaimer
 
