@@ -46,9 +46,7 @@ Script Usage (Linux)
 Screenshot
 ----------
 
-..
-
-    image:: images/screenshot.png
+.. image:: images/screenshot.png
 
 Support
 -------
