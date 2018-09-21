@@ -120,7 +120,7 @@ def main():
                 exported_json = client.get_info()
                 with open( f"./{blueprint_filename}", "w" ) as f:
                     json.dump(exported_json,f)
-                    print(f"Successfully saved blueprint '{blueprint['status']['name']}'")
+                    print(f"Successfully exported blueprint '{blueprint['status']['name']}'")
             print("\nFinished!\n")
 
 if __name__ == "__main__":
