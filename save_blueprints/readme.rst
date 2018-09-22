@@ -3,6 +3,8 @@ Save Calm Blueprints
 
 Python 3.6 script to connect to Prism Central 5.9 or above and export all blueprints to JSON files.
 
+Note: Even though this script was written and tested against Prism Central 5.9, it should work without issue with 5.8.x, too.
+
 Disclaimer
 ----------
 
