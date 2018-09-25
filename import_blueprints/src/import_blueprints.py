@@ -114,7 +114,7 @@ def main():
                         try:
                             blueprint_name = json.loads(raw_json)['spec']['name']
                         except json.decoder.JSONDecodeError:
-                            print(f"{blueprint}: Unprocessable JSON found. Is this definitely a Nutanix Calm blueprint file?")
+                            print(f"{blueprint}: Unprocessable JSON file found. Is this definitely a Nutanix Calm blueprint file?")
                             sys.exit()
                         # got the blueprint name - this is probably a valid blueprint file
                         # we can now continue and try the upload
