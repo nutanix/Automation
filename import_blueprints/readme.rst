@@ -29,6 +29,8 @@ The intention is to use this script to re-import the blueprints you exported usi
 
 **Note**: You WILL need to manually fix the credentials for each blueprint after it has been imported.  For security reasons passwords are not exported with the JSON files.
 
+**Note**: The 'default' project is used for all imports!
+
 The other idea is for you, the user, to take this script and modify it to suit your requirements.
 
 Requirements
