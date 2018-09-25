@@ -42,6 +42,7 @@ def get_options():
     global username
     global password
     global directory
+    global project
 
     # process the command-line arguments
     parser = argparse.ArgumentParser(description='Export all Calm blueprints to JSON files')
@@ -49,6 +50,7 @@ def get_options():
     parser.add_argument('-u', '--username',help='Prism Central username')
     parser.add_argument('-p', '--password',help='Prism Central password')
     parser.add_argument('-d', '--directory',help='Blueprint directory')
+    parser.add_argument('-o', '--project',help='UUID of the project the blueprint belongs to')
 
     args = parser.parse_args()
 
@@ -67,6 +69,11 @@ def get_options():
         directory = args.directory
     else:
         directory = '.'
+
+    if args.project:
+        project = args.project
+    else:
+        project = 'none'
 
     cluster_ip = args.pc_ip
 
@@ -91,6 +98,8 @@ def main():
             raise Exception("Password is required.")
         elif not directory:
             raise Exception("Blueprint directory is required.")
+        elif not project:
+            raise Exception("Project is required.")
         else:
             
             # get a list of all blueprints in the specified directory
@@ -107,8 +116,25 @@ def main():
                     # open the JSON file from disk
                     with open(f"{blueprint}", "r") as f:
                         raw_json = f.read()
-                        raw_json = re.sub(r'"status":{},','',raw_json)
-                        raw_json = re.sub(r'"status": {},','',raw_json)
+
+                        # if no project was specified on the commane line, we've already pre-set the project variable to 'none'
+                        # if a project was specified, we need to add it into the JSON data
+                        if project != 'none':
+                            parsed = json.loads(raw_json)
+                            parsed["metadata"]["project_reference"] = {}
+                            parsed["metadata"]["project_reference"]["kind"] = "project"
+                            parsed["metadata"]["project_reference"]["uuid"] = project
+                            raw_json = json.dumps(parsed)
+
+                        # remove the "status" key from the JSOn data
+                        # this is included on export but is invalid on import
+                        pre_process = json.loads(raw_json)
+                        if "status" in pre_process:
+                            pre_process.pop("status")
+
+                        # after removing the non-required keys, make sure the data is back in the correct format
+                        raw_json = json.dumps(pre_process)
+                        
                         # try and get the blueprint name
                         # if this fails, it's either a corrupt/damaged/edited blueprint JSON file or not a blueprint file at all
                         try:
@@ -122,7 +148,7 @@ def main():
                             'post',
                             cluster_ip,
                             "blueprints/import_json",
-                            str(raw_json),
+                            raw_json,
                             username,
                             password
                         )

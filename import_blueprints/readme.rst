@@ -29,7 +29,7 @@ The intention is to use this script to re-import the blueprints you exported usi
 
 **Note**: You WILL need to manually fix the credentials for each blueprint after it has been imported.  For security reasons passwords are not exported with the JSON files.
 
-**Note**: The 'default' project is used for all imports!
+**Note**: The 'default' project is used for all imports, unless specified otherwise (see usage section below).
 
 The other idea is for you, the user, to take this script and modify it to suit your requirements.
 
@@ -47,7 +47,7 @@ Script Usage (Linux)
 
 ::
 
-    ./src/import_blueprints.py <prism_central_ip_address> [ --username username ] [ --password password --directory json_directory ]
+    ./src/import_blueprints.py <prism_central_ip_address> [ --username username ] [ --password password --directory json_directory --project project_uuid ]
 
 Screenshot
 ----------
