@@ -26,3 +26,6 @@ hs_err_pid*
 
 # Python build files
 build/
+
+# json Files
+*.json
