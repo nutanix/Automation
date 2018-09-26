@@ -8,4 +8,4 @@ work/
 .pydevproject
 build/
 __pycache__/
-upload_blueprints.egg-info
+import_blueprints.egg-info
