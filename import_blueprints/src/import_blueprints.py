@@ -13,7 +13,7 @@
 """
 
 __author__ = "Chris Rasmussen @ Nutanix"
-__version__ = "1.0"
+__version__ = "1.1"
 __maintainer__ = "Chris Rasmussen @ Nutanix"
 __email__ = "crasmussen@nutanix.com"
 __status__ = "Development/Demo"
@@ -26,31 +26,32 @@ import argparse
 from time import localtime, strftime, mktime
 import urllib3
 import glob
-import re
 
 # custom modules
 import apiclient
 
 def set_options():
+    # configure some global settings for use later
     global ENTITY_RESPONSE_LENGTH
-    # set ENTITY_RESPONSE_LENGTH to the maximum number of blueprints you want to export
-    # this is only required since the v3 list APIs will only return 20 entities by default
+    # set ENTITY_RESPONSE_LENGTH to the max number of entities to return
+    # not used in this script but is used in other templates
     ENTITY_RESPONSE_LENGTH = 50
 
 def get_options():
+    # process the command-line parameters provided by the user
     global cluster_ip
     global username
     global password
     global directory
     global project
 
-    # process the command-line arguments
-    parser = argparse.ArgumentParser(description='Export all Calm blueprints to JSON files')
+    # specify both the mandatory and optional command-line parameters
+    parser = argparse.ArgumentParser(description='Import Calm blueprints from JSON files')
     parser.add_argument('pc_ip',help='Prism Central IP address')
     parser.add_argument('-u', '--username',help='Prism Central username')
     parser.add_argument('-p', '--password',help='Prism Central password')
     parser.add_argument('-d', '--directory',help='Blueprint directory')
-    parser.add_argument('-o', '--project',help='UUID of the project the blueprint belongs to')
+    parser.add_argument('-o', '--project',help='Name of the project the blueprint belongs to')
 
     args = parser.parse_args()
 
@@ -98,14 +99,32 @@ def main():
             raise Exception("Password is required.")
         elif not directory:
             raise Exception("Blueprint directory is required.")
-        elif not project:
-            raise Exception("Project is required.")
         else:
             
             # get a list of all blueprints in the specified directory
             blueprint_list = glob.glob(f'{directory}/*.json')
 
             if(len(blueprint_list) > 0):
+
+                # first check if the user has specified a project for the imported blueprints
+                # if they did, we need to make sure the project exists
+                if project != 'none':
+                    project_found = False
+                    client = apiclient.ApiClient('post', cluster_ip, "projects/list", '{ "kind": "project" }', username, password )
+                    results = client.get_info()
+                    for current_project in results["entities"]:
+                        if current_project["status"]["name"] == project:
+                            project_found = True
+                            project_uuid = current_project["metadata"]["uuid"]
+
+                # was the project found?
+                if project_found:
+                    print(f"\nProject {project} exists.")
+                else:
+                    # project wasn't found
+                    # exit at this point as we don't want to assume all blueprints should then hit the 'default' project
+                    print(f"\nProject {project} was not found.  Please check the name and retry.")
+                    sys.exit()
 
                 # make sure the user knows what's happening ... ;-)
                 print(f"\n{len(blueprint_list)} JSON files found. Starting import ...\n")
@@ -123,7 +142,7 @@ def main():
                             parsed = json.loads(raw_json)
                             parsed["metadata"]["project_reference"] = {}
                             parsed["metadata"]["project_reference"]["kind"] = "project"
-                            parsed["metadata"]["project_reference"]["uuid"] = project
+                            parsed["metadata"]["project_reference"]["uuid"] = project_uuid
                             raw_json = json.dumps(parsed)
 
                         # remove the "status" key from the JSOn data
