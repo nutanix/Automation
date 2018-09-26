@@ -18,6 +18,7 @@ Chris Rasmussen, Solutions Architect, Nutanix (Melbourne, AU)
 Changelog
 ---------
 
+- 2018.09.26 - Add support for project name command line parameter
 - 2018.09.25 - Script created
 
 Details

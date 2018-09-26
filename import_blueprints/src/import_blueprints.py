@@ -97,12 +97,10 @@ def main():
             raise Exception("Username is required.")
         elif not password:
             raise Exception("Password is required.")
-        elif not directory:
-            raise Exception("Blueprint directory is required.")
         else:
             
             # get a list of all blueprints in the specified directory
-            blueprint_list = glob.glob(f'{directory}/*.json')
+            blueprint_list = glob.glob(f'{directory.rstrip("/")}/*.json')
 
             if(len(blueprint_list) > 0):
 
