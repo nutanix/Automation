@@ -1,7 +1,0 @@
-setup.py
-src/apiclient/__init__.py
-src/import_blueprints.egg-info/PKG-INFO
-src/import_blueprints.egg-info/SOURCES.txt
-src/import_blueprints.egg-info/dependency_links.txt
-src/import_blueprints.egg-info/requires.txt
-src/import_blueprints.egg-info/top_level.txt

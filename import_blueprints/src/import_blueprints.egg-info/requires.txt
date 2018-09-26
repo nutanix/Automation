@@ -1,4 +1,0 @@
-argparse
-pipenv
-requests
-urllib3
