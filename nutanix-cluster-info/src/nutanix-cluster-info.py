@@ -162,10 +162,14 @@ def generate_pdf_v2( json_results ):
             print("Number of VMs: %s" % json_result[1]["metadata"]["total_matches"])
             entity_totals['vm'] = json_result[1]["metadata"]["total_matches"]
             for vm in json_result[1]["entities"]:
+                try:
+                    description = vm["spec"]["description"]
+                except KeyError:
+                    description = "None provided"
                 if DISPLAY_OUTPUT:
-                    display = "%s on cluster %s" % (vm["spec"]["name"], vm["spec"]["cluster_reference"]["name"])
+                    display = "%s with description %s" % (vm["spec"]["name"], description)
                     print(display)
-                html_rows['vm'] = html_rows['vm'] + "<tr><td>%s</td><td>%s</td></tr>" % ( vm["spec"]["name"], vm["spec"]["cluster_reference"]["name"] )
+                html_rows['vm'] = html_rows['vm'] + "<tr><td>%s:%s</td><td>%s</td></tr>" % ( vm["spec"]["cluster_reference"]["name"], vm["spec"]["name"], description )
             print("\n")
         ##########
         # SUBNET #
