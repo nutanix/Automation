@@ -10,11 +10,12 @@ Many of these are *not* production-grade scripts, and are used to either do spec
 
 ## Repo Admins
 
-* Chris Rasmussen, Solutions Architect, Nutanix (Melbourne, AU)
+* Chris Rasmussen, Developer Content Architect, Nutanix (Melbourne, AU)
 * Jon Kohler, Technical Director, Nutanix (Vermont, US)
 
 ## High Level Changelog
 
+* 2019.12.13 - Chris - Updated import blueprint script to work with Calm 2.9
 * 2018.09.21 - Chris - Remove blueprints (please see https://github.com/nutanix/blueprints)
 * 2018.04.24 - Chris - Added detailed instructions to graphical API demo app
 * 2018.04.24 - Chris - Removed a few old/legacy scripts
