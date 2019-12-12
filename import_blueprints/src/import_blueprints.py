@@ -143,15 +143,17 @@ def main():
                             parsed["metadata"]["project_reference"]["uuid"] = project_uuid
                             raw_json = json.dumps(parsed)
 
-                        # remove the "status" key from the JSOn data
+                        # remove the "status" key from the JSON data
                         # this is included on export but is invalid on import
                         pre_process = json.loads(raw_json)
                         if "status" in pre_process:
                             pre_process.pop("status")
+                        if "product_version" in pre_process:
+                            pre_process.pop("product_version")
 
                         # after removing the non-required keys, make sure the data is back in the correct format
                         raw_json = json.dumps(pre_process)
-                        
+                      
                         # try and get the blueprint name
                         # if this fails, it's either a corrupt/damaged/edited blueprint JSON file or not a blueprint file at all
                         try:
@@ -159,6 +161,8 @@ def main():
                         except json.decoder.JSONDecodeError:
                             print(f"{blueprint}: Unprocessable JSON file found. Is this definitely a Nutanix Calm blueprint file?")
                             sys.exit()
+
+                       
                         # got the blueprint name - this is probably a valid blueprint file
                         # we can now continue and try the upload
                         client = apiclient.ApiClient(
