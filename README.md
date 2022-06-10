@@ -1,27 +1,40 @@
-# Automation Repository
+# Building automated workflows leveraging Nutanix CALM Runbooks, Prism Pro Playbooks, and integration with other application like Jira or ServiceNow
 
-Community repository for misc things Nutanix automation, centralized to help users learn code, leverage existing work, and contribute back.
+This is a sample example to design and build an automated workflow that could be triggered automatically and upgrade a VM resources on getting approval from the authorized body. In this case it leverages Prism Pro Playbooks with a manual trigger (for demonstration) attached to any VM integrated with CALM runbooks and third party application like Atlassian Jira to get approval and decision making process whether to proceed with upgrade or not. Other automatic triggering is possible through available triggers like alerts, events, time based or a webhook for different entities of Prism. 
 
-In addition, we do have a dedicated repo for Nutanix Calm blueprints, which is here: https://github.com/nutanix/blueprints
+Here is the overview of the workflow 
+![conceptual overview](/blobs/approve-auto-update-vm.png?raw=true)
 
-## Disclaimer
+## Breakdown and installation of the components of the workflow:
+ 
+ - A triggering playbook: A Prism Pro playbook is needed to automatically or manually trigger some actions based sourcing from any entities. It would provide decoupled approach from the playbook for independent management of versatile integration logic and freedom of customization for the workflow decision making process. Our sample playbook (playbooks-trigger_runbook.pbk) is attached with a manual trigger from any VM running in Prism central. Import the playbook in prism central then make sure to enable it as follows. By default it remains disabled.
+![architectural overview](/blobs/enable_playbook.png?raw=true)
+ 
+ - Runbook: A runbook is constructed in order to be invoked from a REST api action from the playbook. Import the CALM runbook (get_Approval.json). Change the variable waitUntilMinutes in the configuration section to adjust the waiting time until it gets an approval or deny on the Jira ticket. Until, a decision has been made on the ticket the process would keep trying every minute until it reaches the defined waiting limit in minutes. Otherwise, it will do nothing. Update the other variables and credentials for your environment. The process would call back the following playbook as a webhook regardless. 
+ 
+ ![auto upgrade vm](/blobs/get_approval_rb.png?raw=true)
 
-Many of these are *not* production-grade scripts, and are used to either do specific tasks or simply demonstrate functionality. Also please be advised that many of these scripts may run and operate in a way that do not follow best practices.  Please check through each script to ensure it meets your requirements.  Please make sure you add appropriate exception handling and error-checking before running it in production.  
+ - A callback playbook: Playbook (playbook-auto_upgrade_resources_v2.pbk) has trigger type webhook which allows it to be called from the runbook in previous step. The playbook would either upgrade the VM in concern if the request was approved on the Jira ticket otherwise it will skip. It will notify the system admin via email regardless of the outcome of the decision.
 
-## Repo Admins
+![auto upgrade vm](/blobs/auto_upgrade_resources_v2.png?raw=true)
 
-* Chris Rasmussen, Developer Content Architect, Nutanix (Melbourne, AU)
-* Jon Kohler, Technical Director, Nutanix (Vermont, US)
+ From a runbook task a sample request to trigger the upgrade playbook would look something like this. 
+    {
+    "trigger_type": "incoming_webhook_trigger",
+    "trigger_instance_list": [{
+        "webhook_id": "@@{webhookId}@@",
+        "string1": "JIRA ticket- vm upgrade",
+        "integer1": decision,
+        "entity1": "{\"type\":\"vm\",\"name\":\"Xplay-loc-test\",\"uuid\":\"fdbb7d56-1ec7-4655-bb25-aea209cdd05f\"}"
+    }]
+    }
 
-## High Level Changelog
+   It supplies 
+    - the webhook_id for the corresponding webhook of the playbook. Grab the id from the summary page after importing the playbook (palybook-auto_upgrade_resources_v2.pbk) into your prism central.
+    - name of the Jira issue as string1
+    - a decision variable whether or not to update either by "1" or "0" with the field integer1
+    - the vm to upgrade as entity1
 
-* 2019.12.13 - Chris - Updated import blueprint script to work with Calm 2.9
-* 2018.09.21 - Chris - Remove blueprints (please see https://github.com/nutanix/blueprints)
-* 2018.04.24 - Chris - Added detailed instructions to graphical API demo app
-* 2018.04.24 - Chris - Removed a few old/legacy scripts
-* 2018.04.05 - Jon - Consolidated Chris Rasmussen (digitalformula) repos
-* 2018.04.05 - Jon - Consolidated random /nutanix/ org repos
+ if the request was denied the runbook would set decision 0 and the called playbook would execute the first branch and just notify the requestor the decision, otherwise it will go ahead and perform the upgrade on the VM in the second branch.
 
-## Support
-
-Nutanix loves Open Source, and leverages a community supported model. Nutanix welcomes Pull Requests and Issues, which will be reviewed on a best effort basis.
+## Test it out
