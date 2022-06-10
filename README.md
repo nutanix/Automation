@@ -1,6 +1,6 @@
 # Building automated workflows leveraging Nutanix CALM Runbooks, Prism Pro Playbooks, and integration with other application like Jira or ServiceNow
 
-This is a sample example to design and build an automated workflow that could be triggered automatically and upgrade a VM resources on getting approval from the authorized body. In this case it leverages Prism Pro Playbooks with a manual trigger (for demonstration) attached to any VM integrated with CALM runbooks and third party application like Atlassian Jira to get approval and decision making process whether to proceed with upgrade or not. Other automatic triggering is possible through available triggers like alerts, events, time based or a webhook for different entities of Prism. 
+This is an example to design and build an automated workflow that could be triggered automatically and upgrade VM resources on getting approval from the authorized body. In this case it leverages Prism Pro Playbooks with a manual trigger (for demonstration) attached to any VM integrated with CALM runbooks and third party application like Atlassian Jira to get approval and decision making process whether to proceed with upgrade or not. Other automatic triggering is possible through available triggers like alerts, events, time based or a webhook for different entities of Prism. 
 
 Here is the overview of the workflow 
 ![conceptual overview](/blobs/approve-auto-update-vm-workflow.png?raw=true)
@@ -19,6 +19,7 @@ Here is the overview of the workflow
 ![auto upgrade vm](/blobs/auto_upgrade_resources_v2.png?raw=true)
 
  From a runbook task a sample request to trigger the upgrade playbook would look something like this. 
+ ,,,json
     {
     "trigger_type": "incoming_webhook_trigger",
     "trigger_instance_list": [{
@@ -28,12 +29,13 @@ Here is the overview of the workflow
         "entity1": "{\"type\":\"vm\",\"name\":\"Xplay-loc-test\",\"uuid\":\"fdbb7d56-1ec7-4655-bb25-aea209cdd05f\"}"
     }]
     }
+,,,json
 
-   It supplies 
-    - the webhook_id for the corresponding webhook of the playbook. Grab the id from the summary page after importing the playbook (palybook-auto_upgrade_resources_v2.pbk) into your prism central.
-    - name of the Jira issue as string1
-    - a decision variable whether or not to update either by "1" or "0" with the field integer1
-    - the vm to upgrade as entity1
+It supplies 
+ - the webhook_id for the corresponding webhook of the playbook. Grab the id from the summary page after importing the playbook (palybook-auto_upgrade_resources_v2.pbk) into your prism central.
+ - name of the Jira issue as string1
+ - a decision variable whether or not to update either by "1" or "0" with the field integer1
+ - the vm to upgrade as entity1
 
  if the request was denied the runbook would set decision 0 and the called playbook would execute the first branch and just notify the requestor the decision, otherwise it will go ahead and perform the upgrade on the VM in the second branch.
 
