@@ -14,6 +14,16 @@ Here is the overview of the workflow
  
  ![auto upgrade vm](/automated-integrated-workflow/blobs/get_approval_rb.png?raw=true)
 
+ Note the sample code in the Request_Approval_1 task within the while integration that hardcodes the approval to True. It check every minute if it got desired state on ticket. Change code here according to your requirement whether to get approval from Jira, ServiceNow and email reply or any custom process.
+ 
+```python
+    print "Waiting {0} minutes, requesting approval for {1}".format(@@{iteration}@@+1,"@@{issue_name}@@")
+    ## If integrating with Jira, call jira code here to check the status of an incident or ticket and
+    ## set the approved variable either true or false
+    sleep(1*60)
+    approved=True
+    print "approved = {}".format(approved)
+```
  - A callback playbook: Playbook (playbook-auto_upgrade_resources_v2.pbk) has trigger type webhook which allows it to be called from the runbook in previous step. The playbook would either upgrade the VM in concern if the request was approved on the Jira ticket otherwise it will skip. It will notify the system admin via email regardless of the outcome of the decision.
 
 ![auto upgrade vm](/automated-integrated-workflow/blobs/auto_upgrade_resources_v2.png?raw=true)
@@ -40,3 +50,9 @@ It supplies
  if the request was denied the runbook would set decision 0 and the called playbook would execute the first branch and just notify the requestor the decision, otherwise it will go ahead and perform the upgrade on the VM in the second branch.
 
 ## Test it out
+ - After importing and configuring all the components like requestor notified email, SMTP server in Prism Central, variables in CALM Runbook you should be ready to test an update trigger.
+ - Go to any VM and under action click run playbook
+ - It would trigger the full workflow
+ - Sitback and watch the upgrade. Depending on your approval process, the runbook would fire the upgrade resource playbook to perform appropriate actions.
+
+ As we seldomly get request from customers to design and build specific low-code and no-code workflows like this, this sample is intended for audience who wants to apply the concept on other similar automated workflows.
