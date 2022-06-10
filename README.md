@@ -3,7 +3,7 @@
 This is a sample example to design and build an automated workflow that could be triggered automatically and upgrade a VM resources on getting approval from the authorized body. In this case it leverages Prism Pro Playbooks with a manual trigger (for demonstration) attached to any VM integrated with CALM runbooks and third party application like Atlassian Jira to get approval and decision making process whether to proceed with upgrade or not. Other automatic triggering is possible through available triggers like alerts, events, time based or a webhook for different entities of Prism. 
 
 Here is the overview of the workflow 
-![conceptual overview](/blobs/approve-auto-update-vm.png?raw=true)
+![conceptual overview](/blobs/approve-auto-update-vm-workflow.png?raw=true)
 
 ## Breakdown and installation of the components of the workflow:
  
