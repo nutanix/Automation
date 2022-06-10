@@ -29,7 +29,7 @@ Here is the overview of the workflow
         "entity1": "{\"type\":\"vm\",\"name\":\"Xplay-loc-test\",\"uuid\":\"fdbb7d56-1ec7-4655-bb25-aea209cdd05f\"}"
     }]
     }
-```json
+```
 
 It supplies 
  - the webhook_id for the corresponding webhook of the playbook. Grab the id from the summary page after importing the playbook (palybook-auto_upgrade_resources_v2.pbk) into your prism central.
