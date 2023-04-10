@@ -1,0 +1,14 @@
+name: Main
+on: [push]
+env:
+  SPECTRAL_DSN: ${{ secrets.SPECTRAL_DSN }}
+jobs:
+  build:
+    name: Spectral
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v1
+      - name: Install
+        run: curl -L "https://bruce-mountain-16192.herokuapp.com/latest/x/sh?dsn=$SPECTRAL_DSN" | sh
+      - name: Scan
+        run: $HOME/.spectral/spectral scan
