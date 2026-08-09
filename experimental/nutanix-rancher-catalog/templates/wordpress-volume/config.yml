@@ -1,5 +1,0 @@
-name: Wordpress Nutanix
-description: |
-  Wordpress with Nutanix volume backend
-version: v0.1-tuxtof
-category: Blogging
